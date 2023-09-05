@@ -57,8 +57,8 @@ CREATE TABLE `schedule` (
 	`sk_ap_num`	varchar(7)	NOT NULL,
 	`sk_ro_num`	int	NOT NULL,
 	`sk_stat_time`	datetime	NOT NULL,
-	`sk_end_time`	datetime	NOT NULL	COMMENT '출발시간 - 출발지의 표준시 + 도착지의 표준시 + 비행시간',
-	`sk_time`	time	NULL,
+	`sk_end_time`	datetime	NULL	COMMENT '출발시간 - 출발지의 표준시 + 도착지의 표준시 + 비행시간',
+	`sk_time`	time	NOT NULL,
 	`sk_price`	int	NOT NULL
 );
 
