@@ -1,2 +1,0 @@
-INSERT INTO MEMBER_CLASS(MC_NAME, MC_BONUS_POINT) VALUES("실버", 1),("골드", 1.05),("다이아몬드", 1.1),("다이아몬드플러스", 1.15),("플래티엄", 1.2);
-INSERT INTO SEAT_CLASS(SC_NAME, SC_RATIO) VALUES("이코노미", 1),("비지니스", 2),("퍼스트", 4);
