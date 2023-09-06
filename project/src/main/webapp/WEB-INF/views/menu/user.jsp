@@ -6,8 +6,9 @@
 	<title>Home</title>
 </head>
 <body>
-<h1>
-	테스트
-</h1>
+<h1>사용자 화면</h1>
+<a href="#">로그아웃</a>
+<a href="#">예매</a>
+
 </body>
 </html>
