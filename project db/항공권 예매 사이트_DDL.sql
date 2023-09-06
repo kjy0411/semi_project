@@ -76,7 +76,7 @@ DROP TABLE IF EXISTS `airplane`;
 CREATE TABLE `airplane` (
 	`ap_num`	varchar(7)	NOT NULL	PRIMARY KEY	COMMENT '국가코드(최대3자리)+등록번호(0000~9999)',
 	`ap_al_name`	varchar(20)	NOT NULL,
-	`ap_am_model`	varchar(10)	NOT NULL
+	`ap_am_model`	varchar(4)	NOT NULL
 );
 
 DROP TABLE IF EXISTS `airline`;
@@ -91,7 +91,7 @@ CREATE TABLE `seat` (
 	`se_num`	int	NOT NULL	PRIMARY KEY	AUTO_INCREMENT,
 	`se_name`	varchar(4)	NOT NULL	COMMENT '영문2, 숫자2',
 	`se_sc_name`	varchar(20)	NOT NULL	DEFAULT '일반석',
-	`se_am_model`	varchar(10)	NOT NULL
+	`se_am_model`	varchar(4)	NOT NULL
 );
 
 DROP TABLE IF EXISTS `airplane_model`;
@@ -137,7 +137,7 @@ CREATE TABLE `member_class` (
 DROP TABLE IF EXISTS `nation`;
 
 CREATE TABLE `nation` (
-	`na_name`	varchar(20)	NOT NULL	 PRIMARY KEY,
+	`na_name`	varchar(20)	NOT NULL PRIMARY KEY,
 	`na_division`	varchar(10)	NULL
 );
 
@@ -266,3 +266,4 @@ ALTER TABLE `point_history` ADD CONSTRAINT `FK_ticketing_TO_point_history_1` FOR
 REFERENCES `ticketing` (
 	`ti_num`
 );
+
