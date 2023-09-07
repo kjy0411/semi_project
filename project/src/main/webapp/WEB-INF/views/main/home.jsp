@@ -7,12 +7,11 @@
 </head>
 <body>
 <h1>메인화면</h1>
-<a href="#">회원가입</a>
-<a href="#">로그인</a>
-<form action="<c:url value='/menu'/>" method="get">
-	<input type="text" name="authority">
-	<button class="btn-submit">로그인</button>
-</form>
+<a href="<c:url value='/member/signup'/>">회원가입</a>
+<a href="<c:url value='/member/login'/>">로그인</a>
+<a href="<c:url value='/menu/admin'/>">관리자</a>
+<a href="<c:url value='/menu/user'/>">사용자</a>
+
 
 </body>
 </html>

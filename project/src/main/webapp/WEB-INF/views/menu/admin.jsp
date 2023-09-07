@@ -7,9 +7,10 @@
 </head>
 <body>
 <h1>관리자 화면</h1>
-<a href="#">회원가입</a>
-<a href="#">로그인</a>
-<a href="#">예매</a>
+<a href="#">회원권한</a>
+<a href="#">항공사/비행기</a>
+<a href="#">공항/노선</a>
+<a href="#">스케쥴</a>
 
 </body>
 </html>

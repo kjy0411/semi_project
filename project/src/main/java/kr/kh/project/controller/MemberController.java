@@ -12,4 +12,15 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 	
+	@GetMapping("/member/signup")
+	public String signupMember() {
+		return "/member/signup";
+	}
+	
+	@GetMapping("/member/login")
+	public String loginMember() {
+		return "/member/login";
+	}
+	
+	
 }
