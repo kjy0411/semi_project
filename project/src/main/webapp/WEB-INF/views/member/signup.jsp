@@ -32,7 +32,7 @@
 		</div>
 		<div class="form-group" style="height: 50px">
 			<label>생년월일 :</label>
-			<input type="time" class="form-control" name="me_birthday"> <br>
+			<input type="date" class="form-control" name="me_birthday"> <br>
 			<span></span>
 		</div>
 		<div class="form-group" style="height: 50px">

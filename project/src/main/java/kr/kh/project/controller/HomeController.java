@@ -11,13 +11,4 @@ public class HomeController {
 		return "/main/home";
 	}
 	
-	@GetMapping("/menu/admin")
-	public String menuAdmin() {
-		return "/menu/admin";
-	}
-	
-	@GetMapping("/menu/user")
-	public String menuUser() {
-		return "/menu/user";
-	}
 }
