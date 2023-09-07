@@ -18,6 +18,7 @@
 			<input type="password" class="form-control" name="me_pw" placeholder="비밀번호"> <br>
 			<span class="notice" style="color: red;">영문, 숫자, !@#$ 조합으로 12~25자</span>
 		</div>
+		<button class="btn btn-outline-warning col-12">로그인</button>
 	</form>
 	<script type="text/javascript">
 	</script>
