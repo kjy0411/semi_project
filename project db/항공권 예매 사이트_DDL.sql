@@ -8,7 +8,7 @@ DROP TABLE IF EXISTS `member`;
 
 CREATE TABLE `member` (
 	`me_id`	varchar(20)	NOT NULL	PRIMARY KEY	COMMENT '영문으로 시작, 영문, 숫자 조합으로 10~20자',
-	`me_pw`	varchar(25)	NOT NULL	COMMENT '영문, 숫자, !@#$ 조합으로 12~25자',
+	`me_pw`	varchar(255)	NOT NULL	COMMENT '영문, 숫자, !@#$ 조합으로 12~25자',
 	`me_name`	varchar(30)	NOT NULL,
 	`me_eng_name`	varchar(30)	NOT NULL,
 	`me_birthday`	date	NOT NULL,
