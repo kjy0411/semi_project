@@ -42,9 +42,9 @@ CREATE TABLE `ticketing` (
 	`ti_state`	varchar(10)	NOT NULL	DEFAULT '미확정'	COMMENT '미확정, 확정, 예매취소 중 선택'
 );
 
-DROP TABLE IF EXISTS `ticketting_list`;
+DROP TABLE IF EXISTS `ticketing_list`;
 
-CREATE TABLE `ticketting_list` (
+CREATE TABLE `ticketing_list` (
 	`tl_num`	varchar(20)	NOT NULL	PRIMARY KEY	COMMENT '예매일자(6), 출발지(3), 도착지(3), 예매순서(4), 좌석번호(4) -빈자리는 0으로 채운다',
 	`tl_ti_num`	int	NOT NULL,
 	`tl_se_num`	int	NOT NULL
@@ -176,14 +176,14 @@ REFERENCES `member` (
 	`me_id`
 );
 
-ALTER TABLE `ticketting_list` ADD CONSTRAINT `FK_ticketing_TO_ticketting_list_1` FOREIGN KEY (
+ALTER TABLE `ticketing_list` ADD CONSTRAINT `FK_ticketing_TO_ticketing_list_1` FOREIGN KEY (
 	`tl_ti_num`
 )
 REFERENCES `ticketing` (
 	`ti_num`
 );
 
-ALTER TABLE `ticketting_list` ADD CONSTRAINT `FK_seat_TO_ticketting_list_1` FOREIGN KEY (
+ALTER TABLE `ticketing_list` ADD CONSTRAINT `FK_seat_TO_ticketing_list_1` FOREIGN KEY (
 	`tl_se_num`
 )
 REFERENCES `seat` (
