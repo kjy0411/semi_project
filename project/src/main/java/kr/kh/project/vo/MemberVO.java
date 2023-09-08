@@ -1,5 +1,6 @@
 package kr.kh.project.vo;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -23,4 +24,13 @@ public class MemberVO {
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		return format.format(me_birthday);
 	}
+	public void setMe_birthday(String date) {
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		try {
+			me_birthday = format.parse(date);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+	}
+	
 }
