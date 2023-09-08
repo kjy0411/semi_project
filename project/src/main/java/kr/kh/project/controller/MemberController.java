@@ -28,7 +28,7 @@ public class MemberController {
 	public String singupMemberPost(Model model, MemberVO member) {
 		Message msg = new Message("member/signup", "회원가입을 실패했습니다.");
 		
-		if(memberService.signup(member)) {
+		if(memberService.signupMember(member)) {
 			msg = new Message("/", "회원가입을 성공했습니다.");
 		}
 		model.addAttribute("msg", msg);
@@ -44,7 +44,7 @@ public class MemberController {
 	public String loginMemberPost(Model model, MemberVO member) {
 		Message msg = new Message("member/login", "로그인에 실패했습니다.");
 
-		MemberVO user = memberService.login(member);
+		MemberVO user = memberService.loginMember(member);
 		if(user != null) {
 			msg = new Message("/", "로그인에 성공했습니다.");
 		}
@@ -79,4 +79,26 @@ public class MemberController {
 		return "/member/check";
 	}
 	
+	@GetMapping("/member/update")
+	public String updateMember(Model model,  HttpSession session) {
+		String birthday_str = null;
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		birthday_str = user.getMe_birthday_str();
+		
+		model.addAttribute("str", birthday_str);
+		
+		return "/member/update";
+	}
+	
+	@PostMapping("/member/update")
+	public String updateMemberPost(Model model, MemberVO member) {
+Message msg = new Message("member/update", "회원정보 수정을 실패했습니다.");
+		
+		if(memberService.updateMember(member)) {
+			msg = new Message("member/check", "회원정보 수정을 성공했습니다.");
+		}
+		model.addAttribute("msg", msg);
+		
+		return "message";
+	}
 }

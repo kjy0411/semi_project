@@ -4,10 +4,12 @@ import kr.kh.project.vo.MemberVO;
 
 public interface MemberService {
 
-	boolean signup(MemberVO member);
+	boolean signupMember(MemberVO member);
 
-	MemberVO login(MemberVO member);
+	MemberVO loginMember(MemberVO member);
 
 	MemberVO selectMember(String me_id);
+
+	boolean updateMember(MemberVO member);
 
 }
