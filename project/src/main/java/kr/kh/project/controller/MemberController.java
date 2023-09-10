@@ -56,9 +56,9 @@ public class MemberController {
 	
 	@GetMapping("/member/logout")
 	public String logoutMember(Model model, HttpServletRequest request) {
+		Message msg = new Message("/", null);
 		HttpSession session = request.getSession();
 		MemberVO user = (MemberVO)session.getAttribute("user");
-		Message msg = new Message("/", null);
 		if(user != null) {
 			session.removeAttribute("user");
 			msg.setMsg("로그아웃에 성공했습니다.");
@@ -67,5 +67,16 @@ public class MemberController {
 		
 		return "message";
 	}
+	
+	@GetMapping("/member/check")
+	public String checkMember(Model model,  HttpSession session) {
+		String birthday_str = null;
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		birthday_str = user.getMe_birthday_str();
+		
+		model.addAttribute("str", birthday_str);
+		
+		return "/member/check";
+	}	
 	
 }
