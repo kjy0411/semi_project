@@ -49,8 +49,14 @@
 			</li>
 			<c:if test="${user != null && user.me_authority == 'ADMIN'}">
 				<span>|</span>
-				<li class="nav-item">
-					<a class="nav-link" href="<c:url value='/menu/admin'/>">관리자</a>
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="<c:url value='/menu/admin'/>" id="navbardrop" data-toggle="dropdown">
+					관리자
+					</a>
+					<div class="dropdown-menu">
+						<a class="dropdown-item" href="<c:url value='/menu/admin'/>">회원 정보 출력</a>
+						<a class="dropdown-item" href="#">회원 정보 수정</a>
+					</div>
 				</li>
 			</c:if>
 		</ul>
