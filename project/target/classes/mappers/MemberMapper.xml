@@ -13,10 +13,10 @@
 	<update id="updateMember">
 		update member
 		set
-			me_name = #{member.me_name}
-			me_eng_name = #{member.me_eng_name}
-			me_birthday = #{member.me_birthday}
-			me_phone = #{member.me_phone}
+			me_name = #{member.me_name},
+			me_eng_name = #{member.me_eng_name},
+			me_birthday = #{member.me_birthday},
+			me_phone = #{member.me_phone},
 			me_email = #{member.me_email}
 		where
 			me_id = #{member.me_id}

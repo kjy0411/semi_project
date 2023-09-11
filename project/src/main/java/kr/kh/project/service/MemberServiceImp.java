@@ -1,7 +1,5 @@
 package kr.kh.project.service;
 
-import java.util.regex.Pattern;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -82,7 +80,6 @@ public class MemberServiceImp implements MemberService{
 	public boolean updateMember(MemberVO member) {
 		if(member == null
 		|| member.getMe_id() == null
-		|| member.getMe_pw() == null
 		|| member.getMe_name() == null
 		|| member.getMe_eng_name() == null
 		|| member.getMe_birthday()  == null
@@ -90,7 +87,19 @@ public class MemberServiceImp implements MemberService{
 		|| member.getMe_email() == null) {
 			return false;
 		}
+		String str = member.getMe_birthday_str();
+		member.setMe_birthday(str);
+		
 		return memberDao.updateMember(member);
+	}
+
+	@Override
+	public boolean checkMember(MemberVO member) {
+		if(member == null || member.getMe_id() == null || member.getMe_pw() == null) {
+			return false;
+		}
+		MemberVO dbMember = memberDao.selectMember(member.getMe_id());
+		return passwordEncoder.matches(member.getMe_pw(), dbMember.getMe_pw());
 	}
 
 }
