@@ -1,7 +1,5 @@
 package kr.kh.project.service;
 
-import java.util.regex.Pattern;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -20,7 +18,7 @@ public class MemberServiceImp implements MemberService{
 	private BCryptPasswordEncoder passwordEncoder;
 
 	@Override
-	public boolean signup(MemberVO member) {
+	public boolean signupMember(MemberVO member) {
 		if(member == null
 		|| member.getMe_id() == null
 		|| member.getMe_pw() == null
@@ -56,7 +54,7 @@ public class MemberServiceImp implements MemberService{
 	}
 
 	@Override
-	public MemberVO login(MemberVO member) {
+	public MemberVO loginMember(MemberVO member) {
 		if(member == null) {
 			return null;
 		}
@@ -76,6 +74,32 @@ public class MemberServiceImp implements MemberService{
 			return null;
 		}
 		return memberDao.selectMember(me_id);
+	}
+
+	@Override
+	public boolean updateMember(MemberVO member) {
+		if(member == null
+		|| member.getMe_id() == null
+		|| member.getMe_name() == null
+		|| member.getMe_eng_name() == null
+		|| member.getMe_birthday()  == null
+		|| member.getMe_phone() == null
+		|| member.getMe_email() == null) {
+			return false;
+		}
+		String str = member.getMe_birthday_str();
+		member.setMe_birthday(str);
+		
+		return memberDao.updateMember(member);
+	}
+
+	@Override
+	public boolean checkMember(MemberVO member) {
+		if(member == null || member.getMe_id() == null || member.getMe_pw() == null) {
+			return false;
+		}
+		MemberVO dbMember = memberDao.selectMember(member.getMe_id());
+		return passwordEncoder.matches(member.getMe_pw(), dbMember.getMe_pw());
 	}
 
 }
