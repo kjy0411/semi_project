@@ -14,4 +14,8 @@ public interface MemberService {
 
 	boolean checkMember(MemberVO member);
 
+	void updateMemberSession(MemberVO user);
+
+	MemberVO getMemberBySession(String me_session_id);
+
 }

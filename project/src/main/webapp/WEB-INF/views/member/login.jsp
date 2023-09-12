@@ -16,6 +16,9 @@
 			<label>비번 :</label>
 			<input type="password" class="form-control" name="me_pw" placeholder="비밀번호"> <br>
 		</div>
+		<div class="form-group" style="float: right;">
+			<input type="checkbox" name="autoLogin" value="true">자동로그인 <br>
+		</div>
 		<button class="btn btn-outline-warning col-12">로그인</button>
 	</form>
 </body>

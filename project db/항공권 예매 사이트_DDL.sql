@@ -14,7 +14,9 @@ CREATE TABLE `member` (
 	`me_birthday`	date	NOT NULL,
 	`me_phone`	varchar(20)	NOT NULL,
 	`me_email`	varchar(50)	NOT NULL,
-	`me_authority`	varchar(10)	NOT NULL	DEFAULT 'USER'	COMMENT 'ADMIN, USER, STOP중 선택'
+	`me_authority`	varchar(10)	NOT NULL	DEFAULT 'USER'	COMMENT 'ADMIN, USER, STOP중 선택',
+    `me_session_id`	varchar(255),
+    `me_session_limit`	datetime
 );
 
 DROP TABLE IF EXISTS `point`;
