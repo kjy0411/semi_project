@@ -1,5 +1,6 @@
 package kr.kh.project.service;
 
+import java.util.List;
 import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,9 +37,9 @@ public class MemberServiceImp implements MemberService{
 		if(dbMember != null) {
 			return false;
 		}
-//		//¾ÆÀÌµð´Â ¿µ¹®À¸·Î ½ÃÀÛÇÏ¸ç ¿µ¹®,¼ýÀÚ·Î ÀÌ·ç¾îÁö°í 10~20ÀÚ
+//		//ï¿½ï¿½ï¿½Ìµï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½Ú·ï¿½ ï¿½Ì·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 10~20ï¿½ï¿½
 //		String idRegex = "^[a-zA-Z][a-zA-Z0-9]{10,20}$";
-//		//ºñ¹øÀº ¿µ¹®,¼ýÀÚ,!@#$%·Î ÀÌ·ç¾îÁö°í 12~25ÀÚ
+//		//ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½,!@#$%ï¿½ï¿½ ï¿½Ì·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 12~25ï¿½ï¿½
 //		String pwRegex = "^[a-zA-Z0-9!@#$%]{12,25}$";
 //		
 //		if(!Pattern.matches(idRegex, member.getMe_id())) {
@@ -76,6 +77,12 @@ public class MemberServiceImp implements MemberService{
 			return null;
 		}
 		return memberDao.selectMember(me_id);
+	}
+
+	@Override
+	public List<MemberVO> getMemberList() {
+		List<MemberVO> list = memberDao.selectMemberList();
+		return list;
 	}
 
 }
