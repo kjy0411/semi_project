@@ -7,4 +7,6 @@ import kr.kh.project.vo.AirlineVO;
 public interface AirlineDAO {
 
 	List<AirlineVO> selectAirlineList();
+	
+	List<AirlineVO> selectAirplaneList();
 }

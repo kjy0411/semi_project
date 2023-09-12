@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import kr.kh.project.service.AirlineService;
 import kr.kh.project.vo.AirlineVO;
+import kr.kh.project.vo.AirplaneVO;
 
 
 @Controller
@@ -28,12 +29,12 @@ public class AirlineController {
 	}
 	
 	@GetMapping("/airline/detail")
-	public String detail(Model model, Integer bo_num ) {
+	public String detail(Model model) {
 	//	boardService.updateViews(bo_num);
 	//	BoardVO board = boardService.getBoard(bo_num);
-		//List<FileVO> fileList = boardService.getFileList(bo_num)
+		List<AirplaneVO> list = airlineService.getAirplaneList();
 	//	model.addAttribute("board", board);
-	//	model.addAttribute("cri", cri);
+		model.addAttribute("list", list);
 		return "/airline/detail";
 	}
 	

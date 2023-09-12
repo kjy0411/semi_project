@@ -7,6 +7,12 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>123123</h1>
+<h1>항공 상세정보</h1>
+					<c:forEach items="${list}" var="airplane">
+					<td>
+					<a>${airplane.ap_al_name }</a>
+					<a>${airplane.ap_am_name }</a>
+					</td> <br>
+					</c:forEach>
 </body>
 </html>

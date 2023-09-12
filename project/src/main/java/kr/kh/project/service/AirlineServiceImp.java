@@ -23,4 +23,13 @@ public class AirlineServiceImp implements AirlineService {
 		return list;
 	}
 
+
+	@Override
+	public List<AirlineVO> getAirplaneList() {
+		
+		List<AirlineVO> list = airlineDao.selectAirlineList();
+		
+		return list;
+	}
+
 }
