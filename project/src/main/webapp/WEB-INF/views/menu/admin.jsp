@@ -9,7 +9,7 @@
 <h1>관리자 화면</h1>
 <a href="#">회원권한</a>
 <a href="#">항공사/비행기</a>
-<a href="#">공항/노선</a>
+<a href="<c:url value='/airport/list'/>">공항/노선</a>
 <a href="#">스케쥴</a>
 
 </body>

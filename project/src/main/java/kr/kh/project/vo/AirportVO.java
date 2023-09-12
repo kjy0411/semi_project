@@ -1,5 +1,6 @@
 package kr.kh.project.vo;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -18,5 +19,13 @@ public class AirportVO {
 		}
 		SimpleDateFormat format = new SimpleDateFormat("hh:mm:ss");
 		return format.format(ai_standard_time);
+	}
+	public void setAi_standard_time(String time) {
+		SimpleDateFormat format = new SimpleDateFormat("hh:mm:ss");
+		try {
+			ai_standard_time = format.parse(time);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 	}
 }
