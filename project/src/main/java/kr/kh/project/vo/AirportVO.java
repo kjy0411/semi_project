@@ -1,6 +1,5 @@
 package kr.kh.project.vo;
 
-import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
