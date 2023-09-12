@@ -38,11 +38,16 @@
 	
 	
 	<beans:bean id="loginInterceptor" class="kr.kh.project.interceptor.LoginInterceptor"></beans:bean>
+	<beans:bean id="autoLoginInterceptor" class="kr.kh.project.interceptor.AutoLoginInterceptor"></beans:bean>
 	
 	<interceptors>
 		<interceptor>
 			<mapping path="/member/login"/>
 			<beans:ref bean="loginInterceptor" />
+		</interceptor>
+		<interceptor>
+			<mapping path="/**"/>
+			<beans:ref bean="autoLoginInterceptor"/>
 		</interceptor>
 	</interceptors>
 	

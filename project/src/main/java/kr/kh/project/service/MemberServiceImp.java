@@ -102,4 +102,18 @@ public class MemberServiceImp implements MemberService{
 		return passwordEncoder.matches(member.getMe_pw(), dbMember.getMe_pw());
 	}
 
+	@Override
+	public void updateMemberSession(MemberVO user) {
+		if(user == null || user.getMe_session_id() == null) {
+			return;
+		}
+		System.out.println(user);
+		memberDao.updateMemberSession(user);
+	}
+
+	@Override
+	public MemberVO getMemberBySession(String me_session_id) {
+		return memberDao.selectMemberBySession(me_session_id);
+	}
+
 }

@@ -52,6 +52,7 @@ public class MemberController {
 		MemberVO user = memberService.loginMember(member);
 		if(user != null) {
 			msg = new Message("/", "로그인에 성공했습니다.");
+			user.setAutoLogin(member.isAutoLogin());
 		}
 		model.addAttribute("user", user);
 		model.addAttribute("msg", msg);
@@ -64,6 +65,9 @@ public class MemberController {
 		Message msg = new Message("/", null);
 		HttpSession session = request.getSession();
 		MemberVO user = (MemberVO)session.getAttribute("user");
+		
+		user.setMe_session_limit(null);
+		memberService.updateMemberSession(user);
 		if(user != null) {
 			session.removeAttribute("user");
 			msg.setMsg("로그아웃에 성공했습니다.");
