@@ -42,7 +42,7 @@
 				<span>|</span>
 			</c:if>
 			<li class="nav-item">
-				<a class="nav-link" href="<c:url value='#'/>">예매</a>
+				<a class="nav-link" href="<c:url value='/reservation/search'/>">예매</a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link" href="<c:url value='#'/>">예매내역 조회</a>

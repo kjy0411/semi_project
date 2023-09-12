@@ -8,13 +8,13 @@ import lombok.Data;
 
 @Data
 public class ScheduleVO {
-	int sk_num;
-	String sk_ap_num;
-	int sk_ro_num;
-	Date sk_start_time;
-	Date sk_end_time;
-	Date sk_time;
-	int sk_price;
+	private int sk_num;
+	private String sk_ap_num;
+	private int sk_ro_num;
+	private Date sk_start_time;
+	private Date sk_end_time;
+	private Date sk_time;
+	private int sk_price;
 	
 	public String getSk_start_time_str() {
 		if(sk_start_time == null) {

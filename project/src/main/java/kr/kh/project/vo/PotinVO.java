@@ -4,10 +4,10 @@ import lombok.Data;
 
 @Data
 public class PotinVO {
-	int po_num; 
-	String po_me_id; 
-	String po_al_name; 
-	String po_mc_name; 
-	int po_accumulate_point; 
-	int po_hold_point;
+	private int po_num; 
+	private String po_me_id; 
+	private String po_al_name; 
+	private String po_mc_name; 
+	private int po_accumulate_point; 
+	private int po_hold_point;
 }

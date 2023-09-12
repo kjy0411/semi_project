@@ -23,7 +23,7 @@ VALUES
 -- 국가 등록 
 INSERT INTO NATION(NA_NAME, NA_DIVISION)
 VALUES
-	("한국", "동아시아"),
+	("한국", "국내"),
 	("일본", "동아시아"),
 	("중국", "동아시아"),
 	("대만", "동아시아"),

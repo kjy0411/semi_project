@@ -4,5 +4,5 @@ import lombok.Data;
 
 @Data
 public class AirlineVO {
-	String al_name;
+	private String al_name;
 }

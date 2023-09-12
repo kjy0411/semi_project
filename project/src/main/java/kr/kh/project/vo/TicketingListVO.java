@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class TicketingListVO {
-	String tl_num;
-	int tl_ti_num; 
-	int tl_se_num;
+	private String tl_num;
+	private int tl_ti_num; 
+	private int tl_se_num;
 }
