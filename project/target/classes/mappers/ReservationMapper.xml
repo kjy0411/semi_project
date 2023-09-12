@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.kh.project.dao.ReservationDAO">
+	<select id="selectAirportList" resultType="kr.kh.project.vo.AirportVO">
+		select
+			airport.*, na_division
+		from
+			airport
+				join
+			nation on na_name = ai_na_name
+		order by
+			na_division asc, ai_na_name asc, ai_name asc
+	</select>
+	<select id="selectNationList" resultType="kr.kh.project.vo.NationVO">
+		select *
+		from nation
+		group by na_name
+		order by na_name asc;
+	</select>
+</mapper>

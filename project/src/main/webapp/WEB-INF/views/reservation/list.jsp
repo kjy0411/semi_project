@@ -1,26 +1,27 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page language="java" contentType="text/html; charset=utf-8" 
+	pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="EUC-KR">
-<title>½ºÄÉÁì°Ë»ö¸®½ºÆ®</title>
+<title>ìŠ¤ì¼€ì¥´ê²€ìƒ‰ë¦¬ìŠ¤íŠ¸</title>
 </head>
 <body>
 	<div class="container">
 	  <table class="table table-striped" style="text-align: center;">
 	    <thead>
 	     	<tr>
-				<th>Ç×°ø»ç</th>
-				<th>Ãâ¹ß½Ã°£</th>
-				<th>µµÂø½Ã°£</th>
-				<th>ºñÇà½Ã°£</th>
-				<th>ºñ¿ë(ÀÌÄÚ³ë¹Ì 1ÀÎ)</th>
+				<th>í•­ê³µì‚¬</th>
+				<th>ì¶œë°œì‹œê°„</th>
+				<th>ë„ì°©ì‹œê°„</th>
+				<th>ë¹„í–‰ì‹œê°„</th>
+				<th>ë¹„ìš©(ì´ì½”ë…¸ë¯¸ 1ì¸)</th>
 			</tr>
 	    </thead>
 	    <tbody>
 	     	<tr>
-				<td>´ëÇÑÇ×°ø</td>
+				<td>ëŒ€í•œí•­ê³µ</td>
 				<td>2023-10-03 10:55</td>
 				<td>2023-10-03 19:20</td>
 				<td>17:25</td>
