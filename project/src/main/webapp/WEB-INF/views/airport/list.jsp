@@ -3,15 +3,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Airport List</title>
+    <title>공항 리스트</title>
 </head>
 <body>
-    <h1>Airport List</h1>
+    <h1>공항 리스트</h1>
     <ul>
-        <li><a href="/airport/detail?airportId=1">Airport 1</a></li>
-        <li><a href="/airport/detail?airportId=2">Airport 2</a></li>
+        <li><a href="/airport/detail?airportId=1">공항 1</a></li>
+        <li><a href="/airport/detail?airportId=2">공항 2</a></li>
         
     </ul>
-    <a href="/airport/insert"><button>공항 추가</button></a>
+    <a href="/airport/list"><button>공항 리스트 보기</button></a>
 </body>
 </html>
