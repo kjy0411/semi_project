@@ -1,10 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper
-  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="kr.kh.project.dao.ScheduleDAO">
-	<select id="selectScheduleByRoute" resultType="kr.kh.project.vo.ScheduleVO">
-		select
+select
 			schedule.*,
 		    ap_al_name,
             -- 해당 노선의 출발지의 공항이름
@@ -38,7 +32,7 @@
 			from
 				route
 					join
-				(select * from airport) as end_airport on ro_ai_end = ai_num
+				(select * from airport) as endairport on ro_ai_end = ai_num
 			where
 				ro_num = sk_ro_num) as end_standard_time
 		from
@@ -51,8 +45,40 @@
 			airport on ro_ai_start = ai_num
 				 or ro_ai_end = ai_num
 		where
-			sk_ro_num = #{ro_num}
+			sk_ro_num = 1
 		group by
 			sk_num;
-	</select>
-</mapper>
+-- 출발지의 공항이름
+select
+	ai_name
+from
+	airport
+		join
+	(select * from route) as start_route on ro_ai_start = ai_num
+where ro_num = sk_ro_num;
+-- 도착지의 공항이름
+select
+	ai_name
+from
+	airport
+		join
+	(select * from route) as start_route on ro_ai_end = ai_num
+where ro_num = sk_ro_num;
+-- 출발지의 utc
+select
+	ai_standard_time
+from
+	route
+		join
+	(select * from airport) as start_airport on ro_ai_start = ai_num
+where
+	ro_num = sk_ro_num;
+-- 도착지의 utc
+select
+	ai_standard_time
+from
+	route
+		join
+	(select * from airport) as endairport on ro_ai_end = ai_num
+where
+	ro_num = sk_ro_num;

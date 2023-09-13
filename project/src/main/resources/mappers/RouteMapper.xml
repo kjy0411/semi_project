@@ -16,6 +16,13 @@
   </delete>
   
   <select id="findRoute" resultType="kr.kh.project.vo.RouteVO">
-  	select * from route where ro_ai_start = #{route.ro_ai_start} and ro_ai_end = #{route.ro_ai_end}
+  	select
+  		*,
+	    (select ai_name from airport where ai_num = ro_ai_start) as ai_name_start,
+	    (select ai_name from airport where ai_num = ro_ai_end) as ai_name_end
+  	from
+  		route
+  	where
+  		ro_ai_start = #{route.ro_ai_start} and ro_ai_end = #{route.ro_ai_end}
   </select>
 </mapper>

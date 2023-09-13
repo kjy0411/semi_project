@@ -10,6 +10,7 @@
 <body>
 	${scheduleList}
 	<h1>${msg}</h1>
+	<h2>${dbRoute.ai_name_start} -> ${dbRoute.ai_name_end}</h2>
 	<div class="container">
 	  <table class="table table-striped" style="text-align: center;">
 	    <thead>
@@ -24,7 +25,7 @@
 	    <tbody>
 	    	<c:forEach items="${scheduleList}" var="schedule">
 		    	<tr>
-					<td>test</td>
+					<td>${schedule.ap_al_name}</td>
 					<td>${schedule.sk_start_time_str}</td>
 					<td>${schedule.sk_end_time_str}</td>
 					<td>${schedule.sk_time_str}</td>

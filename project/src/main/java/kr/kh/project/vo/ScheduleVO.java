@@ -19,6 +19,12 @@ public class ScheduleVO {
 	private String sk_start_time_str;
 	private String sk_end_time_str;
 	private String sk_time_str;
+	//검색을 위한 개체
+	private String ap_al_name;
+	private String ai_start_name;		//출발지의 공항이름
+	private String ai_end_name;			//도착지의 공항이름
+	private String start_standard_time;	//출발지의 UTC
+	private String end_standard_time;	//도착지의 UTC
 	
 	public String getSk_start_time_str() {
 		if(sk_start_time == null) {

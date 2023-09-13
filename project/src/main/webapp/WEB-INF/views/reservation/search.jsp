@@ -8,9 +8,6 @@
 <title>항공편 검색</title>
 </head>
 <body>
-	<%
-    request.setAttribute("minDate", "2023-09-12");
-    %>
 	<div style="width: 100%; display: flex;">
 		<div class="search-box container-fluid" style="flex: 2">
 		<div class="search-box">

@@ -48,12 +48,19 @@ public class ReservationController {
 	
 	@GetMapping("/reservation/list")
 	public String listReservation(Model model, RouteVO route) {
-		String msg = "스케쥴";
+		String msg = route.getRo_ai_start() + "->" + route.getRo_ai_end();
 		RouteVO dbRoute = routeService.findRoute(route);
-		if(dbRoute.getRo_num() == 0) {
-			msg = "해당 노선은 없는 노선입니다";
+		List<ScheduleVO> scheduleList = null;
+		if(dbRoute == null) {
+			msg = "등록되지 않은 노선입니다";
+		}else {
+			scheduleList = scheduleService.getScheduleByRoute(dbRoute.getRo_num());	
+			
+			if(scheduleList == null) {
+				msg = "해당 노선의 항공편이 없습니다";
+			}
 		}
-		List<ScheduleVO> scheduleList = scheduleService.getScheduleByRoute(dbRoute.getRo_num());
+		model.addAttribute("dbRoute", dbRoute);
 		model.addAttribute("scheduleList", scheduleList);
 		model.addAttribute("msg", msg);
 		return "/reservation/list";
