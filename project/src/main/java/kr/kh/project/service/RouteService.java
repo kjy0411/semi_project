@@ -10,4 +10,5 @@ public interface RouteService {
     List<RouteVO> getArrivalRoutes(String ai_name);
     void insertRoute(RouteVO route);
     void deleteRouteByNumber(String routeNumber);
+	RouteVO findRoute(RouteVO route);
 }

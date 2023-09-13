@@ -14,7 +14,8 @@
   <delete id="deleteRoute" parameterType="int">
     DELETE FROM route WHERE po_num = #{po_num};
   </delete>
-
   
-
+  <select id="findRoute" resultType="kr.kh.project.vo.RouteVO">
+  	select * from route where ro_ai_start = #{route.ro_ai_start} and ro_ai_end = #{route.ro_ai_end}
+  </select>
 </mapper>

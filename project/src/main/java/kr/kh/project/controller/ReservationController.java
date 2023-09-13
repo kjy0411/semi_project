@@ -7,14 +7,33 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import kr.kh.project.service.AirportService;
+import kr.kh.project.service.NationService;
 import kr.kh.project.service.ReservationService;
+import kr.kh.project.service.RouteService;
+import kr.kh.project.service.ScheduleService;
 import kr.kh.project.vo.AirportVO;
 import kr.kh.project.vo.NationVO;
+import kr.kh.project.vo.RouteVO;
+import kr.kh.project.vo.ScheduleVO;
 
 @Controller
 public class ReservationController {
 	@Autowired
 	ReservationService reservationService;
+	
+	@Autowired
+	AirportService airportService;
+	
+	@Autowired
+	NationService nationService;
+	
+	@Autowired
+	RouteService routeService;
+
+	@Autowired
+	ScheduleService scheduleService;
+	
 	
 	@GetMapping("/reservation/search")
 	public String searchReservation(Model model) {
@@ -28,8 +47,15 @@ public class ReservationController {
 	}
 	
 	@GetMapping("/reservation/list")
-	public String listReservation() {
-		
+	public String listReservation(Model model, RouteVO route) {
+		String msg = "스케쥴";
+		RouteVO dbRoute = routeService.findRoute(route);
+		if(dbRoute.getRo_num() == 0) {
+			msg = "해당 노선은 없는 노선입니다";
+		}
+		List<ScheduleVO> scheduleList = scheduleService.getScheduleByRoute(dbRoute.getRo_num());
+		model.addAttribute("scheduleList", scheduleList);
+		model.addAttribute("msg", msg);
 		return "/reservation/list";
 	}
 }

@@ -16,12 +16,17 @@ public class ScheduleVO {
 	private Date sk_time;
 	private int sk_price;
 	
+	private String sk_start_time_str;
+	private String sk_end_time_str;
+	private String sk_time_str;
+	
 	public String getSk_start_time_str() {
 		if(sk_start_time == null) {
 			return "";	
 		}
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-		return format.format(sk_start_time);
+		sk_start_time_str = format.format(sk_start_time);
+		return sk_start_time_str;
 	}
 	public void setSk_start_time(String time) {
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
@@ -37,7 +42,8 @@ public class ScheduleVO {
 			return "";	
 		}
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-		return format.format(sk_end_time);
+		sk_end_time_str = format.format(sk_end_time);
+		return sk_end_time_str;
 	}
 	public void setSk_end_time(String time) {
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
@@ -53,7 +59,8 @@ public class ScheduleVO {
 			return "";	
 		}
 		SimpleDateFormat format = new SimpleDateFormat("hh:mm:ss");
-		return format.format(sk_time);
+		sk_time_str = format.format(sk_time);
+		return sk_time_str;
 	}
 	public void setSk_time(String time) {
 		SimpleDateFormat format = new SimpleDateFormat("hh:mm:ss");

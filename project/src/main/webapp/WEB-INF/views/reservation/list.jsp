@@ -8,6 +8,8 @@
 <title>스케쥴검색리스트</title>
 </head>
 <body>
+	${scheduleList}
+	<h1>${msg}</h1>
 	<div class="container">
 	  <table class="table table-striped" style="text-align: center;">
 	    <thead>
@@ -20,15 +22,18 @@
 			</tr>
 	    </thead>
 	    <tbody>
-	     	<tr>
-				<td>대한항공</td>
-				<td>2023-10-03 10:55</td>
-				<td>2023-10-03 19:20</td>
-				<td>17:25</td>
-				<td>1244500</td>
-			</tr>
+	    	<c:forEach items="${scheduleList}" var="schedule">
+		    	<tr>
+					<td>test</td>
+					<td>${schedule.sk_start_time_str}</td>
+					<td>${schedule.sk_end_time_str}</td>
+					<td>${schedule.sk_time_str}</td>
+					<td>${schedule.sk_price}</td>
+				</tr>
+	    	</c:forEach>
 	    </tbody>
 	  </table>
 	</div>
+	<a href="<c:url value='/reservation/search'/>"><button class="btn btn-outline-success">돌아가기</button></a>
 </body>
 </html>
