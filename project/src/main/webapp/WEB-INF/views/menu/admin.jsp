@@ -24,13 +24,15 @@
       <tr>
         <th>회원아이디</th>
         <th>회원 권한</th>
+        <th>회원 이메일</th>
       </tr>
     </thead>
     <tbody>
-   	 <c:forEach items="${member}" var="memberList">
+   	 <c:forEach items="${list}" var="member">
 	      <tr>
 	        <td>${member.me_id}</td>
 	        <td>${member.me_authority}</td>
+	        <td>${member.me_email}</td>
 	      </tr>
       </c:forEach>
     </tbody>

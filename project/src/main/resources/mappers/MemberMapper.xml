@@ -11,6 +11,6 @@
 	values (#{member.me_id}, #{member.me_pw}, #{member.me_name}, #{member.me_eng_name}, #{member.me_birthday}, #{member.me_phone}, #{member.me_email})
 	</insert>
 	<select id="selectMemberList" resultType="kr.kh.project.vo.MemberVO">
-		select * from member where me_id = #{member.me_id}, me_authority = #{member.me_authority}
+		select * from member
 	</select>
 </mapper>
