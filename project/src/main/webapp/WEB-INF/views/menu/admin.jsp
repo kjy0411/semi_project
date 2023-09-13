@@ -24,7 +24,7 @@
       <tr>
         <th>회원아이디</th>
         <th>회원 권한</th>
-        <th>회원 이메일</th>
+        <th>권한변경</th>
       </tr>
     </thead>
     <tbody>
@@ -32,11 +32,12 @@
 	      <tr>
 	        <td>${member.me_id}</td>
 	        <td>${member.me_authority}</td>
-	        <td>${member.me_email}</td>
+	        <td><button class="btn btn-outline-warning btn-update" onclick="">수정</button></td>
 	      </tr>
       </c:forEach>
     </tbody>
   </table>
+
 </div>
 </body>
 </html>
