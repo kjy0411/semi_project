@@ -33,10 +33,13 @@ public class AirportServiceImp implements AirportService {
 	}
 
 	@Override
-	public List<AirportVO> selectAirportListByStart(String num) {
-		if(num == null) {
+	public List<AirportVO> selectAirportListByStart(String ro_ai_start) {
+		if(ro_ai_start == null) {
 			return null;
 		}
-		return airportDao.selectAirportListByStart(num);
+		System.out.println(ro_ai_start);
+		List<AirportVO> list = airportDao.selectAirportListByStart(ro_ai_start);
+		System.out.println(list);
+		return list;
 	}
 }

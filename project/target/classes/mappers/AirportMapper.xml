@@ -16,7 +16,7 @@
 
   <select id="selectAirportListByRoute" resultType="kr.kh.project.vo.AirportVO">
 	select
-		ai_num, ai_name, ai_na_name, ai_standard_time, na_division
+		*
 	from
 		airport
 			join
@@ -27,8 +27,8 @@
 		ai_num
   </select>
   <select id="selectAirportListByStart" resultType="kr.kh.project.vo.AirportVO">
-	select
-		ai_num, ai_name, ai_na_name, ai_standard_time, na_division
+  	select
+		*
 	from
 		airport
 			join

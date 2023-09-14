@@ -109,16 +109,10 @@
 				async : false,
 				method : 'post',
 				url : '<c:url value="/reservation/search/"/>',
-				data : JSON.stringify(num),
-				contentType : 'application/json; charset=utf-8',
+				data : {ro_ai_start:num},
 				dataType : 'json',
 				success : function(data) {
-					if(data.res){
-						alert("댓글 삭제 성공");
-						getCommentList(cri);
-					}else{
-						alert("댓글 삭제 실패");
-					}
+					console.log(date)
 				}
 			});
 		})

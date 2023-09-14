@@ -9,7 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.kh.project.service.AirportService;
@@ -54,9 +54,10 @@ public class ReservationController {
 	}
 	@ResponseBody
 	@PostMapping("/reservation/search")
-	public Map<String, Object> ajaxTest(@RequestBody String num, Model model){
+	public Map<String, Object> ajaxTest(@RequestParam String ro_ai_start, Model model){
 		Map<String, Object> map = new HashMap<String, Object>();
-		List<AirportVO> endAirportList = airportService.selectAirportListByStart(num);
+		List<AirportVO> endAirportList = airportService.selectAirportListByStart(ro_ai_start);
+		System.out.println(ro_ai_start);
 		System.out.println(endAirportList);
 		model.addAttribute("endAirportList", endAirportList);
 		return map;

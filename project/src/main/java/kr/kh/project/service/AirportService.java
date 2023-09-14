@@ -16,5 +16,5 @@ public interface AirportService {
 
 	List<AirportVO> selectAirportListByRoute();
 
-	List<AirportVO> selectAirportListByStart(String num);
+	List<AirportVO> selectAirportListByStart(String ro_ai_start);
 }
