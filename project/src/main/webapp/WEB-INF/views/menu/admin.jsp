@@ -37,8 +37,8 @@
 	        <td class="id">${member.me_id}</td>
 	        <td>
 	        	<select class="form-control" name="type">
-			      <option value="USER" <c:if test="${me_authority eq 'USER'}">selected</c:if>>USER</option>
-			      <option value="ADMIN"<c:if test="${me_authority eq 'ADMIN'}">selected</c:if>>ADMIN</option>
+			      <option value="USER" <c:if test="${member.me_authority eq 'USER'}">selected</c:if>>USER</option>
+			      <option value="ADMIN"<c:if test="${member.me_authority eq 'ADMIN'}">selected</c:if>>ADMIN</option>
 			    </select>
 	        </td>
 	        <td><button class="btn btn-outline-warning btn-update">수정</button></td>

@@ -35,7 +35,7 @@ public class AdminController {
 	@PostMapping("/menu/update")
 	public Map<String, Object> update(@RequestBody MemberVO member, HttpSession session){
 		Map<String, Object> map = new HashMap<String, Object>();
-		MemberVO user = (MemberVO)session.getAttribute("user");
+		MemberVO user = (MemberVO)session.getAttribute("user"); // 로그인해서 들어온 user를 뜻한다.
 		boolean res = memberService.updateMember(member, user);
 		map.put("res", res);
 		return map;
