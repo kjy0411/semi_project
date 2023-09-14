@@ -25,4 +25,10 @@
   	where
   		ro_ai_start = #{route.ro_ai_start} and ro_ai_end = #{route.ro_ai_end}
   </select>
+  <select id="selectRouteList" resultType="kr.kh.project.vo.RouteVO">
+  	select
+  		*
+  	from
+  		route
+  </select>
 </mapper>

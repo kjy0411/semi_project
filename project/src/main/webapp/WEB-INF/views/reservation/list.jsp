@@ -8,7 +8,6 @@
 <title>스케쥴검색리스트</title>
 </head>
 <body>
-	${scheduleList}
 	<h1>${msg}</h1>
 	<h2>${dbRoute.ai_name_start} -> ${dbRoute.ai_name_end}</h2>
 	<div class="container">
@@ -29,7 +28,7 @@
 					<td>${schedule.sk_start_time_str}</td>
 					<td>${schedule.sk_end_time_str}</td>
 					<td>${schedule.sk_time_str}</td>
-					<td>${schedule.sk_price}</td>
+					<td>${schedule.sk_price_str}(원)</td>
 				</tr>
 	    	</c:forEach>
 	    </tbody>

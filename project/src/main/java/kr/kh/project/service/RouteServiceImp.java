@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import kr.kh.project.dao.RouteDAO;
 import kr.kh.project.vo.RouteVO;
+import kr.kh.project.vo.SearchVO;
+
 import java.util.List;
 
 @Service
@@ -33,10 +35,15 @@ public class RouteServiceImp implements RouteService {
     }
 
 	@Override
-	public RouteVO findRoute(RouteVO route) {
-		if(route == null || route.getRo_ai_start() == null || route.getRo_ai_end() == null) {
+	public RouteVO findRoute(SearchVO search) {
+		if(search == null || search.getRo_ai_start() == null || search.getRo_ai_end() == null) {
 			return null;
 		}
-		return routeDao.findRoute(route);
+		return routeDao.findRoute(search);
+	}
+
+	@Override
+	public List<RouteVO> getRouteList() {
+		return routeDao.selectRouteList();
 	}
 }

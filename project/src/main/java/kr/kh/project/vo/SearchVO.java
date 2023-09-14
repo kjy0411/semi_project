@@ -8,11 +8,15 @@ import lombok.Data;
 
 @Data
 public class SearchVO {
+	
+	private int ticketType;
 	private String startAirport;
 	private String endAriport;
 	private Date startDay;
 	private Date endDay;
 	private int seatAmount;
+	private String ro_ai_start;
+	private String ro_ai_end;
 	
 	public String getStartDaystr() {
 		if(startDay == null) {

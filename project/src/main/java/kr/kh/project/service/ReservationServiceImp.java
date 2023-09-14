@@ -14,14 +14,4 @@ public class ReservationServiceImp implements ReservationService{
 	@Autowired
 	ReservationDAO reservationDao;
 
-	@Override
-	public List<AirportVO> getAirportList() {
-		return reservationDao.selectAirportList();
-	}
-
-	@Override
-	public List<NationVO> getNationList() {
-		return reservationDao.selectNationList();
-	}
-
 }

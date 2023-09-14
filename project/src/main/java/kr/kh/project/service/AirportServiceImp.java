@@ -10,20 +10,33 @@ import java.util.List;
 public class AirportServiceImp implements AirportService {
 
     @Autowired
-    private AirportDAO airportDAO;
+    private AirportDAO airportDao;
 
     @Override
     public List<AirportVO> selectAirportList() {
-        return airportDAO.selectAirportList();
+        return airportDao.selectAirportList();
     }
 
     @Override
     public AirportVO getAirportByCode(String ai_num) { 
-        return airportDAO.getAirportByNumber(ai_num); 
+        return airportDao.getAirportByNumber(ai_num); 
     }
 
     @Override
     public void insertAirport(AirportVO ai_num) {
-        airportDAO.insertAirport(ai_num);
+        airportDao.insertAirport(ai_num);
     }
+
+	@Override
+	public List<AirportVO> selectAirportListByRoute() {
+		return airportDao.selectAirportListByRoute();
+	}
+
+	@Override
+	public List<AirportVO> selectAirportListByStart(String num) {
+		if(num == null) {
+			return null;
+		}
+		return airportDao.selectAirportListByStart(num);
+	}
 }

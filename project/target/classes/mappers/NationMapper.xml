@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.kh.project.dao.NationDAO">
+	<select id="selectNationList" resultType="kr.kh.project.vo.NationVO">
+		select *
+		from nation
+		group by na_name
+		order by na_name asc
+	</select>
+</mapper>

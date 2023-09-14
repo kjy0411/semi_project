@@ -1,6 +1,8 @@
 package kr.kh.project.service;
 
 import kr.kh.project.vo.RouteVO;
+import kr.kh.project.vo.SearchVO;
+
 import java.util.List;
 
 import org.mybatis.spring.annotation.MapperScan;
@@ -10,5 +12,6 @@ public interface RouteService {
     List<RouteVO> getArrivalRoutes(String ai_name);
     void insertRoute(RouteVO route);
     void deleteRouteByNumber(String routeNumber);
-	RouteVO findRoute(RouteVO route);
+	RouteVO findRoute(SearchVO search);
+	List<RouteVO> getRouteList();
 }
