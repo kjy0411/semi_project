@@ -54,13 +54,12 @@ public class ReservationController {
 	}
 	@ResponseBody
 	@PostMapping("/reservation/search")
-	public Map<String, Object> ajaxTest(@RequestParam String ro_ai_start, Model model){
-		Map<String, Object> map = new HashMap<String, Object>();
-		List<AirportVO> endAirportList = airportService.selectAirportListByStart(ro_ai_start);
-		System.out.println(ro_ai_start);
+	public Object ajaxTest(@RequestParam("num")String num, Model model){
+		List<AirportVO> endAirportList = airportService.selectAirportListByStart(num);
+		System.out.println(num);
 		System.out.println(endAirportList);
 		model.addAttribute("endAirportList", endAirportList);
-		return map;
+		return endAirportList;
 	}
 	
 	@GetMapping("/reservation/list")

@@ -16,5 +16,5 @@ public interface AirportDAO {
 
 	List<AirportVO> selectAirportListByRoute();
 
-	List<AirportVO> selectAirportListByStart(@Param("ro_ai_start")String ro_ai_start);
+	List<AirportVO> selectAirportListByStart(@Param("num")String ro_ai_start);
 }

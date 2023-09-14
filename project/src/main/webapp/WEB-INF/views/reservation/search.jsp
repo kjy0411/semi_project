@@ -50,6 +50,8 @@
 	</div>
 	${endAirportList}
 	<script type="text/javascript">
+		let endAirportList = null;
+	
 		let today = new Date().toISOString().substring(0, 10); //2023-09-13
 		$('[name=startTime]').val(today).prop('min', today);
 		$('[name=endTime]').val(today).prop('min', today);
@@ -109,13 +111,15 @@
 				async : false,
 				method : 'post',
 				url : '<c:url value="/reservation/search/"/>',
-				data : {ro_ai_start:num},
+				data : {num:num},
 				dataType : 'json',
 				success : function(data) {
-					console.log(date)
+					endAirportList = data;
+					console.log(endAirportList);
 				}
 			});
 		})
+		
 		$(document).on('click', '.select-end-airport', function(){
 			let value = $(this).text();
 			let num = $(this).prev().text();

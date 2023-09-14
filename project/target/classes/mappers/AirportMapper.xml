@@ -36,6 +36,6 @@
 			join
 		nation on ai_na_name = na_name
 	where
-		ro_ai_start = #{ro_ai_start}
+		ro_ai_start = #{num}
   </select>
 </mapper>
