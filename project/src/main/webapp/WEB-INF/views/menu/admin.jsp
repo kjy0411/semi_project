@@ -18,7 +18,6 @@
 		    </div>
 		    <input type="text" class="form-control" id="bt_title" placeholder="검색어를 입력하세요.">
 		    <button class="btn btn-outline-success btn-insert" >찾기</button>
-		    
 		</form>
 	</div>
 <!-- 회원정보 출력 -->
@@ -46,6 +45,12 @@
       </c:forEach>
     </tbody>
   </table>
+  	<ul class="pagination justify-content-center">
+	    <li class="page-item"><a class="page-link" href="javascript:void(0);">Previous</a></li>
+	    <li class="page-item"><a class="page-link" href="javascript:void(0);">1</a></li>
+	    <li class="page-item"><a class="page-link" href="javascript:void(0);">2</a></li>
+	    <li class="page-item"><a class="page-link" href="javascript:void(0);">Next</a></li>
+  	</ul>
 </div>
 <script type="text/javascript">
 	$('.btn-update').click(function(){
