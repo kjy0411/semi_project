@@ -9,4 +9,7 @@
 		group by na_name
 		order by na_name asc
 	</select>
+	<select id="selectDivisionList" resultType="kr.kh.project.vo.DivisionVO">
+		select di_name from division order by di_num asc;
+	</select>
 </mapper>

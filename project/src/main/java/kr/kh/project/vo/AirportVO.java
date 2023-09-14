@@ -30,4 +30,8 @@ public class AirportVO {
 			e.printStackTrace();
 		}
 	}
+	@Override
+	public String toString() {
+		return "{\"ai_name\" : \"" + ai_name + "\", \"ai_na_name\":\"" + ai_na_name + "\"}";
+	}
 }

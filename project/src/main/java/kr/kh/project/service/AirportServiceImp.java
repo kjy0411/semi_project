@@ -37,9 +37,7 @@ public class AirportServiceImp implements AirportService {
 		if(num == null) {
 			return null;
 		}
-		System.out.println(num);
 		List<AirportVO> list = airportDao.selectAirportListByStart(num);
-		System.out.println(list);
 		return list;
 	}
 }

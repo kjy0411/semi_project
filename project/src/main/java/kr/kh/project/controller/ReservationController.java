@@ -1,8 +1,6 @@
 package kr.kh.project.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +16,7 @@ import kr.kh.project.service.ReservationService;
 import kr.kh.project.service.RouteService;
 import kr.kh.project.service.ScheduleService;
 import kr.kh.project.vo.AirportVO;
+import kr.kh.project.vo.DivisionVO;
 import kr.kh.project.vo.NationVO;
 import kr.kh.project.vo.RouteVO;
 import kr.kh.project.vo.ScheduleVO;
@@ -44,9 +43,8 @@ public class ReservationController {
 	@GetMapping("/reservation/search")
 	public String searchReservation(Model model) {
 		List<AirportVO> startAirportList = airportService.selectAirportListByRoute();
-		System.out.println(startAirportList);
 		List<NationVO> nationList = nationService.getNationList();
-		List<String> divisionList = List.of("국내", "동아시아", "동남아시아", "북아메리카", "유럽", "오세아니아", "남아메리카", "아시아", "아프리카");
+		List<DivisionVO> divisionList = nationService.getDivisionList();
 		model.addAttribute("startAirportList", startAirportList);
 		model.addAttribute("nationList", nationList);
 		model.addAttribute("divisionList", divisionList);
@@ -56,8 +54,6 @@ public class ReservationController {
 	@PostMapping("/reservation/search")
 	public Object ajaxTest(@RequestParam("num")String num, Model model){
 		List<AirportVO> endAirportList = airportService.selectAirportListByStart(num);
-		System.out.println(num);
-		System.out.println(endAirportList);
 		model.addAttribute("endAirportList", endAirportList);
 		return endAirportList;
 	}

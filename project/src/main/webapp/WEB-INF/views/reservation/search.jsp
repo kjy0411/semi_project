@@ -44,24 +44,28 @@
 				<input class="form-control" type="text" name="ro_ai_end" readonly>
 				<button class="btn btn-outline-primary">검색</button>
 			</form>
+			${divisionList}
 		</div>
 		<div class="popUp-box container-fluid" style="flex: 3; padding: 10px; overflow: scroll; height: 750px">
 		</div>
 	</div>
 	${endAirportList}
 	<script type="text/javascript">
+		let division = ${divisionList};
+		let nation = ${nationList};
 		let endAirportList = null;
-	
+		let str = ``;
 		let today = new Date().toISOString().substring(0, 10); //2023-09-13
 		$('[name=startTime]').val(today).prop('min', today);
 		$('[name=endTime]').val(today).prop('min', today);
 		
 		$('.start-airport').click(function() {
-			let str = `
+			str = ``;
+			str += `
 				<c:forEach items="${divisionList}" var="division">
-				<h4>${division}</h4>
+				<h4>${division.di_name}</h4>
 				<c:forEach items="${nationList}" var="nation">
-					<c:if test="${nation.na_division == division}">
+					<c:if test="${nation.na_division == division.di_name}">
 						<h6>-${nation.na_name}</h6>
 						<c:forEach items="${startAirportList}" var="airport">
 							<c:if test="${airport.ai_na_name == nation.na_name}">
@@ -77,27 +81,12 @@
 			
 		})
 		$('.end-airport').click(function() {
-			let str = ``;
 			if($('[name=startAirport]').val() == ""){
 				alert("출발지를 선택해주세요")
 				str = ``;
 			}else{
-				str = `
-					<c:forEach items="${divisionList}" var="division">
-						<h4>${division}</h4>
-						<c:forEach items="${nationList}" var="nation">
-							<c:if test="${nation.na_division == division}">
-								<h6>-${nation.na_name}</h6>
-								<c:forEach items="${airportList}" var="airport">
-									<c:if test="${airport.ai_na_name == nation.na_name}">
-										<span class="ai_num" hidden="">${airport.ai_num}</span>
-										<a class="select-end-airport" href="#">${airport.ai_name}</a> <br>
-									</c:if>
-								</c:forEach>
-							</c:if>
-						</c:forEach>
-					</c:forEach>
-				`;
+				str = ``;
+				printAirport();
 			}
 			$('.popUp-box').html(str);
 		})
@@ -115,10 +104,25 @@
 				dataType : 'json',
 				success : function(data) {
 					endAirportList = data;
-					console.log(endAirportList);
 				}
 			});
 		})
+		
+		function printAirport() {
+			console.log(endAirportList);
+			for(i = 0; i < division.length; i++){
+				str += `
+					<h4>\${division[i].di_name}<h4>
+				`;
+				for(j = 0; j < nation.length; j++){
+					if(division[i].di_name == nation[j].na_division){
+						str += `
+							<h6>-\${nation[j].na_name}<h6>
+						`;
+					}
+				}
+			}
+		}
 		
 		$(document).on('click', '.select-end-airport', function(){
 			let value = $(this).text();

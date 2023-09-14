@@ -30,6 +30,13 @@ CREATE TABLE `point` (
 	`po_hold_point`	int	NOT NULL	DEFAULT 0
 );
 
+DROP TABLE IF EXISTS `division`;
+
+CREATE TABLE `division` (
+	`di_num`	int	NOT NULL	PRIMARY KEY,
+	`di_name`	varchar(20)	NOT NULL
+);
+
 DROP TABLE IF EXISTS `ticketing`;
 
 CREATE TABLE `ticketing` (
