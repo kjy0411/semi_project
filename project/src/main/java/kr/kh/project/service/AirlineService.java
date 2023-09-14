@@ -8,9 +8,11 @@ public interface AirlineService {
 
 	
 
-	List<AirlineVO> getAirplaneList();
+	
 
 	List<AirlineVO> getAirlineList();
+
+
 	
 	
 }

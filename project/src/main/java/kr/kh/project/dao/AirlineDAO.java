@@ -8,5 +8,5 @@ public interface AirlineDAO {
 
 	List<AirlineVO> selectAirlineList();
 	
-	List<AirlineVO> selectAirplaneList();
+	//List<AirlineVO> selectAirplaneList();
 }

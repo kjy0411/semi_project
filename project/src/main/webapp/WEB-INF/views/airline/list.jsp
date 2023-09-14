@@ -22,7 +22,7 @@
 		      	<tr>
 				<c:forEach items="${list}" var="airline">
 					<td>
-					<a href="<c:url value='/airline/detail'/>">${airline.al_name }</a>
+					<a href="<c:url value='/airline/detail?al_name=${airline.al_name}'/>">${airline.al_name}</a>
 					</td> <br>
 					</c:forEach>
 				</tr>

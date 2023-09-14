@@ -7,7 +7,9 @@
 		select * from airline order by al_name desc
 	</select>
 	
-	<select id="selectAirplaneList" resultType="kr.kh.project.vo.AirplaneVO">
-		select * from airplane order by ap_num desc
-	</select>
 </mapper>
+
+
+
+	
+
