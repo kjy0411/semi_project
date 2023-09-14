@@ -14,4 +14,6 @@ public interface MemberService {
 
 	List<MemberVO> getMemberList();
 
+	boolean updateMember(MemberVO member, MemberVO user);
+
 }
