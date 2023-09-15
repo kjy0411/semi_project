@@ -11,7 +11,7 @@
 	<h1>${msg}</h1>
 	<h2>${dbRoute.ai_name_start} -> ${dbRoute.ai_name_end}</h2>
 	<div class="container">
-	  <table class="table table-striped" style="text-align: center;">
+	  <table class="table table-bordered" style="text-align: center;">
 	    <thead>
 	     	<tr>
 				<th>항공사</th>
@@ -23,7 +23,7 @@
 	    </thead>
 	    <tbody>
 	    	<c:forEach items="${scheduleList}" var="schedule">
-		    	<tr>
+		    	<tr class="sk_num" data-num="${schedule.sk_num}">
 					<td>${schedule.ap_al_name}</td>
 					<td>${schedule.sk_start_time_str}</td>
 					<td>${schedule.sk_end_time_str}</td>
@@ -34,9 +34,17 @@
 	    </tbody>
 	  </table>
 	</div>
+	<a href="<c:url value='/reservation/search'/>"><button class="btn btn-outline-success">돌아가기</button></a>
 	<script type="text/javascript">
 		
+		$('.sk_num').hover(function(){
+			$(this).css('background', 'aqua');
+		}, function(){
+			$(this).css('background', 'white');
+		});
+		$('.sk_num').click(function(){
+			alert($(this).data('num'));
+		});
 	</script>
-	<a href="<c:url value='/reservation/search'/>"><button class="btn btn-outline-success">돌아가기</button></a>
 </body>
 </html>
