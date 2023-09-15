@@ -84,3 +84,4 @@ cached-antora-playbook.yml
 
 target/
 test/
+*.class
