@@ -34,6 +34,9 @@
 	    </tbody>
 	  </table>
 	</div>
+	<script type="text/javascript">
+		
+	</script>
 	<a href="<c:url value='/reservation/search'/>"><button class="btn btn-outline-success">돌아가기</button></a>
 </body>
 </html>
