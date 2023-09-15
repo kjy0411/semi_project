@@ -49,12 +49,14 @@ public class ReservationController {
 	@ResponseBody
 	@PostMapping("/reservation/search")
 	public Map<String, Object> printAirport(@RequestParam("route")boolean route, @RequestParam("ai_num")String ai_num){
+		System.out.println(route);
+		System.out.println(ai_num);
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<AirportVO> airportList = airportService.getAirportByRoute(route, ai_num);
 		List<NationVO> nationList = nationService.getNationByRoute(route, ai_num);
 		List<DivisionVO> divisionList = nationService.getDivisionByRoute(route, ai_num);
 		if(airportList == null || nationList == null || divisionList == null) {
-			map.put("msg","µî·ÏµÈ ³ë¼±ÀÌ ¾ø½À´Ï´Ù.");
+			map.put("msg","ë“±ë¡ëœ ë…¸ì„ ì´ ì—†ìŠµë‹ˆë‹¤.");
 			map.put("res", false);
 			return map;
 		}
@@ -71,12 +73,12 @@ public class ReservationController {
 		RouteVO dbRoute = routeService.findRoute(Search);
 		List<ScheduleVO> scheduleList = null;
 		if(dbRoute == null) {
-			msg = "µî·ÏµÇÁö ¾ÊÀº ³ë¼±ÀÔ´Ï´Ù";
+			msg = "ë“±ë¡ë˜ì§€ ì•Šì€ ë…¸ì„ ì…ë‹ˆë‹¤.";
 		}else {
 			scheduleList = scheduleService.getScheduleByRoute(dbRoute.getRo_num());	
 			
 			if(scheduleList == null) {
-				msg = "ÇØ´ç ³ë¼±ÀÇ Ç×°øÆíÀÌ ¾ø½À´Ï´Ù";
+				msg = "í•´ë‹¹ ë…¸ì„ ì˜ í•­ê³µí¸ì´ ì—†ìŠµë‹ˆë‹¤.";
 			}
 		}
 		model.addAttribute("dbRoute", dbRoute);
@@ -84,4 +86,13 @@ public class ReservationController {
 		model.addAttribute("msg", msg);
 		return "/reservation/list";
 	}
+	
+	@ResponseBody
+	@PostMapping("/test/check")
+	public Map<String, Object> test(String ab){
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("res", true);
+		return map;
+	}
+	
 }
