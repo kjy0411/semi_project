@@ -6,6 +6,6 @@ import kr.kh.project.vo.ScheduleVO;
 
 public interface ScheduleService {
 
-	List<ScheduleVO> getScheduleByRoute(int ro_num);
+	List<ScheduleVO> getScheduleByRoute(int ro_num, String startDate);
 
 }

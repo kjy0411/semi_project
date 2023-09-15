@@ -28,11 +28,11 @@
 					</div>
 					<div class="start-time form-group">
 						<span class="col-1">출발시간</span> <br>
-						<input class="form-control" type="date" name="startTime" min="">
+						<input class="form-control" type="date" name="startDay" min="">
 					</div>
 					<div class="end-time form-group" style="height: 78px">
 						<span class="col-1">도착시간</span> <br>
-						<input class="form-control" type="date" name="endTime" min="">
+						<input class="form-control" type="date" name="endDay" min="">
 					</div>
 					<div class="seat-amount form-group">
 						<span class="col-1">예매좌석수</span> <br>
@@ -51,8 +51,8 @@
 	<script type="text/javascript">
 		let str = ``;
 		let today = new Date().toISOString().substring(0, 10); //2023-09-13
-		$('[name=startTime]').val(today).prop('min', today);
-		$('[name=endTime]').val(today).prop('min', today);
+		$('[name=startDay]').val(today).prop('min', today);
+		$('[name=endDay]').val(today).prop('min', today);
 		
 		$('.start-airport').click(function() {
 			let route = true;
@@ -137,7 +137,7 @@
 			if($(this).val() == 2){
 				str = `
 					<span class="col-1">도착시간</span> <br>
-					<input class="form-control" type="date" value=\${today} name="endTime" min=\${today}>
+					<input class="form-control" type="date" value=\${today} name="endDay" min=\${today}>
 				`;
 				$('.end-time').html(str);
 			}else if($(this).val() == 1){

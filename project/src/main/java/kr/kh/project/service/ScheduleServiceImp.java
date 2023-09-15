@@ -14,11 +14,11 @@ public class ScheduleServiceImp implements ScheduleService{
 	ScheduleDAO scheduleDao;
 
 	@Override
-	public List<ScheduleVO> getScheduleByRoute(int ro_num) {
+	public List<ScheduleVO> getScheduleByRoute(int ro_num, String startDate) {
 		if(ro_num == 0) {
 			return null;
 		}
-		return scheduleDao.selectScheduleByRoute(ro_num);
+		return scheduleDao.selectScheduleByRoute(ro_num, startDate);
 	}
 	
 }

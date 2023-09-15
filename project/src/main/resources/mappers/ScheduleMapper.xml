@@ -22,6 +22,9 @@
 			airport as ai_start on ai_start.ai_num = ro_ai_start
 				join
 			airport as ai_end on ai_end.ai_num = ro_ai_end
-		where sk_ro_num = #{ro_num}
+		where
+			sk_ro_num = #{ro_num} and date_format(sk_start_time, '%Y-%m-%d') = date(#{startDate}) and sk_start_time >= now()
+		order by
+			sk_start_time asc
 	</select>
 </mapper>

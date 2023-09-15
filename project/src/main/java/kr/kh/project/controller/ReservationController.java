@@ -48,9 +48,7 @@ public class ReservationController {
 	}
 	@ResponseBody
 	@PostMapping("/reservation/search")
-	public Map<String, Object> printAirport(@RequestParam("route")boolean route, @RequestParam("ai_num")String ai_num){
-		System.out.println(route);
-		System.out.println(ai_num);
+	public Map<String, Object> searchReservationPost(@RequestParam("route")boolean route, @RequestParam("ai_num")String ai_num){
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<AirportVO> airportList = airportService.getAirportByRoute(route, ai_num);
 		List<NationVO> nationList = nationService.getNationByRoute(route, ai_num);
@@ -68,31 +66,65 @@ public class ReservationController {
 	}
 
 	@GetMapping("/reservation/list")
-	public String listReservation(Model model, SearchVO Search) {
-		String msg = Search.getRo_ai_start() + "->" + Search.getRo_ai_end();
-		RouteVO dbRoute = routeService.findRoute(Search);
+	public String listReservation(Model model, SearchVO search) {
+		String msg = search.getRo_ai_start() + "->" + search.getRo_ai_end();
+		RouteVO goRoute = routeService.findRoute(search.getRo_ai_start(), search.getRo_ai_end());
+		RouteVO backRoute = routeService.findRoute(search.getRo_ai_end(), search.getRo_ai_start());
 		List<ScheduleVO> scheduleList = null;
-		if(dbRoute == null) {
+		List<ScheduleVO> scheduleList2 = null;
+		if(goRoute == null || backRoute == null) {
 			msg = "등록되지 않은 노선입니다.";
 		}else {
-			scheduleList = scheduleService.getScheduleByRoute(dbRoute.getRo_num());	
+			if(search.getTicketType() == 1) {//1편도 2왕복
+				scheduleList = scheduleService.getScheduleByRoute(goRoute.getRo_num(), search.getStartDaystr());					
+			}else if(search.getTicketType() == 2) {
+				scheduleList = scheduleService.getScheduleByRoute(goRoute.getRo_num(), search.getStartDaystr());					
+				scheduleList2 = scheduleService.getScheduleByRoute(backRoute.getRo_num(), search.getEndDaystr());					
+			}
 			
 			if(scheduleList == null) {
 				msg = "해당 노선의 항공편이 없습니다.";
 			}
 		}
-		model.addAttribute("dbRoute", dbRoute);
+		model.addAttribute("goRoute", goRoute);
+		model.addAttribute("backRoute", backRoute);
 		model.addAttribute("scheduleList", scheduleList);
+		model.addAttribute("scheduleList2", scheduleList2);
 		model.addAttribute("msg", msg);
 		return "/reservation/list";
 	}
 	
-	@ResponseBody
-	@PostMapping("/test/check")
-	public Map<String, Object> test(String ab){
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("res", true);
-		return map;
-	}
+//	@ResponseBody
+//	@PostMapping("/reservation/list")
+//	public Map<String, Object> listReservationPost(@RequestParam("res")boolean res, @RequestParam("search")SearchVO search){
+//		System.out.println(res);
+//		System.out.println(search);
+//		Map<String, Object> map = new HashMap<String, Object>();
+//		String msg = search.getRo_ai_start() + "->" + search.getRo_ai_end();
+//		RouteVO goRoute = routeService.findRoute(search.getRo_ai_start(), search.getRo_ai_end());
+//		RouteVO backRoute = routeService.findRoute(search.getRo_ai_end(), search.getRo_ai_start());
+//		List<ScheduleVO> scheduleList = null;
+//		List<ScheduleVO> scheduleList2 = null;
+//		if(goRoute == null || backRoute == null) {
+//			msg = "등록되지 않은 노선입니다.";
+//		}else {
+//			if(search.getTicketType() == 1) {//1편도 2왕복
+//				scheduleList = scheduleService.getScheduleByRoute(goRoute.getRo_num(), search.getStartDaystr());					
+//			}else if(search.getTicketType() == 2) {
+//				scheduleList = scheduleService.getScheduleByRoute(goRoute.getRo_num(), search.getStartDaystr());					
+//				scheduleList2 = scheduleService.getScheduleByRoute(backRoute.getRo_num(), search.getEndDaystr());					
+//			}
+//			
+//			if(scheduleList == null) {
+//				msg = "해당 노선의 항공편이 없습니다.";
+//			}
+//		}
+//		map.put("goRoute", goRoute);
+//		map.put("backRoute", backRoute);
+//		map.put("scheduleList", scheduleList);
+//		map.put("scheduleList2", scheduleList2);
+//		map.put("msg", msg);
+//		return map;
+//	}
 	
 }

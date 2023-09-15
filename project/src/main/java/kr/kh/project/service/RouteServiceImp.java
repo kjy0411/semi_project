@@ -35,11 +35,11 @@ public class RouteServiceImp implements RouteService {
     }
 
 	@Override
-	public RouteVO findRoute(SearchVO search) {
-		if(search == null || search.getRo_ai_start() == null || search.getRo_ai_end() == null) {
+	public RouteVO findRoute(String ro_ai_start, String ro_ai_end) {
+		if(ro_ai_start == null || ro_ai_end == null) {
 			return null;
 		}
-		return routeDao.findRoute(search);
+		return routeDao.findRoute(ro_ai_start, ro_ai_end);
 	}
 
 	@Override

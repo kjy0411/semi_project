@@ -34,7 +34,7 @@ public class SearchVO {
 		}
 	}
 	
-	public String getEndDay_str() {
+	public String getEndDaystr() {
 		if(endDay == null) {
 			return "";	
 		}

@@ -8,6 +8,6 @@ import kr.kh.project.vo.ScheduleVO;
 
 public interface ScheduleDAO {
 
-	List<ScheduleVO> selectScheduleByRoute(@Param("ro_num")int ro_num);
+	List<ScheduleVO> selectScheduleByRoute(@Param("ro_num")int ro_num, @Param("startDate")String startDate);
 
 }

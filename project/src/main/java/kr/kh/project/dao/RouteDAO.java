@@ -12,6 +12,6 @@ public interface RouteDAO {
     List<RouteVO> getArrivalRoutes(String airportCode);
     void insertRoute(RouteVO route);
     void deleteRouteByNumber(String routeNumber);
-	RouteVO findRoute(@Param("route")SearchVO search);
+	RouteVO findRoute(@Param("ro_ai_start")String ro_ai_start, @Param("ro_ai_end")String ro_ai_end);
 	List<RouteVO> selectRouteList();
 }
