@@ -14,7 +14,6 @@ public interface AirportService {
     
     void insertAirport(AirportVO ai_num);
 
-	List<AirportVO> selectAirportListByRoute();
+    List<AirportVO> getAirportByRoute(boolean route, String ai_num);
 
-	List<AirportVO> selectAirportListByStart(String num);
 }

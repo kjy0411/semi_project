@@ -13,29 +13,26 @@
     INSERT INTO airport (ai_name, ai_na_name, ai_standard_time)
     VALUES (#{ai_name}, #{ai_na_name}, #{ai_standard_time});
   </insert>
-
-  <select id="selectAirportListByRoute" resultType="kr.kh.project.vo.AirportVO">
-	select
-		*
-	from
-		airport
-			join
-		route on ro_ai_start = ai_num
-			join
-		nation on ai_na_name = na_name
-	group by
-		ai_num
-  </select>
-  <select id="selectAirportListByStart" resultType="kr.kh.project.vo.AirportVO">
+  
+  <select id="getAirportByRoute" resultType="kr.kh.project.vo.AirportVO">
   	select
-		*
+	    ai_name,
+	    ai_num,
+	    ai_na_name
 	from
 		airport
 			join
-		route on ro_ai_end = ai_num
+		route on if(#{route}, ro_ai_start,ro_ai_end) = ai_num
 			join
 		nation on ai_na_name = na_name
+			join
+		division on na_di_name = di_name
 	where
-		ro_ai_start = #{num}
+		ro_ai_start= if(#{route}, airport.ai_num, #{ai_num}) 
+	group by
+		if(#{route}, ro_ai_start, ro_ai_end)
+	order by
+		di_name asc, na_name asc, ai_name asc;
   </select>
+
 </mapper>

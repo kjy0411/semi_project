@@ -1,6 +1,8 @@
 package kr.kh.project.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -42,22 +44,27 @@ public class ReservationController {
 	
 	@GetMapping("/reservation/search")
 	public String searchReservation(Model model) {
-		List<AirportVO> startAirportList = airportService.selectAirportListByRoute();
-		List<NationVO> nationList = nationService.getNationList();
-		List<DivisionVO> divisionList = nationService.getDivisionList();
-		model.addAttribute("startAirportList", startAirportList);
-		model.addAttribute("nationList", nationList);
-		model.addAttribute("divisionList", divisionList);
 		return "/reservation/search";
 	}
 	@ResponseBody
 	@PostMapping("/reservation/search")
-	public Object ajaxTest(@RequestParam("num")String num, Model model){
-		List<AirportVO> endAirportList = airportService.selectAirportListByStart(num);
-		model.addAttribute("endAirportList", endAirportList);
-		return endAirportList;
+	public Map<String, Object> printAirport(@RequestParam("route")boolean route, @RequestParam("ai_num")String ai_num){
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<AirportVO> airportList = airportService.getAirportByRoute(route, ai_num);
+		List<NationVO> nationList = nationService.getNationByRoute(route, ai_num);
+		List<DivisionVO> divisionList = nationService.getDivisionByRoute(route, ai_num);
+		if(airportList == null || nationList == null || divisionList == null) {
+			map.put("msg","등록된 노선이 없습니다.");
+			map.put("res", false);
+			return map;
+		}
+		map.put("airportList", airportList);
+		map.put("nationList", nationList);
+		map.put("divisionList", divisionList);
+		map.put("res", true);
+		return map;
 	}
-	
+
 	@GetMapping("/reservation/list")
 	public String listReservation(Model model, SearchVO Search) {
 		String msg = Search.getRo_ai_start() + "->" + Search.getRo_ai_end();

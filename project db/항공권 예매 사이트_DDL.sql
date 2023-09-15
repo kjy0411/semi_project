@@ -30,11 +30,9 @@ CREATE TABLE `point` (
 	`po_hold_point`	int	NOT NULL	DEFAULT 0
 );
 
-DROP TABLE IF EXISTS `division`;
-
 CREATE TABLE `division` (
-	`di_num`	int	NOT NULL	PRIMARY KEY,
-	`di_name`	varchar(20)	NOT NULL
+	`di_name`	varchar(10)	NOT NULL PRIMARY KEY,
+	`di_num`	int	NOT NULL
 );
 
 DROP TABLE IF EXISTS `ticketing`;
@@ -145,8 +143,8 @@ CREATE TABLE `member_class` (
 DROP TABLE IF EXISTS `nation`;
 
 CREATE TABLE `nation` (
-	`na_name`	varchar(20)	NOT NULL PRIMARY KEY,
-	`na_division`	varchar(10)	NULL
+	`na_name`	varchar(20)	NOT NULL	PRIMARY KEY,
+	`na_di_name`	varchar(10)	NOT NULL
 );
 
 ALTER TABLE `point` ADD CONSTRAINT `FK_member_TO_point_1` FOREIGN KEY (
@@ -273,5 +271,12 @@ ALTER TABLE `point_history` ADD CONSTRAINT `FK_ticketing_TO_point_history_1` FOR
 )
 REFERENCES `ticketing` (
 	`ti_num`
+);
+
+ALTER TABLE `nation` ADD CONSTRAINT `FK_division_TO_nation_1` FOREIGN KEY (
+	`na_di_name`
+)
+REFERENCES `division` (
+	`di_name`
 );
 

@@ -39,56 +39,36 @@
 						<input class="form-control" type="number" min="1" name="seatAmount" value="1">
 					</div>
 				</div>
-			
 				<input class="form-control" type="text" name="ro_ai_start" readonly>
 				<input class="form-control" type="text" name="ro_ai_end" readonly>
 				<button class="btn btn-outline-primary">검색</button>
 			</form>
-			${divisionList}
 		</div>
 		<div class="popUp-box container-fluid" style="flex: 3; padding: 10px; overflow: scroll; height: 750px">
 		</div>
 	</div>
 	${endAirportList}
 	<script type="text/javascript">
-		let division = ${divisionList};
-		let nation = ${nationList};
-		let endAirportList = null;
 		let str = ``;
 		let today = new Date().toISOString().substring(0, 10); //2023-09-13
 		$('[name=startTime]').val(today).prop('min', today);
 		$('[name=endTime]').val(today).prop('min', today);
 		
 		$('.start-airport').click(function() {
-			str = ``;
-			str += `
-				<c:forEach items="${divisionList}" var="division">
-				<h4>${division.di_name}</h4>
-				<c:forEach items="${nationList}" var="nation">
-					<c:if test="${nation.na_division == division.di_name}">
-						<h6>-${nation.na_name}</h6>
-						<c:forEach items="${startAirportList}" var="airport">
-							<c:if test="${airport.ai_na_name == nation.na_name}">
-								<span class="ai_num" hidden="">${airport.ai_num}</span>
-								<a class="select-start-airport" href="#">${airport.ai_name}</a> <br>
-							</c:if>
-						</c:forEach>
-					</c:if>
-				</c:forEach>
-			</c:forEach>
-				`;
-			$('.popUp-box').html(str);
-			
+			let route = true;
+			let ai_num = "";
+			printAirport(route, ai_num);
 		})
 		$('.end-airport').click(function() {
 			if($('[name=startAirport]').val() == ""){
 				alert("출발지를 선택해주세요")
 				str = ``;
+				$('.popUp-box').html(str);
 			}else{
-				str = ``;
-				printAirport();
+				let route = false;
+				let ai_num = $('[name=ro_ai_start]').val();
+				printAirport(route, ai_num);
 			}
-			$('.popUp-box').html(str);
 		})
 		$(document).on('click', '.select-start-airport', function(){
 			let value = $(this).text();
@@ -96,32 +76,52 @@
 			$('[name=startAirport]').val(value);
 			$('[name=ro_ai_start]').val(num);
 			$('.popUp-box').empty();
+		})
+		
+		function printAirport(route, ai_num) {
+			str = ``;
 			$.ajax({
 				async : false,
 				method : 'post',
 				url : '<c:url value="/reservation/search/"/>',
-				data : {num:num},
+				data : {route:route, ai_num:ai_num},
 				dataType : 'json',
 				success : function(data) {
-					endAirportList = data;
+					if(data.res){
+						for(div of data.divisionList){
+							str += `
+								<h4>\${div.di_name}</h4>
+							`;
+							for(nat of data.nationList){
+								if(div.di_name == nat.na_di_name){
+									str += `
+										<h6>\${nat.na_name}</h6>
+									`;
+									for(air of data.airportList){
+										if(nat.na_name == air.ai_na_name){
+											if(route == true){
+												str += `
+													<span class="ai_num" hidden="">\${air.ai_num}</span>
+													-<a class="select-start-airport" href="#">\${air.ai_name}</a> <br>
+												`;
+											}else{
+												str += `
+													<span class="ai_num" hidden="">\${air.ai_num}</span>
+													-<a class="select-end-airport" href="#">\${air.ai_name}</a> <br>
+												`;
+											}
+											
+										}
+									}
+								}
+							}
+						}
+					}else {
+						alert(data.msg);
+					}
+				$('.popUp-box').html(str);
 				}
 			});
-		})
-		
-		function printAirport() {
-			console.log(endAirportList);
-			for(i = 0; i < division.length; i++){
-				str += `
-					<h4>\${division[i].di_name}<h4>
-				`;
-				for(j = 0; j < nation.length; j++){
-					if(division[i].di_name == nation[j].na_division){
-						str += `
-							<h6>-\${nation[j].na_name}<h6>
-						`;
-					}
-				}
-			}
 		}
 		
 		$(document).on('click', '.select-end-airport', function(){

@@ -7,7 +7,7 @@ import kr.kh.project.vo.NationVO;
 
 public interface NationService {
 
-	List<NationVO> getNationList();
+	List<NationVO> getNationByRoute(boolean route, String ai_num);
 
-	List<DivisionVO> getDivisionList();
+	List<DivisionVO> getDivisionByRoute(boolean route, String ai_num);
 }

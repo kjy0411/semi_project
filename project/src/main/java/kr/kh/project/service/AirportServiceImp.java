@@ -28,16 +28,11 @@ public class AirportServiceImp implements AirportService {
     }
 
 	@Override
-	public List<AirportVO> selectAirportListByRoute() {
-		return airportDao.selectAirportListByRoute();
-	}
-
-	@Override
-	public List<AirportVO> selectAirportListByStart(String num) {
-		if(num == null) {
+	public List<AirportVO> getAirportByRoute(boolean route, String ai_num) {
+		if(route == false && ai_num == null) {
 			return null;
 		}
-		List<AirportVO> list = airportDao.selectAirportListByStart(num);
-		return list;
+		return airportDao.getAirportByRoute(route, ai_num);
 	}
+
 }

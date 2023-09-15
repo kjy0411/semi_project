@@ -26,7 +26,7 @@ VALUES
     ("퍼스트", 4);
     
 -- 국가 등록 
-INSERT INTO NATION(NA_NAME, NA_DIVISION)
+INSERT INTO NATION(NA_NAME, NA_DI_NAME)
 VALUES
 	("한국", "국내"),
 	("일본", "동아시아"),

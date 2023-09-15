@@ -3,13 +3,41 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.kh.project.dao.NationDAO">
-	<select id="selectNationList" resultType="kr.kh.project.vo.NationVO">
-		select *
-		from nation
-		group by na_name
-		order by na_name asc
+	<select id="getNationByRoute" resultType="kr.kh.project.vo.NationVO">
+		select
+		    na_name,
+		    na_di_name
+		from
+			airport
+				join
+			route on if(#{route}, ro_ai_start,ro_ai_end) = ai_num
+				join
+			nation on ai_na_name = na_name
+				join
+			division on na_di_name = di_name
+		where
+			ro_ai_start= if(#{route}, airport.ai_num, #{ai_num}) 
+		group by
+			na_name
+		order by
+			di_name asc, na_name asc, ai_name asc
 	</select>
-	<select id="selectDivisionList" resultType="kr.kh.project.vo.DivisionVO">
-		select di_name from division order by di_num asc;
+	<select id="getDivisionByRoute" resultType="kr.kh.project.vo.DivisionVO">
+		select
+		    di_name
+		from
+			airport
+				join
+			route on if(#{route}, ro_ai_start,ro_ai_end) = ai_num
+				join
+			nation on ai_na_name = na_name
+				join
+			division on na_di_name = di_name
+		where
+			ro_ai_start= if(#{route}, airport.ai_num, #{ai_num}) 
+		group by
+			di_name
+		order by
+			di_name asc, na_name asc, ai_name asc
 	</select>
 </mapper>
