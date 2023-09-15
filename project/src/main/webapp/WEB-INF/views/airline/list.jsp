@@ -30,7 +30,7 @@
  			 </table>
  			 <div class="container">
   
-  <button type="button" class="btn btn-primary">항공사 등록</button>
+  <button type="button" class="btn btn-primary" >항공사 등록</button>
 
 </div>
 		</thead>

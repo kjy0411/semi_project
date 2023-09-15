@@ -17,18 +17,19 @@
   <h1>항공 상세정보</h1>
     <thead>
 	      <tr>
-	        <th>Firstname</th>
-	        <th>Lastname</th>    
+	        <th>Airplane Name</th>
+      		<th>Model</th>   
 	      </tr>
 		  <tr>
-		<c:forEach items="${list}" var="airplane">
-			<th>${airplane.ap_al_name }</th>
-		</c:forEach>
-	 </tr>
-		<tr>
-		<c:forEach items="${list}" var="airplane">
-			<th>${airplane.ap_am_model }</th>
-		</c:forEach>
+		<c:set var="selectedAirline" value="${param.al_name}" />
+            <c:forEach items="${list}" var="airplane">
+                <c:if test="${selectedAirline eq airplane.ap_al_name}">
+                    <tr>
+                        <td>${airplane.ap_al_name}</td>
+                        <td>${airplane.ap_am_model}</td>
+                    </tr>
+                </c:if>
+            </c:forEach>
 		</tr>
 	</thead>	
 	</table>
