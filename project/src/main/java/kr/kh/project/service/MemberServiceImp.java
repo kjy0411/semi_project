@@ -85,4 +85,12 @@ public class MemberServiceImp implements MemberService{
 		return list;
 	}
 
+	@Override
+	public boolean updateMember(MemberVO member, MemberVO user) {
+		if(member == null || member.getMe_id() == null || member.getMe_authority() == null) {
+			return false;
+		}
+		return memberDao.updateMember(member);
+	}
+
 }

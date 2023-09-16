@@ -13,4 +13,12 @@
 	<select id="selectMemberList" resultType="kr.kh.project.vo.MemberVO">
 		select * from member
 	</select>
+	<update id="updateMember">
+		update 
+			member
+		set
+			me_authority = #{member.me_authority}
+		where
+			me_id = #{member.me_id}
+	</update>
 </mapper>
