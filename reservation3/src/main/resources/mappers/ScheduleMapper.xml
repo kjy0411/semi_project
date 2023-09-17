@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.kh.air.dao.ScheduleDAO">
+	<select id="selectSchedule" resultType="kr.kh.air.vo.ScheduleVO">
+		select * from schedule where sk_num = #{sk_num}
+	</select>
+	<insert id="insertSchedule">
+		insert into schedule(sk_num, sk_ap_num, sk_ro_num, sk_start_time, sk_end_time, sk_time, sk_price) values(#{sk_num},#{sk_ap_num},#{sk_ro_num},#{sk_start_time},#{sk_end_time},#{sk_time},#{sk_price})
+	</insert>
+	<delete id="deleteSchedule">
+		delete from schedule where sk_num = #{sk_num}
+	</delete>
+</mapper>
