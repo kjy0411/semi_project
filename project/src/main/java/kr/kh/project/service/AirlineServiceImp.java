@@ -24,6 +24,18 @@ public class AirlineServiceImp implements AirlineService {
 	}
 
 
+	@Override
+	public boolean insertAirline(AirlineVO airline, AirlineVO user) {
+		
+		if(user == null || user.getAl_name() == null) {
+			return false;
+		}
+		
+		airline.setAl_name(user.getAl_name());
+		return airlineDao.insertAirline(airline);
+	}
+
+
 	
 
 }

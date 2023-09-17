@@ -6,12 +6,9 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class Message {
-	private String url;
-	private String msg;
+	private String url, msg;
 	
 	public String toString() {
 		return "{ " + "msg : '" + msg + "', url : '" + url + "' }";
 	}
-
-	
 }

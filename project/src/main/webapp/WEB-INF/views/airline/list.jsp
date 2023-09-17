@@ -9,11 +9,11 @@
 </head>
 	<body>
 		<thead>
-		      <table class="table table-bordered">
+		      <table class="table table-bordered"  style="width:50%" "height=50" "">
 			    <thead>
 			      <tr>
 			        <br>
-			        <th>항공사명</th><br>
+			        <th  style="text-align:center" >항공사명</th><br>
 			      </tr>
 			    </thead>
 			    </table>
@@ -30,7 +30,8 @@
  			 </table>
  			 <div class="container">
   
-  <button type="button" class="btn btn-primary" >항공사 등록</button>
+     <a href="<c:url value='/airline/insert'/>"> <button type="button" class="btn btn-primary" >항공사 등록</button> </a>
+	 <a href="<c:url value='/airline/delete'/>"> <button type="button" class="btn btn-primary" >항공사 삭제</button> </a>
 
 </div>
 		</thead>

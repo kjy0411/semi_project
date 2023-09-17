@@ -12,6 +12,8 @@ public interface AirlineService {
 
 	List<AirlineVO> getAirlineList();
 
+	boolean insertAirline(AirlineVO airline, AirlineVO user);
+
 
 	
 	

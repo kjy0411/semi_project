@@ -7,12 +7,13 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>항공사 등록</h1>
-	<form action="<c:url value='/airline/insert'/>" method="post">
+<h1>항공사 삭제</h1>
+
+<form action="<c:url value='/airline/delete'/>" method="post">
 		<div class="form-group">
 			<label>항공사</label>
 			<input type="text" class="form-control" name="al_name">
 		</div>
-	<button class="btn btn-outline-success col-12">등록하기</button>
+	<button class="btn btn-outline-success col-12">삭제하기</button>
 </body>
 </html>

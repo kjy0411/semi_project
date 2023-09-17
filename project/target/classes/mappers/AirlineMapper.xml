@@ -7,6 +7,10 @@
 		select * from airline order by al_name desc
 	</select>
 	
+	<insert id="insertAirline" useGeneratedKeys="true" keyProperty="airline.al_name" >
+		insert into airline(al_name)
+		from airline
+	</insert>
 </mapper>
 
 
