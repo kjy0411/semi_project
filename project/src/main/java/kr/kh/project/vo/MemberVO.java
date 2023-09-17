@@ -17,6 +17,7 @@ public class MemberVO {
 	private String me_email;
 	private String me_authority;
 	
+	
 	public String getMe_birthday_str() {
 		if(me_birthday == null) {
 			return "";	

@@ -1,7 +1,6 @@
 package kr.kh.project.service;
 
 import java.util.List;
-import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -81,7 +80,9 @@ public class MemberServiceImp implements MemberService{
 
 	@Override
 	public List<MemberVO> getMemberList() {
+		// 다오한테 회원 리스트를 가져오라고 시키고
 		List<MemberVO> list = memberDao.selectMemberList();
+		// 가져오면 반환을 시킨다.
 		return list;
 	}
 
@@ -92,5 +93,6 @@ public class MemberServiceImp implements MemberService{
 		}
 		return memberDao.updateMember(member);
 	}
+
 
 }

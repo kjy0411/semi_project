@@ -3,20 +3,23 @@
 	pageEncoding="utf-8" %>
 <html>
 <head>
-	<title>회원 목록 조회</title>
+	<title>회원 권한 수정</title>
 </head>
 <body>
 <h1>회원목록</h1>
-<div class="input-group mb-3 mt-3">
+<form action="" method="get">
+	<div class="input-group mb-3 mt-3">
 		<div class="input-group-prepend">
-		    <select class="form-control" id="authority">
+		    <select class="form-control" id="me_authority" name="type">
 		      <option value="0">회원 검색</option>
-		      <option value="id">아이디</option>
+		      <option value="me_id" >아이디</option>
+		      <option value="me_authority">회원권한</option>
 		    </select>
 	    </div>
-	    <input type="text" class="form-control" id="bt_title">
-	    <button class="btn btn-outline-success btn-insert">찾기</button>
+	    <input type="text" class="form-control" name="search" id="me_title" placeholder="검색어를 입력하세요." vlue="${pm.cri.search }"></input>
+	    <button class="btn btn-outline-success btn-insert" type="submit">찾기</button>
 	</div>
+</form>
 <!-- 회원정보 출력 -->
 <div class="container">
   <table class="table table-hover">
@@ -24,29 +27,77 @@
       <tr>
         <th>회원아이디</th>
         <th>회원 권한</th>
-        <th>권한 수정</th>
+        <th>권한변경</th>
       </tr>
     </thead>
     <tbody>
    	 <c:forEach items="${list}" var="member">
 	      <tr>
-	        <td>${member.me_id}</td>
+	        <td class="id">${member.me_id}</td>
 	        <td>
 	        	<select class="form-control" name="type">
-			      <option value="USER" <c:if test="${me_authroity eq 'USER'}">selected</c:if>>회원</option>
-			      <option value="ADMIN"<c:if test="${me_authority eq 'ADMIN'}">selected</c:if>>관리자</option>
+			      <option value="USER" <c:if test="${member.me_authority eq 'USER'}">selected</c:if>>USER</option>
+			      <option value="ADMIN"<c:if test="${member.me_authority eq 'ADMIN'}">selected</c:if>>ADMIN</option>
 			    </select>
 	        </td>
-	        <td><button class="btn btn-outline-warning btn-update" data-num='\${me_num}'>수정</button></td>
+	        <td><button class="btn btn-outline-warning btn-update">수정</button></td>
 	      </tr>
       </c:forEach>
     </tbody>
-     <script type="text/javascript">
-     $(document).on('click','.btn-update',function(){
-    	alert('클릭')
-     })
-     </script>
   </table>
-</div>
+<script type="text/javascript">
+	$('.btn-update').click(function(){
+		let me_id = $(this).parents('tr').find('.id').text(); // class는 text() *클래스는 꼭 .을 붙여줘야한다.!!*
+		let me_authority = $(this).parents('tr').find("[name=type]").val(); // select,input은 val()로
+		let member = {
+				me_id : me_id,
+				me_authority : me_authority
+		}
+		$.ajax({
+			method : 'post',
+			url : '<c:url value="/menu/update"/>',
+			data : JSON.stringify(member),
+			contentType : 'application/json; charset=utf-8',
+			dataType : 'json',
+			success : function(data){
+				if(data.res){
+					alert('수정 성공!')
+				}else{
+					alert('수정 실패!');
+				}
+			}
+		});
+	})
+	$('.btn-insert').click(function(){
+		let me_title = $('#me_title').val(); // #은 아이디를 의미 (아이디 bt_title의 값 가져오기)
+		let me_authority = $('#me_authority').val();
+		if(me_authority == '0'){
+			alert('회원 검색 종류를 선택해주세요.')
+			return;
+		}
+		if(me_title.trim().length == 0){
+			alert('검색어를 입력해주세요.')
+			return;
+		}
+		let member = {
+				me_title : me_title,
+				me_authority : me_authority
+		}
+		$.ajax({
+			method : 'get',
+			url : '<c:url value="/menu/search"/>',
+			data : JSON.stringify(member),
+			contentType : 'application/json; charset=utf-8',
+			dataType : 'json',
+			success : function(data){
+				if(data.res){
+					alert('검색 성공!')
+				}else{
+					alert('검색 실패!');
+				}
+			}
+		});
+	})
+</script>
 </body>
 </html>
