@@ -45,6 +45,7 @@
       </c:forEach>
     </tbody>
   </table>
+ </div>
 <script type="text/javascript">
 	$('.btn-update').click(function(){
 		let me_id = $(this).parents('tr').find('.id').text(); // class는 text() *클래스는 꼭 .을 붙여줘야한다.!!*
