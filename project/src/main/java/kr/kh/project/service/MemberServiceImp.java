@@ -1,5 +1,7 @@
 package kr.kh.project.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -34,9 +36,8 @@ public class MemberServiceImp implements MemberService{
 		if(dbMember != null) {
 			return false;
 		}
-//		//¾ÆÀÌµğ´Â ¿µ¹®À¸·Î ½ÃÀÛÇÏ¸ç ¿µ¹®,¼ıÀÚ·Î ÀÌ·ç¾îÁö°í 10~20ÀÚ
 //		String idRegex = "^[a-zA-Z][a-zA-Z0-9]{10,20}$";
-//		//ºñ¹øÀº ¿µ¹®,¼ıÀÚ,!@#$%·Î ÀÌ·ç¾îÁö°í 12~25ÀÚ
+
 //		String pwRegex = "^[a-zA-Z0-9!@#$%]{12,25}$";
 //		
 //		if(!Pattern.matches(idRegex, member.getMe_id())) {
@@ -74,6 +75,22 @@ public class MemberServiceImp implements MemberService{
 			return null;
 		}
 		return memberDao.selectMember(me_id);
+	}
+
+	@Override
+	public List<MemberVO> getMemberList() {
+		// ë‹¤ì˜¤í•œí…Œ íšŒì› ë¦¬ìŠ¤íŠ¸ë¥¼ ê°€ì ¸ì˜¤ë¼ê³  ì‹œí‚¤ê³ 
+		List<MemberVO> list = memberDao.selectMemberList();
+		// ê°€ì ¸ì˜¤ë©´ ë°˜í™˜ì„ ì‹œí‚¨ë‹¤.
+		return list;
+	}
+
+	@Override
+	public boolean updateMemberByAuthority(MemberVO member, MemberVO user) {
+		if(member == null || member.getMe_id() == null || member.getMe_authority() == null) {
+			return false;
+		}
+		return memberDao.updateMemberByAuthority(member);
 	}
 
 	@Override

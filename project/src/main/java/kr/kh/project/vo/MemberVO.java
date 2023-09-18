@@ -21,6 +21,7 @@ public class MemberVO {
 	
 	private boolean autoLogin;
 	
+	
 	public String getMe_birthday_str() {
 		if(me_birthday == null) {
 			return "";	

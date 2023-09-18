@@ -1,5 +1,7 @@
 package kr.kh.project.service;
 
+import java.util.List;
+
 import kr.kh.project.vo.MemberVO;
 
 public interface MemberService {
@@ -9,6 +11,11 @@ public interface MemberService {
 	MemberVO loginMember(MemberVO member);
 
 	MemberVO selectMember(String me_id);
+
+
+	List<MemberVO> getMemberList();
+
+	boolean updateMemberByAuthority(MemberVO member, MemberVO user);
 
 	boolean updateMember(MemberVO member);
 
