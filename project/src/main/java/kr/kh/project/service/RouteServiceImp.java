@@ -15,14 +15,15 @@ public class RouteServiceImp implements RouteService {
     private RouteDAO routeDao;
 
     @Override
-    public List<RouteVO> getDepartureRoutes(String ai_name) {
-        return routeDao.getDepartureRoutes(ai_name);
+    public List<RouteVO> getDepartureRoutes(String ai_num) {
+        return routeDao.getDepartureRoutes(ai_num);
     }
 
     @Override
-    public List<RouteVO> getArrivalRoutes(String ai_name) {
-        return routeDao.getArrivalRoutes(ai_name);
+    public List<RouteVO> getArrivalRoutes(String ai_num) {
+        return routeDao.getArrivalRoutes(ai_num);
     }
+
 
     @Override
     public void insertRoute(RouteVO route) {

@@ -38,16 +38,15 @@ public class AirportController {
         return "redirect:/airport/list";
     }
 
-    @GetMapping("/detail/{param}")
-    public String showAirportDetail(@PathVariable String param, Model model) {
-        AirportVO airport = airportService.getAirportByCode(param);
-        List<RouteVO> departureRoutes = routeService.getDepartureRoutes(param);
-        List<RouteVO> arrivalRoutes = routeService.getArrivalRoutes(param);
+    @GetMapping("/detail/{ai_num}")
+    public String showAirportDetail(@PathVariable String ai_num, Model model) {
+        AirportVO airport = airportService.getAirportByCode(ai_num);
+        List<RouteVO> departureRoutes = routeService.getDepartureRoutes(ai_num);
+        List<RouteVO> arrivalRoutes = routeService.getArrivalRoutes(ai_num);
         model.addAttribute("airport", airport);
         model.addAttribute("departureRoutes", departureRoutes);
         model.addAttribute("arrivalRoutes", arrivalRoutes);
-        return "/airport/detail";
+        return "airport/detail";
     }
-
 }
 

@@ -15,6 +15,16 @@
     DELETE FROM route WHERE po_num = #{po_num};
   </delete>
   
+  <select id="getDepartureRoutes" resultType="kr.kh.project.vo.RouteVO">
+    SELECT * FROM route WHERE ro_ai_start = #{ai_num}
+  </select>
+  
+  <select id="getArrivalRoutes" resultType="kr.kh.project.vo.RouteVO">
+    SELECT * FROM route WHERE ro_ai_end = #{ai_num}
+  </select>
+
+  
+  
   <select id="findRoute" resultType="kr.kh.project.vo.RouteVO">
   	select
   		*,

@@ -36,4 +36,12 @@ public class RouteController {
         routeService.deleteRouteByNumber(po_num);
         return "redirect:/airport/list";
     }
+    @GetMapping("/departure-routes/{ai_num}")
+    public String getDepartureRoutes(@PathVariable String ai_num, Model model) {
+        List<RouteVO> departureRoutes = routeService.getDepartureRoutes(ai_num);
+        model.addAttribute("departureRoutes", departureRoutes);
+        return "/route/departureRoutes"; 
+    }
+
+
 }

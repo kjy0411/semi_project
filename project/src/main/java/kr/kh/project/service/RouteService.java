@@ -8,7 +8,7 @@ import java.util.List;
 import org.mybatis.spring.annotation.MapperScan;
 @MapperScan
 public interface RouteService {
-    List<RouteVO> getDepartureRoutes(String ai_name);
+    List<RouteVO> getDepartureRoutes(String ai_num);
     List<RouteVO> getArrivalRoutes(String ai_name);
     void insertRoute(RouteVO route);
     void deleteRouteByNumber(String routeNumber);
