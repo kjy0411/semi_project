@@ -36,9 +36,9 @@ public class MemberServiceImp implements MemberService{
 		if(dbMember != null) {
 			return false;
 		}
-//		//���̵�� �������� �����ϸ� ����,���ڷ� �̷������ 10~20��
+//		//아이디는 영문으로 시작하며 영문,숫자로 이루어지고 10~20자
 //		String idRegex = "^[a-zA-Z][a-zA-Z0-9]{10,20}$";
-//		//����� ����,����,!@#$%�� �̷������ 12~25��
+//		//비번은 영문,숫자,!@#$%로 이루어지고 12~25자
 //		String pwRegex = "^[a-zA-Z0-9!@#$%]{12,25}$";
 //		
 //		if(!Pattern.matches(idRegex, member.getMe_id())) {
