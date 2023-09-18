@@ -8,4 +8,6 @@ public interface ScheduleService {
 
 	List<ScheduleVO> getScheduleByRoute(int ro_num, String startDate);
 
+	ScheduleVO getSchdeule(Integer sk_num);
+
 }
