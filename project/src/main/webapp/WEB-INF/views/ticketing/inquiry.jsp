@@ -1,3 +1,4 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -20,10 +21,11 @@
         <th>적립마일리지</th>
         <th>사용마일리지</th>
         <th>상태</th>
+        <th>예매취소</th>
       </tr>
     </thead>
     <tbody>
-   	 <c:forEach items="${ticketing_list}" var="inquiry">
+   	 <c:forEach items="${ticketing}" var="inquiry">
 	      <tr>
 	      	<td>${ticketing.ti_num}</td>
 	      	<td>${ticketing.ti_sk_num}</td>
