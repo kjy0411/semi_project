@@ -8,4 +8,7 @@ public interface ScheduleService {
 
 	List<ScheduleVO> getScheduleByRoute(int ro_num, String startDate);
 
+	boolean insertSchedule(ScheduleVO schedule);
+
+
 }

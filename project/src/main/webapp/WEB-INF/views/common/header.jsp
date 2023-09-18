@@ -48,6 +48,9 @@
 			<li class="nav-item">
 				<a class="nav-link" href="<c:url value='#'/>">예매내역 조회</a>
 			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="<c:url value='/schedule/admin'/>">스케줄 관리</a>
+			</li>
 			<c:if test="${user != null && user.me_authority == 'ADMIN'}">
 				<span>|</span>
 				<li class="nav-item dropdown">

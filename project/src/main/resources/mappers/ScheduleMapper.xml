@@ -27,4 +27,7 @@
 		order by
 			sk_start_time asc
 	</select>
+		<insert id="insertSchedule" >
+		insert into schedule(sk_ap_num, sk_ro_num, sk_start_time, sk_time, sk_price) values(#{schedule.sk_ap_num},#{schedule.sk_ro_num},#{schedule.sk_start_time},#{schedule.sk_time},#{schedule.sk_price})
+	</insert>
 </mapper>

@@ -29,6 +29,8 @@ public class AirportServiceImp implements AirportService {
 
 	@Override
 	public List<AirportVO> getAirportByRoute(boolean route, String ai_num) {
+		System.out.println(route);
+		System.out.println(ai_num);
 		if(route == false && ai_num == null) {
 			return null;
 		}
