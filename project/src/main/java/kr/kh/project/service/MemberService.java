@@ -16,6 +16,4 @@ public interface MemberService {
 
 	boolean updateMember(MemberVO member, MemberVO user);
 
-
-
 }
