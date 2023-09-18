@@ -91,7 +91,7 @@ public class MemberServiceImp implements MemberService{
 		if(member == null || member.getMe_id() == null || member.getMe_authority() == null) {
 			return false;
 		}
-		return memberDao.updateMember(member);
+		return memberDao.updateMemberByAuthority(member);
 	}
 
 

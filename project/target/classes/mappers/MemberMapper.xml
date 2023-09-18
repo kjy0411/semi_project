@@ -13,7 +13,7 @@
 	<select id="selectMemberList" resultType="kr.kh.project.vo.MemberVO">
 		select * from member
 	</select>
-	<update id="updateMember">
+	<update id="updateMemberByAuthority">
 		update 
 			member
 		set
