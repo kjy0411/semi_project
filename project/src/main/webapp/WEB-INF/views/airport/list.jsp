@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,10 +9,14 @@
 <body>
     <h1>공항 리스트</h1>
     <ul>
-        <li><a href="/airport/detail?airportId=1">공항 1</a></li>
-        <li><a href="/airport/detail?airportId=2">공항 2</a></li>
-        
+        <c:forEach items="${airportList}" var="airport">
+            <li>
+                <a href="<c:url value='/airport/detail/${airport.ai_num}'/>">
+                    ${airport.ai_name}
+                </a>
+            </li>
+        </c:forEach>
     </ul>
-    <a href="/airport/list"><button>공항 리스트 보기</button></a>
+    <a href="<c:url value='/airport/insert'/>">공항 등록</a>
 </body>
 </html>
