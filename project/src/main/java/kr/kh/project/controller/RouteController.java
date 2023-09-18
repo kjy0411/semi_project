@@ -40,7 +40,14 @@ public class RouteController {
     public String getDepartureRoutes(@PathVariable String ai_num, Model model) {
         List<RouteVO> departureRoutes = routeService.getDepartureRoutes(ai_num);
         model.addAttribute("departureRoutes", departureRoutes);
-        return "/route/departureRoutes"; 
+        return "/route/detail";
+    }
+
+    @GetMapping("/arrival-routes/{ai_num}")
+    public String getArrivalRoutes(@PathVariable String ai_num, Model model) {
+        List<RouteVO> arrivalRoutes = routeService.getArrivalRoutes(ai_num);
+        model.addAttribute("arrivalRoutes", arrivalRoutes);
+        return "/route/detail";
     }
 
 

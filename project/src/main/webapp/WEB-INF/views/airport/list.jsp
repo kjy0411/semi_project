@@ -13,6 +13,7 @@
             <li>
                 <a href="<c:url value='/airport/detail/${airport.ai_num}'/>">
                     ${airport.ai_name}
+                    ${airport.ai_num}
                 </a>
             </li>
         </c:forEach>
