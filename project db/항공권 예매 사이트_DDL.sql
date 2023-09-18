@@ -14,7 +14,9 @@ CREATE TABLE `member` (
 	`me_birthday`	date	NOT NULL,
 	`me_phone`	varchar(20)	NOT NULL,
 	`me_email`	varchar(50)	NOT NULL,
-	`me_authority`	varchar(10)	NOT NULL	DEFAULT 'USER'	COMMENT 'ADMIN, USER, STOP중 선택'
+	`me_authority`	varchar(10)	NOT NULL	DEFAULT 'USER'	COMMENT 'ADMIN, USER, STOP중 선택',
+    `me_session_id`	varchar(255),
+    `me_session_limit`	datetime
 );
 
 DROP TABLE IF EXISTS `point`;
@@ -26,6 +28,11 @@ CREATE TABLE `point` (
 	`po_mc_name`	varchar(10)	NOT NULL	COMMENT '누적마일리지로 결정',
 	`po_accumulate_point`	int	NOT NULL	DEFAULT 0,
 	`po_hold_point`	int	NOT NULL	DEFAULT 0
+);
+
+CREATE TABLE `division` (
+	`di_name`	varchar(10)	NOT NULL PRIMARY KEY,
+	`di_num`	int	NOT NULL
 );
 
 DROP TABLE IF EXISTS `ticketing`;
@@ -57,7 +64,6 @@ CREATE TABLE `schedule` (
 	`sk_ap_num`	varchar(7)	NOT NULL,
 	`sk_ro_num`	int	NOT NULL,
 	`sk_start_time`	datetime	NOT NULL,
-	`sk_end_time`	datetime	NULL	COMMENT '출발시간 - 출발지의 표준시 + 도착지의 표준시 + 비행시간',
 	`sk_time`	time	NOT NULL,
 	`sk_price`	int	NOT NULL
 );
@@ -137,8 +143,8 @@ CREATE TABLE `member_class` (
 DROP TABLE IF EXISTS `nation`;
 
 CREATE TABLE `nation` (
-	`na_name`	varchar(20)	NOT NULL PRIMARY KEY,
-	`na_division`	varchar(10)	NULL
+	`na_name`	varchar(20)	NOT NULL	PRIMARY KEY,
+	`na_di_name`	varchar(10)	NOT NULL
 );
 
 ALTER TABLE `point` ADD CONSTRAINT `FK_member_TO_point_1` FOREIGN KEY (
@@ -265,5 +271,12 @@ ALTER TABLE `point_history` ADD CONSTRAINT `FK_ticketing_TO_point_history_1` FOR
 )
 REFERENCES `ticketing` (
 	`ti_num`
+);
+
+ALTER TABLE `nation` ADD CONSTRAINT `FK_division_TO_nation_1` FOREIGN KEY (
+	`na_di_name`
+)
+REFERENCES `division` (
+	`di_name`
 );
 

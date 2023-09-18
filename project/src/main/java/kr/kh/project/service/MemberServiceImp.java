@@ -20,7 +20,7 @@ public class MemberServiceImp implements MemberService{
 	private BCryptPasswordEncoder passwordEncoder;
 
 	@Override
-	public boolean signup(MemberVO member) {
+	public boolean signupMember(MemberVO member) {
 		if(member == null
 		|| member.getMe_id() == null
 		|| member.getMe_pw() == null
@@ -36,9 +36,8 @@ public class MemberServiceImp implements MemberService{
 		if(dbMember != null) {
 			return false;
 		}
-//		//���̵�� �������� �����ϸ� ����,���ڷ� �̷������ 10~20��
 //		String idRegex = "^[a-zA-Z][a-zA-Z0-9]{10,20}$";
-//		//����� ����,����,!@#$%�� �̷������ 12~25��
+
 //		String pwRegex = "^[a-zA-Z0-9!@#$%]{12,25}$";
 //		
 //		if(!Pattern.matches(idRegex, member.getMe_id())) {
@@ -56,7 +55,7 @@ public class MemberServiceImp implements MemberService{
 	}
 
 	@Override
-	public MemberVO login(MemberVO member) {
+	public MemberVO loginMember(MemberVO member) {
 		if(member == null) {
 			return null;
 		}
@@ -87,12 +86,51 @@ public class MemberServiceImp implements MemberService{
 	}
 
 	@Override
-	public boolean updateMember(MemberVO member, MemberVO user) {
+	public boolean updateMemberByAuthority(MemberVO member, MemberVO user) {
 		if(member == null || member.getMe_id() == null || member.getMe_authority() == null) {
 			return false;
 		}
 		return memberDao.updateMemberByAuthority(member);
 	}
 
+	@Override
+	public boolean updateMember(MemberVO member) {
+		if(member == null
+		|| member.getMe_id() == null
+		|| member.getMe_name() == null
+		|| member.getMe_eng_name() == null
+		|| member.getMe_birthday()  == null
+		|| member.getMe_phone() == null
+		|| member.getMe_email() == null) {
+			return false;
+		}
+		String str = member.getMe_birthday_str();
+		member.setMe_birthday(str);
+		
+		return memberDao.updateMember(member);
+	}
+
+	@Override
+	public boolean checkMember(MemberVO member) {
+		if(member == null || member.getMe_id() == null || member.getMe_pw() == null) {
+			return false;
+		}
+		MemberVO dbMember = memberDao.selectMember(member.getMe_id());
+		return passwordEncoder.matches(member.getMe_pw(), dbMember.getMe_pw());
+	}
+
+	@Override
+	public void updateMemberSession(MemberVO user) {
+		if(user == null || user.getMe_session_id() == null) {
+			return;
+		}
+		System.out.println(user);
+		memberDao.updateMemberSession(user);
+	}
+
+	@Override
+	public MemberVO getMemberBySession(String me_session_id) {
+		return memberDao.selectMemberBySession(me_session_id);
+	}
 
 }

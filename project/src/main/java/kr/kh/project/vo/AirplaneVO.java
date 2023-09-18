@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class AirplaneVO {
-	String ap_num;
-	String ap_al_name;
-	String ap_am_model;
+	private String ap_num;
+	private String ap_al_name;
+	private String ap_am_model;
 }

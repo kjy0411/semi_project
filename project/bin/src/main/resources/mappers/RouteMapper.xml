@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.kh.project.dao.RouteDAO">
+
+  <!-- 노선 추가 -->
+  <insert id="insertRoute" parameterType="kr.kh.project.vo.RouteVO">
+    INSERT INTO route (po_num, po_me_id, po_al_name, po_mc_name, po_accumulate_point, po_hold_point)
+    VALUES (#{po_num}, #{po_me_id}, #{po_al_name}, #{po_mc_name}, #{po_accumulate_point}, #{po_hold_point});
+  </insert>
+
+  <!-- 노선 삭제 -->
+  <delete id="deleteRoute" parameterType="int">
+    DELETE FROM route WHERE po_num = #{po_num};
+  </delete>
+  
+  <select id="findRoute" resultType="kr.kh.project.vo.RouteVO">
+  	select
+  		*,
+	    (select ai_name from airport where ai_num = ro_ai_start) as ai_name_start,
+	    (select ai_name from airport where ai_num = ro_ai_end) as ai_name_end
+  	from
+  		route
+  	where
+  		ro_ai_start = #{ro_ai_start} and ro_ai_end = #{ro_ai_end}
+  </select>
+  <select id="selectRouteList" resultType="kr.kh.project.vo.RouteVO">
+  	select
+  		*
+  	from
+  		route
+  </select>
+</mapper>

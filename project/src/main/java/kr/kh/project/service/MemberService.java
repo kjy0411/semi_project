@@ -6,16 +6,23 @@ import kr.kh.project.vo.MemberVO;
 
 public interface MemberService {
 
-	boolean signup(MemberVO member);
+	boolean signupMember(MemberVO member);
 
-	MemberVO login(MemberVO member);
+	MemberVO loginMember(MemberVO member);
 
 	MemberVO selectMember(String me_id);
 
+
 	List<MemberVO> getMemberList();
 
-	boolean updateMember(MemberVO member, MemberVO user);
+	boolean updateMemberByAuthority(MemberVO member, MemberVO user);
 
+	boolean updateMember(MemberVO member);
 
+	boolean checkMember(MemberVO member);
+
+	void updateMemberSession(MemberVO user);
+
+	MemberVO getMemberBySession(String me_session_id);
 
 }

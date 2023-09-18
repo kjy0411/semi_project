@@ -12,11 +12,18 @@ public interface MemberDAO {
 
 	boolean insertMember(@Param("member")MemberVO member);
 
+
 	List<MemberVO> selectMemberList();
 
 	boolean updateMemberByAuthority(@Param("member")MemberVO member);
-;
 
+
+
+	boolean updateMember(@Param("member")MemberVO member);
+
+	void updateMemberSession(@Param("user")MemberVO user);
+
+	MemberVO selectMemberBySession(@Param("me_session_id")String me_session_id);
 
 
 }

@@ -4,6 +4,6 @@ import lombok.Data;
 
 @Data
 public class SeatClassVO {
-	String sc_name; 
-	int sc_ratio;
+	private String sc_name; 
+	private int sc_ratio;
 }

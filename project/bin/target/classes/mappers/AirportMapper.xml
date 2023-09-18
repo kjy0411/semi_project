@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.kh.project.dao.AirportDAO">
+
+  <select id="selectAirportList" resultType="kr.kh.project.vo.AirportVO">
+    select * from airport
+  </select>
+
+  <!-- 공항 추가 -->
+  <insert id="insertAirport" parameterType="kr.kh.project.vo.AirportVO">
+    INSERT INTO airport (ai_name, ai_na_name, ai_standard_time)
+    VALUES (#{ai_name}, #{ai_na_name}, #{ai_standard_time});
+  </insert>
+  
+  <select id="getAirportByRoute" resultType="kr.kh.project.vo.AirportVO">
+  	select
+	    ai_name,
+	    ai_num,
+	    ai_na_name
+	from
+		airport
+			join
+		route on if(#{route}, ro_ai_start,ro_ai_end) = ai_num
+			join
+		nation on ai_na_name = na_name
+			join
+		division on na_di_name = di_name
+	where
+		ro_ai_start= if(#{route}, airport.ai_num, #{ai_num}) 
+	group by
+		if(#{route}, ro_ai_start, ro_ai_end)
+	order by
+		di_name asc, na_name asc, ai_name asc;
+  </select>
+
+</mapper>

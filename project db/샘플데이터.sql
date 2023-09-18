@@ -1,3 +1,8 @@
+-- division
+INSERT INTO DIVISION(DI_NUM, DI_NAME)
+VALUES
+	(1,"국내"),(2,"동아시아"),(3,"동남아시아"),(4,"북아메리카"),(5,"유럽"),(6,"오세아니아"),(7,"남아메리카"),(8,"아시아"),(9,"아프리카");
+
 -- 관리자 등록
 INSERT INTO MEMBER(ME_ID, ME_PW, ME_NAME, ME_ENG_NAME, ME_BIRTHDAY, ME_PHONE, ME_EMAIL, ME_AUTHORITY)
 VALUES
@@ -21,9 +26,9 @@ VALUES
     ("퍼스트", 4);
     
 -- 국가 등록 
-INSERT INTO NATION(NA_NAME, NA_DIVISION)
+INSERT INTO NATION(NA_NAME, NA_DI_NAME)
 VALUES
-	("한국", "동아시아"),
+	("한국", "국내"),
 	("일본", "동아시아"),
 	("중국", "동아시아"),
 	("대만", "동아시아"),

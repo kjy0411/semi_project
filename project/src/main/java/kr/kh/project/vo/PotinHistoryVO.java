@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class PotinHistoryVO {
-	int ro_num; 
-	String ro_ai_start; 
-	String ro_ai_end;
+	private int ro_num; 
+	private String ro_ai_start; 
+	private String ro_ai_end;
 }

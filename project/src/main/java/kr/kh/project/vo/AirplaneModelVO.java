@@ -4,8 +4,8 @@ import lombok.Data;
 
 @Data
 public class AirplaneModelVO {
-	String am_model;
-	String am_name;
-	int am_col;
-	int am_exit_col;
+	private String am_model;
+	private String am_name;
+	private int am_col;
+	private int am_exit_col;
 }
