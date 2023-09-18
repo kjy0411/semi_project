@@ -38,7 +38,7 @@ public class AdminController {
 	public Map<String, Object> update(@RequestBody MemberVO member, HttpSession session){
 		Map<String, Object> map = new HashMap<String, Object>();
 		MemberVO user = (MemberVO)session.getAttribute("user"); // 로그인해서 들어온 user를 뜻한다.
-		boolean res = memberService.updateMember(member, user);
+		boolean res = memberService.updateMemberByAuthority(member, user);
 		map.put("res", res);
 		return map;
 	}
