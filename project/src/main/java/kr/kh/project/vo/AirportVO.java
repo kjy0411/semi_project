@@ -8,10 +8,12 @@ import lombok.Data;
 
 @Data
 public class AirportVO {
-	String ai_num;
-	String ai_name;
-	String ai_na_name;
-	Date ai_standard_time;
+	private String ai_num;
+	private String ai_name;
+	private String ai_na_name;
+	private Date ai_standard_time;
+	
+	private String na_division;
 	
 	public String getAi_standard_time_str() {
 		if(ai_standard_time == null) {
