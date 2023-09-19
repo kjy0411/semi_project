@@ -13,4 +13,8 @@ public class TicketingVO {
 	private int ti_save_point; 
 	private int ti_use_point; 
 	private String ti_state;
+	
+	//=====================
+	private String ai_start_name;
+	private String ai_end_name;
 }
