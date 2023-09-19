@@ -8,22 +8,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import kr.kh.project.service.AirplaneService;
 import kr.kh.project.service.AirportService;
 import kr.kh.project.service.NationService;
 import kr.kh.project.service.ReservationService;
 import kr.kh.project.service.RouteService;
 import kr.kh.project.service.ScheduleService;
+import kr.kh.project.service.SeatService;
+import kr.kh.project.vo.AirplaneVO;
 import kr.kh.project.vo.AirportVO;
 import kr.kh.project.vo.DivisionVO;
 import kr.kh.project.vo.NationVO;
 import kr.kh.project.vo.RouteVO;
 import kr.kh.project.vo.ScheduleVO;
 import kr.kh.project.vo.SearchVO;
+import kr.kh.project.vo.SeatVO;
 
 @Controller
 public class ReservationController {
@@ -42,6 +47,12 @@ public class ReservationController {
 
 	@Autowired
 	ScheduleService scheduleService;
+	
+	@Autowired
+	SeatService seatService;
+	
+	@Autowired
+	AirplaneService airplaneService;
 	
 	private SearchVO search = null;
 	
@@ -121,6 +132,45 @@ public class ReservationController {
 		}
 		map.put("schedule", schedule);
 		map.put("res", res);
+		return map;
+	}
+	
+	@GetMapping("/reservation/seat/select")
+	public String selectSeat(Model model, Integer[] sk_num) {
+		if(sk_num == null || (sk_num.length != 1 && sk_num.length != 2)) {
+			return "/reservation/list";
+		}else {
+			ScheduleVO schedule = scheduleService.getSchdeule(sk_num[0]);
+			model.addAttribute("schedule", schedule);
+		}if(sk_num.length == 2){
+			ScheduleVO schedule2 = scheduleService.getSchdeule(sk_num[1]);
+			model.addAttribute("schedule2", schedule2);
+		}
+		model.addAttribute("search", search);
+		return "/reservation/seatSelect";
+	}
+	
+	@ResponseBody
+	@PostMapping("/reservation/seat/select")
+	public Map<String, Object> selectSeatPost(@RequestParam("num")Integer num, @RequestParam("sk_num")Integer sk_num){
+		Map<String, Object> map = new HashMap<String, Object>();
+		String msg = null;
+		if(num != 1 && num != 2) {
+			msg = "잘못된 접근입니다.";
+		}else{
+			if(num == 1) {
+				msg = "가는편";
+			}else if(num == 2) {
+				msg = "오는편";
+			}
+			AirplaneVO airplane= airplaneService.getAirplaneBySchedule(sk_num);
+			List<Integer> pathList = airplaneService.getPath(sk_num);
+			List<SeatVO> seatList = seatService.getSeatListBySchedule(sk_num);
+			map.put("airplane", airplane);
+			map.put("pathList", pathList);
+			map.put("seatList", seatList);
+		}
+		map.put("msg", msg);
 		return map;
 	}
 }

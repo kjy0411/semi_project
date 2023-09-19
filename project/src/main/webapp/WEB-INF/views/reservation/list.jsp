@@ -15,16 +15,16 @@
 		</div>
 		<div class="select-back">
 		</div>
-		<form action="#">
+		<form action="<c:url value='/reservation/seat/select'/>" method="get">
 			<c:if test="${search.ticketType == 1}">
-				<input type="text" class="go_sk_num" readonly hidden>
+				<input type="number" class="go_sk_num" name="sk_num" readonly hidden>
 				<a data-toggle="tooltip" title="가는편 항공편을 선택해주세요.">
 					<button class="btn btn-outline-success btn-select" disabled style="float: right; display: block;margin-right: 15px;">선택완료</button>
 				</a>
 			</c:if>
 			<c:if test="${search.ticketType == 2}">
-				<input type="text" class="go_sk_num" readonly hidden>
-				<input type="text" class="back_sk_num" readonly hidden>
+				<input type="number" class="go_sk_num" name="sk_num" readonly hidden>
+				<input type="number" class="back_sk_num" name="sk_num" readonly hidden>
 				<a data-toggle="tooltip" title="가는편과 오는편 항공편을 선택해주세요.">
 					<button class="btn btn-outline-success btn-select" disabled style="float: right; display: block;margin-right: 15px;">선택완료</button>
 				</a>

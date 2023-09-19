@@ -105,10 +105,18 @@ DROP TABLE IF EXISTS `airplane_model`;
 CREATE TABLE `airplane_model` (
 	`am_model`	varchar(4)	NOT NULL	PRIMARY KEY	COMMENT 'ICAO코드',
 	`am_name`	varchar(20)	NOT NULL,
-	`am_col`	int	NOT NULL	COMMENT '좌석 열 끝 번호',
+	`am_col`	int	NOT NULL	COMMENT '좌석 열',
+	`am_row`	int	NOT NULL	COMMENT '좌석 행',
 	`am_exit_col`	int	NOT NULL	COMMENT '출구가 있는 열 번호'
 );
 
+DROP TABLE IF EXISTS `path`;
+
+CREATE TABLE `path` (
+	`pa_num`	int	NOT NULL	PRIMARY KEY	AUTO_INCREMENT,
+	`pa_path`	int	NOT NULL,
+	`pa_am_model`	varchar(4)	NOT NULL	COMMENT 'ICAO코드'
+);
 DROP TABLE IF EXISTS `route`;
 
 CREATE TABLE `route` (
@@ -280,3 +288,9 @@ REFERENCES `division` (
 	`di_name`
 );
 
+ALTER TABLE `path` ADD CONSTRAINT `FK_airplane_model_TO_path_1` FOREIGN KEY (
+	`pa_am_model`
+)
+REFERENCES `airplane_model` (
+	`am_model`
+);
