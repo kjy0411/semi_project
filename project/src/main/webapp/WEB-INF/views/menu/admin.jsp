@@ -7,17 +7,17 @@
 </head>
 <body>
 <h1>회원목록</h1>
-<form action="" method="get">
+<form action="<c:url value='/menu/admin'/>" method="get">
 	<div class="input-group mb-3 mt-3">
 		<div class="input-group-prepend">
-		    <select class="form-control" id="me_authority" name="type">
-		      <option value="0">회원 검색</option>
-		      <option value="me_id" >아이디</option>
-		      <option value="me_authority">회원권한</option>
+		    <select class="form-control" id="me_authority" name="t">
+		      <option value="all">전체</option>
+		      <option value="second">아이디</option>
+		      <option value="third">회원권한</option>
 		    </select>
 	    </div>
-	    <input type="text" class="form-control" name="search" id="me_title" placeholder="검색어를 입력하세요." vlue="${pm.cri.search }"></input>
-	    <button class="btn btn-outline-success btn-insert" type="submit">찾기</button>
+	    <input type="text" class="form-control" name="s" id="me_title" placeholder="검색어를 입력하세요." value="${pm.cri.s}">
+	    <button class="btn btn-outline-success btn-insert">찾기</button>
 	</div>
 </form>
 <!-- 회원정보 출력 -->

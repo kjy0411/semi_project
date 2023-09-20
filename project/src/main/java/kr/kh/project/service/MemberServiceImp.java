@@ -7,6 +7,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import kr.kh.project.dao.MemberDAO;
+import kr.kh.project.pagination.Criteria;
 import kr.kh.project.vo.MemberVO;
 
 @Service
@@ -78,11 +79,8 @@ public class MemberServiceImp implements MemberService{
 	}
 
 	@Override
-	public List<MemberVO> getMemberList() {
-		// 다오한테 회원 리스트를 가져오라고 시키고
-		List<MemberVO> list = memberDao.selectMemberList();
-		// 가져오면 반환을 시킨다.
-		return list;
+	public List<MemberVO> getMemberList(Criteria cri) {
+		return memberDao.selectMemberList(cri);
 	}
 
 	@Override

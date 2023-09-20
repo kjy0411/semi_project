@@ -2,10 +2,12 @@ package kr.kh.project.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
+import kr.kh.project.vo.MemberVO;
 import kr.kh.project.vo.TicketingVO;
 
 public interface TicketingDAO {
 
-	List<TicketingVO> selectTicketingList();
-
+	List<TicketingVO> selectTicketingList(@Param("userId")MemberVO userId);
 }

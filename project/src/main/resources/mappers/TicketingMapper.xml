@@ -14,6 +14,9 @@
 			schedule on ti_sk_num = sk_num
 					join
 			route on sk_ro_num = ro_num
-		where ti_state = "미확정" 
+		where 
+			ti_me_id = #{userId}
+				and
+			ti_state = "미확정" 
 	</select>
 </mapper>

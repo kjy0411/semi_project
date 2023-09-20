@@ -1,4 +1,4 @@
-package kr.kh.project.controller;
+ package kr.kh.project.controller;
 
 import java.util.HashMap;
 import java.util.List;
@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import kr.kh.project.pagination.Criteria;
+import kr.kh.project.pagination.PageMaker;
 import kr.kh.project.service.MemberService;
 import kr.kh.project.vo.MemberVO;
 
@@ -25,9 +27,9 @@ public class AdminController {
 	
 	// 회원정보 출력하기 ,페이지네이션 기능구현하기
 	@GetMapping("/menu/admin")
-	public String menuAdmin(Model model) {
+	public String menuAdmin(Model model, Criteria cri) {
 		// 현재 페이지에 2개의 정보면 넣겠다. 선언
-		List<MemberVO> list = memberService.getMemberList();
+		List<MemberVO> list = memberService.getMemberList(cri);
 		// 가져온 리스트를 화면에 전송한다.
 		model.addAttribute("list", list);
 		return "/menu/admin";

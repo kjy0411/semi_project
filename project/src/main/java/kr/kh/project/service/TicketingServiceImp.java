@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.kh.project.dao.TicketingDAO;
+import kr.kh.project.vo.MemberVO;
 import kr.kh.project.vo.TicketingVO;
 
 @Service
@@ -15,7 +16,7 @@ public class TicketingServiceImp implements TicketingService{
 	TicketingDAO ticketingDao;
 	
 	@Override
-	public List<TicketingVO> getTicketingList() {
-		return ticketingDao.selectTicketingList();
+	public List<TicketingVO> getTicketingList(MemberVO userId) {
+		return ticketingDao.selectTicketingList(userId);
 	}
 }
