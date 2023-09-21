@@ -3,6 +3,14 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.kh.project.dao.ScheduleDAO">
+	<resultMap type="kr.kh.project.vo.ScheduleVO" id="ScheduleVO">
+		<id property="sk_num" column="sk_num"/>
+		<result property="sk_ap_num" column="sk_ap_num"/>
+		<result property="sk_ro_num" column="sk_ro_num"/>
+		<result property="sk_start_time" column="sk_start_time"/>
+		<result property="sk_time" column="sk_time"/>
+		<result property="sk_price" column="sk_price"/>
+	</resultMap>
 	<select id="selectScheduleByRoute" resultType="kr.kh.project.vo.ScheduleVO">
 		select
 			schedule.*,
@@ -27,7 +35,10 @@
 		order by
 			sk_start_time asc
 	</select>
-		<insert id="insertSchedule" >
-		insert into schedule(sk_ap_num, sk_ro_num, sk_start_time, sk_time, sk_price) values(#{schedule.sk_ap_num},#{schedule.sk_ro_num},#{schedule.sk_start_time},#{schedule.sk_time},#{schedule.sk_price})
-	</insert>
+	<select id="selectScheduleList" resultType="kr.kh.project.vo.ScheduleVO">
+		select * from schedule
+	</select>
+	<delete id="deleteSchedule">
+		delete from schedule where sk_num = #{sk_num}
+	</delete>
 </mapper>

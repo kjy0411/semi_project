@@ -1,5 +1,9 @@
 package kr.kh.project.controller;
 
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,7 +11,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import kr.kh.project.pagination.Criteria;
 import kr.kh.project.service.ScheduleService;
 import kr.kh.project.util.Message;
 import kr.kh.project.vo.ScheduleVO;
@@ -19,40 +25,31 @@ public class ScheduleController {
 	@Autowired
 	private ScheduleService scheduleService;
 	
-	@RequestMapping(value="/schedule/admin", method=RequestMethod.GET)
-	public String admin() {
-		
-		
-		return "/schedule/admin";
-	}	
-	
 	@GetMapping("/schedule/insert")
 	public String insertSchedule() {
 		
 		return "/schedule/insert";
 	}
-	
-	@PostMapping("/schedule/insert")
-	public String insertSchedulePost(Model model, ScheduleVO schedule) {
-		Message msg = new Message("/schedule/insert", "스케줄 등록에 실패했습니다.");
+	    
+	@RequestMapping("/schedule/list")
+	public String list(Model model, Criteria cri) {
+		List<ScheduleVO> list = scheduleService.getScheduleList(cri);
 		
-		if(scheduleService.insertSchedule(schedule)) {
-			msg = new Message("/", "스케줄 등록에 성공했습니다.");
-		}
-		model.addAttribute("msg", msg);
-		return "message";
+		model.addAttribute("list", list);
+		return "/schedule/list";
 	}
-    
-    @PostMapping("/schedule/delete")
-    public String delete() {
-    	
-        return "/schedule/delete";
-    }
-    
-    @PostMapping("/schedule/list")
-    public String list() {
-    	
-        return "/schedule/list";
+	
+    //게시물 선택삭제
+    @ResponseBody
+    @RequestMapping(value = "/delete")
+    public String ajaxTest(HttpServletRequest request) throws Exception {
+            
+        String[] ajaxMsg = request.getParameterValues("valueArr");
+        int size = ajaxMsg.length;
+        for(int i=0; i<size; i++) {
+        	scheduleService.deleteSchedule(ajaxMsg[i]);
+        }
+        return "list";//redirect는 url을 새로고침
     }
 
 }
