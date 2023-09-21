@@ -15,7 +15,7 @@
 					join
 			route on sk_ro_num = ro_num
 		where 
-			ti_me_id = #{userId}
+			ti_me_id = #{me_id}
 				and
 			ti_state = "미확정" 
 	</select>

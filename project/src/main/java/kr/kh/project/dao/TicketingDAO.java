@@ -9,5 +9,5 @@ import kr.kh.project.vo.TicketingVO;
 
 public interface TicketingDAO {
 
-	List<TicketingVO> selectTicketingList(@Param("userId")MemberVO userId);
+	List<TicketingVO> selectTicketingList(@Param("me_id")String me_id);
 }

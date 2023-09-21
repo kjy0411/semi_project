@@ -21,17 +21,17 @@ public class TicketingController {
 	// 예매 정보 조회하기
 	@GetMapping("/ticketing/inquiry")
 	public String ticketingInquiry(Model model, HttpSession session) {
-		MemberVO userId = (MemberVO)session.getAttribute("userId");
+		MemberVO user = (MemberVO)session.getAttribute("user");
 		
-		if( userId != null) {
+		if( user != null) {
 		// 티케팅 리스트를 가져오라고 서비스에게 시킴
-		List<TicketingVO> list = ticketingService.getTicketingList(userId);
+		List<TicketingVO> list = ticketingService.getTicketingList(user.getMe_id());
 		
 		// 화면에 데이터를 전송하기 위해 model에서 list를 담아서 보낸다.
 		model.addAttribute("list",list);
-		model.addAttribute("userId",userId);
+		model.addAttribute("userId",user);
 		}
-		System.out.println("User ID : " + userId);
+		System.out.println("User ID : " + user.getMe_id());
 		return "/ticketing/inquiry";
 	}
 }

@@ -7,6 +7,6 @@ import kr.kh.project.vo.TicketingVO;
 
 public interface TicketingService {
 
-	List<TicketingVO> getTicketingList(MemberVO userId);
+	List<TicketingVO> getTicketingList(String me_id);
 
 }

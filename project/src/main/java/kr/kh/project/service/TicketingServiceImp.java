@@ -16,7 +16,8 @@ public class TicketingServiceImp implements TicketingService{
 	TicketingDAO ticketingDao;
 	
 	@Override
-	public List<TicketingVO> getTicketingList(MemberVO userId) {
-		return ticketingDao.selectTicketingList(userId);
+	public List<TicketingVO> getTicketingList(String me_id) {
+		
+		return ticketingDao.selectTicketingList(me_id);
 	}
 }
