@@ -8,14 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.kh.project.pagination.Criteria;
 import kr.kh.project.service.ScheduleService;
-import kr.kh.project.util.Message;
+import kr.kh.project.vo.AirplaneVO;
 import kr.kh.project.vo.ScheduleVO;
 
 
@@ -26,8 +24,7 @@ public class ScheduleController {
 	private ScheduleService scheduleService;
 	
 	@GetMapping("/schedule/insert")
-	public String insertSchedule() {
-		
+	public String searchReservation(Model model) {
 		return "/schedule/insert";
 	}
 	    

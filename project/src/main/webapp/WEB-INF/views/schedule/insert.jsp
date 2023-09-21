@@ -1,16 +1,18 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page language="java" contentType="text/html; charset=utf-8" 
-	pageEncoding="utf-8" %>
-<!doctype html>
-<html lang="ko">
-<head>
-<meta charset="EUC-KR">
-<title>Insert title here</title>
-</head>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<!DOCTYPE html>
+<html>
 <body>
 	<div style="width: 100%; display: flex;">
 		<div class="search-box container-fluid" style="flex: 2">
 			<form action="<c:url value='/reservation/list'/>" method="get">
+				<div class="input-group-prepend">
+				   <select class="from-control" name="ticketType">
+				   	<option value="2">왕복</option>
+				   	<option value="1">편도</option>
+				   </select>
+				</div>
 				<div class="search-box">
 					<div class="start-airport form-group">
 						<span class="col-1">출발지</span> <br>

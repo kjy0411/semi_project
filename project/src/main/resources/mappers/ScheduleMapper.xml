@@ -10,7 +10,8 @@
 		<result property="sk_start_time" column="sk_start_time"/>
 		<result property="sk_time" column="sk_time"/>
 		<result property="sk_price" column="sk_price"/>
-	</resultMap>
+    </resultMap>
+
 	<select id="selectScheduleByRoute" resultType="kr.kh.project.vo.ScheduleVO">
 		select
 			schedule.*,
@@ -41,4 +42,6 @@
 	<delete id="deleteSchedule">
 		delete from schedule where sk_num = #{sk_num}
 	</delete>
+
+
 </mapper>

@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import kr.kh.project.dao.ScheduleDAO;
 import kr.kh.project.pagination.Criteria;
-import kr.kh.project.vo.MemberVO;
 import kr.kh.project.vo.ScheduleVO;
 
 @Service
@@ -36,9 +35,6 @@ public class ScheduleServiceImp implements ScheduleService{
 		
 		return scheduleDao.deleteSchedule(sk_num);
 	}
-
-
-
 
 	
 }

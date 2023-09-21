@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import kr.kh.project.pagination.Criteria;
+import kr.kh.project.vo.AirplaneVO;
 import kr.kh.project.vo.ScheduleVO;
 
 public interface ScheduleDAO {

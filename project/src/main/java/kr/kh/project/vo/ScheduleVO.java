@@ -21,10 +21,12 @@ public class ScheduleVO {
 	private String sk_end_time_str;
 	private String sk_time_str;
 	private String sk_price_str;	
-	//°Ë»öÀ» À§ÇÑ °³Ã¼
+	//ï¿½Ë»ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼
+	private String ap_num;
 	private String ap_al_name;
-	private String ai_start_name;		//Ãâ¹ßÁöÀÇ °øÇ×ÀÌ¸§
-	private String ai_end_name;			//µµÂøÁöÀÇ °øÇ×ÀÌ¸§
+	private String ap_am_model;
+	private String ai_start_name;		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì¸ï¿½
+	private String ai_end_name;			//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì¸ï¿½
 	
 	public String getSk_price_str() {
 		if(sk_price == null) {
@@ -85,4 +87,6 @@ public class ScheduleVO {
 			e.printStackTrace();
 		}
 	}
+	
+	
 }
