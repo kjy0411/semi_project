@@ -12,8 +12,11 @@ public interface AirportDAO {
     
     AirportVO getAirportByNumber(String ai_num);
     
-    void insertAirport(AirportVO ai_num);
+    void insertAirport(AirportVO airportvo);
 
     List<AirportVO> getAirportByRoute(@Param("route")boolean route, @Param("ai_num")String ai_num);
+
+    AirportVO getAirportByAiNameAndAiNaName(@Param("aiName") String aiName, @Param("aiNaName") String aiNaName);
+
 
 }
