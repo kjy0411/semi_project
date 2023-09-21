@@ -1,5 +1,6 @@
 package kr.kh.project.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -192,26 +193,22 @@ public class ReservationController {
 	@PostMapping("/reservation/complete")
 	public Map<String, Object> completeReservationPost(
 			@RequestParam(value="type")int type,
-			@RequestParam(value="sk_num[]")List<Integer> sk_num,
+			@RequestParam(value="sk_num[]")int[] sk_num,
 			@RequestParam(value="ti_me_id")String ti_me_id,
 			@RequestParam(value="ti_amount")int ti_amount,
-			@RequestParam(value="ti_total_price")int ti_total_price,
+			@RequestParam(value="ti_total_price[]")int[] ti_total_price,
 			@RequestParam(value="ti_price")int ti_price,
 			@RequestParam(value="ti_use_point")int ti_use_point,
-			@RequestParam(value="se_num[]")List<Integer> se_num){
-		TicketingVO ticketing = new TicketingVO();
-		ticketing.setTi_me_id(ti_me_id);
-		ticketing.setTi_amount(ti_amount);
-		ticketing.setTi_total_price(ti_total_price);
-		ticketing.setTi_price(ti_price);
-		ticketing.setTi_use_point(ti_use_point);
-		System.out.println(type);
-		for(Integer i : sk_num) {
-			System.out.println(i);			
-		}
-		System.out.println(ticketing);
-		for(Integer i : se_num) {
-			System.out.println(i);			
+			@RequestParam(value="se_num[]")int[] se_num){
+		List<TicketingVO> ticketing = new ArrayList<TicketingVO>();
+		for(int i = 0; i < type; i ++) {
+			ticketing.get(i).setTi_sk_num(sk_num[i]);
+			ticketing.get(i).setTi_me_id(ti_me_id);
+			ticketing.get(i).setTi_amount(ti_amount);
+			ticketing.get(i).setTi_total_price(ti_total_price[i]);
+			ticketing.get(i).setTi_price(ti_price);
+			ticketing.get(i).setTi_use_point(ti_use_point);
+			ticketing.get(i).setTi_save_point(ti_use_point);
 		}
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("res", true);
