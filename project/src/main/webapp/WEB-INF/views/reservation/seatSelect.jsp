@@ -13,7 +13,6 @@
 </style>
 </head>
 <body>
-
 	<h1>좌석선택</h1>
 	<div style="width: 100%; display: flex;">
 		<div class="container-fluid" style="flex: 1;">
@@ -437,12 +436,12 @@
 			for(i = 0; i < seatCount*${search.ticketType}; i++){
 				se_num.push(Number($('.seat-num').eq(i).val()));
 			}
-			console.log(se_num);
+			
 			$.ajax({
 				async : false,
 				method : 'post',
 				url : '<c:url value="/reservation/complete"/>',
-				data : {se_num:se_num},
+				data : {type:type,sk_num:sk_num, se_num:se_num, ti_me_id:ti_me_id, ti_amount:ti_amount, ti_total_price:ti_total_price, ti_price:ti_price, ti_use_point:ti_use_point},
 				dataType : 'json',
 				success : function(data) {
 					console.log(data)

@@ -190,7 +190,26 @@ public class ReservationController {
 	}
 	@ResponseBody
 	@PostMapping("/reservation/complete")
-	public Map<String, Object> completeReservationPost(@RequestParam(value="se_num[]")Integer[] se_num){
+	public Map<String, Object> completeReservationPost(
+			@RequestParam(value="type")int type,
+			@RequestParam(value="sk_num[]")List<Integer> sk_num,
+			@RequestParam(value="ti_me_id")String ti_me_id,
+			@RequestParam(value="ti_amount")int ti_amount,
+			@RequestParam(value="ti_total_price")int ti_total_price,
+			@RequestParam(value="ti_price")int ti_price,
+			@RequestParam(value="ti_use_point")int ti_use_point,
+			@RequestParam(value="se_num[]")List<Integer> se_num){
+		TicketingVO ticketing = new TicketingVO();
+		ticketing.setTi_me_id(ti_me_id);
+		ticketing.setTi_amount(ti_amount);
+		ticketing.setTi_total_price(ti_total_price);
+		ticketing.setTi_price(ti_price);
+		ticketing.setTi_use_point(ti_use_point);
+		System.out.println(type);
+		for(Integer i : sk_num) {
+			System.out.println(i);			
+		}
+		System.out.println(ticketing);
 		for(Integer i : se_num) {
 			System.out.println(i);			
 		}
