@@ -4,11 +4,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import kr.kh.project.service.AirplaneService;
 import kr.kh.project.service.AirportService;
 import kr.kh.project.service.NationService;
+import kr.kh.project.service.PointService;
 import kr.kh.project.service.ReservationService;
 import kr.kh.project.service.RouteService;
 import kr.kh.project.service.ScheduleService;
@@ -24,11 +26,14 @@ import kr.kh.project.service.SeatService;
 import kr.kh.project.vo.AirplaneVO;
 import kr.kh.project.vo.AirportVO;
 import kr.kh.project.vo.DivisionVO;
+import kr.kh.project.vo.MemberVO;
 import kr.kh.project.vo.NationVO;
+import kr.kh.project.vo.PointVO;
 import kr.kh.project.vo.RouteVO;
 import kr.kh.project.vo.ScheduleVO;
 import kr.kh.project.vo.SearchVO;
 import kr.kh.project.vo.SeatVO;
+import kr.kh.project.vo.TicketingVO;
 
 @Controller
 public class ReservationController {
@@ -53,6 +58,9 @@ public class ReservationController {
 	
 	@Autowired
 	AirplaneService airplaneService;
+	
+	@Autowired
+	PointService pointService;
 	
 	private SearchVO search = null;
 	
@@ -136,7 +144,9 @@ public class ReservationController {
 	}
 	
 	@GetMapping("/reservation/seat/select")
-	public String selectSeat(Model model, Integer[] sk_num) {
+	public String selectSeat(Model model, Integer[] sk_num, HttpSession session) {
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		PointVO point = pointService.getPoint(user.getMe_id());
 		if(sk_num == null || (sk_num.length != 1 && sk_num.length != 2)) {
 			return "/reservation/list";
 		}else {
@@ -145,7 +155,12 @@ public class ReservationController {
 		}if(sk_num.length == 2){
 			ScheduleVO schedule2 = scheduleService.getSchdeule(sk_num[1]);
 			model.addAttribute("schedule2", schedule2);
+		}else {
+			ScheduleVO schedule2 = new ScheduleVO();
+			schedule2.setSk_price(0);
+			model.addAttribute("schedule2", schedule2);			
 		}
+		model.addAttribute("point", point);
 		model.addAttribute("search", search);
 		return "/reservation/seatSelect";
 	}
@@ -171,6 +186,16 @@ public class ReservationController {
 			map.put("seatList", seatList);
 		}
 		map.put("msg", msg);
+		return map;
+	}
+	@ResponseBody
+	@PostMapping("/reservation/complete")
+	public Map<String, Object> completeReservationPost(@RequestParam(value="se_num[]")Integer[] se_num){
+		for(Integer i : se_num) {
+			System.out.println(i);			
+		}
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("res", true);
 		return map;
 	}
 }

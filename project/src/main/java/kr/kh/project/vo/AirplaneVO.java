@@ -11,4 +11,6 @@ public class AirplaneVO {
 	private String am_col;
 	private String am_row;
 	private String am_exit_col;
+	private int sk_num;
+	private Integer sk_price;
 }

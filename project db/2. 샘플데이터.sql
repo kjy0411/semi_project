@@ -9,15 +9,19 @@ VALUES
 	("ADMIN","$2a$10$rUROwCBBLRaFDQCfamkPXepbWpWeaJZsxSgtIJRB2LgrYmDaXqJ1W","ADMIN","ADMIN","2000-01-01","010-1234-5678","ADMIN@ADMIN","ADMIN"),
 	("USER","$2a$10$t7uJZtqISEuopcX9zfxYxODFyTePIDQvGQ.nX40Lkybz.aBQ7wcHK","USER","USER","2000-01-01","010-1111-1111","USER@USER","USER");
 
-
 -- 회원등급 등록
-INSERT INTO MEMBER_CLASS(MC_NAME, MC_BONUS_POINT)
+INSERT INTO MEMBER_CLASS(MC_NAME, MC_BONUS_POINT, MC_LIMIT_POINT)
 VALUES
-	("실버", 1),
-    ("골드", 1.05),
-    ("다이아몬드", 1.1),
-    ("다이아몬드플러스", 1.15),
-    ("플래티엄", 1.2);
+	("실버", 1, 50000),
+    ("골드", 1.05, 100000),
+    ("다이아몬드", 1.1, 500000),
+    ("다이아몬드플러스", 1.15, 1000000),
+    ("플래티넘", 1.2, 10000000);
+
+INSERT INTO POINT(PO_ME_ID, PO_MC_NAME)
+VALUES
+	("USER", "실버");
+
 -- 좌석등급 등록
 INSERT INTO SEAT_CLASS(SC_NAME, SC_RATIO)
 VALUES

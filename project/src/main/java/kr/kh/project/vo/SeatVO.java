@@ -14,4 +14,5 @@ public class SeatVO {
     
     public int row;
     public int col;
+    public int sk_num;
 }

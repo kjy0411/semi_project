@@ -9,7 +9,9 @@
 	    airplane.*,
 	    am_col,
 	    am_row,
-	    am_exit_col
+	    am_exit_col,
+	    sk_num,
+	    sk_price
 	from
 		schedule
 			join

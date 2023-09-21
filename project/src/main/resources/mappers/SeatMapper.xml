@@ -9,7 +9,16 @@
 		    se_name,
 		    se_sc_name,
 		    sc_ratio,
-		    tl_num,
+            (select
+				tl_num
+			from
+				schedule as t
+					join
+				ticketing on sk_num = ti_sk_num
+					join
+				ticketing_list on tl_ti_num = ti_num
+			where
+				sk_num = #{sk_num} and se_num = tl_se_num) as tl_num,
 			case
 				when left(se_name, 1) = 'A' then 1
 				when left(se_name, 1) = 'B' then 2
@@ -22,7 +31,8 @@
 				when left(se_name, 1) = 'I' then 9
                 else 0
 			end as `row`,
-            cast(right(se_name, 2) as UNSIGNED) as col
+            cast(right(se_name, 2) as UNSIGNED) as col,
+            sk_num
 		from
 			seat
 				join
@@ -33,10 +43,10 @@
 			airplane on ap_am_model = am_model
 				join
 			schedule on sk_ap_num = ap_num
-				left join
-			ticketing_list on tl_se_num = se_num
 		where
 			sk_num = #{sk_num}
+		group by
+			se_num
 		order by
 			se_num asc;
 	</select>
