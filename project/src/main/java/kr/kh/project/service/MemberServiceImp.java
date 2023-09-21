@@ -77,9 +77,12 @@ public class MemberServiceImp implements MemberService{
 		}
 		return memberDao.selectMember(me_id);
 	}
-
+	// 회원 조회 & 검색 기능
 	@Override
 	public List<MemberVO> getMemberList(Criteria cri) {
+		if( cri == null ) {
+			cri = new Criteria();
+		}
 		return memberDao.selectMemberList(cri);
 	}
 
@@ -129,6 +132,15 @@ public class MemberServiceImp implements MemberService{
 	@Override
 	public MemberVO getMemberBySession(String me_session_id) {
 		return memberDao.selectMemberBySession(me_session_id);
+	}
+
+	//회원권한 페이지네이션
+	@Override
+	public int getTotalCount(Criteria cri) {
+		if(cri == null) {
+			cri = new Criteria();
+		}
+		return memberDao.selectCountMemberList(cri);
 	}
 
 }

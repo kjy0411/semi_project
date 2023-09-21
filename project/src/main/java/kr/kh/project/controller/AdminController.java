@@ -28,10 +28,18 @@ public class AdminController {
 	// 회원정보 출력하기 ,페이지네이션 기능구현하기
 	@GetMapping("/menu/admin")
 	public String menuAdmin(Model model, Criteria cri) {
-		// 현재 페이지에 2개의 정보면 넣겠다. 선언
+		// 현재 페이지 정보에 맞는 게시글을 가져오라고 서비스에게 시킴
 		List<MemberVO> list = memberService.getMemberList(cri);
+		// 현재 페이지 정보(검색어, 차입)에 맞는 전체 게시글 수를 가져옴
+		int totalCount = memberService.getTotalCount(cri);
+		// 현재 페이지네이션 페이지 수
+		final int DISPLAY_PAGE_NUM = 3;
+		
+		PageMaker pm = new PageMaker(DISPLAY_PAGE_NUM, cri, totalCount);
+		
 		// 가져온 리스트를 화면에 전송한다.
 		model.addAttribute("list", list);
+		model.addAttribute("pm", pm);
 		return "/menu/admin";
 	}
 	// 회원정보 수정하기

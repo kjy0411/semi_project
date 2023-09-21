@@ -31,7 +31,7 @@ public class TicketingController {
 		model.addAttribute("list",list);
 		model.addAttribute("userId",user);
 		}
-		System.out.println("User ID : " + user.getMe_id());
+		//System.out.println("User ID : " + user.getMe_id());
 		return "/ticketing/inquiry";
 	}
 }

@@ -26,5 +26,7 @@ public interface MemberService {
 
 	MemberVO getMemberBySession(String me_session_id);
 
+	int getTotalCount(Criteria cri);
+
 
 }

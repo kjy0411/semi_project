@@ -27,6 +27,23 @@
 			me_authority like concat('%', #{cri.s}, '%')
 		</if>
 	</select>
+	<select id="selectCountMemberList" resultType="kr.kh.project.vo.MemberVO">
+		select count(*) from member
+		<if test='cri.t == "all"'>
+		where 
+			me_id like concat('%', #{cri.s}, '%')
+				or
+			me_authority like concat('%', #{cri.s}, '%')
+		</if>
+		<if test='cri.t == "second"'>
+		where 
+			me_id like concat('%', #{cri.s}, '%')
+		</if>
+		<if test='cri.t == "third"'>
+		where 
+			me_authority like concat('%', #{cri.s}, '%')
+		</if>
+	</select>
 	<update id="updateMemberByAuthority">
 		update 
 			member

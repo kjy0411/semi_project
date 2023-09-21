@@ -6,7 +6,6 @@
 	<title>회원 권한 수정</title>
 </head>
 <body>
-<h1>회원목록</h1>
 <form action="<c:url value='/menu/admin'/>" method="get">
 	<div class="input-group mb-3 mt-3">
 		<div class="input-group-prepend">
@@ -45,6 +44,11 @@
       </c:forEach>
     </tbody>
   </table>
+   <ul class="pagination justify-content-center">
+    <li class="page-item"><a class="page-link" href="javascript:void(0);">이전</a></li>
+    <li class="page-item"><a class="page-link" href="javascript:void(0);">1</a></li>
+    <li class="page-item"><a class="page-link" href="javascript:void(0);">다음</a></li>
+  </ul>
  </div>
 <script type="text/javascript">
 	$('.btn-update').click(function(){

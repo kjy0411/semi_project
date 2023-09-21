@@ -35,6 +35,11 @@
       </c:forEach>
     </tbody>
   </table>
+  <ul class="pagination justify-content-center">
+    <li class="page-item"><a class="page-link" href="javascript:void(0);">이전</a></li>
+    <li class="page-item"><a class="page-link" href="javascript:void(0);">1</a></li>
+    <li class="page-item"><a class="page-link" href="javascript:void(0);">다음</a></li>
+  </ul>
  </div>
 </body>
 </html>
