@@ -19,9 +19,11 @@
 			me_authority like concat('%', #{cri.s}, '%')
 		</if>
 		<if test='cri.t == "second"'>
+		where 
 			me_id like concat('%', #{cri.s}, '%')
 		</if>
 		<if test='cri.t == "third"'>
+		where 
 			me_authority like concat('%', #{cri.s}, '%')
 		</if>
 	</select>

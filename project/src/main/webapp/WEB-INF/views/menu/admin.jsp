@@ -72,10 +72,7 @@
 	$('.btn-insert').click(function(){
 		let me_title = $('#me_title').val(); // #은 아이디를 의미 (아이디 bt_title의 값 가져오기)
 		let me_authority = $('#me_authority').val();
-		if(me_authority == '0'){
-			alert('회원 검색 종류를 선택해주세요.')
-			return;
-		}
+
 		if(me_title.trim().length == 0){
 			alert('검색어를 입력해주세요.')
 			return;
