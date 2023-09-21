@@ -18,21 +18,25 @@ public class AirportServiceImp implements AirportService {
     }
 
     @Override
-    public AirportVO getAirportByCode(String ai_num) { 
-        return airportDao.getAirportByNumber(ai_num); 
+    public AirportVO getAirportByCode(String ai_num) {
+        return airportDao.getAirportByNumber(ai_num);
     }
 
     @Override
-    public void insertAirport(AirportVO ai_num) {
-        airportDao.insertAirport(ai_num);
+    public void insertAirport(AirportVO airportVO) {
+        airportDao.insertAirport(airportVO);
     }
 
-	@Override
-	public List<AirportVO> getAirportByRoute(boolean route, String ai_num) {
-		if(route == false && ai_num == null) {
-			return null;
-		}
-		return airportDao.getAirportByRoute(route, ai_num);
-	}
+    @Override
+    public List<AirportVO> getAirportByRoute(boolean route, String ai_num) {
+        if (route == false && ai_num == null) {
+            return null;
+        }
+        return airportDao.getAirportByRoute(route, ai_num);
+    }
 
+    @Override
+    public AirportVO getAirportByAiNameAndAiNaName(String aiName, String aiNaName) {
+        return airportDao.getAirportByAiNameAndAiNaName(aiName, aiNaName);
+    }
 }
