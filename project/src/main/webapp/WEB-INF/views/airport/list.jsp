@@ -19,5 +19,6 @@
         </c:forEach>
     </ul>
     <a href="<c:url value='/airport/insert'/>">공항 등록</a>
+    <a href="<c:url value='/route/delete'/>">노선 삭제</a>
 </body>
 </html>

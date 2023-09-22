@@ -25,7 +25,7 @@
             <p style="color: red">${invalidAirportMessage}</p>
         </c:if>
         
-        <button type="submit">공항 추가</button>
+        <button type="submit">공항 등록</button>
     </form>
     
     <a href="<c:url value='/airport/list'/>">공항 리스트</a>

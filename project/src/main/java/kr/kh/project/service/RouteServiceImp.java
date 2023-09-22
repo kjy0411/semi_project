@@ -1,6 +1,7 @@
 package kr.kh.project.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 import kr.kh.project.dao.RouteDAO;
 import kr.kh.project.vo.RouteVO;
@@ -26,13 +27,14 @@ public class RouteServiceImp implements RouteService {
 
 
     @Override
-    public void insertRoute(RouteVO route) {
-    	routeDao.insertRoute(route);
+    public void insertRoute(String ro_ai_start, String ro_ai_end) {
+        routeDao.insertRoute(ro_ai_start, ro_ai_end);
     }
 
+
     @Override
-    public void deleteRouteByNumber(String routeNumber) {
-    	routeDao.deleteRouteByNumber(routeNumber);
+    public void deleteRouteByNumber(int ro_num) {
+    	routeDao.deleteRouteByNumber(ro_num);
     }
 
 	@Override

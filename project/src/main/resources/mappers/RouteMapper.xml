@@ -5,7 +5,7 @@
 <mapper namespace="kr.kh.project.dao.RouteDAO">
 
   
-  <!-- 노선 추가 -->
+    <!-- 노선 추가 -->
 	<insert id="insertRoute" parameterType="kr.kh.project.vo.RouteVO">
 	    INSERT INTO route (ro_ai_start, ro_ai_end)
 	    VALUES (#{ro_ai_start}, #{ro_ai_end});
@@ -13,10 +13,12 @@
 
 
   <!-- 노선 삭제 -->
-  <delete id="deleteRoute" parameterType="int">
-    DELETE FROM route WHERE po_num = #{po_num};
+  <delete id="deleteRouteByNumber" parameterType="int">
+    DELETE FROM route WHERE ro_num = #{ro_num};
   </delete>
   
+  
+  <!-- 공항 상세 정보 -->
   <select id="getDepartureRoutes" resultType="kr.kh.project.vo.RouteVO">
     SELECT * FROM route WHERE ro_ai_start = #{ai_num}
   </select>
