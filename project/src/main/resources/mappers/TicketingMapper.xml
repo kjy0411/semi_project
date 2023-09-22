@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.kh.project.dao.TicketingDAO">
+	<insert id="insertTicketing">
+		insert into 
+		ticketing
+			(ti_sk_num, ti_me_id, ti_amount, ti_total_price, ti_price, ti_save_point, ti_use_point)
+		values
+			(#{ticketing.ti_sk_num},#{ticketing.ti_me_id},#{ticketing.ti_amount},#{ticketing.ti_total_price},#{ticketing.ti_price},#{ticketing.ti_save_point},#{ticketing.ti_use_point})
+	</insert>
+	<select id="selectTicketing" resultType="kr.kh.project.vo.TicketingVO">
+		select
+			*
+		from
+			ticketing
+		where
+			ti_num = (
+				select
+					max(ti_num)
+				from
+					ticketing
+				where
+					ti_me_id = #{ti_me_id})
+	</select>
+</mapper>

@@ -109,7 +109,7 @@
 							<th>사용 마일리지</th>
 							<td>
 								<a data-toggle="tooltip" title="최대 ${point.po_hold_point}Point 사용가능">
-									<input type="number" class="ti_use_point payment-input" value="0" min="0" max="${point.po_hold_point}">
+									<input type="number" class="ti_use_point payment-input" value="0" min="0">
 								</a>
 							</td>
 						</tr>
@@ -422,29 +422,43 @@
 		}
 		function payment(){
 			let type = Number(${search.ticketType});
-			let sk_num = [];
-			sk_num.push(Number(${schedule.sk_num}));
+			let ti_sk_num = [];
+			let ti_total_price = [];
+			let ti_use_point = [];
+			ti_sk_num.push(Number(${schedule.sk_num}));
+			ti_total_price.push(Number($('.ti_total_price-go').text()));
+			ti_use_point.push(Number($('.ti_use_point').val()));
 			if(type == 2){
-				sk_num.push(Number(${schedule2.sk_num}));
+				ti_sk_num.push(Number(${schedule2.sk_num}));
+				ti_total_price.push(Number($('.ti_total_price-back').text()));
+				ti_use_point.push(0);
 			}
 			let ti_me_id = '${user.me_id}';
 			let ti_amount = Number(${search.seatAmount});
-			let ti_total_price = Number($('.ti_total_price').text());
-			let ti_price = Number($('.ti_price').text());
-			let ti_use_point = Number($('.ti_use_point').val());
 			let se_num = [];
 			for(i = 0; i < seatCount*${search.ticketType}; i++){
 				se_num.push(Number($('.seat-num').eq(i).val()));
 			}
-			
 			$.ajax({
 				async : false,
 				method : 'post',
 				url : '<c:url value="/reservation/complete"/>',
-				data : {type:type,sk_num:sk_num, se_num:se_num, ti_me_id:ti_me_id, ti_amount:ti_amount, ti_total_price:ti_total_price, ti_price:ti_price, ti_use_point:ti_use_point},
+				data : {type:type,
+						ti_me_id:ti_me_id,
+						ti_amount:ti_amount,
+						ti_sk_num:ti_sk_num,
+						ti_total_price:ti_total_price,
+						ti_use_point:ti_use_point,
+						se_num:se_num},
 				dataType : 'json',
 				success : function(data) {
-					console.log(data)
+					if(data.res){
+						alert(data.msg);
+						location.href='<c:url value="/"/>';
+					}else{
+						alert(data.msg);
+						location.href='<c:url value="/reservation/search"/>';
+					}
 				}
 			});
 		}

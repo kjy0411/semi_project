@@ -24,6 +24,8 @@ import kr.kh.project.service.ReservationService;
 import kr.kh.project.service.RouteService;
 import kr.kh.project.service.ScheduleService;
 import kr.kh.project.service.SeatService;
+import kr.kh.project.service.TicketingListService;
+import kr.kh.project.service.TicketingService;
 import kr.kh.project.vo.AirplaneVO;
 import kr.kh.project.vo.AirportVO;
 import kr.kh.project.vo.DivisionVO;
@@ -34,6 +36,7 @@ import kr.kh.project.vo.RouteVO;
 import kr.kh.project.vo.ScheduleVO;
 import kr.kh.project.vo.SearchVO;
 import kr.kh.project.vo.SeatVO;
+import kr.kh.project.vo.TicketingListVO;
 import kr.kh.project.vo.TicketingVO;
 
 @Controller
@@ -63,7 +66,15 @@ public class ReservationController {
 	@Autowired
 	PointService pointService;
 	
+	@Autowired
+	TicketingService ticketingService;
+	
+	@Autowired
+	TicketingListService ticketingListService;
+	
 	private SearchVO search = null;
+	private List<TicketingVO> ticketingList;
+	private List<TicketingListVO> tListList;
 	
 	@GetMapping("/reservation/search")
 	public String searchReservation(Model model) {
@@ -193,25 +204,43 @@ public class ReservationController {
 	@PostMapping("/reservation/complete")
 	public Map<String, Object> completeReservationPost(
 			@RequestParam(value="type")int type,
-			@RequestParam(value="sk_num[]")int[] sk_num,
 			@RequestParam(value="ti_me_id")String ti_me_id,
 			@RequestParam(value="ti_amount")int ti_amount,
+			@RequestParam(value="ti_sk_num[]")int[] ti_sk_num,
 			@RequestParam(value="ti_total_price[]")int[] ti_total_price,
-			@RequestParam(value="ti_price")int ti_price,
-			@RequestParam(value="ti_use_point")int ti_use_point,
+			@RequestParam(value="ti_use_point[]")int[] ti_use_point,
 			@RequestParam(value="se_num[]")int[] se_num){
-		List<TicketingVO> ticketing = new ArrayList<TicketingVO>();
-		for(int i = 0; i < type; i ++) {
-			ticketing.get(i).setTi_sk_num(sk_num[i]);
-			ticketing.get(i).setTi_me_id(ti_me_id);
-			ticketing.get(i).setTi_amount(ti_amount);
-			ticketing.get(i).setTi_total_price(ti_total_price[i]);
-			ticketing.get(i).setTi_price(ti_price);
-			ticketing.get(i).setTi_use_point(ti_use_point);
-			ticketing.get(i).setTi_save_point(ti_use_point);
-		}
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("res", true);
+		TicketingVO ticketing = new TicketingVO();
+		TicketingListVO tList = new TicketingListVO();
+		ticketingList = new ArrayList<TicketingVO>(type);
+		tListList = new ArrayList<TicketingListVO>(type*ti_amount);
+		String msg = "항공권 예매를 성공했습니다.";
+		boolean res = true;
+		for(int i = 0; i < type; i ++) {
+			ticketing.setTi_sk_num(ti_sk_num[i]);
+			ticketing.setTi_me_id(ti_me_id);
+			ticketing.setTi_amount(ti_amount);
+			ticketing.setTi_total_price(ti_total_price[i]);
+			ticketing.setTi_use_point(ti_use_point[i]);
+			TicketingVO dbTicketing = ticketingService.insertSelectTicketing(ticketing);
+			for(int j = 0; j < se_num.length; j++) {
+				String tl_num = null;
+				if(i == 0 && j < ti_amount){
+					tl_num = search.getToDay() + search.getRo_ai_start() + "-" + search.getRo_ai_end();					
+				}if(i == 1 && j + 1 > ti_amount) {
+					tl_num = search.getToDay() + search.getRo_ai_end() + "-" + search.getRo_ai_start();										
+				}
+				if(tl_num != null) {
+					tList.setTl_num(tl_num);
+					tList.setTl_ti_num(dbTicketing.getTi_num());
+					tList.setTl_se_num(se_num[j]);
+					ticketingListService.insertTicketingList(ti_sk_num[i], tList);
+				}
+			}				
+		}
+		map.put("msg", msg);
+		map.put("res", res);
 		return map;
 	}
 }
