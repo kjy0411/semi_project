@@ -6,6 +6,8 @@ import kr.kh.project.vo.TicketingListVO;
 
 public interface TicketingListDAO {
 
-	void insertTicketingList(@Param("sk_num")int sk_num, @Param("tl")TicketingListVO ticketingList);
+	boolean insertTicketingList(@Param("sk_num")int sk_num, @Param("tl")TicketingListVO ticketingList);
+
+	TicketingListVO selectTicketingList( @Param("ticketingList")TicketingListVO ticketingList);
 
 }

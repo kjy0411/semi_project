@@ -4,6 +4,6 @@ import kr.kh.project.vo.TicketingListVO;
 
 public interface TicketingListService {
 
-	void insertTicketingList(int sk_num, TicketingListVO ticketingList);
+	TicketingListVO insertSelectTicketingList(int sk_num, TicketingListVO ticketingList);
 
 }

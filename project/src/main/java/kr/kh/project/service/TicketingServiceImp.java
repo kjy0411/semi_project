@@ -21,7 +21,9 @@ public class TicketingServiceImp implements TicketingService {
 				|| ticketing.getTi_total_price() == 0) {
 			return null;
 		}
-		ticketingDao.insertTicketing(ticketing);
+		if(!ticketingDao.insertTicketing(ticketing)) {
+			return null;
+		}
 		return ticketingDao.selectTicketing(ticketing.getTi_me_id());
 	}
 

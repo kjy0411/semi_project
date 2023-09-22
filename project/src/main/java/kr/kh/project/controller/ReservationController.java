@@ -215,30 +215,40 @@ public class ReservationController {
 		TicketingListVO tList = new TicketingListVO();
 		ticketingList = new ArrayList<TicketingVO>(type);
 		tListList = new ArrayList<TicketingListVO>(type*ti_amount);
-		String msg = "항공권 예매를 성공했습니다.";
-		boolean res = true;
+		String msg = "항공권 예매를 실패했습니다.";
+		boolean res = false;
 		for(int i = 0; i < type; i ++) {
 			ticketing.setTi_sk_num(ti_sk_num[i]);
 			ticketing.setTi_me_id(ti_me_id);
 			ticketing.setTi_amount(ti_amount);
 			ticketing.setTi_total_price(ti_total_price[i]);
 			ticketing.setTi_use_point(ti_use_point[i]);
-			TicketingVO dbTicketing = ticketingService.insertSelectTicketing(ticketing);
-			for(int j = 0; j < se_num.length; j++) {
-				String tl_num = null;
-				if(i == 0 && j < ti_amount){
-					tl_num = search.getToDay() + search.getRo_ai_start() + "-" + search.getRo_ai_end();					
-				}if(i == 1 && j + 1 > ti_amount) {
-					tl_num = search.getToDay() + search.getRo_ai_end() + "-" + search.getRo_ai_start();										
-				}
-				if(tl_num != null) {
-					tList.setTl_num(tl_num);
-					tList.setTl_ti_num(dbTicketing.getTi_num());
-					tList.setTl_se_num(se_num[j]);
-					ticketingListService.insertTicketingList(ti_sk_num[i], tList);
-				}
-			}				
+			
+			ticketingList.add(ticketingService.insertSelectTicketing(ticketing));
 		}
+		for(int j = 0; j < se_num.length; j++) {
+			String tl_num = null;
+			int tl_ti_num = 0;
+			int sk_num = 0;
+			if(j < ti_amount){
+				tl_num = search.getToDay() + search.getRo_ai_start() + "-" + search.getRo_ai_end();		
+				tl_ti_num = ticketingList.get(0).getTi_num();
+				sk_num = ticketingList.get(0).getTi_sk_num();
+			}if(j + 1 > ti_amount) {
+				tl_num = search.getToDay() + search.getRo_ai_end() + "-" + search.getRo_ai_start();	
+				tl_ti_num = ticketingList.get(1).getTi_num();
+				sk_num = ticketingList.get(1).getTi_sk_num();
+			}
+			if(tl_num != null) {
+				tList.setTl_num(tl_num);
+				tList.setTl_ti_num(tl_ti_num);
+				tList.setTl_se_num(se_num[j]);
+				
+				tListList.add(ticketingListService.insertSelectTicketingList(sk_num, tList));
+			}
+		}
+		msg = "항공권 예매를 성공했습니다.";
+		res = true;
 		map.put("msg", msg);
 		map.put("res", res);
 		return map;

@@ -27,4 +27,12 @@
 					se_num = #{tl.tl_se_num}))
 				, #{tl.tl_ti_num}, #{tl.tl_se_num})
 	</insert>
+	<select id="selectTicketingList" resultType="kr.kh.project.vo.TicketingListVO">
+		select
+			*
+		from
+			ticketing_list
+		where
+			tl_ti_num = #{ticketingList.tl_ti_num} and tl_se_num = #{ticketingList.tl_se_num}
+	</select>
 </mapper>
