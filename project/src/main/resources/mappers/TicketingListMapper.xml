@@ -35,4 +35,19 @@
 		where
 			tl_ti_num = #{tl.tl_ti_num} and tl_se_num = #{tl.tl_se_num}
 	</select>
+	<select id="checkTicketingListSeat" resultType="kr.kh.project.vo.TicketingListVO">
+		select
+			*
+		from
+			ticketing_list
+				join
+			ticketing on ti_num = tl_ti_num
+		where
+			ti_sk_num = #{sk_num} and tl_se_num = #{tl.tl_se_num}
+	</select>
+	<delete id="deleteTicketingList">
+		delete from ticketing_list
+		where
+			tl_num = #{tl_num}
+	</delete>
 </mapper>

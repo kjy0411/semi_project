@@ -10,4 +10,6 @@ public interface TicketingDAO {
 
 	TicketingVO selectTicketing(@Param("ti_me_id")String ti_me_id);
 
+	void deleteTicketing(@Param("ti_num")int ti_num);
+
 }

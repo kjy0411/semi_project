@@ -124,13 +124,13 @@
 			<div>
 				<c:forEach begin="1" end="${search.seatAmount}">
 					<div class="go-seat-box">
-						<input type="text" class="go-seat-num seat-num" name="tl_se_num" readonly hidden>
+						<input type="text" class="go-seat-num seat-num" name="tl_se_num" readonly>
 					</div>
 				</c:forEach>
 				<c:if test="${search.ticketType == 2}">
 					<c:forEach begin="1" end="${search.seatAmount}">
 						<div class="back-seat-box">
-							<input type="text" class="back-seat-num seat-num" name="tl_se_num" readonly hidden>
+							<input type="text" class="back-seat-num seat-num" name="tl_se_num">
 						</div>
 					</c:forEach>
 				</c:if>

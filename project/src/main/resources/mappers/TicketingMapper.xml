@@ -24,4 +24,9 @@
 				where
 					ti_me_id = #{ti_me_id})
 	</select>
+	<delete id="deleteTicketing">
+		delete from ticketing
+		where
+			ti_num = #{ti_num}
+	</delete>
 </mapper>

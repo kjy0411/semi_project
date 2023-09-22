@@ -1,10 +1,13 @@
 package kr.kh.project.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.kh.project.dao.TicketingListDAO;
 import kr.kh.project.vo.TicketingListVO;
+import kr.kh.project.vo.TicketingVO;
 
 @Service
 public class TicketingListServiceImp implements TicketingListService {
@@ -20,6 +23,9 @@ public class TicketingListServiceImp implements TicketingListService {
 		if(ticketingList == null || ticketingList.getTl_num() == null || ticketingList.getTl_ti_num() == 0 || ticketingList.getTl_se_num() == 0) {
 			return false;
 		}
+		if(ticketingListDao.checkTicketingListSeat(sk_num, ticketingList) != null) {
+			return false;
+		}
 		return ticketingListDao.insertTicketingList(sk_num, ticketingList);
 	}
 
@@ -29,6 +35,19 @@ public class TicketingListServiceImp implements TicketingListService {
 			return null;
 		}
 		return ticketingListDao.selectTicketingList(ticketingList);
+	}
+
+	@Override
+	public void deleteTicketingList(List<TicketingListVO> ticketList) {
+		if(ticketList.size() == 0) {
+			return;
+		}
+		for(TicketingListVO ticket : ticketList) {
+			if(ticket == null || ticket.getTl_num() == null) {
+				continue;
+			}
+			ticketingListDao.deleteTicketing(ticket.getTl_num());
+		}
 	}
 
 }

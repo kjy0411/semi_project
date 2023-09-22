@@ -226,6 +226,12 @@ public class ReservationController {
 				ticketingList.add(ticketingService.selectTicketing(ticketing.getTi_me_id()));				
 			}else {
 				//ticketingList의 값을 가진 데이터 삭제
+				if(ticketingList.size() != 0) {
+					ticketingService.deleteTicketing(ticketingList);
+				}
+				map.put("msg", msg);
+				map.put("res", res);
+				return map;
 			}
 		}
 		for(int j = 0; j < se_num.length; j++) {
@@ -250,6 +256,13 @@ public class ReservationController {
 					ticketList.add(ticketingListService.selectTicketingList(ticket));					
 				}else {
 					//ticketingList와 ticketList의 값을 가진 데이터 삭제
+					if(ticketList.size() != 0) {
+						ticketingService.deleteTicketing(ticketingList);
+						ticketingListService.deleteTicketingList(ticketList);
+					}
+					map.put("msg", msg);
+					map.put("res", res);
+					return map;
 				}
 			}
 		}
