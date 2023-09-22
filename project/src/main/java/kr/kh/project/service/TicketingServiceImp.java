@@ -13,18 +13,23 @@ public class TicketingServiceImp implements TicketingService {
     TicketingDAO ticketingDao;
 
 	@Override
-	public TicketingVO insertSelectTicketing(TicketingVO ticketing) {
+	public boolean insertTicketing(TicketingVO ticketing) {
 		if(ticketing == null
 				|| ticketing.getTi_me_id() == null
 				|| ticketing.getTi_sk_num() == 0
 				|| ticketing.getTi_amount() == 0
 				|| ticketing.getTi_total_price() == 0) {
+			return false;
+		}
+		return ticketingDao.insertTicketing(ticketing);
+	}
+
+	@Override
+	public TicketingVO selectTicketing(String ti_me_id) {
+		if(ti_me_id == null) {
 			return null;
 		}
-		if(!ticketingDao.insertTicketing(ticketing)) {
-			return null;
-		}
-		return ticketingDao.selectTicketing(ticketing.getTi_me_id());
+		return ticketingDao.selectTicketing(ti_me_id);
 	}
 
 }

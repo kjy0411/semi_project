@@ -8,6 +8,6 @@ public interface TicketingListDAO {
 
 	boolean insertTicketingList(@Param("sk_num")int sk_num, @Param("tl")TicketingListVO ticketingList);
 
-	TicketingListVO selectTicketingList( @Param("ticketingList")TicketingListVO ticketingList);
+	TicketingListVO selectTicketingList( @Param("tl")TicketingListVO ticketingList);
 
 }

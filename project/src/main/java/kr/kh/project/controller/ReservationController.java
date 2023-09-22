@@ -73,8 +73,6 @@ public class ReservationController {
 	TicketingListService ticketingListService;
 	
 	private SearchVO search = null;
-	private List<TicketingVO> ticketingList;
-	private List<TicketingListVO> tListList;
 	
 	@GetMapping("/reservation/search")
 	public String searchReservation(Model model) {
@@ -212,9 +210,9 @@ public class ReservationController {
 			@RequestParam(value="se_num[]")int[] se_num){
 		Map<String, Object> map = new HashMap<String, Object>();
 		TicketingVO ticketing = new TicketingVO();
-		TicketingListVO tList = new TicketingListVO();
-		ticketingList = new ArrayList<TicketingVO>(type);
-		tListList = new ArrayList<TicketingListVO>(type*ti_amount);
+		TicketingListVO ticket = new TicketingListVO();
+		List<TicketingVO> ticketingList = new ArrayList<TicketingVO>(type);
+		List<TicketingListVO> ticketList = new ArrayList<TicketingListVO>(type*ti_amount);
 		String msg = "항공권 예매를 실패했습니다.";
 		boolean res = false;
 		for(int i = 0; i < type; i ++) {
@@ -224,7 +222,11 @@ public class ReservationController {
 			ticketing.setTi_total_price(ti_total_price[i]);
 			ticketing.setTi_use_point(ti_use_point[i]);
 			
-			ticketingList.add(ticketingService.insertSelectTicketing(ticketing));
+			if(ticketingService.insertTicketing(ticketing)) {
+				ticketingList.add(ticketingService.selectTicketing(ticketing.getTi_me_id()));				
+			}else {
+				//ticketingList의 값을 가진 데이터 삭제
+			}
 		}
 		for(int j = 0; j < se_num.length; j++) {
 			String tl_num = null;
@@ -240,11 +242,15 @@ public class ReservationController {
 				sk_num = ticketingList.get(1).getTi_sk_num();
 			}
 			if(tl_num != null) {
-				tList.setTl_num(tl_num);
-				tList.setTl_ti_num(tl_ti_num);
-				tList.setTl_se_num(se_num[j]);
+				ticket.setTl_num(tl_num);
+				ticket.setTl_ti_num(tl_ti_num);
+				ticket.setTl_se_num(se_num[j]);
 				
-				tListList.add(ticketingListService.insertSelectTicketingList(sk_num, tList));
+				if(ticketingListService.insertTicketingList(sk_num, ticket)) {
+					ticketList.add(ticketingListService.selectTicketingList(ticket));					
+				}else {
+					//ticketingList와 ticketList의 값을 가진 데이터 삭제
+				}
 			}
 		}
 		msg = "항공권 예매를 성공했습니다.";
