@@ -60,7 +60,27 @@ public class AirlineServiceImp implements AirlineService {
 		
 		return airlineDao.deleteAirline(al_name);
 	}
+
+
+
+	@Override
+	public boolean insertAirplane_ap(AirplaneVO airplane, MemberVO user) {
+
+		if(airplane == null || airplane.getAp_num()==null||airplane.getAp_am_model()==null||airplane.getAp_al_name()==null) {
+			return false;
+		}
 		
+		boolean res = airlineDao.insertAirplane(airplane);
+		if(!res) {
+			return false;
+		}
+		
+		
+		return true;
+	}
+
+
+
 
    
 }

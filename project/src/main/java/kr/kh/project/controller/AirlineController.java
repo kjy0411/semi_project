@@ -92,6 +92,41 @@ public class AirlineController {
 		return "/airline/detail";
 	}
 	
+	@GetMapping("/airline/insert_ap")
+	public String insert_ap(Model model) {
+		
+		return "/airline/insert_ap";
+	}
+	
+	@PostMapping("/airline/insert_ap")
+	public String insertPost_AP(Model model, AirplaneVO airplane, HttpSession session) {
+		
+		MemberVO user = (MemberVO) session.getAttribute("user");
+		
+		Message msg = new Message("airline/insert_ap", "항공기등록을 실패했습니다.");
+		boolean res = airlineService.insertAirplane_ap(airplane, user);
+		if(res) {
 
+			msg = new Message("menu/airport", "항공기등록을 성공했습니다.");
+		}else {
+		
+			msg = new Message("airline/insert_ap", "항공기등록을 실패했습니다.");
+		}
+		model.addAttribute("msg", msg);
+		return "message";
+	}
+	
+	@GetMapping("/airline/delete_ap")
+	public String delete_AP() {
+		
+		return "/airline/delete_ap";
+	}
+	
+	@PostMapping("/airline/delete_ap")
+	public String deletePost_AP(Model model, AirlineVO airline, HttpSession session) {
+		
+		return "message";
+	}
+	
 	
 }

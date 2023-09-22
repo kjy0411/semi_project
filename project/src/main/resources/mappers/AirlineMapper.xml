@@ -20,4 +20,9 @@
 	<delete id="deleteAirline">
 		delete from airline where al_name=#{al_name}
 	</delete>
+	
+	<insert id="insertAirplane">
+		insert into airplane(ap_num,ap_al_name, ap_am_model)
+		values (#{airplane.ap_num},#{airplane.ap_al_name},#{airplane.ap_am_model})
+	</insert>
 </mapper>

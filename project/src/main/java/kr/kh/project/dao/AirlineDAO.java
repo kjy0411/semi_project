@@ -16,6 +16,10 @@ public interface AirlineDAO {
 	boolean insertAirline(@Param("airline")AirlineVO airline); // 항공사명을 입력할 때 가져오는 데이터
 
 	boolean deleteAirline(@Param("al_name")String al_name); // 삭제할 항공사
+
+	boolean insertAirplane(@Param("airplane")AirplaneVO airplane);
+
+
 	
 	
 }

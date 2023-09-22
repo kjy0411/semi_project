@@ -22,6 +22,9 @@ public interface AirlineService {
 
 	boolean deleteAirline(String al_name, MemberVO user);
 
+	boolean insertAirplane_ap(AirplaneVO airplane, MemberVO user);
+
+	
 	
 	
    
