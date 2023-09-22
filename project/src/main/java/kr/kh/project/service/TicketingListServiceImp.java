@@ -36,18 +36,4 @@ public class TicketingListServiceImp implements TicketingListService {
 		}
 		return ticketingListDao.selectTicketingList(ticketingList);
 	}
-
-	@Override
-	public void deleteTicketingList(List<TicketingListVO> ticketList) {
-		if(ticketList.size() == 0) {
-			return;
-		}
-		for(TicketingListVO ticket : ticketList) {
-			if(ticket == null || ticket.getTl_num() == null) {
-				continue;
-			}
-			ticketingListDao.deleteTicketing(ticket.getTl_num());
-		}
-	}
-
 }

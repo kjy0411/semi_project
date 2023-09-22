@@ -1,11 +1,14 @@
 package kr.kh.project.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.kh.project.dao.TicketingDAO;
+import kr.kh.project.dao.TicketingListDAO;
+import kr.kh.project.vo.TicketingListVO;
 import kr.kh.project.vo.TicketingVO;
 
 @Service
@@ -14,6 +17,9 @@ public class TicketingServiceImp implements TicketingService {
     @Autowired
     TicketingDAO ticketingDao;
 
+    @Autowired
+    TicketingListDAO ticketingListDao;
+    
 	@Override
 	public boolean insertTicketing(TicketingVO ticketing) {
 		if(ticketing == null
@@ -42,6 +48,11 @@ public class TicketingServiceImp implements TicketingService {
 		for(TicketingVO ticketing : ticketingList) {
 			if(ticketing == null || ticketing.getTi_num() == 0) {
 				continue;
+			}
+			List<TicketingListVO> ticketList = new ArrayList<TicketingListVO>();
+			ticketList = ticketingListDao.selectTicketingListByTi_num(ticketing.getTi_num());
+			for(TicketingListVO ticket : ticketList) {
+				ticketingListDao.deleteTicketingList(ticket.getTl_num());				
 			}
 			ticketingDao.deleteTicketing(ticketing.getTi_num());
 		}

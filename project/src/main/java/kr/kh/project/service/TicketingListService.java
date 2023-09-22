@@ -10,6 +10,4 @@ public interface TicketingListService {
 
 	TicketingListVO selectTicketingList(TicketingListVO ticket);
 
-	void deleteTicketingList(List<TicketingListVO> ticketList);
-
 }

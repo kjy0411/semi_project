@@ -45,6 +45,14 @@
 		where
 			ti_sk_num = #{sk_num} and tl_se_num = #{tl.tl_se_num}
 	</select>
+	<select id="selectTicketingListByTi_num" resultType="kr.kh.project.vo.TicketingListVO">
+		select
+			*
+		from
+			ticketing_list
+		where
+			tl_ti_num = #{ti_num}
+	</select>
 	<delete id="deleteTicketingList">
 		delete from ticketing_list
 		where

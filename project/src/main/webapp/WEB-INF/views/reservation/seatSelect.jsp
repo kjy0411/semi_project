@@ -457,7 +457,12 @@
 						location.href='<c:url value="/"/>';
 					}else{
 						alert(data.msg);
-						location.href='<c:url value="/reservation/search"/>';
+						$('.seat-name').show();
+						$('.schedule-container').show();
+						$('.total-price-box').hide();
+						$('.btn-payment-complete').hide();
+						str = ``;
+						$('.seat-container').html(str)
 					}
 				}
 			});
