@@ -28,5 +28,7 @@ public interface MemberService {
 
 	int getTotalCount(Criteria cri);
 
+	boolean checkId(String id);
+
 
 }

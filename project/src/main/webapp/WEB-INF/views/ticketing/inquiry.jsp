@@ -24,7 +24,7 @@
     <tbody>
    	 <c:forEach items="${list}" var="ticketing" >
 	      <tr>
-	      	<td>${ticketing.ti_num}</td>
+	      	<td class="num">${ticketing.ti_num}</td>
 	        <td>${ticketing.ti_me_id}</td>
 	        <td>${ticketing.ti_use_point}</td>
 	        <td>${ticketing.ai_start_name}</td>
@@ -35,11 +35,6 @@
       </c:forEach>
     </tbody>
   </table>
-  <ul class="pagination justify-content-center">
-    <li class="page-item"><a class="page-link" href="javascript:void(0);">이전</a></li>
-    <li class="page-item"><a class="page-link" href="javascript:void(0);">1</a></li>
-    <li class="page-item"><a class="page-link" href="javascript:void(0);">다음</a></li>
-  </ul>
  </div>
 </body>
 </html>

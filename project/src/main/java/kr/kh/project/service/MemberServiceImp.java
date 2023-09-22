@@ -1,6 +1,7 @@
 package kr.kh.project.service;
 
 import java.util.List;
+import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -32,8 +33,22 @@ public class MemberServiceImp implements MemberService{
 		|| member.getMe_email() == null) {
 			return false;
 		}
-
-		MemberVO dbMember = memberDao.selectMember(member.getMe_id());
+		// 아이디 체크
+		// 전체 6~20자, 영문으로 시작, 영문&숫자만 가능하다
+		String regexId = "^[a-zA-Z]\\w{5,19}$";
+		if(member.getMe_id() == null || !Pattern.matches(regexId, member.getMe_id())) {
+			return false;
+		}
+		
+		//비번 체크
+				//전체 6~2-자, 영문 숫자만 가능
+				String regexPw = "\\w{6,20}";
+				if(member.getMe_pw() == null || !Pattern.matches(regexPw, member.getMe_pw())) {
+					return false;
+				}
+		
+		//아이디 중복체크
+		MemberVO dbMember = memberDao.selectMemberById(member.getMe_id());
 		if(dbMember != null) {
 			return false;
 		}
@@ -48,7 +63,7 @@ public class MemberServiceImp implements MemberService{
 //			return false;
 //		}
 		
-
+		//비밀번호 암호화
 		String encPw = passwordEncoder.encode(member.getMe_pw());
 		member.setMe_pw(encPw);
 
@@ -141,6 +156,12 @@ public class MemberServiceImp implements MemberService{
 			cri = new Criteria();
 		}
 		return memberDao.selectCountMemberList(cri);
+	}
+
+	//아이디 중복검사
+	@Override
+	public boolean checkId(String id) {
+		return memberDao.selectMember(id) == null;
 	}
 
 }

@@ -28,4 +28,7 @@ public interface MemberDAO {
 
 	int selectCountMemberList(@Param("cri")Criteria cri);
 
+	MemberVO selectMemberById(@Param("id")String me_id);
+
+
 }
