@@ -78,10 +78,31 @@ public class RouteController {
     }
 
     @PostMapping("/delete")
-    public String deleteRoute(@RequestParam("ro_num") int ro_num) {
-    	routeService.deleteRouteByNumber(ro_num);
-        return "redirect:/airport/list";
+    public String deleteRoute(@RequestParam("ro_num") int ro_num, Model model) {
+        // 노선 삭제 전에 해당 노선이 존재하는지 확인.
+        RouteVO existingRoute = routeService.findRouteByNumber(ro_num);
+
+        if (existingRoute == null) {
+            // 주어진 노선 번호로 노선을 찾을 수 없는 경우
+            model.addAttribute("notFoundMessage", "존재하지 않는 노선입니다.");
+
+            
+            List<RouteVO> routeList = routeService.getRouteList();
+            model.addAttribute("routeList", routeList);
+
+            // 노선 삭제 페이지로 이동.
+            return "/route/delete";
+        }
+
+        // 노선 삭제
+        routeService.deleteRouteByNumber(ro_num);
+
+        // 성공 메시지와 함께 노선 삭제 페이지로 리다이렉트.
+        return "redirect:/route/delete?success=true";
     }
+
+
+
 
     @GetMapping("/departure-routes/{ai_num}")
     public String getDepartureRoutes(@PathVariable String ai_num, Model model) {

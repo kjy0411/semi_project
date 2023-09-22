@@ -15,4 +15,5 @@ public interface RouteService {
     void deleteRouteByNumber(int ro_num);
     RouteVO findRoute(String ro_ai_start, String ro_ai_end);
     List<RouteVO> getRouteList();
+	RouteVO findRouteByNumber(int ro_num);
 }

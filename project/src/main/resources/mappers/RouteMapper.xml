@@ -17,6 +17,12 @@
     DELETE FROM route WHERE ro_num = #{ro_num};
   </delete>
   
+  <!-- 노선 조회 by 번호 -->
+  <select id="findRouteByNumber" resultType="kr.kh.project.vo.RouteVO" parameterType="int">
+    SELECT * FROM route WHERE ro_num = #{ro_num}
+  </select>
+  
+  
   
   <!-- 공항 상세 정보 -->
   <select id="getDepartureRoutes" resultType="kr.kh.project.vo.RouteVO">

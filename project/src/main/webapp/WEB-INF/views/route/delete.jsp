@@ -42,6 +42,16 @@
                 <label for="ro_num">노선 번호:</label>
                 <input type="text" id="ro_num" name="ro_num" required><br><br>
                 
+                <!-- 인식할 수 없는 노선 번호 표시 -->
+				<c:if test="${not empty notFoundMessage}">
+				    <p style="color: red">${notFoundMessage}</p>
+				</c:if>
+				
+				<!-- URL에 'success' 파라미터가 있는 경우 성공 메시지를 표시 -->
+				<c:if test="${param.success == 'true'}">
+				    <p style="color: green">노선이 성공적으로 삭제되었습니다.</p>
+				</c:if>
+                
                 <button type="submit">노선 삭제</button>
             </form>
         </div>

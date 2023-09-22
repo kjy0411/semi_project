@@ -49,4 +49,10 @@ public class RouteServiceImp implements RouteService {
 	public List<RouteVO> getRouteList() {
 		return routeDao.selectRouteList();
 	}
+	@Override
+	public RouteVO findRouteByNumber(int ro_num) {
+	    return routeDao.findRouteByNumber(ro_num);
+	}
+
+	
 }

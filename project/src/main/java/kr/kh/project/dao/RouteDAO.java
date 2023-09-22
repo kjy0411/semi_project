@@ -14,4 +14,5 @@ public interface RouteDAO {
     void deleteRouteByNumber(int ro_num);
 	RouteVO findRoute(@Param("ro_ai_start")String ro_ai_start, @Param("ro_ai_end")String ro_ai_end);
 	List<RouteVO> selectRouteList();
+	RouteVO findRouteByNumber(int ro_num);
 }
