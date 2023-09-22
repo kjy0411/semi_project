@@ -89,8 +89,8 @@
 		        <td>${board.sk_num}</td>
 		        <td>${board.sk_ap_num }</td>
 		        <td>${board.sk_ro_num }</td>
-		        <td>${board.sk_start_time }</td>
-		        <td><fmt:formatDate pattern="hh:mm:ss" value="${board.sk_time }"/></td>
+		        <td>${board.sk_start_time_str }</td>
+		        <td>${board.sk_time_str }</td>
 		        <td>${board.sk_price }</td>
 		      </tr>
 	      </c:forEach>

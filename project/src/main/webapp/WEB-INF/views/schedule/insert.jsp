@@ -7,12 +7,6 @@
 	<div style="width: 100%; display: flex;">
 		<div class="search-box container-fluid" style="flex: 2">
 			<form action="<c:url value='/reservation/list'/>" method="get">
-				<div class="input-group-prepend">
-				   <select class="from-control" name="ticketType">
-				   	<option value="2">왕복</option>
-				   	<option value="1">편도</option>
-				   </select>
-				</div>
 				<div class="search-box">
 					<div class="start-airport form-group">
 						<span class="col-1">출발지</span> <br>
@@ -22,23 +16,12 @@
 						<span class="col-1">도착지</span> <br>
 						<input class="form-control" type="text" name="endAriport" readonly placeholder="도착지">
 					</div>
-					<div class="start-time form-group">
-						<span class="col-1">출발시간</span> <br>
-						<input class="form-control" type="date" name="startDay" min="">
-					</div>
-					<div class="end-time form-group" style="height: 78px">
-						<span class="col-1">도착시간</span> <br>
-						<input class="form-control" type="date" name="endDay" min="">
-					</div>
-					<div class="seat-amount form-group">
-						<span class="col-1">예매좌석수</span> <br>
-						<input class="form-control" type="number" min="1" name="seatAmount" value="1">
-					</div>
 				</div>
-				<input class="form-control" type="text" name="ro_ai_start" readonly>
-				<input class="form-control" type="text" name="ro_ai_end" readonly>
+				<input class="form-control" type="number" name="ro_num" readonly>
 				<button class="btn btn-outline-primary">검색</button>
 			</form>
+				<input class="form-control" type="text" name="ro_ai_start" readonly>
+				<input class="form-control" type="text" name="ro_ai_end" readonly>
 		</div>
 		<div class="popUp-box container-fluid" style="flex: 3; padding: 10px; overflow: scroll; height: 750px">
 		</div>
@@ -47,9 +30,6 @@
 	<script type="text/javascript">
 		let str = ``;
 		let today = new Date().toISOString().substring(0, 10); //2023-09-13
-		$('[name=startDay]').val(today).prop('min', today);
-		$('[name=endDay]').val(today).prop('min', today);
-		
 		$('.start-airport').click(function() {
 			let route = true;
 			let ai_num = "";
@@ -126,23 +106,21 @@
 			$('[name=endAriport]').val(value);
 			$('[name=ro_ai_end]').val(num);
 			$('.popUp-box').empty();
+			
+			let ro_ai_start = $('.ro_ai_start').val();
+			let ro_ai_end = $('.ro_ai_end').val();
+			
+			findRo_num(ro_ai_start, ro_ai_end)
 		})
-		
-		$('[name=ticketType]').change(function() {
-			let str = ``;
-			if($(this).val() == 2){
-				str = `
-					<span class="col-1">도착시간</span> <br>
-					<input class="form-control" type="date" value=\${today} name="endDay" min=\${today}>
-				`;
-				$('.end-time').html(str);
-			}else if($(this).val() == 1){
-				str = `
-					
-					`;
-				$('.end-time').html(str);
-			}
-		})
+		function findRo_num(ro_ai_start, ro_ai_end) {
+			$.ajax({
+				async : false,
+				method : 'post',
+				url : '<c:url value="/reservation/search/"/>',
+				data : {ro_ai_start:ro_ai_start, ro_ai_end:ro_ai_end},
+				dataType : 'json',
+				success : function(data) {
+		}
 	</script>
 </body>
 </html>
