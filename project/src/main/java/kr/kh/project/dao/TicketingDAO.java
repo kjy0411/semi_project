@@ -12,4 +12,6 @@ public interface TicketingDAO {
 
 	void deleteTicketing(@Param("ti_num")int ti_num);
 
+	float findBonus(@Param("ti_me_id")String ti_me_id);
+
 }

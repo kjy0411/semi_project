@@ -29,4 +29,16 @@
 		where
 			ti_num = #{ti_num}
 	</delete>
+	<select id="findBonus" resultType="float">
+		select
+			mc_bonus_point
+		from
+			member_class
+				join
+			point on mc_name = po_mc_name
+				join
+			member on me_id = po_me_id
+		where
+			me_id = #{ti_me_id};
+	</select>
 </mapper>

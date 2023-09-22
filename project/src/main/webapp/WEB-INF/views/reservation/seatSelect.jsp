@@ -109,7 +109,7 @@
 							<th>사용 마일리지</th>
 							<td>
 								<a data-toggle="tooltip" title="최대 ${point.po_hold_point}Point 사용가능">
-									<input type="number" class="ti_use_point payment-input" value="0" min="0">
+									<input type="number" class="ti_use_point payment-input" value="0" min="0" max="${point.po_hold_point}">
 								</a>
 							</td>
 						</tr>

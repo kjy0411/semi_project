@@ -144,7 +144,7 @@ DROP TABLE IF EXISTS `member_class`;
 
 CREATE TABLE `member_class` (
 	`mc_name`	varchar(10)	NOT NULL	PRIMARY KEY	COMMENT '실버, 골드, 다이아몬드, 다이아몬드플러스, 플래티넘',
-	`mc_bonus_point`	int	NOT NULL	COMMENT '1, 1.05, 1.1, 1.15, 1.2',
+	`mc_bonus_point`	float	NOT NULL	COMMENT '1, 1.05, 1.1, 1.15, 1.2',
     `mc_limit_point`	int	NULL	COMMENT '50000, 100000, 500000, 1000000'
 );
 

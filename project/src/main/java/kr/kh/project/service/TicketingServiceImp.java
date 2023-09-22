@@ -22,6 +22,7 @@ public class TicketingServiceImp implements TicketingService {
     
 	@Override
 	public boolean insertTicketing(TicketingVO ticketing) {
+		ticketing.setMc_bonus_point(ticketingDao.findBonus(ticketing.getTi_me_id()));
 		if(ticketing == null
 				|| ticketing.getTi_me_id() == null
 				|| ticketing.getTi_sk_num() == 0
@@ -29,6 +30,7 @@ public class TicketingServiceImp implements TicketingService {
 				|| ticketing.getTi_total_price() == 0) {
 			return false;
 		}
+		
 		return ticketingDao.insertTicketing(ticketing);
 	}
 

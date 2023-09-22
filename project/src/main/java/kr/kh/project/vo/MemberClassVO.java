@@ -5,5 +5,6 @@ import lombok.Data;
 @Data
 public class MemberClassVO {
 	private String mc_name; 
-	private int mc_bonus_point;
+	private float mc_bonus_point;
+	private int mc_limit_point;
 }
