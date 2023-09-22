@@ -8,13 +8,8 @@
 <body>
     <h1>노선 등록</h1>
     
-    <!-- 중복 메시지를 표시합니다. -->
-    <c:if test="${not empty duplicateMessage}">
-        <p style="color: red">${duplicateMessage}</p>
-    </c:if>
-    
-    <!-- 현재 노선 리스트를 표시합니다. -->
-    <h2>현재 노선 리스트</h2>
+    <!-- 노선 리스트 표시 -->
+    <h2>노선 리스트</h2>
     <ul>
         <c:forEach items="${routeList}" var="route">
             <li>${route.ro_ai_start} - ${route.ro_ai_end}</li>
@@ -27,9 +22,18 @@
 
         <label for="ro_ai_end">도착 공항:</label>
         <input type="text" id="ro_ai_end" name="ro_ai_end" required><br><br>
+        
+        <!-- 중복 메시지를 표시합니다. -->
+        <c:if test="${not empty duplicateMessage}">
+            <p style="color: red">${duplicateMessage}</p>
+        </c:if>
 
+        <!-- 인식할 수 없는 공항 메시지를 표시합니다. -->
+        <c:if test="${not empty invalidAirportMessage}">
+            <p style="color: red">${invalidAirportMessage}</p>
+        </c:if>
+        
         <button type="submit">노선 등록</button>
     </form>
-    <a href="<c:url value='/airport/list'/>">공항 리스트</a>
 </body>
 </html>

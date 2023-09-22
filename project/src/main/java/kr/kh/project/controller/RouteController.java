@@ -5,7 +5,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import kr.kh.project.service.AirportService;
 import kr.kh.project.service.RouteService;
+import kr.kh.project.vo.AirportVO;
 import kr.kh.project.vo.RouteVO;
 import java.util.List;
 
@@ -15,6 +18,9 @@ public class RouteController {
 
     @Autowired
     private RouteService routeService;
+    
+    @Autowired
+    private AirportService airportService;
 
     @GetMapping("/insert")
     public String showInsertForm(Model model) {
@@ -36,14 +42,28 @@ public class RouteController {
         if (existingRoute != null) {
             // 이미 존재하는 노선이면 모델에 중복 메시지 추가
             model.addAttribute("duplicateMessage", "이미 존재하는 노선입니다.");
-            return "/route/insert";
+        } else {
+            // 데이터베이스에서 출발 공항과 도착 공항이 모두 존재하는지 확인
+            AirportVO startAirport = airportService.getAirportByCode(ro_ai_start);
+            AirportVO endAirport = airportService.getAirportByCode(ro_ai_end);
+
+            if (startAirport == null || endAirport == null) {
+                // 출발 공항 또는 도착 공항이 데이터베이스에 없는 경우
+                model.addAttribute("invalidAirportMessage", "인식할 수 없는 공항입니다.");
+            } else {
+                // 중복된 노선이 아닌 경우, 노선 등록 서비스 호출
+                routeService.insertRoute(ro_ai_start, ro_ai_end);
+                return "redirect:/airport/list"; // 공항 리스트 페이지로 리다이렉트
+            }
         }
 
-        // 중복된 노선이 아닌 경우, 노선 등록 서비스 호출
-        routeService.insertRoute(ro_ai_start, ro_ai_end);
-
-        return "redirect:/airport/list"; // 공항 리스트 페이지로 리다이렉트
+        // 노선 리스트 표시
+        List<RouteVO> routeList = routeService.getRouteList();
+        model.addAttribute("routeList", routeList);
+        return "/route/insert";
     }
+
+
 
 
 
