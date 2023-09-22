@@ -80,12 +80,4 @@
 		where
 			me_session_id = #{me_session_id} and me_session_limit >= now() 
 	</select>
-	<select id="selectMemberById">
-		select
-			*
-		from
-			member
-		where
-			me_id = #{id}
-	</select>
 </mapper>

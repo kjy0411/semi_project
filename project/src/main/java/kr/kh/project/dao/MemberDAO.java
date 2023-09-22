@@ -30,5 +30,7 @@ public interface MemberDAO {
 
 	MemberVO selectMemberById(@Param("id")String me_id);
 
+	MemberVO selectMemberByRegexId(@Param("id")String id);
+
 
 }

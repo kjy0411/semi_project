@@ -16,7 +16,7 @@
 			<button class="btn btn-outline-success col-12" type="button" id="btn-check">아이디 중복검사</button><br>
 		<div class="form-group">
 			<label>비번 :</label>
-			<input type="password" class="form-control" name="me_pw" placeholder="비밀번호"> <br>
+			<input type="password" class="form-control" name="me_pw" id="pw" placeholder="비밀번호"> <br>
 			<span class="notice" style="color: red;">영문, 숫자, !@#$ 조합으로 12~25자</span>
 		</div>
 		<div class="form-group">
@@ -54,7 +54,7 @@
 		
 		$('.form-group').click(function() {
 			$(this).children('.notice').show();
-		})
+		});
 		
 		$('#btn-check').click(function(){
 			let id =$('[name=me_id]').val();

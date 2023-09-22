@@ -31,7 +31,7 @@ public class MemberController {
 	}
 	
 	@PostMapping("/member/signup")
-	public String singupMemberPost(Model model, MemberVO member) {
+	public String singupMemberPost(Model model, MemberVO member, boolean id_check) {
 		Message msg = new Message("member/signup", "회원가입을 실패했습니다.");
 		
 		if(memberService.signupMember(member)) {
