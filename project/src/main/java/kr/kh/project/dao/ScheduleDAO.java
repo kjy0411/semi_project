@@ -10,4 +10,8 @@ public interface ScheduleDAO {
 
 	List<ScheduleVO> selectScheduleByRoute(@Param("ro_num")int ro_num, @Param("startDate")String startDate);
 
+	List<ScheduleVO> getSchedulesByRouteNumber(int ro_num);
+
+	void deleteScheduleByNumber(int sk_ro_num);
+
 }

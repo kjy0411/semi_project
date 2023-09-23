@@ -16,4 +16,6 @@ public interface RouteService {
     RouteVO findRoute(String ro_ai_start, String ro_ai_end);
     List<RouteVO> getRouteList();
 	RouteVO findRouteByNumber(int ro_num);
+	void deleteSchedulesByRouteNumber(int ro_num);
+
 }

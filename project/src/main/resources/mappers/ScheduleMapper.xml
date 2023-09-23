@@ -27,4 +27,16 @@
 		order by
 			sk_start_time asc
 	</select>
+	
+	<select id="getSchedulesByRouteNumber" resultType="kr.kh.project.vo.ScheduleVO">
+    SELECT * FROM schedule
+    WHERE sk_ro_num = #{sk_ro_num}
+   </select>
+   
+   <!-- 노선 삭제시 해당 노선 번호의 스케쥴 삭제 -->
+   <delete id="deleteScheduleByNumber" parameterType="int">
+    DELETE FROM schedule WHERE sk_ro_num = #{ro_num}
+   </delete>
+   
+   
 </mapper>

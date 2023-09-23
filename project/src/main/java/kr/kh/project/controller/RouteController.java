@@ -63,11 +63,6 @@ public class RouteController {
         return "/route/insert";
     }
 
-
-
-
-
-
     @GetMapping("/delete")
     public String showDeleteForm(Model model) {
         // 노선 리스트 표시
@@ -86,7 +81,6 @@ public class RouteController {
             // 주어진 노선 번호로 노선을 찾을 수 없는 경우
             model.addAttribute("notFoundMessage", "존재하지 않는 노선입니다.");
 
-            
             List<RouteVO> routeList = routeService.getRouteList();
             model.addAttribute("routeList", routeList);
 
@@ -97,11 +91,12 @@ public class RouteController {
         // 노선 삭제
         routeService.deleteRouteByNumber(ro_num);
 
+        // 연관된 스케쥴 삭제
+        routeService.deleteSchedulesByRouteNumber(ro_num);
+
         // 성공 메시지와 함께 노선 삭제 페이지로 리다이렉트.
         return "redirect:/route/delete?success=true";
     }
-
-
 
 
     @GetMapping("/departure-routes/{ai_num}")
