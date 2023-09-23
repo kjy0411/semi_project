@@ -8,6 +8,8 @@
 <body>
     <h1>공항 등록</h1>
     <form id="airportForm" action="/project/airport/insert" method="post">
+        <label for="ai_num">IATA 코드:</label>
+        <input type="text" id="ai_num" name="aiNum" required><br><br>
         <label for="ai_name">공항 이름:</label>
         <input type="text" id="ai_name" name="aiName" required><br><br>
         <label for="ai_na_name">국가 이름:</label>
@@ -19,10 +21,15 @@
         <c:if test="${not empty duplicateMessage}">
             <p style="color: red">${duplicateMessage}</p>
         </c:if>
+        
+        <!-- 중복 IATA를 표시합니다. -->
+        <c:if test="${not empty duplicateIATAMessage}">
+            <p style="color: red">${duplicateIATAMessage}</p>
+        </c:if>
 
-        <!-- 인식할 수 없는 공항 메시지를 표시합니다. -->
-        <c:if test="${not empty invalidAirportMessage}">
-            <p style="color: red">${invalidAirportMessage}</p>
+        <!-- 국가 유효성 검사 메시지를 표시합니다. -->
+        <c:if test="${not empty invalidNationMessage}">
+            <p style="color: red">${invalidNationMessage}</p>
         </c:if>
         
         <button type="submit">공항 등록</button>

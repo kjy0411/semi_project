@@ -16,7 +16,7 @@ public interface AirportDAO {
 
     List<AirportVO> getAirportByRoute(@Param("route")boolean route, @Param("ai_num")String ai_num);
 
-    AirportVO getAirportByAiNameAndAiNaName(@Param("aiName") String aiName, @Param("aiNaName") String aiNaName);
+    
 
 
 }

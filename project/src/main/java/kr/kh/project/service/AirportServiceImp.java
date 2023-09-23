@@ -35,8 +35,6 @@ public class AirportServiceImp implements AirportService {
         return airportDao.getAirportByRoute(route, ai_num);
     }
 
-    @Override
-    public AirportVO getAirportByAiNameAndAiNaName(String aiName, String aiNaName) {
-        return airportDao.getAirportByAiNameAndAiNaName(aiName, aiNaName);
-    }
+    
+    
 }
