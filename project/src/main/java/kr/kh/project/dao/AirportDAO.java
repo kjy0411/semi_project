@@ -13,8 +13,13 @@ public interface AirportDAO {
     AirportVO getAirportByNumber(String ai_num);
     
     void insertAirport(AirportVO airportvo);
+    
+    void deleteAirportByCode(String aiNum);
 
+    void deleteRoutesByAirport(@Param("aiNum")String aiNum);
+    
     List<AirportVO> getAirportByRoute(@Param("route")boolean route, @Param("ai_num")String ai_num);
+
 
     
 

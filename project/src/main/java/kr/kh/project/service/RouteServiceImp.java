@@ -22,6 +22,8 @@ public class RouteServiceImp implements RouteService {
     
     @Autowired
     private ScheduleService scheduleService;
+    
+    
 
     @Override
     public List<RouteVO> getDepartureRoutes(String ai_num) {
@@ -83,6 +85,11 @@ public class RouteServiceImp implements RouteService {
 	        scheduleDao.deleteScheduleByNumber(schedule.getSk_ro_num());
 	    }
 	}
+	@Override
+    public List<RouteVO> getRoutesByAirport(String aiNum) {
+	
+        return routeDao.getRoutesByAirport(aiNum);
+    }
 
 	
 }

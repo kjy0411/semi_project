@@ -10,7 +10,10 @@ public interface AirportService {
     List<AirportVO> selectAirportList();
     AirportVO getAirportByCode(String ai_num);
     void insertAirport(AirportVO airportVO);
+    void deleteAirportByCode(String aiNum);
+    void deleteRoutesByAirport(String aiNum);
     List<AirportVO> getAirportByRoute(boolean route, String ai_num);
-    
+	
+	
     
 }

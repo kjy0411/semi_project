@@ -23,6 +23,10 @@
   </select>
   
   
+    <select id="getRoutesByAirport" resultType="kr.kh.project.vo.RouteVO" parameterType="String">
+    SELECT * FROM route WHERE ro_ai_start = #{aiNum} OR ro_ai_end = #{aiNum}
+    </select>
+    
   
   <!-- 공항 상세 정보 -->
   <select id="getDepartureRoutes" resultType="kr.kh.project.vo.RouteVO">

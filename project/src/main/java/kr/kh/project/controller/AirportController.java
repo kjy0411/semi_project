@@ -81,7 +81,21 @@ public class AirportController {
 
 	        return "redirect:/airport/list"; // 공항 리스트 페이지로 리다이렉트
 	    }
-	        
+	   
+	    @GetMapping("/delete")
+	    public String showDeleteForm() {
+	        return "/airport/delete";
+	    }
+	     
+	    @PostMapping("/delete")
+	    public String deleteAirport(@RequestParam("aiNum") String aiNum, Model model) {
+	    	
+	    	airportService.deleteRoutesByAirport(aiNum);
+	    	
+	    	airportService.deleteAirportByCode(aiNum);
+	    	
+	    	return "redirect:/airport/list";
+	    }
 
 
 	    @GetMapping("/detail/{ai_num}")
