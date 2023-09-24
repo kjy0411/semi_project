@@ -18,7 +18,7 @@
 	</insert>
 	
 	<delete id="deleteAirline">
-		delete from airline where al_name=#{al_name}
+		delete from airline where al_name=#{al_name}; 
 	</delete>
 	
 	<insert id="insertAirplane">

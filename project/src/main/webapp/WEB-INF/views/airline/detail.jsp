@@ -5,12 +5,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Bootstrap Example</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
 	 <table class="table table-condensed">
@@ -18,6 +12,7 @@
     <thead>
 	      <tr>
 	        <th>항공사명</th>
+	        <th>항공기번호</th>
 	        <th>항공기명</th>    
 	      </tr>
 		  <tr>
@@ -26,6 +21,7 @@
                 <c:if test="${selectedAirline eq airplane.ap_al_name}">
                     <tr>
                         <td>${airplane.ap_al_name}</td>
+                        <td>${airplane.ap_num}</td>
                         <td>${airplane.ap_am_model}</td>
                     </tr>
                 </c:if>

@@ -128,5 +128,11 @@ public class AirlineController {
 		return "message";
 	}
 	
+	@GetMapping("/airline/insert_con")
+	public String insert_con(Model model) {
+		
+		return "/airline/insert_con";
+	}
+	
 	
 }

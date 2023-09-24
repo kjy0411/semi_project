@@ -31,7 +31,7 @@
  			 <div class="container">
     <a href="<c:url value='/airline/insert'/>"> <button type="button" class="btn btn-primary" >항공사 등록</button> </a>
 	 <a href="<c:url value='/airline/delete'/>"> <button type="button" class="btn btn-primary" >항공사 삭제</button> </a>
-	  <a href="<c:url value='/airline/insert_ap'/>"> <button type="button" class="btn btn-primary" >항공기 등록</button> </a>
+	  <a href="<c:url value='/airline/insert_con'/>"> <button type="button" class="btn btn-primary" >항공기 등록</button> </a>
 	   <a href="<c:url value='/airline/delete_ap'/>"> <button type="button" class="btn btn-primary" >항공기 삭제</button> </a>
 
 </div>

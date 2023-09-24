@@ -5,7 +5,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
 </head>
 <body>
 
@@ -15,7 +14,7 @@
 				<input type="text" class="form-control" name="ap_num" placeholder="항공기번호 입력" >
 			</div>
 			<div class="form-group">
-				<input type="text" class="form-control" name="al_al_name" placeholder="항공기명 입력" >
+				<input type="text" class="form-control" name="ap_al_name" placeholder="항공기명 입력" >
 			</div>
 			<div class="form-group">
 				<input type="text" class="form-control" name="ap_am_model" placeholder="항공기명 모델 입력" >
