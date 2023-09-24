@@ -1,52 +1,57 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=utf-8" 
-	pageEncoding="utf-8" %>
+    pageEncoding="utf-8" %>
 <html>
 <head>
-<title>Home</title>
-  <style>
-  .user-wrap{
-  width: 100%;
-  margin : 10px auto;
-  position : relative;
-  }
-  .user-wrap img{
-  width:100%;
-  vertical-align : middle;
-  }
-  .user-text{
-  position : absolute;
-  top : 50%;
-  left : 23%;
-  transform:translate(-50%, -50%);
-  font-family : fantasy;
-  text-align : left;
-  }
-  .box{
-  background-color : white;
-  position : absolute;
-  width :300px;
-  height : 100%;
-  right : 65%;
-  opacity : 0.8;
-  }
-  </style>
+    <title>Home</title>
+    <style>
+        .box {
+            height: 500px;
+            width: 100%;
+            overflow: hidden;
+        }
+        .list {
+            margin: 0;
+            padding: 0;
+            width: 310%; /* 이미지가 3개이므로 300%로 설정 */
+            display: flex; /* 이미지들을 가로로 나열 */
+            transition: margin-left 1.2s; /* 슬라이드 효과를 위한 트랜지션 */
+        }
+        .item {
+            height: 500px;
+            flex: 1; /* 동일한 너비를 가지도록 설정 */
+        }
+    </style>
 </head>
-<body id="page-top">
-	
-<div class="user-wrap">
-	<div class="user-image">
-		<div class="box"></div>
-			<img src="<c:url value='/resources/img/mainpic.jpg'/>">		
-		</div>
-	<div class="user-text">
-		<h5>관리자 계정</h5>
-		<h6>ID : admin, PW : admin</h6>
-		<br>
-		<h5>사용자 계정</h5>
-		<h6>ID : user, PW : user</h6>
-	</div>
-</div> 
-     <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+<body>
+<div class="box">
+    <div class="list">
+        <img class="item" src="<c:url value='/resources/img/001.png'/>">
+        <img class="item" src="<c:url value='/resources/img/002.png'/>">
+        <img class="item" src="<c:url value='/resources/img/003.png'/>">
+    </div>
+</div>
+<script>
+    $('.box').hover(function () {
+        // 롤링을 멈춤
+        clearInterval(id);
+    }, function () {
+        // 롤링을 시작
+        id = rolling();
+    });
+
+    let id = rolling();
+
+    function rolling() {
+        return setInterval(() => {
+            let width = $('.item').width();
+            $('.list').animate({ 'margin-left': `-${width}px` }, 1200, function () {
+                // 슬라이딩 완료 후 첫 번째 이미지를 마지막으로 이동
+                $(this).append($(this).children().first());
+                $(this).css('margin-left', 0); // 초기 위치로 이동
+            });
+        }, 3000); // 이미지가 3초마다 슬라이드되도록 변경
+    }
+</script>
 </body>
-</html>
+</html> 
