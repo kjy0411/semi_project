@@ -149,15 +149,6 @@ public class MemberServiceImp implements MemberService{
 		return memberDao.selectMemberBySession(me_session_id);
 	}
 
-	//회원권한 페이지네이션
-	@Override
-	public int getTotalCount(Criteria cri) {
-		if(cri == null) {
-			cri = new Criteria();
-		}
-		return memberDao.selectCountMemberList(cri);
-	}
-
 	//아이디 중복검사
 	@Override
 	public boolean checkId(String id) {
@@ -166,5 +157,6 @@ public class MemberServiceImp implements MemberService{
 		}
 		return false;
 	}
+
 
 }
