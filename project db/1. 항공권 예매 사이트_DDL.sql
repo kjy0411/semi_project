@@ -24,7 +24,6 @@ DROP TABLE IF EXISTS `point`;
 CREATE TABLE `point` (
 	`po_num`	int	NOT NULL	PRIMARY KEY	AUTO_INCREMENT,
 	`po_me_id`	varchar(20)	NOT NULL,
-	`po_al_name`	varchar(20)	NOT NULL,
 	`po_mc_name`	varchar(10)	NOT NULL	COMMENT '누적마일리지로 결정',
 	`po_accumulate_point`	int	NOT NULL	DEFAULT 0,
 	`po_hold_point`	int	NOT NULL	DEFAULT 0
@@ -105,10 +104,18 @@ DROP TABLE IF EXISTS `airplane_model`;
 CREATE TABLE `airplane_model` (
 	`am_model`	varchar(4)	NOT NULL	PRIMARY KEY	COMMENT 'ICAO코드',
 	`am_name`	varchar(20)	NOT NULL,
-	`am_col`	int	NOT NULL	COMMENT '좌석 열 끝 번호',
+	`am_col`	int	NOT NULL	COMMENT '좌석 열',
+	`am_row`	int	NOT NULL	COMMENT '좌석 행',
 	`am_exit_col`	int	NOT NULL	COMMENT '출구가 있는 열 번호'
 );
 
+DROP TABLE IF EXISTS `path`;
+
+CREATE TABLE `path` (
+	`pa_num`	int	NOT NULL	PRIMARY KEY	AUTO_INCREMENT,
+	`pa_path`	int	NOT NULL,
+	`pa_am_model`	varchar(4)	NOT NULL	COMMENT 'ICAO코드'
+);
 DROP TABLE IF EXISTS `route`;
 
 CREATE TABLE `route` (
@@ -137,7 +144,8 @@ DROP TABLE IF EXISTS `member_class`;
 
 CREATE TABLE `member_class` (
 	`mc_name`	varchar(10)	NOT NULL	PRIMARY KEY	COMMENT '실버, 골드, 다이아몬드, 다이아몬드플러스, 플래티넘',
-	`mc_bonus_point`	int	NOT NULL	COMMENT '1, 1.05, 1.1, 1.15, 1.2'
+	`mc_bonus_point`	float	NOT NULL	COMMENT '1, 1.05, 1.1, 1.15, 1.2',
+    `mc_limit_point`	int	NULL	COMMENT '50000, 100000, 500000, 1000000'
 );
 
 DROP TABLE IF EXISTS `nation`;
@@ -152,13 +160,6 @@ ALTER TABLE `point` ADD CONSTRAINT `FK_member_TO_point_1` FOREIGN KEY (
 )
 REFERENCES `member` (
 	`me_id`
-);
-
-ALTER TABLE `point` ADD CONSTRAINT `FK_airline_TO_point_1` FOREIGN KEY (
-	`po_al_name`
-)
-REFERENCES `airline` (
-	`al_name`
 );
 
 ALTER TABLE `point` ADD CONSTRAINT `FK_member_class_TO_point_1` FOREIGN KEY (
@@ -280,3 +281,9 @@ REFERENCES `division` (
 	`di_name`
 );
 
+ALTER TABLE `path` ADD CONSTRAINT `FK_airplane_model_TO_path_1` FOREIGN KEY (
+	`pa_am_model`
+)
+REFERENCES `airplane_model` (
+	`am_model`
+);
