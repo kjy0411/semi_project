@@ -13,4 +13,8 @@ public interface ScheduleService {
 
 	boolean deleteSchedule(String sk_num);
 
+	void insertSchedulePost(ScheduleVO schedule);
+
+	List<ScheduleVO> getScheduleInsert(ScheduleVO scheduleVo);
+
 }

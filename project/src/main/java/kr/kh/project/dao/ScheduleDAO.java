@@ -16,5 +16,9 @@ public interface ScheduleDAO {
 
 	boolean deleteSchedule(@Param("sk_num")String sk_num);
 
+	void insertSchedule(@Param("schedule")ScheduleVO schedule);
+
+	List<ScheduleVO> insertSchedules(@Param("scheduleVo")ScheduleVO scheduleVo);
+
 
 }

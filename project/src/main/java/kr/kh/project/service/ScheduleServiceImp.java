@@ -36,5 +36,18 @@ public class ScheduleServiceImp implements ScheduleService{
 		return scheduleDao.deleteSchedule(sk_num);
 	}
 
+	@Override
+	public void insertSchedulePost(ScheduleVO schedule) {
+		
+		scheduleDao.insertSchedule(schedule);
+	}
+
+	@Override
+	public List<ScheduleVO> getScheduleInsert(ScheduleVO scheduleVo) {
+		// TODO Auto-generated method stub
+		return scheduleDao.insertSchedules(scheduleVo);
+	}
+
+
 	
 }
