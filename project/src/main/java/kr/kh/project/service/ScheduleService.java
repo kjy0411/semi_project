@@ -3,6 +3,7 @@ package kr.kh.project.service;
 import java.util.List;
 
 import kr.kh.project.pagination.Criteria;
+import kr.kh.project.vo.AirplaneVO;
 import kr.kh.project.vo.ScheduleVO;
 
 public interface ScheduleService {
@@ -16,5 +17,7 @@ public interface ScheduleService {
 	void insertSchedulePost(ScheduleVO schedule);
 
 	List<ScheduleVO> getScheduleInsert(ScheduleVO scheduleVo);
+
+	List<AirplaneVO> getAirplaneByRoute(boolean airline, String ap_num);
 
 }

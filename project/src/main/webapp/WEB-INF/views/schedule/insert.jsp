@@ -35,5 +35,45 @@
 		<div class="popUp-box container-fluid" style="flex: 3; padding: 10px; overflow: scroll; height: 750px">
 		</div>
 	</div>
+	<script>
+	$('.resist-num').click(function() {
+		let airline = true;
+		let ap_num ="";
+		printAirplane(airline,ap_num);
+	})
+			$(document).on('click', '.select-resist-num', function(){
+			let value = $(this).text();
+			let num = $(this).prev().text();
+			$('[name=startAirport]').val(value);
+			$('[name=ap_num]').val(num);
+			$('.popUp-box').empty();
+		})
+	
+	
+		function printAirplane(airline, ap_num) {
+			str = ``;
+			$.ajax({
+				async : false,
+				method : 'post',
+				url : '<c:url value="/schedule/insert/"/>',
+				data : {airline:airline, ap_num:ap_num},
+				dataType : 'json',
+				success : function(data) {
+					console.log(data)
+					if(data.res){			
+						for(air of data.airportList){						
+							str += `
+								<span class="ap_num" hidden="">\${air.ap_num}</span>
+								-<a class="select-resist-num" href="#">\${air.ap_num}</a> <br>
+							`;												
+						}											
+					}else {
+						alert(data.msg);
+					}
+				$('.popUp-box').html(str);
+				}
+			});
+		}
+	</script>
 </body>
 </html>

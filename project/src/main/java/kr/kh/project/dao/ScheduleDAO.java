@@ -20,5 +20,7 @@ public interface ScheduleDAO {
 
 	List<ScheduleVO> insertSchedules(@Param("scheduleVo")ScheduleVO scheduleVo);
 
+	List<AirplaneVO> getAirplaneSchedule(@Param("airline")boolean airline,@Param("ap_num") String ap_num);
+
 
 }

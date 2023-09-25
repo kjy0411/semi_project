@@ -1,6 +1,8 @@
 package kr.kh.project.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -10,10 +12,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.kh.project.pagination.Criteria;
 import kr.kh.project.service.ScheduleService;
+import kr.kh.project.vo.AirplaneVO;
 import kr.kh.project.vo.ScheduleVO;
 
 
@@ -24,18 +28,23 @@ public class ScheduleController {
 	private ScheduleService scheduleService;
 	
 	@GetMapping("/schedule/insert")
-	public String insertSchedule(){
-		
-	       return "/schedule/insert";
-	    }
-
-	@PostMapping("/schedule/insert") 
-	public String insertSchedulePost(ScheduleVO schedule){
-		
-        scheduleService.insertSchedulePost(schedule);
-
-        return "redirect:/schedule/list";
-    }
+	public String searchReservation(Model model) {
+		return "/schedule/insert";
+	}
+	@ResponseBody
+	@PostMapping("/schedule/insert")
+	public Map<String, Object> searchReservationPost(@RequestParam("airline")boolean airline, @RequestParam("ap_num")String ap_num){
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<AirplaneVO> airplaneList = scheduleService.getAirplaneByRoute(airline, ap_num);
+		if(airplaneList == null) {
+			map.put("msg","등록된 노선이 없습니다.");
+			map.put("res", false);
+			return map;
+		}
+		map.put("airportList", airplaneList);
+		map.put("res", true);
+		return map;
+	}
 	
 	@RequestMapping("/schedule/insert")
 	public String insert(Model model, ScheduleVO scheduleVo) {

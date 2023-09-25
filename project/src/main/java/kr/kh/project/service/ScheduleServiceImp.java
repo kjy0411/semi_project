@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import kr.kh.project.dao.ScheduleDAO;
 import kr.kh.project.pagination.Criteria;
+import kr.kh.project.vo.AirplaneVO;
 import kr.kh.project.vo.ScheduleVO;
 
 @Service
@@ -44,8 +45,12 @@ public class ScheduleServiceImp implements ScheduleService{
 
 	@Override
 	public List<ScheduleVO> getScheduleInsert(ScheduleVO scheduleVo) {
-		// TODO Auto-generated method stub
 		return scheduleDao.insertSchedules(scheduleVo);
+	}
+
+	@Override
+	public List<AirplaneVO> getAirplaneByRoute(boolean airline, String ap_num) {
+		return scheduleDao.getAirplaneSchedule(airline, ap_num);
 	}
 
 
