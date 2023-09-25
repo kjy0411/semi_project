@@ -124,4 +124,10 @@ Message msg = new Message("member/update", "회원정보 수정을 실패했습�
 		
 		return "message";
 	}
+	
+	@GetMapping("/member/point")
+	public String checkMyPoint(Model model, HttpSession session) {
+		
+		return "/member/point";
+	}
 }
