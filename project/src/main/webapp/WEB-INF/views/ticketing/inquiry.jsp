@@ -25,7 +25,7 @@
 	      <tr>
 	      	<td class="num">${ticketing.ti_num}</td>
 	        <td>${ticketing.ti_me_id}</td>
-	        <td>${ticketing.ti_use_point}</td>
+	        <td>${ticketing.ti_amount}</td>
 	        <td>${ticketing.ai_start_name}</td>
 	        <td>${ticketing.ai_end_name}</td>
 	        <td>${ticketing.ti_state}</td>
