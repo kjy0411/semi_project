@@ -85,7 +85,13 @@
 				}
 			}
 		});
-		
+		checkLogin();
+		function checkLogin(){
+			if(${user == null}){
+				alert("로그인 후 이용가능한 기능입니다.")
+				location.href="<c:url value='/member/login'/>"
+			}
+		}
 		function printSchedule(res) {
 			let str = ``;
 			$.ajax({

@@ -13,7 +13,7 @@
 <body>
 	<h1>회원등급/마일리지</h1>
 	<div class="info-container container-fluid" style="width: 100%; display: flex;">
-		<div class="member-point-box box form-group" style="flex: 3; border: 3px solid black;">
+		<div class="member-point-box box form-group" style="flex: 3;">
 			<span>ID :</span>
 			<input type="text" class="form-control input-outline-primary col-6" value="${point.po_me_id }" readonly> <br>
 			<span>등급 :</span>
@@ -114,6 +114,7 @@
 	</ul>
 	</div>
 	<script type="text/javascript">
+	
 		$('.popup-table').hide();
 		$('.input-class').hover(function() {
 			$('.popup-table').show();
@@ -125,7 +126,7 @@
 		}, function() {
 			$(this).css('font-weight', 'normal')
 		})
-		$('.point-history').click(function() {
+		$(document).on('click','.point-history', function() {
 			$(this).addClass('point-history-detail');
 			$(this).removeClass('point-history');
 			$(this).siblings().addClass('point-history');
@@ -173,8 +174,10 @@
 				}
 			});
 			$(this).after(el);
-			$('.point-history-detail').click(function() {
+			$(document).on('click', '.point-history-detail', function() {
 				$(this).siblings('.ticketing').remove();
+				$(this).addClass('point-history');
+				$(this).removeClass('point-history-detail');
 			});
 		})
 		$('[name=bt_num]').change(function() {

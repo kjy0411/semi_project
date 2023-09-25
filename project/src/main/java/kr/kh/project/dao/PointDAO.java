@@ -8,4 +8,6 @@ public interface PointDAO {
 
 	PointVO selectPointByID(@Param("me_id")String me_id);
 
+	void updatePointByID(@Param("me_id")String me_id);
+
 }

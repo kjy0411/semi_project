@@ -6,4 +6,24 @@
 	<select id="selectPointByID" resultType="kr.kh.project.vo.PointVO">
 		select * from point where po_me_id = #{me_id}
 	</select>
+	<update id="updatePointByID">
+		update point
+		set
+			po_accumulate_point = (
+				select
+					sum(ti_save_point) as 누적
+				from
+					ticketing
+				where
+					ti_me_id = "user"),
+			po_hold_point =(
+				select
+					sum(ti_save_point)-sum(ti_use_point) as 적립
+				from
+					ticketing
+				where
+					ti_me_id = "user")
+		where
+			po_me_id = "user"
+	</update>
 </mapper>
