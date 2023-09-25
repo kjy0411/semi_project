@@ -1,11 +1,9 @@
 package kr.kh.project.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
 import kr.kh.project.service.AirportService;
 import kr.kh.project.service.RouteService;
 import kr.kh.project.vo.AirportVO;
@@ -22,14 +20,16 @@ public class RouteController {
     @Autowired
     private AirportService airportService;
 
+    // 노선 등록 페이지를 불러오는 메서드
     @GetMapping("/insert")
     public String showInsertForm(Model model) {
-    	// 노선 리스트 표시
+        // 노선 리스트 표시
         List<RouteVO> routeList = routeService.getRouteList();
         model.addAttribute("routeList", routeList);
         return "/route/insert";
     }
 
+    // 노선 등록을 처리하는 메서드
     @PostMapping("/insert")
     public String insertRoute(
         @RequestParam("ro_ai_start") String ro_ai_start,
@@ -63,15 +63,17 @@ public class RouteController {
         return "/route/insert";
     }
 
+    // 노선 삭제 페이지를 불러오는 메서드
     @GetMapping("/delete")
     public String showDeleteForm(Model model) {
         // 노선 리스트 표시
-        List<RouteVO> routeList = routeService.getRouteList();
+    	List<RouteVO> routeList = routeService.getRouteList();
         model.addAttribute("routeList", routeList);
 
         return "/route/delete";
     }
 
+    // 노선 삭제를 처리하는 메서드
     @PostMapping("/delete")
     public String deleteRoute(@RequestParam("ro_num") int ro_num, Model model) {
         // 노선 삭제 전에 해당 노선이 존재하는지 확인.
@@ -98,7 +100,7 @@ public class RouteController {
         return "redirect:/route/delete?success=true";
     }
 
-
+    // 출발 노선 리스트 페이지를 불러오는 메서드
     @GetMapping("/departure-routes/{ai_num}")
     public String getDepartureRoutes(@PathVariable String ai_num, Model model) {
         List<RouteVO> departureRoutes = routeService.getDepartureRoutes(ai_num);
@@ -106,12 +108,11 @@ public class RouteController {
         return "/route/detail";
     }
 
+    // 도착 노선 리스트 페이지를 불러오는 메서드
     @GetMapping("/arrival-routes/{ai_num}")
     public String getArrivalRoutes(@PathVariable String ai_num, Model model) {
         List<RouteVO> arrivalRoutes = routeService.getArrivalRoutes(ai_num);
         model.addAttribute("arrivalRoutes", arrivalRoutes);
         return "/route/detail";
     }
-
-
 }
