@@ -4,46 +4,75 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.kh.project.dao.AirportDAO">
 
+  <!-- 공항 리스트 조회 -->
   <select id="selectAirportList" resultType="kr.kh.project.vo.AirportVO">
     select * from airport
   </select>
+  
+	 <select id="searchAirport" resultType="kr.kh.project.vo.AirportVO">
+	   SELECT * FROM airport WHERE
+	    ai_num LIKE CONCAT('%', #{keyword}, '%')
+	    OR ai_name LIKE CONCAT('%', #{keyword}, '%')
+	    OR ai_na_name LIKE CONCAT('%', #{keyword}, '%')
+	    OR ai_standard_time LIKE CONCAT('%', #{keyword}, '%')
+	 </select>
+ 
+
+
+   
+    <select id="selectAirportListWithPaging" resultType="kr.kh.project.vo.AirportVO">
+        SELECT * FROM airport
+        LIMIT #{criteria.pageStart}, #{criteria.perPageNum}
+    </select>
+
 
   <!-- 공항 추가 -->
   <insert id="insertAirport" parameterType="kr.kh.project.vo.AirportVO">
-    INSERT INTO airport (ai_name, ai_na_name, ai_standard_time)
-    VALUES (#{aiName}, #{aiNaName}, #{aiStandardTime});
+    INSERT INTO airport (ai_num, ai_name, ai_na_name, ai_standard_time)
+    VALUES (#{ai_num}, #{ai_name}, #{ai_na_name}, #{ai_standard_time});
   </insert>
 
-  
-  <select id="getAirportByAiNameAndAiNaName" resultType="kr.kh.project.vo.AirportVO">
-    SELECT * FROM airport WHERE ai_name = #{aiName} AND ai_na_name = #{aiNaName}
+  <!-- 공항 이름(ai_na_name)을 기반으로 공항 조회 -->
+  <select id="getAirportByAiNaName" resultType="kr.kh.project.vo.AirportVO">
+    SELECT * FROM airport WHERE ai_na_name = #{aiNaName}
   </select>
+
+  <!-- 공항 삭제 -->
+  <delete id="deleteAirportByCode" parameterType="String">
+    DELETE FROM airport
+    WHERE ai_num = #{aiNum}
+  </delete>
+     
+  <!-- 공항 삭제시 해당 공항과 연결된 노선도 함께 삭제 -->
+  <delete id="deleteRoutesByAirport" parameterType="String">
+    DELETE FROM route WHERE ro_ai_start = #{aiNum} OR ro_ai_end = #{aiNum}
+  </delete>
   
-  
+  <!-- 공항 코드(ai_num)을 기반으로 공항 조회 -->
   <select id="getAirportByNumber" resultType="kr.kh.project.vo.AirportVO">
     SELECT * FROM airport WHERE ai_num = #{ai_num}
   </select>
   
-  
+ 
   <select id="getAirportByRoute" resultType="kr.kh.project.vo.AirportVO">
-  	select
-	    ai_name,
-	    ai_num,
-	    ai_na_name
-	from
-		airport
-			join
-		route on if(#{route}, ro_ai_start,ro_ai_end) = ai_num
-			join
-		nation on ai_na_name = na_name
-			join
-		division on na_di_name = di_name
-	where
-		ro_ai_start= if(#{route}, airport.ai_num, #{ai_num}) 
-	group by
-		if(#{route}, ro_ai_start, ro_ai_end)
-	order by
-		di_name asc, na_name asc, ai_name asc;
+    SELECT
+      ai_name,
+      ai_num,
+      ai_na_name
+    FROM
+      airport
+      JOIN
+      route ON IF(#{route}, ro_ai_start, ro_ai_end) = ai_num
+      JOIN
+      nation ON ai_na_name = na_name
+      JOIN
+      division ON na_di_name = di_name
+    WHERE
+      ro_ai_start = IF(#{route}, airport.ai_num, #{ai_num})
+    GROUP BY
+      IF(#{route}, ro_ai_start, ro_ai_end)
+    ORDER BY
+      di_name ASC, na_name ASC, ai_name ASC;
   </select>
 
 </mapper>
