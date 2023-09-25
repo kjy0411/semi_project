@@ -30,7 +30,8 @@ public class TicketingServiceImp implements TicketingService {
 	public List<TicketingVO> getTicketingList(String me_id) {
 		
 		return ticketingDao.selectTicketingList(me_id);
-
+	}
+	
 	@Override
 	public boolean insertTicketing(TicketingVO ticketing) {
 		ticketing.setMc_bonus_point(ticketingDao.findBonus(ticketing.getTi_me_id()));
