@@ -57,4 +57,15 @@
 		where
 			me_id = #{ti_me_id};
 	</select>
+	<!-- 예매내역조회 상태수정 -->
+	<update id="updateTicketingState">
+		update
+			ticketing
+		set
+			ti_state = "예매취소"
+		where
+			ti_num = #{ticketing.ti_num}
+				and
+			ti_me_id = #{ticketing.ti_me_id}
+	</update>
 </mapper>

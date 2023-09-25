@@ -1,7 +1,6 @@
 package kr.kh.project.service;
 
 import java.util.ArrayList;
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,6 +75,15 @@ public class TicketingServiceImp implements TicketingService {
 			}
 			ticketingDao.deleteTicketing(ticketing.getTi_num());
 		}
+	}
+
+	// 예매내역조회 상태 수정하기
+	@Override
+	public boolean updateTicketingState(TicketingVO ticketing) {
+		if(ticketing == null || ticketing.getTi_me_id() == null || ticketing.getTi_state() == null) {
+			return false;
+		}
+		return ticketingDao.updateTicketingState(ticketing);
 	}
 
 }

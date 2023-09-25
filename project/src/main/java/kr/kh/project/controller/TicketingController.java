@@ -40,4 +40,14 @@ public class TicketingController {
 		return "/ticketing/inquiry";
 	}
 	
+	//예매정보 수정하기
+	@ResponseBody
+	@PostMapping("/ticketing/update")
+	public Map<String, Object> ticketingUpdate(@RequestBody TicketingVO ticketing, HttpSession session){
+		Map<String, Object> map = new HashMap<String, Object>();
+		boolean res = ticketingService.updateTicketingState(ticketing);
+		map.put("res", res);
+		return map;
+	}
+	
 }

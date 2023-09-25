@@ -14,4 +14,6 @@ public interface TicketingService {
 
 	void deleteTicketing(List<TicketingVO> ticketingList);
 
+	boolean updateTicketingState(TicketingVO ticketing);
+
 }
