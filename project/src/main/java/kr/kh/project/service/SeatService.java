@@ -8,6 +8,4 @@ public interface SeatService {
 
 	List<SeatVO> getSeatListBySchedule(int sk_num);
 
-	
-
 }
