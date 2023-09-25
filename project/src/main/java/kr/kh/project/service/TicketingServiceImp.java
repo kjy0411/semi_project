@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import kr.kh.project.dao.PointHistoryDAO;
 import kr.kh.project.dao.TicketingDAO;
 import kr.kh.project.dao.TicketingListDAO;
+import kr.kh.project.pagination.Criteria;
 import kr.kh.project.vo.PointHistoryVO;
 import kr.kh.project.vo.TicketingListVO;
 import kr.kh.project.vo.TicketingVO;
@@ -27,7 +28,6 @@ public class TicketingServiceImp implements TicketingService {
   
 	@Override
 	public List<TicketingVO> getTicketingList(String me_id) {
-		
 		return ticketingDao.selectTicketingList(me_id);
 	}
 	
@@ -84,6 +84,12 @@ public class TicketingServiceImp implements TicketingService {
 			return false;
 		}
 		return ticketingDao.updateTicketingState(ticketing);
+	}
+
+	@Override
+	public List<TicketingVO> getTicketingList(String me_id, Criteria cri) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
