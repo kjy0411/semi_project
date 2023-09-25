@@ -50,7 +50,7 @@
                 $(this).append($(this).children().first());
                 $(this).css('margin-left', 0); // 초기 위치로 이동
             });
-        }, 3000); // 이미지가 3초마다 슬라이드되도록 변경
+        }, 10000); // 이미지가 10초마다 슬라이드되도록 변경
     }
 </script>
 </body>

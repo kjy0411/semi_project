@@ -11,18 +11,11 @@
 		<div class="form-group">
 			<label>아이디 :</label>
 			<input type="text" class="form-control" name="me_id" placeholder="아이디">
-			<span class="notice" style="color: red;">영문으로 시작, 영문, 숫자 조합으로 6~10자</span>
 		</div>
 			<button class="btn btn-outline-success col-12" type="button" id="btn-check">아이디 중복검사</button><br>
 		<div class="form-group">
 			<label>비번 :</label>
 			<input type="password" class="form-control" name="me_pw" id="pw" placeholder="비밀번호"> <br>
-			<span class="notice" style="color: red;">영문, 숫자, !@#$ 조합으로 12~25자</span>
-		</div>
-		<div class="form-group">
-			<label>비번 :</label>
-			<input type="password2" class="form-control" name="me_pw2" placeholder="비밀번호 확인"> <br>
-			<span class="notice" style="color: red;">비밀번호가 일치하지 않습니다.</span>
 		</div>
 		<div class="form-group">
 			<label>이름 :</label>
@@ -40,7 +33,6 @@
 		<div class="form-group">
 			<label>전화번호 :</label>
 			<input type="text" class="form-control" name="me_phone" placeholder="전화번호"> <br>
-			<span class="notice" style="color: red;">'-'를 포함해서 입력하세요</span>
 		</div>
 		<div class="form-group">
 			<label>이메일 :</label>
