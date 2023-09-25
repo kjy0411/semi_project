@@ -78,4 +78,12 @@ public class TicketingServiceImp implements TicketingService {
 		}
 	}
 
+	@Override
+	public TicketingVO selectTicketingByNum(int ti_num) {
+		if(ti_num == 0) {
+			return null;
+		}
+		return ticketingDao.selectTicketingByNum(ti_num);
+	}
+
 }

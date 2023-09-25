@@ -41,7 +41,7 @@
 					<a class="nav-link" href="<c:url value='/member/check'/>">회원정보 관리</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="<c:url value='/member/point'/>">마일리지내역 조회</a>
+					<a class="nav-link" href="<c:url value='/point/history'/>">마일리지내역 조회</a>
 				</li>
 				<span>|</span>
 			</c:if>
