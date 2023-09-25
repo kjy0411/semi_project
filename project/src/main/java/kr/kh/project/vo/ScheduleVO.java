@@ -21,10 +21,10 @@ public class ScheduleVO {
 	private String sk_end_time_str;
 	private String sk_time_str;
 	private String sk_price_str;	
-	//검색을 위한 개체
+
 	private String ap_al_name;
-	private String ai_start_name;		//출발지의 공항이름
-	private String ai_end_name;			//도착지의 공항이름
+	private String ai_start_name;
+	private String ai_end_name;
 	
 	public String getSk_price_str() {
 		if(sk_price == null) {
@@ -78,7 +78,7 @@ public class ScheduleVO {
 		return sk_time_str;
 	}
 	public void setSk_time(String time) {
-		SimpleDateFormat format = new SimpleDateFormat("hh:mm:ss");
+		SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
 		try {
 			sk_time = format.parse(time);
 		} catch (ParseException e) {

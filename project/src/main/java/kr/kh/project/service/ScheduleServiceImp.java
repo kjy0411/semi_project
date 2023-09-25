@@ -20,5 +20,13 @@ public class ScheduleServiceImp implements ScheduleService{
 		}
 		return scheduleDao.selectScheduleByRoute(ro_num, startDate);
 	}
+
+	@Override
+	public ScheduleVO getSchdeule(Integer sk_num) {
+		if(sk_num == 0) {
+			return null;
+		}
+		return scheduleDao.selectSchedule(sk_num);
+	}
 	
 }

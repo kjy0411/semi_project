@@ -18,5 +18,42 @@
 			ti_me_id = #{me_id}
 				and
 			ti_state = "미확정" 
+	<insert id="insertTicketing">
+		insert into 
+		ticketing
+			(ti_sk_num, ti_me_id, ti_amount, ti_total_price, ti_price, ti_save_point, ti_use_point)
+		values
+			(#{ticketing.ti_sk_num},#{ticketing.ti_me_id},#{ticketing.ti_amount},#{ticketing.ti_total_price},#{ticketing.ti_price},#{ticketing.ti_save_point},#{ticketing.ti_use_point})
+	</insert>
+	<select id="selectTicketing" resultType="kr.kh.project.vo.TicketingVO">
+		select
+			*
+		from
+			ticketing
+		where
+			ti_num = (
+				select
+					max(ti_num)
+				from
+					ticketing
+				where
+					ti_me_id = #{ti_me_id})
+	</select>
+	<delete id="deleteTicketing">
+		delete from ticketing
+		where
+			ti_num = #{ti_num}
+	</delete>
+	<select id="findBonus" resultType="float">
+		select
+			mc_bonus_point
+		from
+			member_class
+				join
+			point on mc_name = po_mc_name
+				join
+			member on me_id = po_me_id
+		where
+			me_id = #{ti_me_id};
 	</select>
 </mapper>

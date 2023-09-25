@@ -1,11 +1,11 @@
 package kr.kh.project.service;
 
-import kr.kh.project.vo.AirportVO;
-
 import java.util.List;
 
 import org.mybatis.spring.annotation.MapperScan;
-@MapperScan
+
+import kr.kh.project.vo.AirportVO;
+
 public interface AirportService {
 	
     List<AirportVO> selectAirportList();

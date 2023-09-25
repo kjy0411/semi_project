@@ -131,5 +131,10 @@ Message msg = new Message("member/update", "회원정보 수정을 실패했습�
 	public boolean idCheck(@RequestParam("id") String id) {
 		// Service한테 id를 주며 체크해달라고 시킴
 		return memberService.checkId(id);
+
+	@GetMapping("/member/point")
+	public String checkMyPoint(Model model, HttpSession session) {
+		
+		return "/member/point";
 	}
 }
