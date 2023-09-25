@@ -1,6 +1,7 @@
 package kr.kh.project.service;
 
 import java.util.ArrayList;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,12 @@ public class TicketingServiceImp implements TicketingService {
     
     @Autowired
     PointHistoryDAO pointHistoryDao;
-    
+  
+	@Override
+	public List<TicketingVO> getTicketingList(String me_id) {
+		
+		return ticketingDao.selectTicketingList(me_id);
+
 	@Override
 	public boolean insertTicketing(TicketingVO ticketing) {
 		ticketing.setMc_bonus_point(ticketingDao.findBonus(ticketing.getTi_me_id()));
