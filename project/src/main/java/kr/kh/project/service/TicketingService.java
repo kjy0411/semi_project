@@ -14,4 +14,6 @@ public interface TicketingService {
 
 	void deleteTicketing(List<TicketingVO> ticketingList);
 
+	TicketingVO selectTicketingByNum(int ti_num);
+
 }

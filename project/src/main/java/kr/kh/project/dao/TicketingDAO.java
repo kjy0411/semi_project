@@ -20,4 +20,6 @@ public interface TicketingDAO {
 
 	float findBonus(@Param("ti_me_id")String ti_me_id);
 
+	TicketingVO selectTicketingByNum(@Param("ti_num")int ti_num);
+
 }

@@ -57,4 +57,18 @@
 		where
 			me_id = #{ti_me_id};
 	</select>
+	<select id="selectTicketingByNum" resultType="kr.kh.project.vo.TicketingVO">
+		select 
+			ticketing.*,
+		    (select ai_name from airport where ai_num = ro_ai_start) as ai_start_name,
+		    (select ai_name from airport where ai_num = ro_ai_end) as ai_end_name
+		from 
+			ticketing 
+					join 
+			schedule on ti_sk_num = sk_num
+					join
+			route on sk_ro_num = ro_num
+		where 
+			ti_num = #{ti_num}
+	</select>
 </mapper>
