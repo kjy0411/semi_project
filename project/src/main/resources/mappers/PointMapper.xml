@@ -6,4 +6,16 @@
 	<select id="selectPointByID" resultType="kr.kh.project.vo.PointVO">
 		select * from point where po_me_id = #{me_id}
 	</select>
+	<update id="checkPoint">
+		update point
+		set
+			po_mc_name = case
+		    when po_accumulate_point > 1000000 then "플래티넘"
+		    when po_accumulate_point > 500000 then "다이아몬드 플러스"
+		    when po_accumulate_point > 100000 then "다이아몬드"
+		    when po_accumulate_point > 50000 then "골드"
+			end
+		where
+			po_me_id = #{me_id};
+	</update>
 </mapper>
