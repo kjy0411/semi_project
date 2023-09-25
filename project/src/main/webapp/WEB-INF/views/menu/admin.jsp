@@ -6,18 +6,17 @@
 	<title>회원 권한 수정</title>
 </head>
 <body>
-<h1>회원목록</h1>
-<form action="" method="get">
+<form action="<c:url value='/menu/admin'/>" method="get">
 	<div class="input-group mb-3 mt-3">
 		<div class="input-group-prepend">
-		    <select class="form-control" id="me_authority" name="type">
-		      <option value="0">회원 검색</option>
-		      <option value="me_id" >아이디</option>
-		      <option value="me_authority">회원권한</option>
+		    <select class="form-control" id="me_authority" name="t">
+		      <option value="all">전체</option>
+		      <option value="second">아이디</option>
+		      <option value="third">회원권한</option>
 		    </select>
 	    </div>
-	    <input type="text" class="form-control" name="search" id="me_title" placeholder="검색어를 입력하세요." vlue="${pm.cri.search }"></input>
-	    <button class="btn btn-outline-success btn-insert" type="submit">찾기</button>
+	    <input type="text" class="form-control" name="s" id="me_title" placeholder="검색어를 입력하세요." value="${pm.cri.s}">
+	    <button class="btn btn-outline-success btn-insert">찾기</button>
 	</div>
 </form>
 <!-- 회원정보 출력 -->
@@ -45,6 +44,7 @@
       </c:forEach>
     </tbody>
   </table>
+ </div>
 <script type="text/javascript">
 	$('.btn-update').click(function(){
 		let me_id = $(this).parents('tr').find('.id').text(); // class는 text() *클래스는 꼭 .을 붙여줘야한다.!!*
@@ -71,10 +71,7 @@
 	$('.btn-insert').click(function(){
 		let me_title = $('#me_title').val(); // #은 아이디를 의미 (아이디 bt_title의 값 가져오기)
 		let me_authority = $('#me_authority').val();
-		if(me_authority == '0'){
-			alert('회원 검색 종류를 선택해주세요.')
-			return;
-		}
+
 		if(me_title.trim().length == 0){
 			alert('검색어를 입력해주세요.')
 			return;

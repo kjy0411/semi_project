@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.kh.project.dao.AirplaneDAO">
+
+  <select id="selectAirplaneBySchedule" resultType="kr.kh.project.vo.AirplaneVO">
+  	select
+	    airplane.*,
+	    am_col,
+	    am_row,
+	    am_exit_col,
+	    sk_num,
+	    sk_price
+	from
+		schedule
+			join
+		airplane on sk_ap_num = ap_num
+			join
+		airplane_model on ap_am_model = am_model
+	where
+		sk_num = #{sk_num};
+  </select>
+  <select id="selectPath" resultType="int">
+  	select
+	    pa_path
+	from
+		schedule
+			join
+		airplane on sk_ap_num = ap_num
+			join
+		airplane_model on ap_am_model = am_model
+			join
+		`path` on pa_am_model = am_model
+	where
+		sk_num = #{sk_num};
+  </select>
+  
+</mapper>

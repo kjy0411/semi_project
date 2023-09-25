@@ -14,4 +14,7 @@ public interface ScheduleDAO {
 
 	void deleteScheduleByNumber(int sk_ro_num);
 
+	ScheduleVO selectSchedule(@Param("sk_num")Integer sk_num);
+
+
 }

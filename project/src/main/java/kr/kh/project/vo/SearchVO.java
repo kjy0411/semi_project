@@ -2,6 +2,7 @@ package kr.kh.project.vo;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import lombok.Data;
@@ -48,5 +49,14 @@ public class SearchVO {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public String getToDay() {
+		 SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+
+	        Calendar c1 = Calendar.getInstance();
+
+		 String strToday = sdf.format(c1.getTime());
+		return strToday.substring(2);
 	}
 }
