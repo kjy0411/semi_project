@@ -18,6 +18,7 @@
 			ti_me_id = #{me_id}
 				and
 			ti_state = "미확정" 
+	</select>
 	<insert id="insertTicketing">
 		insert into 
 		ticketing
