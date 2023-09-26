@@ -10,10 +10,4 @@ public interface NationService {
 	List<NationVO> getNationByRoute(boolean route, String ai_num);
 
 	List<DivisionVO> getDivisionByRoute(boolean route, String ai_num);
-
-	boolean checkNation(String ai_na_name);
-
-	List<NationVO> getNation();
-
-	List<DivisionVO> getDivision();
 }

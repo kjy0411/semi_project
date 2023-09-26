@@ -4,13 +4,14 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import kr.kh.project.pagination.Criteria;
 import kr.kh.project.vo.MemberVO;
 
 import kr.kh.project.vo.TicketingVO;
 
 public interface TicketingDAO {
 
-	List<TicketingVO> selectTicketingList(@Param("me_id")String me_id);
+	List<TicketingVO> selectTicketingList(@Param("me_id")String me_id, @Param("ticketing")int ticketing);
 
 	boolean insertTicketing(@Param("ticketing")TicketingVO ticketing);
 
@@ -20,6 +21,7 @@ public interface TicketingDAO {
 
 	float findBonus(@Param("ti_me_id")String ti_me_id);
 
-	TicketingVO selectTicketingByNum(@Param("ti_num")int ti_num);
+	boolean updateTicketingState(@Param("ticketing")TicketingVO ticketing);
 
+	List<TicketingVO> selectTicketingListBySearch(@Param("cri")Criteria cri);
 }

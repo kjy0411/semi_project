@@ -14,8 +14,4 @@ public interface PointHistoryDAO {
 
 	void deletePointHistoryList(@Param("ph_num")int ph_num);
 
-	List<PointHistoryVO> selectPotinHistoryListByID(@Param("me_id")String me_id);
-
-	int countByMeID(@Param("me_id")String me_id);
-
 }

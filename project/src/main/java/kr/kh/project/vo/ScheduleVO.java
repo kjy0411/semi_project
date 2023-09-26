@@ -6,7 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import lombok.Data;
-//테스트
+
 @Data
 public class ScheduleVO {
 	private int sk_num;
@@ -16,7 +16,6 @@ public class ScheduleVO {
 	private Date sk_end_time;
 	private Date sk_time;
 	private Integer sk_price;
-	private boolean sk_state;
 	
 	private String sk_start_time_str;
 	private String sk_end_time_str;

@@ -15,30 +15,4 @@
 	<delete id="deletePointHistoryList">
 		delete from point_history where ph_num = #{ph_num}
 	</delete>
-	<select id="selectPotinHistoryListByID" resultType="kr.kh.project.vo.PointHistoryVO">
-		select
-			point_history.*,
-            ticketing.ti_save_point,
-            ticketing.ti_use_point,
-            ticketing.ti_state
-		from
-			point_history
-				join
-			ticketing on ph_ti_num = ti_num
-		where
-			ti_me_id = #{me_id}
-		order by
-			ph_num asc
-	</select>
-	<select id="countByMeID" resultType="int">
-		select
-			count(*)
-		from
-			point_history
-				join
-			ticketing on ph_ti_num = ti_num
-		where
-			ti_me_id = #{me_id}
-			
-	</select>
 </mapper>

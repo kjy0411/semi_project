@@ -2,11 +2,12 @@ package kr.kh.project.service;
 
 import java.util.List;
 
+import kr.kh.project.pagination.Criteria;
 import kr.kh.project.vo.TicketingVO;
 
 public interface TicketingService {
 
-	List<TicketingVO> getTicketingList(String me_id);
+	List<TicketingVO> getTicketingList(String me_id, int ticketing);
 
 	boolean insertTicketing(TicketingVO ticketing);
 
@@ -14,6 +15,6 @@ public interface TicketingService {
 
 	void deleteTicketing(List<TicketingVO> ticketingList);
 
-	TicketingVO selectTicketingByNum(int ti_num);
-
+	boolean updateTicketingState(TicketingVO ticketing);
+	
 }
