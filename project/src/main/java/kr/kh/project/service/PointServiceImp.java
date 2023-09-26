@@ -16,7 +16,26 @@ public class PointServiceImp implements PointService{
 		if(me_id == null) {
 			return null;
 		}
+		pointDao.checkPoint(me_id);
 		return pointDao.selectPointByID(me_id);
+	}
+
+	@Override
+	public boolean checkPoint(String me_id) {
+		if(me_id == null) {
+			return false;
+		}
+		boolean res = false;
+		PointVO point1 = pointDao.selectPointByID(me_id);
+		System.out.println(point1);
+		pointDao.checkPoint(me_id);
+		pointDao.updateClass(me_id);
+		PointVO point2 = pointDao.selectPointByID(me_id);
+		System.out.println(point2);
+		if(!point1.getPo_mc_name().equals(point2.getPo_mc_name())) {
+			res = true;
+		}
+		return res;
 	}
 	
 }
