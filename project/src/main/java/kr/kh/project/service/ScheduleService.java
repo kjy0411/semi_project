@@ -26,6 +26,8 @@ public interface ScheduleService {
 
 	List<RouteVO> getRouteByRoute(boolean airline, String ap_num);
 
+	ScheduleVO getSchdeule(Integer sk_num);
+
 
 
 }

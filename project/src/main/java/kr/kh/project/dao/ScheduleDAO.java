@@ -25,6 +25,8 @@ public interface ScheduleDAO {
 
 	List<RouteVO> getRouteByRoute(@Param("airline")boolean airline,@Param("ap_num") String ap_num);
 
+	ScheduleVO selectSchedule(Integer sk_num);
+
 
 
 }
