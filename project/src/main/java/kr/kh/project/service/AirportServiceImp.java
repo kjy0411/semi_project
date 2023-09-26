@@ -42,16 +42,6 @@ public class AirportServiceImp implements AirportService {
         return airportDao.getAirportByNumber(ai_num);
     }
 
-	@Override
-	public List<AirportVO> getAirportByRoute(boolean route, String ai_num) {
-		System.out.println(route);
-		System.out.println(ai_num);
-		if(route == false && ai_num == null) {
-			return null;
-		}
-		return airportDao.getAirportByRoute(route, ai_num);
-	}
-
     // 공항 정보를 데이터베이스에 추가하는 메서드
     @Override
     public void insertAirport(AirportVO airportVO) {
