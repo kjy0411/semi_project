@@ -16,7 +16,6 @@ public class ScheduleVO {
 	private Date sk_end_time;
 	private Date sk_time;
 	private Integer sk_price;
-	private boolean sk_state;
 	
 	private String sk_start_time_str;
 	private String sk_end_time_str;
