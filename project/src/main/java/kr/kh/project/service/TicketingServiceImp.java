@@ -77,7 +77,6 @@ public class TicketingServiceImp implements TicketingService {
 			ticketingDao.deleteTicketing(ticketing.getTi_num());
 		}
 	}
-
 	// 예매내역조회 상태 수정하기
 	@Override
 	public boolean updateTicketingState(TicketingVO ticketing) {
@@ -87,5 +86,12 @@ public class TicketingServiceImp implements TicketingService {
 		return ticketingDao.updateTicketingState(ticketing);
 	}
 
+	@Override
+	public TicketingVO selectTicketingByNum(int ti_num) {
+		if(ti_num == 0) {
+			return null;
+		}
+		return ticketingDao.selectTicketingByNum(ti_num);
+	}
 
 }

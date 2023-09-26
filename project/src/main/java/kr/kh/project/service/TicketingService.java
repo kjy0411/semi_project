@@ -16,5 +16,7 @@ public interface TicketingService {
 	void deleteTicketing(List<TicketingVO> ticketingList);
 
 	boolean updateTicketingState(TicketingVO ticketing);
-	
+
+	TicketingVO selectTicketingByNum(int ti_num);
+
 }

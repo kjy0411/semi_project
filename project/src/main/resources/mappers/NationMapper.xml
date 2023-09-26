@@ -40,4 +40,31 @@
 		order by
 			di_name asc, na_name asc, ai_name asc
 	</select>
+	<select id="getNation" resultType="kr.kh.project.vo.NationVO">
+		select
+		    na_name,
+		    na_di_name
+		from
+			airport
+				join
+			nation on ai_na_name = na_name
+				join
+			division on na_di_name = di_name
+		group by
+			na_name
+		order by
+			di_name asc, na_name asc, ai_name asc
+	</select>
+	<select id="getDivision" resultType="kr.kh.project.vo.DivisionVO">
+		select
+		    di_name
+		from
+			nation
+				join
+			division on na_di_name = di_name
+		group by
+			di_name
+		order by
+			di_name asc, na_name asc
+	</select>
 </mapper>

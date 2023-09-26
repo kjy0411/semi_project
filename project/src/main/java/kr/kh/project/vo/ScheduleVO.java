@@ -5,6 +5,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import lombok.Data;
 
 @Data
@@ -16,15 +18,25 @@ public class ScheduleVO {
 	private Date sk_end_time;
 	private Date sk_time;
 	private Integer sk_price;
+	private boolean sk_state;
 	
 	private String sk_start_time_str;
 	private String sk_end_time_str;
 	private String sk_time_str;
 	private String sk_price_str;	
 
+	private String ap_num;
 	private String ap_al_name;
+	private String ap_am_model;
 	private String ai_start_name;
-	private String ai_end_name;
+	
+	private String al_name;
+	private int ro_num; 
+	private String ro_ai_start; 
+	private String ro_ai_end;
+	
+	private String ai_name_start;
+	private String ai_name_end;
 	
 	public String getSk_price_str() {
 		if(sk_price == null) {
@@ -44,7 +56,10 @@ public class ScheduleVO {
 		return sk_start_time_str;
 	}
 	public void setSk_start_time(String time) {
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		if(time.contains("T")) {
+			time=time.replace('T', ' ');
+		}
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		try {
 			sk_start_time = format.parse(time);
 		} catch (ParseException e) {
@@ -78,11 +93,13 @@ public class ScheduleVO {
 		return sk_time_str;
 	}
 	public void setSk_time(String time) {
-		SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
+		SimpleDateFormat format = new SimpleDateFormat("HH:mm");
 		try {
 			sk_time = format.parse(time);
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
 	}
+	
+	
 }

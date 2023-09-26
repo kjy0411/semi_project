@@ -14,8 +14,8 @@
 	<option class="two" value="2">미확정</option>
 	<option class="three" value="3">취소</option>
 </select>
-<!-- 예매내역 조회 -->
-<div class="ticketing-box container">
+	<!-- 예매내역 조회 -->
+ <div class="ticketing-box container">
   
  </div>
  <script type="text/javascript">

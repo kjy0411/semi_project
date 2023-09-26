@@ -41,7 +41,7 @@
 					<a class="nav-link" href="<c:url value='/member/check'/>">회원정보 관리</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="<c:url value='/member/point'/>">마일리지내역 조회</a>
+					<a class="nav-link" href="<c:url value='/point/history'/>">마일리지내역 조회</a>
 				</li>
 				<span>|</span>
 			</c:if>
@@ -60,8 +60,8 @@
 					<div class="dropdown-menu">
 						<a class="dropdown-item" href="<c:url value='/menu/admin'/>">회원 권한</a>
 						<a class="dropdown-item" href="<c:url value='/menu/airport'/>">항공사/비행기</a>
-						<a class="dropdown-item" href="<c:url value='/menu/route'/>">공항/노선</a>
-						<a class="dropdown-item" href="<c:url value='/menu/schedule'/>">스케줄</a>
+						<a class="dropdown-item" href="<c:url value='/airport/list'/>">공항/노선</a>
+						<a class="dropdown-item" href="<c:url value='/schedule/list'/>">스케줄</a>
 					</div>
 				</li>
 			</c:if>
