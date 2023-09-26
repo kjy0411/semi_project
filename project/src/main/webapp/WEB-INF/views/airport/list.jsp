@@ -10,9 +10,10 @@
     <h1>공항 리스트</h1>
     <nav style="display: flex;">
 	    <div class="info-box container-fluid" style="flex: 2;">
-			<a href="<c:url value='/airport/insert'/>">공항 등록</a>
-			<a href="<c:url value='/route/delete'/>">노선 삭제</a>
-			<a href="<c:url value='/airport/delete'/>">공항 삭제</a>
+			<a href="<c:url value='/airport/insert'/>" class="btn btn-outline-primary">공항 등록</a>
+			<a href="<c:url value='/airport/delete'/>" class="btn btn-outline-primary">공항 삭제</a>
+			<a href="<c:url value='/route/insert'/>" class="btn btn-outline-danger">노선 등록</a>
+			<a href="<c:url value='/route/delete'/>" class="btn btn-outline-danger">노선 삭제</a>
 		    <div class="detail-box">
 		    	
 		    </div>
@@ -70,7 +71,6 @@
 									<tr style="display: flex; border-bottom: 3px solid black">
 										<th style="flex: 4";>출발</th>
 										<th style="flex: 4";>도착</th>
-										<th style="flex: 1";>삭제</th>
 									</tr>
 								</thead>
 						`;
@@ -86,9 +86,6 @@
 											\${go.ro_ai_end} <br>
 											\${go.ai_name_end}
 										</td>
-										<td>
-											<button class="btn-route-delete" data-num="\${go.ro_num}">x</button>
-										</td>
 									</tr>
 								</tbody>
 							`;
@@ -96,6 +93,9 @@
 						routestr += `
 							</table>
 						`;
+						if(data.route_go.length == 0){
+							routestr = `<h2>등록된 노선이 없습니다.</h2>`;
+						}
 						$('.route-box').html(routestr);
 					});
 					$('.btn-back').click(function() {
@@ -103,7 +103,7 @@
 						routestr += `
 							<table style="text-align: center; width: 100%;">
 								<thead>
-									<tr style="display: flex;">
+									<tr style="display: flex; border-bottom: 3px solid black">
 										<th style="flex: 4";>출발</th>
 										<th style="flex: 4";>도착</th>
 									</tr>
@@ -112,7 +112,7 @@
 						for(back of data.route_back){
 							routestr += `
 								<tbody>
-									<tr style="display: flex;">
+									<tr style="display: flex; border-bottom: 2px solid black">
 										<td style="flex: 4";>
 											\${back.ro_ai_start} <br>
 											\${back.ai_name_start}
@@ -128,6 +128,9 @@
 						routestr += `
 							</table>
 						`;
+						if(data.route_back.length == 0){
+							routestr = `<h2>등록된 노선이 없습니다.</h2>`;
+						}
 						$('.route-box').html(routestr);
 					});
 					$(document).on('click', '.btn-route-delete', function() {
