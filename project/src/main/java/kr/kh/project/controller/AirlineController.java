@@ -19,6 +19,7 @@ import kr.kh.project.util.Message;
 import kr.kh.project.vo.AirlineVO;
 import kr.kh.project.vo.AirplaneVO;
 import kr.kh.project.vo.MemberVO;
+import lombok.AllArgsConstructor;
 
 @Controller
 public class AirlineController {
@@ -62,7 +63,10 @@ public class AirlineController {
 	}
 	
 	@GetMapping("/airline/delete")
-	public String deleteAirline() {
+	public String deleteAirline(Model model) {
+		
+		List<AirlineVO> list = airlineService.getAirlineList();
+		model.addAttribute("list",list);
 		
 		return "/airline/delete";
 	}
@@ -80,6 +84,8 @@ public class AirlineController {
 			msg = new Message("airline/delete", "항공사삭제을 실패했습니다.");
 		}
 		model.addAttribute("msg", msg);
+		
+		
 		return "message";
 	}
 	
@@ -94,6 +100,9 @@ public class AirlineController {
 	
 	@GetMapping("/airline/insert_ap")
 	public String insert_ap(Model model) {
+		
+		List<AirlineVO> list = airlineService.getAirlineList();
+		model.addAttribute("list",list);
 		
 		return "/airline/insert_ap";
 	}
@@ -123,7 +132,7 @@ public class AirlineController {
 	}
 	
 	@PostMapping("/airline/delete_ap")
-	public String deletePost_AP(Model model, AirlineVO airline, HttpSession session) {
+	public String deletePost_AP(Model model, AirplaneVO airplane, HttpSession session) {
 		
 		return "message";
 	}

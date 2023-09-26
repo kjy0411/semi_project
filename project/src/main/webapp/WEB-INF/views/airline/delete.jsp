@@ -12,28 +12,18 @@
 <body>
 	<h1>항공사 삭제</h1>
 	
-	<form action="<c:url value='/airline/delete'/>" method="post">
-			<div class="form-group">
-				<input type="text" class="form-control" name="al_name" placeholder="항공사명 입력" >
-			</div>
-		<button class="btn btn-outline-success col-12">삭제하기</button>
-		
-		
-		 <tbody>
-	      <c:forEach items="${list }" var="board">
-		      <tr>
-		      	<td><input name="RowCheck" type="checkbox" value="${board.sk_num}"></td>
-		        <td>${board.sk_num}</td>
-		        <td>${board.sk_ap_num }</td>
-		        <td>${board.sk_ro_num }</td>
-		        <td>${board.sk_start_time }</td>
-		        <td><fmt:formatDate pattern="hh:mm:ss" value="${board.sk_time }"/></td>
-		        <td>${board.sk_start_time_str }</td>
-		        <td>${board.sk_time_str }</td>
-		        <td>${board.sk_price }</td>
-		      </tr>
-	      </c:forEach>
-	
-	    </tbody>
+	 <form action="<c:url value='/airline/delete'/>" method="post">
+        <div class="form-group">
+            <label for="al_name">항공사 선택</label>
+	            <select class="form-control" name="al_name" id="al_name">
+	                <c:forEach items="${list}" var="airline">
+	                    <option value="${airline.al_name }">
+	                        ${airline.al_name }
+	                    </option>
+	                </c:forEach>
+	            </select>
+        </div>
+        <button class="btn btn-outline-success col-12">삭제하기</button>
+    </form>
 </body>
 </html>
