@@ -264,13 +264,8 @@ public class ReservationController {
 				}
 			}
 		}
-		//등업조건 만족 여부를 확인
-		boolean check = pointService.checkPoint(ti_me_id);
-		PointVO point = pointService.getPoint(ti_me_id);
 		msg = "항공권 예매를 성공했습니다.";
 		res = true;
-		map.put("point", point);
-		map.put("check", check);
 		map.put("msg", msg);
 		map.put("res", res);
 		return map;
