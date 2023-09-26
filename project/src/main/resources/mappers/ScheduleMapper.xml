@@ -56,9 +56,14 @@
   	</select>
   	
   	<select id="getRouteByRoute" resultType="kr.kh.project.vo.ScheduleVO">
-  	select
-	    *
-	from
-		route
+	SELECT 
+	    route.*, a1.ai_num as 'ro_ai_start', a1.ai_name as 'ai_name_start',
+	    a2.ai_num as 'ro_ai_end', a2.ai_name as 'ai_name_end'
+	FROM
+	    route
+	        JOIN
+	    (select * from airport) as a1 ON ro_ai_start = a1.ai_num
+			JOIN
+	    (select * from airport) as a2 ON ro_ai_end= a2.ai_num
   	</select>
 </mapper>

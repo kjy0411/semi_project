@@ -146,8 +146,8 @@
 							str += `
 								<span class="ro_num" hidden="">\${air.ro_num}</span>
 								-<a class="select-route-num" href="#">\${air.ro_num}</a> <br>
-								-\${air.ro_ai_start}<br>
-								-\${air.ro_ai_end}<br>
+								-\${air.ro_ai_start} (\${air.ai_name_start})<br>
+								-\${air.ro_ai_end} (\${air.ai_name_end})<br>
 								<br>
 							`;												
 						}											
