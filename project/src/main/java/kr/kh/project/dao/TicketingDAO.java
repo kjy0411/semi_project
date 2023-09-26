@@ -24,4 +24,6 @@ public interface TicketingDAO {
 	boolean updateTicketingState(@Param("ticketing")TicketingVO ticketing);
 
 	List<TicketingVO> selectTicketingListBySearch(@Param("cri")Criteria cri);
+	
+	TicketingVO selectTicketingByNum(@Param("ti_num")int ti_num);
 }
