@@ -158,48 +158,6 @@
 				}
 			});
 		}
-	
-	/* 노선번호 */
-	$('.route-num').click(function() {
-		let airline = true;
-		let ap_num ="";
-		printRoute(airline,ap_num);
-	})
-			$(document).on('click', '.select-route-num', function(){
-			let value = $(this).text();
-			let num = $(this).prev().text();
-			$('[name=sk_ro_num]').val(value);
-			$('[name=ap_num]').val(num);
-			$('.popUp-box').empty();
-		})
-	
-		function printRoute(airline, ap_num) {
-			str = ``;
-			$.ajax({
-				async : false,
-				method : 'post',
-				url : '<c:url value="/schedule/route/"/>',
-				data : {airline:airline, ap_num:ap_num},
-				dataType : 'json',
-				success : function(data) {
-					console.log(data)
-					if(data.res){			
-						for(air of data.routeList){						
-							str += `
-								<span class="ro_num" hidden="">\${air.ro_num}</span>
-								-<a class="select-route-num" href="#">\${air.ro_num}</a> <br>
-								-\${air.ro_ai_start} (\${air.ai_name_start})<br>
-								-\${air.ro_ai_end} (\${air.ai_name_end})<br>
-								<br>
-							`;												
-						}											
-					}else {
-						alert(data.msg);
-					}
-				$('.popUp-box').html(str);
-				}
-			});
-		}
 
 	</script>
 </body>
