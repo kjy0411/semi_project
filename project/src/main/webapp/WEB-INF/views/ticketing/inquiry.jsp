@@ -31,7 +31,7 @@
 	        <td>${ticketing.ai_start_name}</td>
 	        <td>${ticketing.ai_end_name}</td>
 	        <td class="state">${ticketing.ti_state}</td>
-	        <td><button class="btn btn-outline-warning btn-update">수정</button></td>
+	        <td><button class="btn btn-outline-warning btn-update">예매취소</button></td>
 	      </tr>
       </c:forEach>
     </tbody>
@@ -56,9 +56,9 @@
 			dataType : 'json',
 			success : function(data){
 				if(data.res){
-					alert('수정 성공!')
+					alert('예매취소 완료!')
 				}else{
-					alert('수정 실패!');
+					alert('예매취소 실패!');
 				}
 			}
 		});
