@@ -6,8 +6,8 @@
 	<select id="selectTicketingList" resultType="kr.kh.project.vo.TicketingVO">
 		select 
 			ticketing.*,
-			(select ai_name from airport where ai_num = ro_ai_start) as ai_start_name,
-			(select ai_name from airport where ai_num = ro_ai_end) as ai_end_name
+		    (select ai_name from airport where ai_num = ro_ai_start) as ai_start_name,
+		    (select ai_name from airport where ai_num = ro_ai_end) as ai_end_name
 		from 
 			ticketing 
 					join 
@@ -17,12 +17,39 @@
 		where 
 			ti_me_id = #{me_id}
 				and
-			ti_state = case
-				when #{ticketing} = 0 then ti_state
-				when #{ticketing} = 1 then "확정"
-				when #{ticketing} = 2 then "미확정"
-				when #{ticketing} = 3 then "예매취소"
-			end;
+			ti_state = "미확정"
+	</select>
+	<select id="selectTicketingListByDone" resultType="kr.kh.project.vo.TicketingVO">
+		select 
+			ticketing.*,
+		    (select ai_name from airport where ai_num = ro_ai_start) as ai_start_name,
+		    (select ai_name from airport where ai_num = ro_ai_end) as ai_end_name
+		from 
+			ticketing 
+					join 
+			schedule on ti_sk_num = sk_num
+					join
+			route on sk_ro_num = ro_num
+		where 
+			ti_me_id = #{me_id}
+				and
+			ti_state = "확정"
+	</select>
+	<select id="selectTicketingListByCancel" resultType="kr.kh.project.vo.TicketingVO">
+		select 
+			ticketing.*,
+		    (select ai_name from airport where ai_num = ro_ai_start) as ai_start_name,
+		    (select ai_name from airport where ai_num = ro_ai_end) as ai_end_name
+		from 
+			ticketing 
+					join 
+			schedule on ti_sk_num = sk_num
+					join
+			route on sk_ro_num = ro_num
+		where 
+			ti_me_id = #{me_id}
+				and
+			ti_state = "예매취소"
 	</select>
 	<select id="selectTicketingListBySearch" resultType="kr.kh.project.vo.TicketingVO">
 		select * from ticketing
