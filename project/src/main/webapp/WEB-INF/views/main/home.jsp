@@ -26,9 +26,9 @@
 <body>
 <div class="box">
     <div class="list">
-        <img class="item" src="<c:url value='/resources/img/001.png'/>">
-        <img class="item" src="<c:url value='/resources/img/002.png'/>">
-        <img class="item" src="<c:url value='/resources/img/003.png'/>">
+        <img class="item" src="<c:url value='/resources/img/01.png'/>">
+        <img class="item" src="<c:url value='/resources/img/02.png'/>">
+        <img class="item" src="<c:url value='/resources/img/03.png'/>">
     </div>
 </div>
 <script>
