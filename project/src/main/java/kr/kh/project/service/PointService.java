@@ -6,6 +6,4 @@ public interface PointService {
 
 	PointVO getPoint(String me_id);
 
-	boolean checkPoint(String ti_me_id);
-
 }

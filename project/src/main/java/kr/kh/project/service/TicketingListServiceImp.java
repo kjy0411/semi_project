@@ -36,12 +36,4 @@ public class TicketingListServiceImp implements TicketingListService {
 		}
 		return ticketingListDao.selectTicketingList(ticketingList);
 	}
-
-	@Override
-	public List<TicketingListVO> selectTicketListByNum(int ti_num) {
-		if(ti_num == 0) {
-			return null;
-		}
-		return ticketingListDao.selectTicketingListByTi_num(ti_num);
-	}
 }

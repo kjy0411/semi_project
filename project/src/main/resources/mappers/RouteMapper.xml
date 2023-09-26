@@ -4,40 +4,16 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.kh.project.dao.RouteDAO">
 
-  
-    <!-- 노선 추가 -->
-	<insert id="insertRoute" parameterType="kr.kh.project.vo.RouteVO">
-	    INSERT INTO route (ro_ai_start, ro_ai_end)
-	    VALUES (#{ro_ai_start}, #{ro_ai_end});
-	</insert>
-
+  <!-- 노선 추가 -->
+  <insert id="insertRoute" parameterType="kr.kh.project.vo.RouteVO">
+    INSERT INTO route (po_num, po_me_id, po_al_name, po_mc_name, po_accumulate_point, po_hold_point)
+    VALUES (#{po_num}, #{po_me_id}, #{po_al_name}, #{po_mc_name}, #{po_accumulate_point}, #{po_hold_point});
+  </insert>
 
   <!-- 노선 삭제 -->
-  <delete id="deleteRouteByNumber" parameterType="int">
-    DELETE FROM route WHERE ro_num = #{ro_num};
+  <delete id="deleteRoute" parameterType="int">
+    DELETE FROM route WHERE po_num = #{po_num};
   </delete>
-  
-  <!-- 노선 조회 by 번호 -->
-  <select id="findRouteByNumber" resultType="kr.kh.project.vo.RouteVO" parameterType="int">
-    SELECT * FROM route WHERE ro_num = #{ro_num}
-  </select>
-  
-  
-    <select id="getRoutesByAirport" resultType="kr.kh.project.vo.RouteVO" parameterType="String">
-    SELECT * FROM route WHERE ro_ai_start = #{aiNum} OR ro_ai_end = #{aiNum}
-    </select>
-    
-  
-  <!-- 공항 상세 정보 -->
-  <select id="getDepartureRoutes" resultType="kr.kh.project.vo.RouteVO">
-    SELECT * FROM route WHERE ro_ai_start = #{ai_num}
-  </select>
-  
-  <select id="getArrivalRoutes" resultType="kr.kh.project.vo.RouteVO">
-    SELECT * FROM route WHERE ro_ai_end = #{ai_num}
-  </select>
-
-  
   
   <select id="findRoute" resultType="kr.kh.project.vo.RouteVO">
   	select
@@ -54,39 +30,5 @@
   		*
   	from
   		route
-  </select>
-  <select id="selectRouteListGo" resultType="kr.kh.project.vo.RouteVO">
-  	select
-  		route.*,
-        (select
-			ai_name
-		from
-			airport
-		where
-			ai_num = ro_ai_start) as ai_name_start,
-        ai_name as ai_name_end
-  	from
-  		route
-			join
-		airport on ai_num = ro_ai_end
-  	where
-  		ro_ai_start = #{ai_num};
-  </select>
-  <select id="selectRouteListBack" resultType="kr.kh.project.vo.RouteVO">
-  	select
-  		route.*,
-  		ai_name as ai_name_start,
-        (select
-			ai_name
-		from
-			airport
-		where
-			ai_num = ro_ai_end) as ai_name_end
-  	from
-  		route
-			join
-		airport on ai_num = ro_ai_start
-  	where
-  		ro_ai_end = #{ai_num};
   </select>
 </mapper>
