@@ -17,6 +17,7 @@ public class PointServiceImp implements PointService{
 			return null;
 		}
 		pointDao.checkPoint(me_id);
+		pointDao.updateClass(me_id);
 		return pointDao.selectPointByID(me_id);
 	}
 
