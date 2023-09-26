@@ -48,7 +48,7 @@
 			<li class="nav-item">
 				<a class="nav-link" href="<c:url value='/reservation/search'/>">예매</a>
 			</li>
-			<li class="nav-item">
+			<li class="nav-item dropdown">
 				<a class="nav-link" href="<c:url value='/ticketing/inquiry'/>">예매내역 조회</a>
 			</li>
 			<c:if test="${user != null && user.me_authority == 'ADMIN'}">
