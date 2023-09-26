@@ -3,6 +3,7 @@ package kr.kh.project.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import kr.kh.project.dao.AirportDAO;
+import kr.kh.project.pagination.Criteria;
 import kr.kh.project.vo.AirportVO;
 import kr.kh.project.vo.RouteVO;
 
@@ -21,7 +22,10 @@ public class AirportServiceImp implements AirportService {
     public List<AirportVO> selectAirportList() {
         return airportDao.selectAirportList();
     }
-
+    public List<AirportVO> searchAirport(String keyword) {
+        return airportDao.searchAirport(keyword);
+    }
+    
     @Override
     public AirportVO getAirportByCode(String ai_num) {
         return airportDao.getAirportByNumber(ai_num);

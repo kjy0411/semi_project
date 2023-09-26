@@ -1,5 +1,6 @@
 package kr.kh.project.service;
 
+import kr.kh.project.pagination.Criteria;
 import kr.kh.project.vo.AirportVO;
 
 import java.util.List;
@@ -13,6 +14,9 @@ public interface AirportService {
     void deleteAirportByCode(String aiNum);
     void deleteRoutesByAirport(String aiNum);
     List<AirportVO> getAirportByRoute(boolean route, String ai_num);
+	List<AirportVO> searchAirport(String keyword);
+	
+	
 	
 	
     

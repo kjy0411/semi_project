@@ -53,7 +53,7 @@ public class RouteController {
             } else {
                 // 중복된 노선이 아닌 경우, 노선 등록 서비스 호출
                 routeService.insertRoute(ro_ai_start, ro_ai_end);
-                return "redirect:/airport/list"; // 공항 리스트 페이지로 리다이렉트
+                model.addAttribute("successMessage", "노선이 등록되었습니다.");
             }
         }
 
@@ -62,6 +62,7 @@ public class RouteController {
         model.addAttribute("routeList", routeList);
         return "/route/insert";
     }
+
 
     @GetMapping("/delete")
     public String showDeleteForm(Model model) {
