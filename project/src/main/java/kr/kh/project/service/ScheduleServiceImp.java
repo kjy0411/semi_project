@@ -67,9 +67,22 @@ public class ScheduleServiceImp implements ScheduleService{
 		return scheduleDao.insertSchedule(schedule);
 	}
 
+	@Override
+	public List<ScheduleVO> getSchedulesByRouteNumber(int sk_ro_num) {
+	    return scheduleDao.getSchedulesByRouteNumber(sk_ro_num);
+	}
+	@Override
+	public void deleteScheduleByNumber(int sk_ro_num) {
+	    
+	   scheduleDao.deleteScheduleByNumber(sk_ro_num);
+	}
 
+	@Override
+	public ScheduleVO getSchdeule(Integer sk_num) {
+		if(sk_num == 0) {
+			return null;
+		}
+		return scheduleDao.selectSchedule(sk_num);
+	}
 
-
-
-	
 }

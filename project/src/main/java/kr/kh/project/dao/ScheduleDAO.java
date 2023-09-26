@@ -24,5 +24,11 @@ public interface ScheduleDAO {
 	List<AirplaneVO> getAirplaneSchedule(@Param("airline")boolean airline,@Param("ap_num") String ap_num);
 
 
+	List<ScheduleVO> getSchedulesByRouteNumber(int ro_num);
+
+	void deleteScheduleByNumber(int sk_ro_num);
+
+	ScheduleVO selectSchedule(@Param("sk_num")Integer sk_num);
+
 
 }

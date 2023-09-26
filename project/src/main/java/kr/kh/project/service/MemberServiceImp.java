@@ -1,12 +1,14 @@
 package kr.kh.project.service;
 
 import java.util.List;
+import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import kr.kh.project.dao.MemberDAO;
+import kr.kh.project.pagination.Criteria;
 import kr.kh.project.vo.MemberVO;
 
 @Service
@@ -31,8 +33,22 @@ public class MemberServiceImp implements MemberService{
 		|| member.getMe_email() == null) {
 			return false;
 		}
-
-		MemberVO dbMember = memberDao.selectMember(member.getMe_id());
+		// 아이디 체크
+		// 전체 6~20자, 영문으로 시작, 영문&숫자만 가능하다
+		String regexId = "^[a-zA-Z][a-zA-Z0-9]{5,19}$";
+		if(member.getMe_id() == null || !Pattern.matches(regexId, member.getMe_id())) {
+			return false;
+		}
+		
+		//비번 체크
+		//전체 6~2-자, 영문 숫자만 가능
+		String regexPw = "^[a-zA-Z0-9!@#$%]{12,25}$";
+		if(member.getMe_pw() == null || !Pattern.matches(regexPw, member.getMe_pw())) {
+			return false;
+		}
+		
+		//아이디 중복체크
+		MemberVO dbMember = memberDao.selectMemberById(member.getMe_id());
 		if(dbMember != null) {
 			return false;
 		}
@@ -47,7 +63,7 @@ public class MemberServiceImp implements MemberService{
 //			return false;
 //		}
 		
-
+		//비밀번호 암호화
 		String encPw = passwordEncoder.encode(member.getMe_pw());
 		member.setMe_pw(encPw);
 
@@ -76,13 +92,13 @@ public class MemberServiceImp implements MemberService{
 		}
 		return memberDao.selectMember(me_id);
 	}
-
+	// 회원 조회 & 검색 기능
 	@Override
-	public List<MemberVO> getMemberList() {
-		// 다오한테 회원 리스트를 가져오라고 시키고
-		List<MemberVO> list = memberDao.selectMemberList();
-		// 가져오면 반환을 시킨다.
-		return list;
+	public List<MemberVO> getMemberList(Criteria cri) {
+		if( cri == null ) {
+			cri = new Criteria();
+		}
+		return memberDao.selectMemberList(cri);
 	}
 
 	@Override
@@ -132,5 +148,15 @@ public class MemberServiceImp implements MemberService{
 	public MemberVO getMemberBySession(String me_session_id) {
 		return memberDao.selectMemberBySession(me_session_id);
 	}
+
+	//아이디 중복검사
+	@Override
+	public boolean checkId(String id) {
+		if(memberDao.selectMember(id) == null) {
+			return true;
+		}
+		return false;
+	}
+
 
 }

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.kh.project.dao.AirlineDAO">
+	<select id="selectAirlineList" resultType="kr.kh.project.vo.AirlineVO">
+		select * from airline order by al_name desc
+	</select>
+		
+	<select id="selectAirplaneList" resultType="kr.kh.project.vo.AirplaneVO">
+		select * from airplane order by ap_al_name desc
+	</select>
+	
+	
+	<insert id="insertAirline">
+		insert into airline(al_name)
+		value(#{airline.al_name})
+	</insert>
+	
+	<delete id="deleteAirline">
+		delete from airline where al_name=#{al_name}; 
+	</delete>
+	
+	<insert id="insertAirplane">
+		insert into airplane(ap_num,ap_al_name, ap_am_model)
+		values (#{airplane.ap_num},#{airplane.ap_al_name},#{airplane.ap_am_model})
+	</insert>
+</mapper>

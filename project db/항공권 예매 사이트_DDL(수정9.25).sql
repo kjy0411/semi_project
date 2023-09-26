@@ -159,7 +159,9 @@ ALTER TABLE `point` ADD CONSTRAINT `FK_airline_TO_point_1` FOREIGN KEY (
 )
 REFERENCES `airline` (
 	`al_name`
-);
+)
+ON DELETE CASCADE
+ON UPDATE CASCADE;
 
 ALTER TABLE `point` ADD CONSTRAINT `FK_member_class_TO_point_1` FOREIGN KEY (
 	`po_mc_name`
@@ -201,7 +203,9 @@ ALTER TABLE `schedule` ADD CONSTRAINT `FK_airplane_TO_schedule_1` FOREIGN KEY (
 )
 REFERENCES `airplane` (
 	`ap_num`
-);
+)
+ON DELETE CASCADE
+ON UPDATE CASCADE;
 
 ALTER TABLE `schedule` ADD CONSTRAINT `FK_route_TO_schedule_1` FOREIGN KEY (
 	`sk_ro_num`
@@ -222,7 +226,9 @@ ALTER TABLE `airplane` ADD CONSTRAINT `FK_airline_TO_airplane_1` FOREIGN KEY (
 )
 REFERENCES `airline` (
 	`al_name`
-);
+)
+ON DELETE CASCADE
+ON UPDATE CASCADE;
 
 ALTER TABLE `airplane` ADD CONSTRAINT `FK_airplane_model_TO_airplane_1` FOREIGN KEY (
 	`ap_am_model`

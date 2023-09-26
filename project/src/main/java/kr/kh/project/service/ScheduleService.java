@@ -24,6 +24,11 @@ public interface ScheduleService {
 
 	boolean insertSchedule(ScheduleVO schedule);
 
+	List<ScheduleVO> getSchedulesByRouteNumber(int sk_ro_num);
+
+	void deleteScheduleByNumber(int sk_ro_num);
+	
+	ScheduleVO getSchdeule(Integer sk_num);
 
 
 }

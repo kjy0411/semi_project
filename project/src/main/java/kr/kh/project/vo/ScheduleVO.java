@@ -18,17 +18,17 @@ public class ScheduleVO {
 	private Date sk_end_time;
 	private Date sk_time;
 	private Integer sk_price;
+	private boolean sk_state;
 	
 	private String sk_start_time_str;
 	private String sk_end_time_str;
 	private String sk_time_str;
 	private String sk_price_str;	
-	//�˻��� ���� ��ü
+
 	private String ap_num;
 	private String ap_al_name;
 	private String ap_am_model;
-	private String ai_start_name;		//������� �����̸�
-	private String ai_end_name;			//�������� �����̸�
+	private String ai_start_name;
 	
 	private String al_name;
 	private int ro_num; 
@@ -37,6 +37,7 @@ public class ScheduleVO {
 	
 	private String ai_name_start;
 	private String ai_name_end;
+> main
 	
 	public String getSk_price_str() {
 		if(sk_price == null) {

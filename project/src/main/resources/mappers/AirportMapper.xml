@@ -5,14 +5,25 @@
 <mapper namespace="kr.kh.project.dao.AirportDAO">
 
   <select id="selectAirportList" resultType="kr.kh.project.vo.AirportVO">
-    select * from airport
+    select * from airport order by ai_name asc
   </select>
 
   <!-- 공항 추가 -->
   <insert id="insertAirport" parameterType="kr.kh.project.vo.AirportVO">
     INSERT INTO airport (ai_name, ai_na_name, ai_standard_time)
-    VALUES (#{ai_name}, #{ai_na_name}, #{ai_standard_time});
+    VALUES (#{aiName}, #{aiNaName}, #{aiStandardTime});
   </insert>
+
+  
+  <select id="getAirportByAiNameAndAiNaName" resultType="kr.kh.project.vo.AirportVO">
+    SELECT * FROM airport WHERE ai_name = #{aiName} AND ai_na_name = #{aiNaName}
+  </select>
+  
+  
+  <select id="getAirportByNumber" resultType="kr.kh.project.vo.AirportVO">
+    SELECT * FROM airport WHERE ai_num = #{ai_num}
+  </select>
+  
   
   <select id="getAirportByRoute" resultType="kr.kh.project.vo.AirportVO">
   	select
