@@ -51,7 +51,7 @@ public class AirlineServiceImp implements AirlineService {
 
 
 	@Override
-	public boolean deleteAirline(String al_name, MemberVO user) {
+	public AirlineVO deleteAirline(String al_name, MemberVO user) {
 
 		
 		if(al_name == null) {

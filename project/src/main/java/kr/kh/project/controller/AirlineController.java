@@ -76,12 +76,13 @@ public class AirlineController {
 	public String deleteAirlinePost(Model model,String al_name, HttpSession session) {
 		
 		MemberVO user = (MemberVO)session.getAttribute("user");
-		Message msg = new Message("airline/delete", "항공사삭제을 실패했습니다.");
-		boolean res = airlineService.deleteAirline(al_name, user);
-		if(res) {
-			msg = new Message("menu/airport", "항공사삭제을 성공했습니다.");
+		Message msg = new Message("airline/delete", "항공사 삭제를 실패했습니다.");
+		AirlineVO airline = airlineService.deleteAirline(al_name, user);
+		
+		if(airline == null) {
+			msg = new Message("menu/airport", "항공사 삭제를 성공했습니다.");
 		}else {
-			msg = new Message("airline/delete", "항공사삭제을 실패했습니다.");
+			msg = new Message("airline/delete", "항공사 삭제를 실패했습니다.");
 		}
 		model.addAttribute("msg", msg);
 		

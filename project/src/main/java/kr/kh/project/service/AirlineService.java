@@ -20,7 +20,7 @@ public interface AirlineService {
 
 	boolean insertAirline(AirlineVO airline, MemberVO user);
 
-	boolean deleteAirline(String al_name, MemberVO user);
+	AirlineVO deleteAirline(String al_name, MemberVO user);
 
 	boolean insertAirplane_ap(AirplaneVO airplane, MemberVO user);
 
