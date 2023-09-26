@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import kr.kh.project.dao.AirlineDAO;
 import kr.kh.project.vo.AirlineVO;
+import kr.kh.project.vo.AirplaneModelVO;
 import kr.kh.project.vo.AirplaneVO;
 import kr.kh.project.vo.MemberVO;
 
@@ -77,6 +78,12 @@ public class AirlineServiceImp implements AirlineService {
 		
 		
 		return true;
+	}
+
+
+	@Override
+	public List<AirplaneModelVO> getModelList() {
+		return airlineDao.selectModelList();
 	}
 
 

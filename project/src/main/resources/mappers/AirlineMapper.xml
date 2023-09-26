@@ -25,4 +25,10 @@
 		insert into airplane(ap_num,ap_al_name, ap_am_model)
 		values (#{airplane.ap_num},#{airplane.ap_al_name},#{airplane.ap_am_model})
 	</insert>
+	<select id="selectModelList" resultType="kr.kh.project.vo.AirplaneModelVO">
+		select
+			am_model
+		from
+			airplane_model
+	</select>
 </mapper>

@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import kr.kh.project.vo.AirlineVO;
+import kr.kh.project.vo.AirplaneModelVO;
 import kr.kh.project.vo.AirplaneVO;
 
 public interface AirlineDAO {
@@ -18,6 +19,8 @@ public interface AirlineDAO {
 	boolean deleteAirline(@Param("al_name")String al_name); // 삭제할 항공사
 
 	boolean insertAirplane(@Param("airplane")AirplaneVO airplane);
+
+	List<AirplaneModelVO> selectModelList();
 
 
 	

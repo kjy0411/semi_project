@@ -1,14 +1,13 @@
 package kr.kh.project.service;
 
-import kr.kh.project.vo.AirlineVO;
-import kr.kh.project.vo.AirplaneVO;
-import kr.kh.project.vo.AirportVO;
-import kr.kh.project.vo.MemberVO;
-
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
 import org.mybatis.spring.annotation.MapperScan;
+
+import kr.kh.project.vo.AirlineVO;
+import kr.kh.project.vo.AirplaneModelVO;
+import kr.kh.project.vo.AirplaneVO;
+import kr.kh.project.vo.MemberVO;
 @MapperScan
 public interface AirlineService {
 
@@ -23,6 +22,8 @@ public interface AirlineService {
 	boolean deleteAirline(String al_name, MemberVO user);
 
 	boolean insertAirplane_ap(AirplaneVO airplane, MemberVO user);
+
+	List<AirplaneModelVO> getModelList();
 
 	
 	

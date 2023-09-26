@@ -9,17 +9,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-
 
 import kr.kh.project.service.AirlineService;
-import kr.kh.project.service.MemberService;
 import kr.kh.project.util.Message;
 import kr.kh.project.vo.AirlineVO;
+import kr.kh.project.vo.AirplaneModelVO;
 import kr.kh.project.vo.AirplaneVO;
 import kr.kh.project.vo.MemberVO;
-import lombok.AllArgsConstructor;
 
 @Controller
 public class AirlineController {
@@ -100,8 +96,9 @@ public class AirlineController {
 	
 	@GetMapping("/airline/insert_ap")
 	public String insert_ap(Model model) {
-		
+		List<AirplaneModelVO> modelList = airlineService.getModelList();
 		List<AirlineVO> list = airlineService.getAirlineList();
+		model.addAttribute("modelList",modelList);
 		model.addAttribute("list",list);
 		
 		return "/airline/insert_ap";
