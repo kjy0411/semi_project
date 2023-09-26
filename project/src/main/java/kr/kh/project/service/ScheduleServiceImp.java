@@ -1,3 +1,4 @@
+
 package kr.kh.project.service;
 
 import java.util.List;
@@ -56,33 +57,19 @@ public class ScheduleServiceImp implements ScheduleService{
 
 	@Override
 	public boolean insertSchedule(ScheduleVO schedule) {
-		if(schedule.getSk_ap_num() == null
-		|| schedule.getSk_ro_num() == 0
-		|| schedule.getSk_start_time() == null
-		|| schedule.getSk_time() == null
-		|| schedule.getSk_price()  == null) {
-			return false;
-		}
 		
 		return scheduleDao.insertSchedule(schedule);
 	}
 
 	@Override
-	public List<ScheduleVO> getSchedulesByRouteNumber(int sk_ro_num) {
-	    return scheduleDao.getSchedulesByRouteNumber(sk_ro_num);
-	}
-	@Override
-	public void deleteScheduleByNumber(int sk_ro_num) {
-	    
-	   scheduleDao.deleteScheduleByNumber(sk_ro_num);
+	public List<RouteVO> getRouteByRoute(boolean airline, String ap_num) {
+		
+		return scheduleDao.getRouteByRoute(airline, ap_num);
 	}
 
-	@Override
-	public ScheduleVO getSchdeule(Integer sk_num) {
-		if(sk_num == 0) {
-			return null;
-		}
-		return scheduleDao.selectSchedule(sk_num);
-	}
 
+
+
+
+	
 }

@@ -1,3 +1,4 @@
+
 package kr.kh.project.controller;
 
 import java.util.HashMap;
@@ -58,6 +59,21 @@ public class ScheduleController {
 			return map;
 		}
 		map.put("airportList", airplaneList);
+		map.put("res", true);
+		return map;
+	}
+	
+	@ResponseBody
+	@PostMapping("/schedule/route")
+	public Map<String, Object> searchRoute(@RequestParam("airline")boolean airline, @RequestParam("ap_num")String ap_num){
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<RouteVO> routeList = scheduleService.getRouteByRoute(airline, ap_num);
+		if(routeList == null) {
+			map.put("msg","등록된 루트가 없습니다.");
+			map.put("res", false);
+			return map;
+		}
+		map.put("routeList", routeList);
 		map.put("res", true);
 		return map;
 	}
