@@ -28,6 +28,7 @@ public class TicketingServiceImp implements TicketingService {
   
 	@Override
 	public List<TicketingVO> getTicketingList(String me_id) {
+		
 		return ticketingDao.selectTicketingList(me_id);
 	}
 	
@@ -84,12 +85,6 @@ public class TicketingServiceImp implements TicketingService {
 			return false;
 		}
 		return ticketingDao.updateTicketingState(ticketing);
-	}
-
-	@Override
-	public List<TicketingVO> getTicketingList(String me_id, Criteria cri) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }
