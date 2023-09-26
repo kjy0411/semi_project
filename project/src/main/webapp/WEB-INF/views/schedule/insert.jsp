@@ -1,3 +1,4 @@
+<insert>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
@@ -8,15 +9,10 @@
 		<div class="search-box container-fluid" style="flex: 2">
 			<form action="<c:url value='/schedule/insert'/>" method="post">
 				<div class="search-box">
-					<div class="airline-name form-group">
-						<span class="col-1">항공사</span> <br>
-						<input class="form-control" type="text" name="ap_al_name" readonly placeholder="항공사">
-						<span class="notice ap_al_name-notice" style="color: red;">항공사 입력은 필수사항 입니다.</span>
-					</div>
-					<div class="model-num form-group">
-						<span class="col-1">모델번호</span> <br>
-						<input class="form-control" type="text" name="ap_am_model" readonly placeholder="비행기 모델 번호">
-						<span class="notice ap_am_model-notice" style="color: red;">비행기 모델 번호 입력은 필수사항 입니다.</span>
+					<div class="resist-num form-group">
+						<span class="col-1">등록번호</span> <br>
+						<input class="form-control" type="text" name="sk_ap_num" readonly placeholder="등록번호">
+						<span class="notice sk_ap_num-notice" style="color: red;">등록번호 입력은 필수사항 입니다.</span>
 					</div>
 					<div class="route-num form-group">
 						<span class="col-1">노선번호</span> <br>
@@ -48,13 +44,13 @@
 	<script type="text/javascript">
 		$('.notice').hide();		
 		  $('form').submit(function() {
-			  let ap_al_num = $('[name=ap_al_num]').val();
+			  let sk_ap_num = $('[name=sk_ap_num]').val();
 			  let sk_ro_num = $('[name=sk_ro_num]').val();
 			  let sk_start_time = $('[name=sk_start_time]').val();
 			  let sk_time = $('[name=sk_time]').val();
 			  let sk_price = $('[name=sk_price]').val();
 			    if (sk_ap_num == '') {
-			      $('.ap_al_name-notice').show();
+			      $('.sk_ap_num-notice').show();
 			      return false;
 			    }
 				if(sk_ro_num == '') {
@@ -76,16 +72,16 @@
 			});
 	</script>
 	<script>
-	/* 항공사 */
-	$('.model-num').click(function() {
+	/* 등록번호 */
+	$('.resist-num').click(function() {
 		let airline = true;
 		let ap_num ="";
 		printAirplane(airline,ap_num);
 	})
-			$(document).on('click', '.select-model-num', function(){
+			$(document).on('click', '.select-resist-num', function(){
 			let value = $(this).text();
 			let num = $(this).prev().text();
-			$('[name=ap_al_name]').val(value);
+			$('[name=sk_ap_num]').val(value);
 			$('[name=ap_num]').val(num);
 			$('.popUp-box').empty();
 		})
@@ -105,8 +101,10 @@
 					if(data.res){			
 						for(air of data.airportList){	
 							str += `
-								<span class="ap_al_name" hidden="">\${air.ap_al_name}</span>
-								-<a class="select-airline-name" href="#">\${air.ap_al_name}</a> <br>
+								<span class="ap_num" hidden="">\${air.ap_num}</span>
+								-\${air.ap_al_name}<br>
+								-\${air.ap_am_model}<br>
+								-<a class="select-resist-num" href="#">\${air.ap_num}</a> <br>
 								<br>
 							`;												
 						}											
@@ -118,7 +116,7 @@
 				}
 			});
 		}
-
+	
 	/* 노선번호 */
 	$('.route-num').click(function() {
 		let airline = true;
@@ -138,16 +136,16 @@
 			$.ajax({
 				async : false,
 				method : 'post',
-				url : '<c:url value="/schedule/search/"/>',
+				url : '<c:url value="/schedule/route/"/>',
 				data : {airline:airline, ap_num:ap_num},
 				dataType : 'json',
 				success : function(data) {
 					console.log(data)
 					if(data.res){			
-						for(air of data.airportList){						
+						for(air of data.routeList){						
 							str += `
-								<span class="ro_num" hidden="">\${air.sk_ro_num}</span>
-								-<a class="select-route-num" href="#">\${air.sk_ro_num}</a> <br>
+								<span class="ro_num" hidden="">\${air.ro_num}</span>
+								-<a class="select-route-num" href="#">\${air.ro_num}</a> <br>
 								-\${air.ro_ai_start}<br>
 								-\${air.ro_ai_end}<br>
 								<br>
