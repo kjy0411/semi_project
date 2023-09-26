@@ -17,6 +17,8 @@ public interface RouteDAO {
 	RouteVO findRouteByNumber(int ro_num);
 	List<RouteVO> getRoutesByAirport(String aiNum);
 	void deleteRoutesByAirport(String aiNum);
+	List<RouteVO> selectRouteListGo(@Param("ai_num")String ai_num);
+	List<RouteVO> selectRouteListBack(@Param("ai_num")String ai_num);
 
 	
 	

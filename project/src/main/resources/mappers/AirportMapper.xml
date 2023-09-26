@@ -5,7 +5,7 @@
 <mapper namespace="kr.kh.project.dao.AirportDAO">
 
   <select id="selectAirportList" resultType="kr.kh.project.vo.AirportVO">
-    select * from airport
+    select * from airport order by ai_name asc
   </select>
 
   <!-- 공항 추가 -->

@@ -12,6 +12,7 @@ public class AirportVO {
 	private String ai_name;
 	private String ai_na_name;
 	private Date ai_standard_time;
+	private int ai_standard_type;
 	
 	private String na_division;
 	
@@ -20,7 +21,11 @@ public class AirportVO {
 			return "";	
 		}
 		SimpleDateFormat format = new SimpleDateFormat("hh:mm:ss");
-		return format.format(ai_standard_time);
+		if(ai_standard_type == 1) {
+			return format.format(ai_standard_time).equals("12:00:00") ? "00:00:00" : format.format(ai_standard_time);
+		}else{
+			return "-" + format.format(ai_standard_time);
+		}
 	}
 	public void setAi_standard_time(String time) {
 		SimpleDateFormat format = new SimpleDateFormat("hh:mm:ss");

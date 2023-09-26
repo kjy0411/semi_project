@@ -53,5 +53,15 @@ public class NationServiceImp implements NationService{
         // 인식 불가능한 국가인 경우
         return false;
     }
+
+	@Override
+	public List<NationVO> getNation() {
+		return nationDao.getNation();
+	}
+
+	@Override
+	public List<DivisionVO> getDivision() {
+		return nationDao.getDivision();
+	}
 	
 }

@@ -18,6 +18,8 @@ public interface RouteService {
 	RouteVO findRouteByNumber(int ro_num);
 	void deleteSchedulesByRouteNumber(int ro_num);
 	List<RouteVO> getRoutesByAirport(String aiNum);
+	List<RouteVO> findRouteGo(String ai_num);
+	List<RouteVO> findRouteback(String ai_num);
 	
 
 	

@@ -55,4 +55,38 @@
   	from
   		route
   </select>
+  <select id="selectRouteListGo" resultType="kr.kh.project.vo.RouteVO">
+  	select
+  		route.*,
+        (select
+			ai_name
+		from
+			airport
+		where
+			ai_num = ro_ai_start) as ai_name_start,
+        ai_name as ai_name_end
+  	from
+  		route
+			join
+		airport on ai_num = ro_ai_end
+  	where
+  		ro_ai_start = #{ai_num};
+  </select>
+  <select id="selectRouteListBack" resultType="kr.kh.project.vo.RouteVO">
+  	select
+  		route.*,
+  		ai_name as ai_name_start,
+        (select
+			ai_name
+		from
+			airport
+		where
+			ai_num = ro_ai_end) as ai_name_end
+  	from
+  		route
+			join
+		airport on ai_num = ro_ai_start
+  	where
+  		ro_ai_end = #{ai_num};
+  </select>
 </mapper>
