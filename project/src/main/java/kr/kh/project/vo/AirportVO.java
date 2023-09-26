@@ -13,6 +13,7 @@ public class AirportVO {
 	private String ai_na_name;
 	private Date ai_standard_time;
 	private int ai_standard_type;
+	private boolean ai_state;
 	
 	private String na_division;
 	
