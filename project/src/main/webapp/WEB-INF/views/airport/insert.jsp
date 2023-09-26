@@ -1,3 +1,4 @@
+@@ -1,100 +1,94 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
@@ -83,6 +84,7 @@
                         duplicateIATAMessageElement.innerHTML = "중복된 IATA 코드입니다.";
                     } else {
                         duplicateIATAMessageElement.style.color = "transparent"; // 숨기기
+                        duplicateIATAMessageElement.style.color = "transparent"; 
                         duplicateIATAMessageElement.innerHTML = "";
                     }
                 }

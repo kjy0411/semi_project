@@ -10,9 +10,10 @@
 
   <!-- 공항 추가 -->
   <insert id="insertAirport" parameterType="kr.kh.project.vo.AirportVO">
-    INSERT INTO airport (ai_name, ai_na_name, ai_standard_time)
-    VALUES (#{aiName}, #{aiNaName}, #{aiStandardTime});
+    INSERT INTO airport (ai_num, ai_name, ai_na_name, ai_standard_time, ai_standard_type)
+    VALUES (#{aiNum}, #{aiName}, #{aiNaName}, #{aiStandardTime}, #{aiStandardType});
   </insert>
+
 
   
   

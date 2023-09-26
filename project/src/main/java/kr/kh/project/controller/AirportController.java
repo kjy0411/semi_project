@@ -66,7 +66,9 @@ public class AirportController {
 	}
     
     @GetMapping("/insert")
-    public String showInsertForm() {
+    public String showInsertForm(Model model) {
+    	List<AirportVO> airportList = airportService.selectAirportList();
+    	model.addAttribute("airportList", airportList);
         return "/airport/insert";
     }
     @GetMapping("/getAirportList")
@@ -134,7 +136,9 @@ public class AirportController {
     }
    
     @GetMapping("/delete")
-    public String showDeleteForm() {
+    public String showDeleteForm(Model model) {
+    	List<AirportVO> airportList = airportService.selectAirportList();
+    	model.addAttribute("airportList", airportList);
         return "/airport/delete";
     }
     
