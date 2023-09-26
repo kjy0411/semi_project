@@ -1,6 +1,7 @@
 package kr.kh.project.service;
 
 import java.util.ArrayList;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +10,6 @@ import org.springframework.stereotype.Service;
 import kr.kh.project.dao.PointHistoryDAO;
 import kr.kh.project.dao.TicketingDAO;
 import kr.kh.project.dao.TicketingListDAO;
-import kr.kh.project.pagination.Criteria;
 import kr.kh.project.vo.PointHistoryVO;
 import kr.kh.project.vo.TicketingListVO;
 import kr.kh.project.vo.TicketingVO;
@@ -27,9 +27,9 @@ public class TicketingServiceImp implements TicketingService {
     PointHistoryDAO pointHistoryDao;
   
 	@Override
-	public List<TicketingVO> getTicketingList(String me_id, int ticketing) {
+	public List<TicketingVO> getTicketingList(String me_id) {
 		
-		return ticketingDao.selectTicketingList(me_id, ticketing);
+		return ticketingDao.selectTicketingList(me_id);
 	}
 	
 	@Override
@@ -76,14 +76,6 @@ public class TicketingServiceImp implements TicketingService {
 			}
 			ticketingDao.deleteTicketing(ticketing.getTi_num());
 		}
-	}
-	// 예매내역조회 상태 수정하기
-	@Override
-	public boolean updateTicketingState(TicketingVO ticketing) {
-		if(ticketing == null || ticketing.getTi_me_id() == null || ticketing.getTi_state() == null) {
-			return false;
-		}
-		return ticketingDao.updateTicketingState(ticketing);
 	}
 
 	@Override

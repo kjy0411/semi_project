@@ -48,7 +48,7 @@
 			<li class="nav-item">
 				<a class="nav-link" href="<c:url value='/reservation/search'/>">예매</a>
 			</li>
-			<li class="nav-item dropdown">
+			<li class="nav-item">
 				<a class="nav-link" href="<c:url value='/ticketing/inquiry'/>">예매내역 조회</a>
 			</li>
 			<c:if test="${user != null && user.me_authority == 'ADMIN'}">
@@ -61,7 +61,7 @@
 						<a class="dropdown-item" href="<c:url value='/menu/admin'/>">회원 권한</a>
 						<a class="dropdown-item" href="<c:url value='/menu/airport'/>">항공사/비행기</a>
 						<a class="dropdown-item" href="<c:url value='/airport/list'/>">공항/노선</a>
-						<a class="dropdown-item" href="<c:url value='/schedule/list'/>">스케줄</a>
+						<a class="dropdown-item" href="<c:url value='/menu/schedule'/>">스케줄</a>
 					</div>
 				</li>
 			</c:if>

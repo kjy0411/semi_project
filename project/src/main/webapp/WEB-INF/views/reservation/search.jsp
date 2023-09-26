@@ -100,7 +100,6 @@
 									for(air of data.airportList){
 										if(nat.na_name == air.ai_na_name){
 											if(route == true){
-												
 												str += `
 													<span class="ai_num" hidden="">\${air.ai_num}</span>
 													-<a class="select-start-airport" href="#">\${air.ai_name}</a> <br>
