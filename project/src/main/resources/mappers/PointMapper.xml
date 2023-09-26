@@ -9,13 +9,36 @@
 	<update id="checkPoint">
 		update point
 		set
-			po_mc_name = case
-		    when po_accumulate_point > 1000000 then "플래티넘"
-		    when po_accumulate_point > 500000 then "다이아몬드 플러스"
-		    when po_accumulate_point > 100000 then "다이아몬드"
-		    when po_accumulate_point > 50000 then "골드"
-			end
+		    po_accumulate_point = (
+					select
+					sum(ti_save_point)
+				from
+					ticketing
+				where
+					ti_me_id = #{me_id}
+				),
+			po_hold_point = (
+				select
+					sum(ti_save_point) - sum(ti_use_point)
+				from
+					ticketing
+				where
+					ti_me_id = #{me_id}
+				)
 		where
 			po_me_id = #{me_id};
+	</update>
+	<update id="updateClass">
+		update point
+			set
+				po_mc_name = case
+			    when po_accumulate_point >= 1000000 then "플래티넘"
+			    when po_accumulate_point >= 500000 then "다이아몬드플러스"
+			    when po_accumulate_point >= 100000 then "다이아몬드"
+			    when po_accumulate_point >= 50000 then "골드"
+			    when 50000 > po_accumulate_point then "실버"
+				end
+			where
+				po_me_id = #{me_id};
 	</update>
 </mapper>

@@ -459,7 +459,7 @@
 						alert(data.msg);
 						location.href='<c:url value="/"/>';
 						if(data.check){
-							alert("${data.point.po_mc_name}등급으로 승급했습니다.");
+							alert(data.point.po_mc_name + "등급으로 승급했습니다.");
 						}
 					}else{
 						alert(data.msg);
