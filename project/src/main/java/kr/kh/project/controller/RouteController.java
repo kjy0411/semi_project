@@ -5,8 +5,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import kr.kh.project.service.RouteService;
+import kr.kh.project.service.ScheduleService;
 import kr.kh.project.vo.RouteVO;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/route")
@@ -14,7 +18,7 @@ public class RouteController {
 
     @Autowired
     private RouteService routeService;
-
+    	
     @GetMapping("/insert")
     public String showInsertForm() {
         return "/route/insert";
@@ -36,4 +40,5 @@ public class RouteController {
         routeService.deleteRouteByNumber(po_num);
         return "redirect:/airport/list";
     }
+
 }

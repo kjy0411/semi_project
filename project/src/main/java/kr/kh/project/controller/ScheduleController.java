@@ -17,7 +17,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.kh.project.pagination.Criteria;
 import kr.kh.project.service.ScheduleService;
+import kr.kh.project.util.Message;
 import kr.kh.project.vo.AirplaneVO;
+import kr.kh.project.vo.MemberVO;
+import kr.kh.project.vo.RouteVO;
 import kr.kh.project.vo.ScheduleVO;
 
 
@@ -31,13 +34,26 @@ public class ScheduleController {
 	public String searchReservation(Model model) {
 		return "/schedule/insert";
 	}
-	@ResponseBody
+	
 	@PostMapping("/schedule/insert")
+	public String insert(Model model,ScheduleVO schedule) {
+		Message msg = new Message("schedule/insert", "스케줄 추가에 실패했습니다.");
+		System.out.println(schedule);
+		if(scheduleService.insertSchedule(schedule)) {
+			msg = new Message("/schedule/list", "스케줄 추가에 성공했습니다.");
+		}
+		System.out.println(msg);
+		model.addAttribute("msg", msg);
+		return "message";
+	}
+	
+	@ResponseBody
+	@PostMapping("/schedule/search")
 	public Map<String, Object> searchReservationPost(@RequestParam("airline")boolean airline, @RequestParam("ap_num")String ap_num){
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<AirplaneVO> airplaneList = scheduleService.getAirplaneByRoute(airline, ap_num);
 		if(airplaneList == null) {
-			map.put("msg","등록된 노선이 없습니다.");
+			map.put("msg","등록된 항공기가 없습니다.");
 			map.put("res", false);
 			return map;
 		}
@@ -45,15 +61,7 @@ public class ScheduleController {
 		map.put("res", true);
 		return map;
 	}
-	
-	@RequestMapping("/schedule/insert")
-	public String insert(Model model, ScheduleVO scheduleVo) {
-		List<ScheduleVO> insert = scheduleService.getScheduleInsert(scheduleVo);
-		
-		model.addAttribute("insert", insert);
-		return "/schedule/list";
-	}
-    
+	    
 	@RequestMapping("/schedule/list")
 	public String list(Model model, Criteria cri) {
 		List<ScheduleVO> list = scheduleService.getScheduleList(cri);

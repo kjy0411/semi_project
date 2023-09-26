@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import kr.kh.project.pagination.Criteria;
 import kr.kh.project.vo.AirplaneVO;
+import kr.kh.project.vo.RouteVO;
 import kr.kh.project.vo.ScheduleVO;
 
 public interface ScheduleDAO {
@@ -16,11 +17,12 @@ public interface ScheduleDAO {
 
 	boolean deleteSchedule(@Param("sk_num")String sk_num);
 
-	void insertSchedule(@Param("schedule")ScheduleVO schedule);
+	boolean insertSchedule(@Param("schedule")ScheduleVO schedule);
 
 	List<ScheduleVO> insertSchedules(@Param("scheduleVo")ScheduleVO scheduleVo);
 
 	List<AirplaneVO> getAirplaneSchedule(@Param("airline")boolean airline,@Param("ap_num") String ap_num);
+
 
 
 }

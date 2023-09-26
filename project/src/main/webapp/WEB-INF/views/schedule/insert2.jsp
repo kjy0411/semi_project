@@ -121,6 +121,56 @@
 				dataType : 'json',
 				success : function(data) {
 		}
+				
+				
+				
+				
+				
+				$('.route-num').click(function() {
+					let route = true;
+					let ro_num ="";
+					printRoute(route,ro_num);
+				})
+						$(document).on('click', '.select-route-num', function(){
+						let value = $(this).text();
+						let num = $(this).prev().text();
+						$('[name=royte]').val(value);
+						$('[name=ro_num]').val(num);
+						$('.popUp-box').empty();
+					})
+				
+				
+					function printRoute(route, ro_num) {
+						str = ``;
+						$.ajax({
+							async : false,
+							method : 'post',
+							url : '<c:url value="/schedule/insert/"/>',
+							data : {route:route, ro_num:ro_num},
+							dataType : 'json',
+							success : function(data) {
+								console.log(data)
+								if(data.res){			
+									for(air of data.routeList){						
+										str += `
+											<span class="ro_num" hidden="">\${air.ro_num}</span>
+											-<a class="select-route-num" href="#">\${air.ro_num}</a> <br>
+										`;												
+									}											
+								}else {
+									alert(data.msg);
+								}
+							$('.popUp-box').html(str);
+							}
+						});
+					}		
+				
+				
+				
+				
+				
+				
+				
 	</script>
 </body>
 </html>
