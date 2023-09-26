@@ -10,4 +10,6 @@ public interface AirplaneService {
 
 	List<Integer> getPath(Integer sk_num);
 
+	List<AirplaneVO> getAirplaneByAlName(String al_name);
+
 }

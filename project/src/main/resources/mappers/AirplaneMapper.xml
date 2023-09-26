@@ -35,5 +35,12 @@
 	where
 		sk_num = #{sk_num};
   </select>
-  
+  <select id="selectAirplaneByAlName" resultType="kr.kh.project.vo.AirplaneVO">
+  	select
+	    *
+	from
+		airplane
+	where
+		ap_al_name = #{al_name}
+  </select>
 </mapper>

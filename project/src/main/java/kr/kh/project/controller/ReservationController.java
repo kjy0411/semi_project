@@ -21,7 +21,6 @@ import kr.kh.project.service.AirportService;
 import kr.kh.project.service.NationService;
 import kr.kh.project.service.PointHistoryService;
 import kr.kh.project.service.PointService;
-import kr.kh.project.service.ReservationService;
 import kr.kh.project.service.RouteService;
 import kr.kh.project.service.ScheduleService;
 import kr.kh.project.service.SeatService;
@@ -42,9 +41,6 @@ import kr.kh.project.vo.TicketingVO;
 
 @Controller
 public class ReservationController {
-	
-	@Autowired
-	ReservationService reservationService;
 	
 	@Autowired
 	AirportService airportService;

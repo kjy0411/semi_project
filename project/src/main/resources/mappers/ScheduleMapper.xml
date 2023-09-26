@@ -60,4 +60,38 @@
 		order by
 			sk_start_time asc
 	</select>
+	<select id="selectScheduleList" resultType="kr.kh.project.vo.ScheduleVO">
+		select
+			schedule.*,
+		    addtime(addtime(subtime(sk_start_time, ai_start.ai_standard_time), sk_time), ai_end.ai_standard_time) as sk_end_time,
+		    ro_ai_start,
+		    ai_start.ai_name as ai_start_name,
+		    ro_ai_end,
+		    ai_end.ai_name as ai_end_name,
+		    ap_al_name,
+		    if(sk_start_time > now(), true, false) as del_res
+		from
+			schedule
+				join
+			airplane on ap_num = sk_ap_num
+				join
+			route on sk_ro_num = ro_num
+				join
+			airport as ai_start on ai_start.ai_num = ro_ai_start
+				join
+			airport as ai_end on ai_end.ai_num = ro_ai_end
+		where
+			sk_state = 1
+		order by
+			sk_num desc
+		limit #{cri.pageStart}, #{cri.perPageNum}
+	</select>
+	<select id="getTotalCount" resultType="int">
+		select
+			count(*)
+		from
+			schedule
+		where
+			sk_state = 1
+	</select>
 </mapper>

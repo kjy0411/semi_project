@@ -29,4 +29,12 @@ public class AirplaneServiceImp implements AirplaneService {
 		}
 		return airplaneDao.selectPath(sk_num);
 	}
+
+	@Override
+	public List<AirplaneVO> getAirplaneByAlName(String al_name) {
+		if(al_name == null) {
+			return null;
+		}
+		return airplaneDao.selectAirplaneByAlName(al_name);
+	}
 }

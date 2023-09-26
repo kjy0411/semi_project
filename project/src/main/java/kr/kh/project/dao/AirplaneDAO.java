@@ -12,4 +12,6 @@ public interface AirplaneDAO {
 
 	List<Integer> selectPath(@Param("sk_num")Integer sk_num);
 
+	List<AirplaneVO> selectAirplaneByAlName(@Param("al_name")String al_name);
+
 }

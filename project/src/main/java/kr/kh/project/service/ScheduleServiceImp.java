@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.kh.project.dao.ScheduleDAO;
+import kr.kh.project.pagination.Criteria;
 import kr.kh.project.vo.ScheduleVO;
 
 @Service
@@ -36,5 +37,13 @@ public class ScheduleServiceImp implements ScheduleService{
 			return null;
 		}
 		return scheduleDao.selectSchedule(sk_num);
+	}
+	@Override
+	public List<ScheduleVO> getScheduleList(Criteria cri) {
+		return scheduleDao.selectScheduleList(cri);
+	}
+	@Override
+	public int getTotalCount() {
+		return scheduleDao.getTotalCount();
 	}
 }
