@@ -8,26 +8,30 @@
 </head>
 <body>
 	 <table class="table table-condensed">
-  <h1>항공 상세정보</h1>
+  <h1 style="font-size:25px;">항공 상세정보</h1>
     <thead>
+    	<tr>
+		<br><a href="<c:url value='/menu/airport'/>"> <button type="button" class="btn btn-primary" >뒤로가기</button> </a><br>
+		</tr>
 	      <tr>
-	        <th>항공사명</th>
-	        <th>항공기번호</th>
-	        <th>항공기명</th>    
+	        <th style="text-align: center;border : 1px solid">항공사명</th>
+	        <th style="text-align: center;border : 1px solid">항공기번호</th>
+	        <th style="text-align: center;border : 1px solid">항공기명</th>    
 	      </tr>
 		  <tr>
 		<c:set var="selectedAirline" value="${param.al_name}" />
             <c:forEach items="${list}" var="airplane">
                 <c:if test="${selectedAirline eq airplane.ap_al_name}">
                     <tr>
-                        <td>${airplane.ap_al_name}</td>
-                        <td>${airplane.ap_num}</td>
-                        <td>${airplane.ap_am_model}</td>
+                        <td style="text-align: center;border : 1px solid">${airplane.ap_al_name}</td>
+                        <td style="text-align: center;border : 1px solid">${airplane.ap_num}</td>
+                        <td style="text-align: center;border : 1px solid">${airplane.ap_am_model}</td>
                     </tr>
                 </c:if>
-            </c:forEach>
+            </c:forEach><br>
 		</tr>
-	</thead>	
+		
+		</thead>
 	</table>
 </body>
 </html>

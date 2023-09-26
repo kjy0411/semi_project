@@ -10,11 +10,10 @@
 <script src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
 </head>
 <body>
-	<h1>항공사 삭제</h1>
+	<h1 style="font-size:25px;">항공사 삭제</h1>
 	
 	 <form action="<c:url value='/airline/delete'/>" method="post">
         <div class="form-group">
-            <label for="al_name">항공사 선택</label>
 	            <select class="form-control" name="al_name" id="al_name">
 	                <c:forEach items="${list}" var="airline">
 	                    <option value="${airline.al_name }">
