@@ -6,7 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import lombok.Data;
-//테스트
+
 @Data
 public class ScheduleVO {
 	private int sk_num;
