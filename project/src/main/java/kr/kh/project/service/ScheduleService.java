@@ -8,6 +8,9 @@ public interface ScheduleService {
 
 	List<ScheduleVO> getScheduleByRoute(int ro_num, String startDate);
 
+	List<ScheduleVO> getSchedulesByRouteNumber(int sk_ro_num);
+	void deleteScheduleByNumber(int sk_ro_num);
+	
 	ScheduleVO getSchdeule(Integer sk_num);
 
 }
