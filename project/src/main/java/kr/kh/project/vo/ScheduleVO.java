@@ -37,7 +37,6 @@ public class ScheduleVO {
 	
 	private String ai_name_start;
 	private String ai_name_end;
-> main
 	
 	public String getSk_price_str() {
 		if(sk_price == null) {

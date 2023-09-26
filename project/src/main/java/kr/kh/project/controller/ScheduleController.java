@@ -38,11 +38,9 @@ public class ScheduleController {
 	@PostMapping("/schedule/insert")
 	public String insert(Model model,ScheduleVO schedule) {
 		Message msg = new Message("schedule/insert", "스케줄 추가에 실패했습니다.");
-		System.out.println(schedule);
 		if(scheduleService.insertSchedule(schedule)) {
 			msg = new Message("/schedule/list", "스케줄 추가에 성공했습니다.");
 		}
-		System.out.println(msg);
 		model.addAttribute("msg", msg);
 		return "message";
 	}
