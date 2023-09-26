@@ -73,7 +73,8 @@ CREATE TABLE `airport` (
 	`ai_num`	varchar(3)	NOT NULL	PRIMARY KEY	COMMENT 'IATA코드',
 	`ai_name`	varchar(30)	NOT NULL,
 	`ai_na_name`	varchar(20)	NOT NULL,
-	`ai_standard_time`	time	NOT NULL	COMMENT 'UTC'
+	`ai_standard_time`	time	NOT NULL	COMMENT 'UTC',
+    `ai_standard_type`	int		NOT NULL
 );
 
 DROP TABLE IF EXISTS `airplane`;

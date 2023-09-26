@@ -60,7 +60,7 @@
 					<div class="dropdown-menu">
 						<a class="dropdown-item" href="<c:url value='/menu/admin'/>">회원 권한</a>
 						<a class="dropdown-item" href="<c:url value='/menu/airport'/>">항공사/비행기</a>
-						<a class="dropdown-item" href="<c:url value='/menu/route'/>">공항/노선</a>
+						<a class="dropdown-item" href="<c:url value='/airport/list'/>">공항/노선</a>
 						<a class="dropdown-item" href="<c:url value='/menu/schedule'/>">스케줄</a>
 					</div>
 				</li>

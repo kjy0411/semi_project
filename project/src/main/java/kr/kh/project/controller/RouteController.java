@@ -8,7 +8,10 @@ import kr.kh.project.service.AirportService;
 import kr.kh.project.service.RouteService;
 import kr.kh.project.vo.AirportVO;
 import kr.kh.project.vo.RouteVO;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/route")
@@ -74,7 +77,7 @@ public class RouteController {
     }
 
     // 노선 삭제를 처리하는 메서드
-    @PostMapping("/delete")
+   /* @PostMapping("/delete")
     public String deleteRoute(@RequestParam("ro_num") int ro_num, Model model) {
         // 노선 삭제 전에 해당 노선이 존재하는지 확인.
         RouteVO existingRoute = routeService.findRouteByNumber(ro_num);
@@ -98,8 +101,20 @@ public class RouteController {
 
         // 성공 메시지와 함께 노선 삭제 페이지로 리다이렉트.
         return "redirect:/route/delete?success=true";
-    }
-
+    }*/
+    @ResponseBody
+    @PostMapping("/delete")
+	public Map<String, Object> selectReservationPost(@RequestBody int num){
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		routeService.deleteSchedulesByRouteNumber(num);
+		
+		routeService.deleteRouteByNumber(num);
+		
+		boolean res = true;
+		map.put("res", res);
+		return map;
+	}
     // 출발 노선 리스트 페이지를 불러오는 메서드
     @GetMapping("/departure-routes/{ai_num}")
     public String getDepartureRoutes(@PathVariable String ai_num, Model model) {

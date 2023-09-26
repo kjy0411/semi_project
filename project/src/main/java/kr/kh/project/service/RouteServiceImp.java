@@ -91,5 +91,21 @@ public class RouteServiceImp implements RouteService {
         return routeDao.getRoutesByAirport(aiNum);
     }
 
+	@Override
+	public List<RouteVO> findRouteGo(String ai_num) {
+		if(ai_num == null) {
+			return null;
+		}
+		return routeDao.selectRouteListGo(ai_num);
+	}
+
+	@Override
+	public List<RouteVO> findRouteback(String ai_num) {
+		if(ai_num == null) {
+			return null;
+		}
+		return routeDao.selectRouteListBack(ai_num);
+	}
+
 	
 }
