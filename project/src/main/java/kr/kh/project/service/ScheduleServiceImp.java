@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.kh.project.dao.ScheduleDAO;
+import kr.kh.project.pagination.Criteria;
+import kr.kh.project.vo.AirplaneVO;
+import kr.kh.project.vo.RouteVO;
 import kr.kh.project.vo.ScheduleVO;
 
 @Service
@@ -20,6 +23,50 @@ public class ScheduleServiceImp implements ScheduleService{
 		}
 		return scheduleDao.selectScheduleByRoute(ro_num, startDate);
 	}
+
+	@Override
+	public List<ScheduleVO> getScheduleList(Criteria cri) {
+		if(cri == null) {
+			cri = new Criteria();
+		}
+		return scheduleDao.selectScheduleList(cri);
+	}
+
+	@Override
+	public boolean deleteSchedule(String sk_num){
+		
+		return scheduleDao.deleteSchedule(sk_num);
+	}
+
+	@Override
+	public void insertSchedulePost(ScheduleVO schedule) {
+		
+		scheduleDao.insertSchedule(schedule);
+	}
+
+	@Override
+	public List<ScheduleVO> getScheduleInsert(ScheduleVO scheduleVo) {
+		return scheduleDao.insertSchedules(scheduleVo);
+	}
+
+	@Override
+	public List<AirplaneVO> getAirplaneByRoute(boolean airline, String ap_num) {
+		return scheduleDao.getAirplaneSchedule(airline, ap_num);
+	}
+
+	@Override
+	public boolean insertSchedule(ScheduleVO schedule) {
+		if(schedule.getSk_ap_num() == null
+		|| schedule.getSk_ro_num() == 0
+		|| schedule.getSk_start_time() == null
+		|| schedule.getSk_time() == null
+		|| schedule.getSk_price()  == null) {
+			return false;
+		}
+		
+		return scheduleDao.insertSchedule(schedule);
+	}
+
 	@Override
 	public List<ScheduleVO> getSchedulesByRouteNumber(int sk_ro_num) {
 	    return scheduleDao.getSchedulesByRouteNumber(sk_ro_num);
@@ -37,4 +84,5 @@ public class ScheduleServiceImp implements ScheduleService{
 		}
 		return scheduleDao.selectSchedule(sk_num);
 	}
+
 }

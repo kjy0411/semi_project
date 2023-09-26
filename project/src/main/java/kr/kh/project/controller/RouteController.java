@@ -6,6 +6,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import kr.kh.project.service.AirportService;
 import kr.kh.project.service.RouteService;
+
+import kr.kh.project.service.ScheduleService;
 import kr.kh.project.vo.AirportVO;
 import kr.kh.project.vo.RouteVO;
 
@@ -130,4 +132,5 @@ public class RouteController {
         model.addAttribute("arrivalRoutes", arrivalRoutes);
         return "/route/detail";
     }
+
 }

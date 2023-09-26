@@ -1,22 +1,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page language="java" contentType="text/html; charset=utf-8" 
-	pageEncoding="utf-8" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="EUC-KR">
-<title>항공편 검색</title>
-</head>
 <body>
 	<div style="width: 100%; display: flex;">
 		<div class="search-box container-fluid" style="flex: 2">
 			<form action="<c:url value='/reservation/list'/>" method="get">
-				<div class="input-group-prepend">
-				   <select class="from-control" name="ticketType">
-				   	<option value="2">왕복</option>
-				   	<option value="1">편도</option>
-				   </select>
-				</div>
 				<div class="search-box">
 					<div class="start-airport form-group">
 						<span class="col-1">출발지</span> <br>
@@ -26,23 +16,12 @@
 						<span class="col-1">도착지</span> <br>
 						<input class="form-control" type="text" name="endAriport" readonly placeholder="도착지">
 					</div>
-					<div class="start-time form-group">
-						<span class="col-1">출발시간</span> <br>
-						<input class="form-control" type="date" name="startDay" min="">
-					</div>
-					<div class="end-time form-group" style="height: 78px">
-						<span class="col-1">도착시간</span> <br>
-						<input class="form-control" type="date" name="endDay" min="">
-					</div>
-					<div class="seat-amount form-group">
-						<span class="col-1">예매좌석수</span> <br>
-						<input class="form-control" type="number" min="1" name="seatAmount" value="1">
-					</div>
 				</div>
-				<input class="form-control" type="text" name="ro_ai_start" readonly>
-				<input class="form-control" type="text" name="ro_ai_end" readonly>
+				<input class="form-control" type="number" name="ro_num" readonly>
 				<button class="btn btn-outline-primary">검색</button>
 			</form>
+				<input class="form-control" type="text" name="ro_ai_start" readonly>
+				<input class="form-control" type="text" name="ro_ai_end" readonly>
 		</div>
 		<div class="popUp-box container-fluid" style="flex: 3; padding: 10px; overflow: scroll; height: 750px">
 		</div>
@@ -51,9 +30,6 @@
 	<script type="text/javascript">
 		let str = ``;
 		let today = new Date().toISOString().substring(0, 10); //2023-09-13
-		$('[name=startDay]').val(today).prop('min', today);
-		$('[name=endDay]').val(today).prop('min', today);
-		
 		$('.start-airport').click(function() {
 			let route = true;
 			let ai_num = "";
@@ -100,7 +76,6 @@
 									for(air of data.airportList){
 										if(nat.na_name == air.ai_na_name){
 											if(route == true){
-												
 												str += `
 													<span class="ai_num" hidden="">\${air.ai_num}</span>
 													-<a class="select-start-airport" href="#">\${air.ai_name}</a> <br>
@@ -131,23 +106,71 @@
 			$('[name=endAriport]').val(value);
 			$('[name=ro_ai_end]').val(num);
 			$('.popUp-box').empty();
+			
+			let ro_ai_start = $('.ro_ai_start').val();
+			let ro_ai_end = $('.ro_ai_end').val();
+			
+			findRo_num(ro_ai_start, ro_ai_end)
 		})
-		
-		$('[name=ticketType]').change(function() {
-			let str = ``;
-			if($(this).val() == 2){
-				str = `
-					<span class="col-1">도착시간</span> <br>
-					<input class="form-control" type="date" value=\${today} name="endDay" min=\${today}>
-				`;
-				$('.end-time').html(str);
-			}else if($(this).val() == 1){
-				str = `
-					
-					`;
-				$('.end-time').html(str);
-			}
-		})
+		function findRo_num(ro_ai_start, ro_ai_end) {
+			$.ajax({
+				async : false,
+				method : 'post',
+				url : '<c:url value="/reservation/search/"/>',
+				data : {ro_ai_start:ro_ai_start, ro_ai_end:ro_ai_end},
+				dataType : 'json',
+				success : function(data) {
+		}
+				
+				
+				
+				
+				
+				$('.route-num').click(function() {
+					let route = true;
+					let ro_num ="";
+					printRoute(route,ro_num);
+				})
+						$(document).on('click', '.select-route-num', function(){
+						let value = $(this).text();
+						let num = $(this).prev().text();
+						$('[name=royte]').val(value);
+						$('[name=ro_num]').val(num);
+						$('.popUp-box').empty();
+					})
+				
+				
+					function printRoute(route, ro_num) {
+						str = ``;
+						$.ajax({
+							async : false,
+							method : 'post',
+							url : '<c:url value="/schedule/insert/"/>',
+							data : {route:route, ro_num:ro_num},
+							dataType : 'json',
+							success : function(data) {
+								console.log(data)
+								if(data.res){			
+									for(air of data.routeList){						
+										str += `
+											<span class="ro_num" hidden="">\${air.ro_num}</span>
+											-<a class="select-route-num" href="#">\${air.ro_num}</a> <br>
+										`;												
+									}											
+								}else {
+									alert(data.msg);
+								}
+							$('.popUp-box').html(str);
+							}
+						});
+					}		
+				
+				
+				
+				
+				
+				
+				
 	</script>
 </body>
 </html>
