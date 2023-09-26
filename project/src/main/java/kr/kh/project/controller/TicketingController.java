@@ -50,5 +50,36 @@ public class TicketingController {
 		map.put("res", res);
 		return map;
 	}
-	
+	//확정 조회
+	@GetMapping("/ticketing/done")
+	public String ticketingDone(Model model, HttpSession session) {
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		
+		if( user != null) {
+		// 티케팅 리스트를 가져오라고 서비스에게 시킴
+		List<TicketingVO> list = ticketingService.getTicketingList2(user.getMe_id());
+		
+		// 화면에 데이터를 전송하기 위해 model에서 list를 담아서 보낸다.
+		model.addAttribute("list",list);
+		model.addAttribute("userId",user);
+		}
+		//System.out.println("User ID : " + user.getMe_id());
+		return "/ticketing/done";
+	}
+	//예매취소 조회
+		@GetMapping("/ticketing/cancel")
+		public String ticketingCancel(Model model, HttpSession session) {
+			MemberVO user = (MemberVO)session.getAttribute("user");
+			
+			if( user != null) {
+			// 티케팅 리스트를 가져오라고 서비스에게 시킴
+			List<TicketingVO> list = ticketingService.getTicketingList3(user.getMe_id());
+			
+			// 화면에 데이터를 전송하기 위해 model에서 list를 담아서 보낸다.
+			model.addAttribute("list",list);
+			model.addAttribute("userId",user);
+			}
+			//System.out.println("User ID : " + user.getMe_id());
+			return "/ticketing/cancel";
+		}
 }

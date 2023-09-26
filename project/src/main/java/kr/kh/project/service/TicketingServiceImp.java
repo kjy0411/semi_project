@@ -86,5 +86,17 @@ public class TicketingServiceImp implements TicketingService {
 		}
 		return ticketingDao.updateTicketingState(ticketing);
 	}
+	// 확정 조회
+	@Override
+	public List<TicketingVO> getTicketingList2(String me_id) {
+		
+		return ticketingDao.selectTicketingListByDone(me_id);
+	}
+	// 예매취소 조회
+	@Override
+	public List<TicketingVO> getTicketingList3(String me_id) {
+
+		return ticketingDao.selectTicketingListByCancel(me_id);
+	}
 
 }

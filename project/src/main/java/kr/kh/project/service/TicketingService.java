@@ -16,5 +16,9 @@ public interface TicketingService {
 	void deleteTicketing(List<TicketingVO> ticketingList);
 
 	boolean updateTicketingState(TicketingVO ticketing);
+
+	List<TicketingVO> getTicketingList2(String me_id);
+
+	List<TicketingVO> getTicketingList3(String me_id);
 	
 }

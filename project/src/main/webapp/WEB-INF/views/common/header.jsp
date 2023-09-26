@@ -48,8 +48,15 @@
 			<li class="nav-item">
 				<a class="nav-link" href="<c:url value='/reservation/search'/>">예매</a>
 			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="<c:url value='/ticketing/inquiry'/>">예매내역 조회</a>
+			<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="<c:url value='/ticketing/inquiry'/>" data-toggle="dropdown">
+				예매내역 조회
+				</a>
+				<div class="dropdown-menu">
+					<a class="dropdown-item" href="<c:url value='/ticketing/inquiry'/>">미확정</a>
+					<a class="dropdown-item" href="<c:url value='/ticketing/done'/>">확정</a>
+					<a class="dropdown-item" href="<c:url value='/ticketing/cancel'/>">예매취소</a>
+				</div>
 			</li>
 			<c:if test="${user != null && user.me_authority == 'ADMIN'}">
 				<span>|</span>
