@@ -10,4 +10,6 @@ public interface TicketingListService {
 
 	TicketingListVO selectTicketingList(TicketingListVO ticket);
 
+	List<TicketingListVO> selectTicketListByNum(int ti_num);
+
 }

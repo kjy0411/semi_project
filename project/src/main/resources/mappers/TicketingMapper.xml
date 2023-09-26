@@ -3,6 +3,22 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.kh.project.dao.TicketingDAO">
+	<select id="selectTicketingList" resultType="kr.kh.project.vo.TicketingVO">
+		select 
+			ticketing.*,
+		    (select ai_name from airport where ai_num = ro_ai_start) as ai_start_name,
+		    (select ai_name from airport where ai_num = ro_ai_end) as ai_end_name
+		from 
+			ticketing 
+					join 
+			schedule on ti_sk_num = sk_num
+					join
+			route on sk_ro_num = ro_num
+		where 
+			ti_me_id = #{me_id}
+				and
+			ti_state = "미확정" 
+	</select>
 	<insert id="insertTicketing">
 		insert into 
 		ticketing
@@ -40,5 +56,19 @@
 			member on me_id = po_me_id
 		where
 			me_id = #{ti_me_id};
+	</select>
+	<select id="selectTicketingByNum" resultType="kr.kh.project.vo.TicketingVO">
+		select 
+			ticketing.*,
+		    (select ai_name from airport where ai_num = ro_ai_start) as ai_start_name,
+		    (select ai_name from airport where ai_num = ro_ai_end) as ai_end_name
+		from 
+			ticketing 
+					join 
+			schedule on ti_sk_num = sk_num
+					join
+			route on sk_ro_num = ro_num
+		where 
+			ti_num = #{ti_num}
 	</select>
 </mapper>

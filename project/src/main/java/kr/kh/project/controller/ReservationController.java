@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import kr.kh.project.service.AirplaneService;
 import kr.kh.project.service.AirportService;
 import kr.kh.project.service.NationService;
+import kr.kh.project.service.PointHistoryService;
 import kr.kh.project.service.PointService;
 import kr.kh.project.service.ReservationService;
 import kr.kh.project.service.RouteService;
@@ -65,6 +66,9 @@ public class ReservationController {
 	
 	@Autowired
 	PointService pointService;
+	
+	@Autowired
+	PointHistoryService pointHistoryService;
 	
 	@Autowired
 	TicketingService ticketingService;
@@ -215,6 +219,7 @@ public class ReservationController {
 		List<TicketingListVO> ticketList = new ArrayList<TicketingListVO>(type*ti_amount);
 		String msg = "항공권 예매를 실패했습니다.";
 		boolean res = false;
+		//예매 생성
 		for(int i = 0; i < type; i ++) {
 			ticketing.setTi_sk_num(ti_sk_num[i]);
 			ticketing.setTi_me_id(ti_me_id);
@@ -226,15 +231,20 @@ public class ReservationController {
 				ticketingList.add(ticketingService.selectTicketing(ticketing.getTi_me_id()));				
 			}
 		}
-		for(int j = 0; j < se_num.length; j++) {
+		//마일리지내역 생성
+		for(int i = 0; i < type; i ++) {
+			pointHistoryService.insertPointHistory(ticketingList.get(i));
+		}
+		//예매리스트 생성
+		for(int i = 0; i < se_num.length; i++) {
 			String tl_num = null;
 			int tl_ti_num = 0;
 			int sk_num = 0;
-			if(j < ti_amount){
+			if(i < ti_amount){
 				tl_num = search.getToDay() + search.getRo_ai_start() + "-" + search.getRo_ai_end();		
 				tl_ti_num = ticketingList.get(0).getTi_num();
 				sk_num = ticketingList.get(0).getTi_sk_num();
-			}if(j + 1 > ti_amount) {
+			}if(i + 1 > ti_amount) {
 				tl_num = search.getToDay() + search.getRo_ai_end() + "-" + search.getRo_ai_start();	
 				tl_ti_num = ticketingList.get(1).getTi_num();
 				sk_num = ticketingList.get(1).getTi_sk_num();
@@ -242,7 +252,7 @@ public class ReservationController {
 			if(tl_num != null) {
 				ticket.setTl_num(tl_num);
 				ticket.setTl_ti_num(tl_ti_num);
-				ticket.setTl_se_num(se_num[j]);
+				ticket.setTl_se_num(se_num[i]);
 				
 				if(ticketingListService.insertTicketingList(sk_num, ticket)) {
 					ticketList.add(ticketingListService.selectTicketingList(ticket));					
@@ -254,8 +264,13 @@ public class ReservationController {
 				}
 			}
 		}
+		//등업조건 만족 여부를 확인
+		boolean check = pointService.checkPoint(ti_me_id);
+		PointVO point = pointService.getPoint(ti_me_id);
 		msg = "항공권 예매를 성공했습니다.";
 		res = true;
+		map.put("point", point);
+		map.put("check", check);
 		map.put("msg", msg);
 		map.put("res", res);
 		return map;

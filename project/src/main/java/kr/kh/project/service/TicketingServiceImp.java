@@ -1,13 +1,16 @@
 package kr.kh.project.service;
 
 import java.util.ArrayList;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import kr.kh.project.dao.PointHistoryDAO;
 import kr.kh.project.dao.TicketingDAO;
 import kr.kh.project.dao.TicketingListDAO;
+import kr.kh.project.vo.PointHistoryVO;
 import kr.kh.project.vo.TicketingListVO;
 import kr.kh.project.vo.TicketingVO;
 
@@ -20,6 +23,15 @@ public class TicketingServiceImp implements TicketingService {
     @Autowired
     TicketingListDAO ticketingListDao;
     
+    @Autowired
+    PointHistoryDAO pointHistoryDao;
+  
+	@Override
+	public List<TicketingVO> getTicketingList(String me_id) {
+		
+		return ticketingDao.selectTicketingList(me_id);
+	}
+	
 	@Override
 	public boolean insertTicketing(TicketingVO ticketing) {
 		ticketing.setMc_bonus_point(ticketingDao.findBonus(ticketing.getTi_me_id()));
@@ -52,12 +64,26 @@ public class TicketingServiceImp implements TicketingService {
 				continue;
 			}
 			List<TicketingListVO> ticketList = new ArrayList<TicketingListVO>();
+			List<PointHistoryVO> pointHistoryList = new ArrayList<PointHistoryVO>();
+			
 			ticketList = ticketingListDao.selectTicketingListByTi_num(ticketing.getTi_num());
+			pointHistoryList = pointHistoryDao.selectPotinHistoryList(ticketing.getTi_num());
 			for(TicketingListVO ticket : ticketList) {
 				ticketingListDao.deleteTicketingList(ticket.getTl_num());				
 			}
+			for(PointHistoryVO pointHistory : pointHistoryList) {
+				pointHistoryDao.deletePointHistoryList(pointHistory.getPh_num());
+			}
 			ticketingDao.deleteTicketing(ticketing.getTi_num());
 		}
+	}
+
+	@Override
+	public TicketingVO selectTicketingByNum(int ti_num) {
+		if(ti_num == 0) {
+			return null;
+		}
+		return ticketingDao.selectTicketingByNum(ti_num);
 	}
 
 }

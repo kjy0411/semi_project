@@ -124,13 +124,13 @@
 			<div>
 				<c:forEach begin="1" end="${search.seatAmount}">
 					<div class="go-seat-box">
-						<input type="text" class="go-seat-num seat-num" name="tl_se_num" readonly>
+						<input type="text" class="go-seat-num seat-num" name="tl_se_num" readonly hidden>
 					</div>
 				</c:forEach>
 				<c:if test="${search.ticketType == 2}">
 					<c:forEach begin="1" end="${search.seatAmount}">
 						<div class="back-seat-box">
-							<input type="text" class="back-seat-num seat-num" name="tl_se_num">
+							<input type="text" class="back-seat-num seat-num" name="tl_se_num" hidden>
 						</div>
 					</c:forEach>
 				</c:if>
@@ -240,6 +240,9 @@
 			$('.btn-payment-complete').hide();
 		});
 		$(document).on('change', '.ti_use_point', function() {
+			if($(this).val() > ${point.po_hold_point}){
+				$(this).val(${point.po_hold_point});
+			}
 			let totalPrice = Number($('.ti_total_price').text());
 			let point = Number($('.ti_use_point').val());
 			let realPrice = totalPrice - point;
@@ -455,6 +458,9 @@
 					if(data.res){
 						alert(data.msg);
 						location.href='<c:url value="/"/>';
+						if(data.check){
+							alert(data.point.po_mc_name + "등급으로 승급했습니다.");
+						}
 					}else{
 						alert(data.msg);
 						$('.seat-name').show();

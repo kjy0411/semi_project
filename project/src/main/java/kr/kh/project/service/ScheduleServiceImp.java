@@ -20,6 +20,15 @@ public class ScheduleServiceImp implements ScheduleService{
 		}
 		return scheduleDao.selectScheduleByRoute(ro_num, startDate);
 	}
+	@Override
+	public List<ScheduleVO> getSchedulesByRouteNumber(int sk_ro_num) {
+	    return scheduleDao.getSchedulesByRouteNumber(sk_ro_num);
+	}
+	@Override
+	public void deleteScheduleByNumber(int sk_ro_num) {
+	    
+	   scheduleDao.deleteScheduleByNumber(sk_ro_num);
+	}
 
 	@Override
 	public ScheduleVO getSchdeule(Integer sk_num) {
@@ -28,5 +37,4 @@ public class ScheduleServiceImp implements ScheduleService{
 		}
 		return scheduleDao.selectSchedule(sk_num);
 	}
-	
 }
