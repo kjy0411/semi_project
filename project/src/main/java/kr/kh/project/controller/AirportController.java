@@ -69,7 +69,15 @@ public class AirportController {
     public String showInsertForm() {
         return "/airport/insert";
     }
+    @GetMapping("/getAirportList")
+    @ResponseBody
+    public List<AirportVO> getAirportList() {
+        // 공항 목록을 데이터베이스에서 조회하고 반환하는 코드를 작성
+        List<AirportVO> airportList = airportService.selectAirportList();
+        return airportList;
+    }
 
+ 
     @PostMapping("/insert")
     public String insertAirport(
         @RequestParam("aiNum") String aiNum,
@@ -88,8 +96,8 @@ public class AirportController {
         // 이미 데이터가 존재하는지 데이터베이스에서 확인
         List<AirportVO> airportList = airportService.selectAirportList();
         
-     // 국가 유효성 검사 추가
-        if (! nationService.checkNation(aiNaName)) {
+        // 국가 유효성 검사 추가
+        if (!nationService.checkNation(aiNaName)) {
             model.addAttribute("invalidNationMessage", "등록할 수 없는 국가입니다.");
             return "/airport/insert";
         }
@@ -113,6 +121,16 @@ public class AirportController {
         airportService.insertAirport(airportVO);
 
         return "redirect:/airport/list"; // 공항 리스트 페이지로 리다이렉트
+    }
+
+    @ResponseBody
+    @PostMapping("/checkDuplicateIATA")
+    public Map<String, Object> checkDuplicateIATA(@RequestParam("aiNum") String aiNum) {
+        Map<String, Object> response = new HashMap<String, Object>();
+        // 여기에서 중복 여부를 확인하는 로직을 수행하고 결과를 response에 담습니다.
+        boolean isDuplicate = airportService.checkDuplicateIATA(aiNum);
+        response.put("isDuplicate", isDuplicate);
+        return response;
     }
    
     @GetMapping("/delete")

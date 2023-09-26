@@ -56,6 +56,14 @@ public class AirportServiceImp implements AirportService {
         }
         return airportDao.getAirportByRoute(route, ai_num);
     }
+    @Override
+    public boolean checkDuplicateIATA(String aiNum) {
+        // aiNum을 이용하여 데이터베이스에서 공항을 조회합니다.
+        AirportVO airport = airportDao.getAirportByNumber(aiNum);
+
+        // 조회된 공항이 null이 아니면 중복된 IATA 코드로 간주합니다.
+        return airport != null;
+    }
 
     // 공항 코드를 기반으로 공항을 삭제하는 메서드
     @Override

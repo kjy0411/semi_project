@@ -16,6 +16,16 @@ public class AirportVO {
 	
 	private String na_division;
 	
+	public String getAiName() {
+	    return ai_name;
+	}
+	public String getAiNaName() {
+		return ai_na_name;
+	}
+	public Date getAiStandardTime() {
+		return ai_standard_time;
+	}
+	
 	public String getAi_standard_time_str() {
 		if(ai_standard_time == null) {
 			return "";	
