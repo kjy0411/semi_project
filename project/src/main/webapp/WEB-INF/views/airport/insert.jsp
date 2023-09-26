@@ -1,4 +1,3 @@
-@@ -1,100 +1,94 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
@@ -6,12 +5,15 @@
 <head>
     <title>공항 등록</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    
 </head>
 <body>
-    <div class="container">
+   <div class="container">
+        <h1 class="mt-5">공항 등록</h1>
         <div class="row">
-            <div class="col-md-6">
-                <h1>공항 리스트</h1>
+            <!-- 왼쪽 컨테이너에 공항 리스트 표시 -->
+            <div class="left col-md-6" style="height: 400px; overflow-y: scroll;">
+                
                 <ul class="list-group">
                     <c:forEach items="${airportList}" var="airport">
                         <li class="list-group-item">${airport.ai_num} - ${airport.ai_name}</li>

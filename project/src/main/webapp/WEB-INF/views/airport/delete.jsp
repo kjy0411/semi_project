@@ -20,7 +20,7 @@
     <div class="container mt-4">
         <div class="row">
             <!-- 왼쪽에 공항 리스트 표시 -->
-            <div class="col-md-6">
+           <div class="left col-md-6" style="height: 400px; overflow-y: scroll;">
                 <h1>공항 삭제</h1>
                 <ul class="list-group">
                     <c:forEach items="${airportList}" var="airport">
