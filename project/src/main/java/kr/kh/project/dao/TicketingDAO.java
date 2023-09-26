@@ -11,7 +11,7 @@ import kr.kh.project.vo.TicketingVO;
 
 public interface TicketingDAO {
 
-	List<TicketingVO> selectTicketingList(@Param("me_id")String me_id);
+	List<TicketingVO> selectTicketingList(@Param("me_id")String me_id, @Param("ticketing")int ticketing);
 
 	boolean insertTicketing(@Param("ticketing")TicketingVO ticketing);
 
@@ -24,14 +24,4 @@ public interface TicketingDAO {
 	boolean updateTicketingState(@Param("ticketing")TicketingVO ticketing);
 
 	List<TicketingVO> selectTicketingListBySearch(@Param("cri")Criteria cri);
-<<<<<<< HEAD
-	
-	TicketingVO selectTicketingByNum(@Param("ti_num")int ti_num);
-=======
-
-	List<TicketingVO> selectTicketingListByDone(@Param("me_id")String me_id);
-
-	List<TicketingVO> selectTicketingListByCancel(@Param("me_id")String me_id);
-
->>>>>>> parent of e13788d (예매조회 기능구현완료)
 }

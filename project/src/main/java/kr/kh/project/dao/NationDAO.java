@@ -15,7 +15,4 @@ public interface NationDAO {
 	
 	List<DivisionVO> getDivisionByRoute(@Param("route")boolean route, @Param("ai_num")String ai_num);
 
-	List<NationVO> getNation();
-
-	List<DivisionVO> getDivision();
 }

@@ -24,23 +24,6 @@ public class TicketingController {
 	@Autowired
 	TicketingService ticketingService;
 	
-	// 예매 정보 조회하기
-	@GetMapping("/ticketing/inquiry")
-	public String ticketingInquiry(Model model, HttpSession session) {
-		MemberVO user = (MemberVO)session.getAttribute("user");
-		
-		if( user != null) {
-		// 티케팅 리스트를 가져오라고 서비스에게 시킴
-		List<TicketingVO> list = ticketingService.getTicketingList(user.getMe_id());
-		
-		// 화면에 데이터를 전송하기 위해 model에서 list를 담아서 보낸다.
-		model.addAttribute("list",list);
-		model.addAttribute("userId",user);
-		}
-		//System.out.println("User ID : " + user.getMe_id());
-		return "/ticketing/inquiry";
-	}
-	
 	//예매정보 수정하기
 	@ResponseBody
 	@PostMapping("/ticketing/update")
@@ -50,36 +33,28 @@ public class TicketingController {
 		map.put("res", res);
 		return map;
 	}
-	//확정 조회
-	@GetMapping("/ticketing/done")
-	public String ticketingDone(Model model, HttpSession session) {
+	
+	// 전체 조회하기
+	@GetMapping("/ticketing/inquiry")
+	public String ticketingInquiry(Model model, HttpSession session) {
 		MemberVO user = (MemberVO)session.getAttribute("user");
-		
-		if( user != null) {
-		// 티케팅 리스트를 가져오라고 서비스에게 시킴
-		List<TicketingVO> list = ticketingService.getTicketingList2(user.getMe_id());
-		
-		// 화면에 데이터를 전송하기 위해 model에서 list를 담아서 보낸다.
-		model.addAttribute("list",list);
-		model.addAttribute("userId",user);
-		}
 		//System.out.println("User ID : " + user.getMe_id());
-		return "/ticketing/done";
+		return "/ticketing/inquiry";
 	}
-	//예매취소 조회
-		@GetMapping("/ticketing/cancel")
-		public String ticketingCancel(Model model, HttpSession session) {
-			MemberVO user = (MemberVO)session.getAttribute("user");
-			
-			if( user != null) {
-			// 티케팅 리스트를 가져오라고 서비스에게 시킴
-			List<TicketingVO> list = ticketingService.getTicketingList3(user.getMe_id());
-			
-			// 화면에 데이터를 전송하기 위해 model에서 list를 담아서 보낸다.
-			model.addAttribute("list",list);
-			model.addAttribute("userId",user);
-			}
-			//System.out.println("User ID : " + user.getMe_id());
-			return "/ticketing/cancel";
+	
+	@ResponseBody
+	@PostMapping("/ticketing/inquiry")
+	public Map<String, Object> ticketingSelect(@RequestBody int ticketing, HttpSession session){
+		Map<String, Object> map = new HashMap<String, Object>();
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		boolean res = true;
+		List<TicketingVO> ticketingList = ticketingService.getTicketingList(user.getMe_id(), ticketing);
+		if(ticketingList == null) {
+			res = false;
 		}
+		
+		map.put("ticketingList", ticketingList);
+		map.put("res", res);
+		return map;
+	}
 }
