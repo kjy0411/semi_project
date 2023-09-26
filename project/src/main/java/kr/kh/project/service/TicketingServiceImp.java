@@ -26,10 +26,10 @@ public class TicketingServiceImp implements TicketingService {
     @Autowired
     PointHistoryDAO pointHistoryDao;
   
-	@Override
-	public List<TicketingVO> getTicketingList(String me_id) {
-		
-		return ticketingDao.selectTicketingList(me_id);
+    @Override
+	public List<TicketingVO> getTicketingList(String me_id, int ticketing) {
+
+		return ticketingDao.selectTicketingList(me_id, ticketing);
 	}
 	
 	@Override
@@ -85,5 +85,12 @@ public class TicketingServiceImp implements TicketingService {
 		}
 		return ticketingDao.selectTicketingByNum(ti_num);
 	}
-
+	// 예매내역조회 상태 수정하기
+		@Override
+		public boolean updateTicketingState(TicketingVO ticketing) {
+			if(ticketing == null || ticketing.getTi_me_id() == null || ticketing.getTi_state() == null) {
+				return false;
+			}
+			return ticketingDao.updateTicketingState(ticketing);
+		}
 }

@@ -20,7 +20,7 @@
         
         <!-- 공항 정보 -->
         <div class="row airport-info">
-            <div class="col-md-4">
+          <div class="left col-md-6" style="height: 400px; overflow-y: scroll;">
                 <h2>공항 이름</h2>
                 <p>${airport.ai_name}</p>
             </div>

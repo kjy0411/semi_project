@@ -13,8 +13,25 @@ public class AirportVO {
 	private String ai_na_name;
 	private Date ai_standard_time;
 	private int ai_standard_type;
+	private boolean ai_state;
 	
 	private String na_division;
+	
+	public String getAiNum() {
+		return ai_num;
+	}
+	public String getAiName() {
+	    return ai_name;
+	}
+	public String getAiNaName() {
+		return ai_na_name;
+	}
+	public Date getAiStandardTime() {
+		return ai_standard_time;
+	}
+	public int getAiStandardType() {
+		return ai_standard_type;
+	}
 	
 	public String getAi_standard_time_str() {
 		if(ai_standard_time == null) {

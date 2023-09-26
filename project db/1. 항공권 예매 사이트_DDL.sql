@@ -64,7 +64,8 @@ CREATE TABLE `schedule` (
 	`sk_ro_num`	int	NOT NULL,
 	`sk_start_time`	datetime	NOT NULL,
 	`sk_time`	time	NOT NULL,
-	`sk_price`	int	NOT NULL
+	`sk_price`	int	NOT NULL,
+    `sk_state`	boolean	NOT NULl	DEFAULT TRUE
 );
 
 DROP TABLE IF EXISTS `airport`;
@@ -74,7 +75,8 @@ CREATE TABLE `airport` (
 	`ai_name`	varchar(30)	NOT NULL,
 	`ai_na_name`	varchar(20)	NOT NULL,
 	`ai_standard_time`	time	NOT NULL	COMMENT 'UTC',
-    `ai_standard_type`	int		NOT NULL
+    `ai_standard_type`	int		NOT NULL,
+    `ai_state`	boolean	NOT NULl	DEFAULT TRUE
 );
 
 DROP TABLE IF EXISTS `airplane`;
@@ -82,13 +84,15 @@ DROP TABLE IF EXISTS `airplane`;
 CREATE TABLE `airplane` (
 	`ap_num`	varchar(7)	NOT NULL	PRIMARY KEY	COMMENT '국가코드(최대3자리)+등록번호(0000~9999)',
 	`ap_al_name`	varchar(20)	NOT NULL,
-	`ap_am_model`	varchar(4)	NOT NULL
+	`ap_am_model`	varchar(4)	NOT NULL,
+    `ap_state`	boolean	NOT NULl	DEFAULT TRUE
 );
 
 DROP TABLE IF EXISTS `airline`;
 
 CREATE TABLE `airline` (
-	`al_name`	varchar(20)	NOT NULL	PRIMARY KEY
+	`al_name`	varchar(20)	NOT NULL	PRIMARY KEY,
+    `al_state`	boolean	NOT NULl	DEFAULT TRUE
 );
 
 DROP TABLE IF EXISTS `seat`;
@@ -122,7 +126,8 @@ DROP TABLE IF EXISTS `route`;
 CREATE TABLE `route` (
 	`ro_num`	int	NOT NULL	PRIMARY KEY	AUTO_INCREMENT,
 	`ro_ai_start`	varchar(3)	NOT NULL,
-	`ro_ai_end`	varchar(3)	NOT NULL
+	`ro_ai_end`	varchar(3)	NOT NULL,
+    `ro_state`	boolean	NOT NULl	DEFAULT TRUE
 );
 
 DROP TABLE IF EXISTS `seat_class`;

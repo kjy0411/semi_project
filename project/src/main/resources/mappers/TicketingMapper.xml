@@ -17,7 +17,29 @@
 		where 
 			ti_me_id = #{me_id}
 				and
-			ti_state = "미확정" 
+			ti_state = case
+				when #{ticketing} = 0 then ti_state
+				when #{ticketing} = 1 then "확정"
+				when #{ticketing} = 2 then "미확정"
+				when #{ticketing} = 3 then "예매취소"
+			end;
+	</select>
+	<select id="selectTicketingListBySearch" resultType="kr.kh.project.vo.TicketingVO">
+		select * from ticketing
+		<if test='cri.t == "all"'>
+		where 
+			ti_me_id like concat('%', #{cri.s}, '%')
+				or
+			ti_num like concat('%', #{cri.s}, '%')
+		</if>
+		<if test='cri.t == "second"'>
+		where
+			ti_me_id like concat('%', #{cri.s}, '%')
+		</if>
+		<if test='cri.t == "third"'>
+		where
+			ti_num like concat('%', #{cri.s}, '%')
+		</if>
 	</select>
 	<insert id="insertTicketing">
 		insert into 
@@ -71,4 +93,15 @@
 		where 
 			ti_num = #{ti_num}
 	</select>
+	<!-- 예매내역조회 상태수정 -->
+	<update id="updateTicketingState">
+		update
+			ticketing
+		set
+			ti_state = "예매취소"
+		where
+			ti_num = #{ticketing.ti_num}
+				and
+			ti_me_id = #{ticketing.ti_me_id}
+	</update>
 </mapper>
