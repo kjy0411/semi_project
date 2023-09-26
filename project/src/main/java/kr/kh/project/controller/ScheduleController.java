@@ -18,9 +18,12 @@ import kr.kh.project.pagination.Criteria;
 import kr.kh.project.pagination.PageMaker;
 import kr.kh.project.service.AirlineService;
 import kr.kh.project.service.AirplaneService;
+import kr.kh.project.service.RouteService;
 import kr.kh.project.service.ScheduleService;
+import kr.kh.project.util.Message;
 import kr.kh.project.vo.AirlineVO;
 import kr.kh.project.vo.AirplaneVO;
+import kr.kh.project.vo.ScheduleInsertVO;
 import kr.kh.project.vo.ScheduleVO;
 
 @Controller
@@ -34,6 +37,9 @@ public class ScheduleController {
 
 	@Autowired
 	AirplaneService airplaneService;
+	
+	@Autowired
+	RouteService routeService;
 	
 	@GetMapping("/menu/schedule")
 	public String scheduleList(Model model, HttpSession session, Criteria cri) {
@@ -68,6 +74,30 @@ public class ScheduleController {
 			res = false;
 		}
 		map.put("apList", apList);
+		map.put("res", res);
+		return map;
+	}
+	
+	@PostMapping("/schedule/input")
+	public String scheduleInput(Model model, HttpSession session, ScheduleInsertVO schedule) {
+		Message msg = new Message("/menu/schedule", "등록 성공");
+		int ro_num = routeService.getRoNumByAiNum(schedule.getRo_ai_start(), schedule.getRo_ai_end());
+		schedule.setSk_ro_num(ro_num);
+		if(!scheduleService.insertSchedule(schedule)) {
+			msg = new Message("/schedule/insert", "등록 실패");
+		}
+		model.addAttribute("msg",msg);
+		return "/message";
+	}
+	
+	@ResponseBody
+	@PostMapping("/schedule/delete")
+	public Map<String, Object> scheduleDeletePost(@RequestBody int sk_num){
+		Map<String, Object> map = new HashMap<String, Object>();
+		boolean res = true;
+		if(!scheduleService.deleteScheduleByNumber(sk_num)) {
+			res = false;
+		}
 		map.put("res", res);
 		return map;
 	}

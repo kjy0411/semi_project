@@ -8,4 +8,6 @@ public interface PointService {
 
 	boolean checkPoint(String ti_me_id);
 
+	void insertPoint(String me_id);
+
 }

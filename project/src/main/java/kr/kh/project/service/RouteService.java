@@ -20,6 +20,7 @@ public interface RouteService {
 	List<RouteVO> getRoutesByAirport(String aiNum);
 	List<RouteVO> findRouteGo(String ai_num);
 	List<RouteVO> findRouteback(String ai_num);
+	int getRoNumByAiNum(String ro_ai_start, String ro_ai_end);
 	
 
 	

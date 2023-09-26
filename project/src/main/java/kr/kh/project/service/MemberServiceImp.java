@@ -35,7 +35,7 @@ public class MemberServiceImp implements MemberService{
 		}
 		// 아이디 체크
 		// 전체 6~20자, 영문으로 시작, 영문&숫자만 가능하다
-		String regexId = "^[a-zA-Z][a-zA-Z0-9]{5,19}$";
+		String regexId = "^[a-zA-Z][a-zA-Z0-9]{5,20}$";
 		if(member.getMe_id() == null || !Pattern.matches(regexId, member.getMe_id())) {
 			return false;
 		}
@@ -48,20 +48,10 @@ public class MemberServiceImp implements MemberService{
 		}
 		
 		//아이디 중복체크
-		MemberVO dbMember = memberDao.selectMemberById(member.getMe_id());
+		MemberVO dbMember = memberDao.selectMember(member.getMe_id());
 		if(dbMember != null) {
 			return false;
 		}
-//		String idRegex = "^[a-zA-Z][a-zA-Z0-9]{10,20}$";
-
-//		String pwRegex = "^[a-zA-Z0-9!@#$%]{12,25}$";
-//		
-//		if(!Pattern.matches(idRegex, member.getMe_id())) {
-//			return false;
-//		}
-//		if(!Pattern.matches(pwRegex, member.getMe_pw())) {
-//			return false;
-//		}
 		
 		//비밀번호 암호화
 		String encPw = passwordEncoder.encode(member.getMe_pw());

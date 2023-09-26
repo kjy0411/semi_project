@@ -12,4 +12,6 @@ public interface PointDAO {
 
 	void updateClass(@Param("me_id")String me_id);
 
+	void insertPoint(@Param("me_id")String me_id);
+
 }

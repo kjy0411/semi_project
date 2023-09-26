@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.kh.project.service.MemberService;
+import kr.kh.project.service.PointService;
 import kr.kh.project.util.Message;
 import kr.kh.project.vo.MemberVO;
 
@@ -23,7 +24,10 @@ import kr.kh.project.vo.MemberVO;
 public class MemberController {
 	
 	@Autowired
-	private MemberService memberService;
+	MemberService memberService;
+	
+	@Autowired
+	PointService pointService;
 	
 	@GetMapping("/member/signup")
 	public String signupMember() {
@@ -31,12 +35,12 @@ public class MemberController {
 	}
 	
 	@PostMapping("/member/signup")
-	public String singupMemberPost(Model model, MemberVO member, boolean id_check) {
+	public String singupMemberPost(Model model, MemberVO member) {
 		Message msg = new Message("member/signup", "회원가입을 실패했습니다.");
-		
 		if(memberService.signupMember(member)) {
 			msg = new Message("/", "회원가입을 성공했습니다.");
 		}
+		pointService.insertPoint(member.getMe_id());
 		model.addAttribute("msg", msg);
 		return "message";
 	}

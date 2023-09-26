@@ -38,5 +38,13 @@ public class PointServiceImp implements PointService{
 		}
 		return res;
 	}
+
+	@Override
+	public void insertPoint(String me_id) {
+		if(me_id == null) {
+			return;
+		}
+		pointDao.insertPoint(me_id);
+	}
 	
 }

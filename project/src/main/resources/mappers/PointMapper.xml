@@ -9,22 +9,22 @@
 	<update id="checkPoint">
 		update point
 		set
-		    po_accumulate_point = (
+		    po_accumulate_point = ifnull((
 					select
 					sum(ti_save_point)
 				from
 					ticketing
 				where
 					ti_me_id = #{me_id}
-				),
-			po_hold_point = (
+				),0),
+			po_hold_point = ifnull((
 				select
 					sum(ti_save_point) - sum(ti_use_point)
 				from
 					ticketing
 				where
 					ti_me_id = #{me_id}
-				)
+				),0)
 		where
 			po_me_id = #{me_id};
 	</update>
@@ -41,4 +41,9 @@
 			where
 				po_me_id = #{me_id};
 	</update>
+	<insert id="insertPoint">
+		insert into point(po_me_id)
+		values
+			(#{me_id});
+	</insert>
 </mapper>

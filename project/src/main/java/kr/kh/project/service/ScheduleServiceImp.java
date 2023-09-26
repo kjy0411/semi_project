@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import kr.kh.project.dao.ScheduleDAO;
 import kr.kh.project.pagination.Criteria;
+import kr.kh.project.vo.ScheduleInsertVO;
 import kr.kh.project.vo.ScheduleVO;
 
 @Service
@@ -26,9 +27,9 @@ public class ScheduleServiceImp implements ScheduleService{
 	    return scheduleDao.getSchedulesByRouteNumber(sk_ro_num);
 	}
 	@Override
-	public void deleteScheduleByNumber(int sk_ro_num) {
+	public boolean deleteScheduleByNumber(int sk_num) {
 	    
-	   scheduleDao.deleteScheduleByNumber(sk_ro_num);
+	   return scheduleDao.deleteScheduleByNumber(sk_num);
 	}
 
 	@Override
@@ -45,5 +46,18 @@ public class ScheduleServiceImp implements ScheduleService{
 	@Override
 	public int getTotalCount() {
 		return scheduleDao.getTotalCount();
+	}
+	@Override
+	public boolean insertSchedule(ScheduleInsertVO schedule) {
+		if(schedule == null
+			|| schedule.getSk_ap_num() == null
+			|| schedule.getSk_ro_num() == 0
+			|| schedule.getSk_start_time_str() == null
+			|| schedule.getSk_time() == null) {
+			return false;
+		}
+		boolean res = scheduleDao.insertSchedule(schedule);
+		System.out.println(res);
+		return res;
 	}
 }

@@ -24,7 +24,7 @@ DROP TABLE IF EXISTS `point`;
 CREATE TABLE `point` (
 	`po_num`	int	NOT NULL	PRIMARY KEY	AUTO_INCREMENT,
 	`po_me_id`	varchar(20)	NOT NULL,
-	`po_mc_name`	varchar(10)	NOT NULL	COMMENT '누적마일리지로 결정',
+	`po_mc_name`	varchar(10)	NOT NULL	DEFAULT "실버"	COMMENT '누적마일리지로 결정',
 	`po_accumulate_point`	int	NOT NULL	DEFAULT 0,
 	`po_hold_point`	int	NOT NULL	DEFAULT 0
 );

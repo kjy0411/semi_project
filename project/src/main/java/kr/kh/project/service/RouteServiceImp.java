@@ -107,5 +107,14 @@ public class RouteServiceImp implements RouteService {
 		return routeDao.selectRouteListBack(ai_num);
 	}
 
+	@Override
+	public int getRoNumByAiNum(String ro_ai_start, String ro_ai_end) {
+		if(ro_ai_start == null || ro_ai_end == null) {
+			return 0;
+		}
+		
+		return routeDao.getRoNumByAiNum(ro_ai_start, ro_ai_end);
+	}
+
 	
 }

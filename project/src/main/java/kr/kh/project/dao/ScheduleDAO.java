@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import kr.kh.project.pagination.Criteria;
+import kr.kh.project.vo.ScheduleInsertVO;
 import kr.kh.project.vo.ScheduleVO;
 
 public interface ScheduleDAO {
@@ -13,13 +14,15 @@ public interface ScheduleDAO {
 
 	List<ScheduleVO> getSchedulesByRouteNumber(int ro_num);
 
-	void deleteScheduleByNumber(int sk_ro_num);
+	boolean deleteScheduleByNumber(@Param("sk_num")int sk_num);
 
 	ScheduleVO selectSchedule(@Param("sk_num")Integer sk_num);
 
 	List<ScheduleVO> selectScheduleList(@Param("cri")Criteria cri);
 
 	int getTotalCount();
+
+	boolean insertSchedule(@Param("schedule")ScheduleInsertVO schedule);
 
 
 }

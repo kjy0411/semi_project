@@ -39,15 +39,14 @@
 						<input class="form-control" type="number" min="1" name="seatAmount" value="1">
 					</div>
 				</div>
-				<input class="form-control" type="text" name="ro_ai_start" readonly>
-				<input class="form-control" type="text" name="ro_ai_end" readonly>
+				<input class="form-control" type="text" name="ro_ai_start" readonly hidden>
+				<input class="form-control" type="text" name="ro_ai_end" readonly hidden>
 				<button class="btn btn-outline-primary">검색</button>
 			</form>
 		</div>
 		<div class="popUp-box container-fluid" style="flex: 3; padding: 10px; overflow: scroll; height: 750px">
 		</div>
 	</div>
-	${endAirportList}
 	<script type="text/javascript">
 		let str = ``;
 		let today = new Date().toISOString().substring(0, 10); //2023-09-13

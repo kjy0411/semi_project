@@ -26,9 +26,6 @@ public interface MemberDAO {
 
 	MemberVO selectMemberBySession(@Param("me_session_id")String me_session_id);
 
-
-	MemberVO selectMemberById(@Param("id")String me_id);
-
 	MemberVO selectMemberByRegexId(@Param("id")String id);
 
 

@@ -89,4 +89,14 @@
   	where
   		ro_ai_end = #{ai_num};
   </select>
+  <select id="getRoNumByAiNum" resultType="int">
+  	select
+		ro_num
+	from
+		route
+	where
+		ro_ai_start = #{ro_ai_start}
+		and ro_ai_end = #{ro_ai_end}
+		and ro_state = true;
+  </select>
 </mapper>

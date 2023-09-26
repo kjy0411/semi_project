@@ -10,12 +10,12 @@
 	<form action="<c:url value='/member/signup'/>" method="post">
 		<div class="form-group">
 			<label>아이디 :</label>
-			<input type="text" class="form-control" name="me_id" placeholder="아이디">
+			<input type="text" class="form-control" name="me_id" placeholder="아이디 - 영문으로 시작하며 영문,숫자 6~20자">
 		</div>
 			<button class="btn btn-outline-success col-12" type="button" id="btn-check">아이디 중복검사</button><br>
 		<div class="form-group">
 			<label>비번 :</label>
-			<input type="password" class="form-control" name="me_pw" id="pw" placeholder="비밀번호"> <br>
+			<input type="password" class="form-control" name="me_pw" id="pw" placeholder="비밀번호 - 영문,숫자,!@#$ 12~25"> <br>
 		</div>
 		<div class="form-group">
 			<label>이름 :</label>

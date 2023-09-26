@@ -28,14 +28,16 @@
 			sk_start_time asc
 	</select>
 	<select id="getSchedulesByRouteNumber" resultType="kr.kh.project.vo.ScheduleVO">
-    SELECT * FROM schedule
-    WHERE sk_ro_num = #{sk_ro_num}
-   </select>
-   
-   <!-- 노선 삭제시 해당 노선 번호의 스케쥴 삭제 -->
-   <delete id="deleteScheduleByNumber" parameterType="int">
-    DELETE FROM schedule WHERE sk_ro_num = #{ro_num}
-   </delete>
+		SELECT * FROM schedule
+		WHERE sk_ro_num = #{sk_ro_num}
+	</select>
+	<update id="deleteScheduleByNumber">
+		update schedule
+		set
+			sk_state = false
+		where
+			sk_num = #{sk_num}
+	</update>
 	<select id="selectSchedule" resultType="kr.kh.project.vo.ScheduleVO">
 		select
 			schedule.*,
@@ -94,4 +96,9 @@
 		where
 			sk_state = 1
 	</select>
+	<insert id="insertSchedule">
+		insert into schedule(sk_ap_num, sk_ro_num, sk_start_time, sk_time, sk_price)
+		values
+			(#{schedule.sk_ap_num}, #{schedule.sk_ro_num}, #{schedule.sk_start_time_str}, #{schedule.sk_time}, #{schedule.sk_price});
+	</insert>
 </mapper>
