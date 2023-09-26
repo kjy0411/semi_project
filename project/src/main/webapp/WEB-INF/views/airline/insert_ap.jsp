@@ -9,7 +9,7 @@
 <body>
 
 	<form action="<c:url value='/airline/insert_ap'/>" method="post">
-		<h1>항공기 등록</h1>
+		<h1 style="font-size:25px;">항공기 등록</h1>
 			<div class="form-group">
 				<input type="text" class="form-control" name="ap_num" placeholder="항공기번호 입력 (영문 1~3, 숫자 00001~9999)" >
 			</div>

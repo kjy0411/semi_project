@@ -8,7 +8,7 @@
 </head>
 <body>
 		<form action="<c:url value='/airline/insert'/>" method="post">
-		<h1>항공사 등록</h1>
+		<h1 style="font-size:25px;">항공사 등록</h1>
 			<div class="form-group">
 				<input type="text" class="form-control" name="al_name" placeholder="항공사명 입력" >
 			</div>
