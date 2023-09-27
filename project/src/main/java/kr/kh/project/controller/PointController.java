@@ -67,6 +67,8 @@ public class PointController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		TicketingVO ticketing = ticketingService.selectTicketingByNum(ti_num);
 		List<TicketingListVO> ticketList = ticketingListService.selectTicketListByNum(ti_num);
+		System.out.println(ticketing);
+		
 		boolean res = true;
 		if(ticketing == null) {
 			res = false;

@@ -15,7 +15,7 @@
 				from
 					ticketing
 				where
-					ti_me_id = #{me_id}
+					ti_me_id = #{me_id} and ti_state != "예매취소"
 				),0),
 			po_hold_point = ifnull((
 				select
@@ -23,10 +23,10 @@
 				from
 					ticketing
 				where
-					ti_me_id = #{me_id}
+					ti_me_id = #{me_id} and ti_state != "예매취소"
 				),0)
 		where
-			po_me_id = #{me_id};
+			po_me_id = #{me_id}
 	</update>
 	<update id="updateClass">
 		update point

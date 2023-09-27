@@ -240,8 +240,12 @@
 			$('.btn-payment-complete').hide();
 		});
 		$(document).on('change', '.ti_use_point', function() {
-			if($(this).val() > ${point.po_hold_point}){
-				$(this).val(${point.po_hold_point});
+			if(${point.po_hold_point} < 0){
+				$(this).val(0);
+			}else{
+				if($(this).val() > ${point.po_hold_point}){
+					$(this).val(${point.po_hold_point});
+				}				
 			}
 			let totalPrice = Number($('.ti_total_price').text());
 			let point = Number($('.ti_use_point').val());
