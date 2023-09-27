@@ -9,9 +9,9 @@
   </select>
 
   <!-- 공항 추가 -->
-  <insert id="insertAirport" parameterType="kr.kh.project.vo.AirportVO">
+  <insert id="insertAirport">
     INSERT INTO airport (ai_num, ai_name, ai_na_name, ai_standard_time, ai_standard_type)
-    VALUES (#{aiNum}, #{aiName}, #{aiNaName}, #{aiStandardTime}, #{aiStandardType});
+    VALUES (#{airportvo.ai_num}, #{airportvo.ai_name}, #{airportvo.ai_na_name}, #{airportvo.ai_standard_time}, #{airportvo.ai_standard_type});
   </insert>
 
   
@@ -43,7 +43,40 @@
 	group by
 		if(#{route}, ro_ai_start, ro_ai_end)
 	order by
-		di_name asc, na_name asc, ai_name asc;
+		di_name asc, na_name asc, ai_name asc
   </select>
-
+  <select id="getAirportList" resultType="kr.kh.project.vo.AirportVO">
+  	select
+		ai_name,
+		ai_num,
+		ai_na_name
+	from
+		airport
+	where
+		ai_state = true
+	order by
+		ai_name asc
+  </select>
+	<select id="getAirportByNotRoute" resultType="kr.kh.project.vo.AirportVO">
+  	select
+		ai_name,
+		ai_num,
+		ai_na_name
+	from
+		airport
+			left join
+		route on ai_num = ro_ai_end
+			join
+		nation on ai_na_name = na_name
+			join
+		division on na_di_name = di_name
+	where
+		(ro_ai_start != #{ai_num} or ro_ai_start is null)
+	    and ai_num != #{ai_num}
+	    and ai_state = true
+	group by
+		ai_num
+	order by
+		di_name asc, na_name asc, ai_name asc
+  </select>
 </mapper>

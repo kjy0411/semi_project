@@ -3,94 +3,113 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>공항 등록</title>
+    <title>노선 등록</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-
 </head>
 <body>
-   <div class="container">
-        <h1 class="mt-5">공항 등록</h1>
-        <div class="row">
-            <!-- 왼쪽 컨테이너에 공항 리스트 표시 -->
-            <div class="left col-md-6" style="height: 400px; overflow-y: scroll;">
-
-                <ul class="list-group">
-                    <c:forEach items="${airportList}" var="airport">
-                        <li class="list-group-item">${airport.ai_num} - ${airport.ai_name}</li>
-                    </c:forEach>
-                </ul>
-            </div>
-            <div class="col-md-6">
-                <h1>공항 등록</h1>
-                <form id="airportForm" action="/project/airport/insert" method="post">
-                    <div class="form-group">
-                        <label for="ai_num">IATA 코드:</label>
-                        <input type="text" class="form-control" id="ai_num" name="aiNum" required>
-                        <!-- 중복 IATA 메시지 표시 -->
-                        <p style="color: red" id="duplicateIATAMessage"></p>
-                    </div>
-                    <div class="form-group">
-                        <label for="ai_name">공항 이름:</label>
-                        <input type="text" class="form-control" id="ai_name" name="aiName" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="ai_na_name">국가 이름:</label>
-                        <input type="text" class="form-control" id="ai_na_name" name="aiNaName" required>
-                        <!-- 국가 유효성 검사 메시지 표시 -->
-                        <p style="color: red" id="invalidNationMessage"></p>
-                    </div>
-                    <div class="form-group">
-                        <label for="ai_standard_time">국가 표준 시(UTC):</label>
-                        <input type="text" class="form-control" id="ai_standard_time" name="aiStandardTime" required>
-                    </div>
-                    
-                    <!-- 중복 메시지를 표시합니다. -->
-                    <c:if test="${not empty duplicateMessage}">
-                        <p style="color: red">${duplicateMessage}</p>
-                    </c:if>
-
-                    <button type="submit" class="btn btn-primary">공항 등록</button>
-
-                <a href="<c:url value='/airport/delete'/>" class="btn btn-outline-warning">공항 삭제</a>
-                </form>
-                <a href="<c:url value='/airport/list'/>" class="btn btn-secondary mt-2">공항 리스트로 돌아가기</a>
-            </div>
-        </div>
-    </div>
-
+   <div style="width: 100%; display: flex;">
+		<div class="search-box container-fluid" style="flex: 2">
+			<h1>노선 등록</h1>
+			<form action="<c:url value='/route/insert'/>" method="post">
+				<div class="search-box">
+					<div class="start-airport form-group">
+						<span class="col-1">출발지</span> <br>
+						<input class="form-control" type="text" name="startAirport" readonly placeholder="출발지">
+					</div>
+					<div class="end-airport form-group">
+						<span class="col-1">도착지</span> <br>
+						<input class="form-control" type="text" name="endAriport" readonly placeholder="도착지">
+					</div>
+				</div>
+				<input class="form-control" type="text" name="ro_ai_start" readonly hidden>
+				<input class="form-control" type="text" name="ro_ai_end" readonly hidden>
+				<button class="btn btn-outline-primary">등록</button>
+			</form>
+		</div>
+		<div class="popUp-box container-fluid" style="flex: 3; padding: 10px; overflow: scroll; height: 750px">
+		</div>
+	</div>
     <script>
-    document.getElementById("ai_num").addEventListener("change", function () {
-        // 현재 입력된 IATA 코드 가져오기
-        var aiNum = this.value;
-        // 서버로부터 공항 목록을 가져오는 AJAX 요청
-        var xhr = new XMLHttpRequest();
-        xhr.open("GET", "/project/airport/getAirportList", true);
-        xhr.setRequestHeader("Content-Type", "application/json");
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4) {
-                if (xhr.status === 200) {
-                    // 서버 응답을 파싱합니다.
-                    var airportList = JSON.parse(xhr.responseText);
-                    // 공항 목록에서 IATA 코드만 추출하여 배열로 만듭니다.
-                    var existingIATACodes = airportList.map(function (airport) {
-                        return airport.ai_num;
-                    });
-                    var duplicateIATAMessageElement = document.getElementById("duplicateIATAMessage");
-                    // 입력된 IATA 코드가 이미 존재하는지 확인합니다.
-                    if (existingIATACodes.includes(aiNum)) {
-                        duplicateIATAMessageElement.style.color = "red";
-                        duplicateIATAMessageElement.innerHTML = "중복된 IATA 코드입니다.";
-                    } else {
-                        duplicateIATAMessageElement.style.color = "transparent"; // 숨기기
-                        duplicateIATAMessageElement.style.color = "transparent"; 
-                        duplicateIATAMessageElement.innerHTML = "";
-                    }
-                }
-            }
-        };
-        // AJAX 요청 보내기
-        xhr.send();
-    });
+    let str = ``;
+	let today = new Date().toISOString().substring(0, 10); //2023-09-13
+	
+	$('.start-airport').click(function() {
+		let route = true;
+		let ai_num = "";
+		printAirport(route, ai_num);
+	})
+	$('.end-airport').click(function() {
+		if($('[name=startAirport]').val() == ""){
+			alert("출발지를 선택해주세요")
+			str = ``;
+			$('.popUp-box').html(str);
+		}else{
+			let route = false;
+			let ai_num = $('[name=ro_ai_start]').val();
+			printAirport(route, ai_num);
+		}
+	})
+	$(document).on('click', '.select-start-airport', function(){
+		let value = $(this).text();
+		let num = $(this).prev().text();
+		$('[name=startAirport]').val(value);
+		$('[name=ro_ai_start]').val(num);
+		$('.popUp-box').empty();
+	})
+	
+	function printAirport(route, ai_num) {
+		str = ``;
+		$.ajax({
+			async : false,
+			method : 'post',
+			url : '<c:url value="/route/search"/>',
+			data : {route:route, ai_num:ai_num},
+			dataType : 'json',
+			success : function(data) {
+				if(data.res){
+					for(div of data.divisionList){
+						str += `
+							<h4>\${div.di_name}</h4>
+						`;
+						for(nat of data.nationList){
+							if(div.di_name == nat.na_di_name){
+								str += `
+									<h6>\${nat.na_name}</h6>
+								`;
+								for(air of data.airportList){
+									if(nat.na_name == air.ai_na_name){
+										if(route == true){
+											str += `
+												<span class="ai_num" hidden="">\${air.ai_num}</span>
+												-<a class="select-start-airport" href="#">\${air.ai_name}</a> <br>
+											`;
+										}else{
+											str += `
+												<span class="ai_num" hidden="">\${air.ai_num}</span>
+												-<a class="select-end-airport" href="#">\${air.ai_name}</a> <br>
+											`;
+										}
+										
+									}
+								}
+							}
+						}
+					}
+				}else {
+					alert(data.msg);
+				}
+			$('.popUp-box').html(str);
+			}
+		});
+	}
+	
+	$(document).on('click', '.select-end-airport', function(){
+		let value = $(this).text();
+		let num = $(this).prev().text();
+		$('[name=endAriport]').val(value);
+		$('[name=ro_ai_end]').val(num);
+		$('.popUp-box').empty();
+	})
     </script>
 </body>
 </html>

@@ -39,6 +39,9 @@
 	
 	<beans:bean id="loginInterceptor" class="kr.kh.project.interceptor.LoginInterceptor"></beans:bean>
 	<beans:bean id="autoLoginInterceptor" class="kr.kh.project.interceptor.AutoLoginInterceptor"></beans:bean>
+	<beans:bean id="memberInterceptor" class="kr.kh.project.interceptor.MemberInterceptor"></beans:bean>
+	<beans:bean id="guestInterceptor" class="kr.kh.project.interceptor.GuestInterceptor"></beans:bean>
+	<beans:bean id="adminInterceptor" class="kr.kh.project.interceptor.AdminInterceptor"></beans:bean>
 	
 	<interceptors>
 		<interceptor>
@@ -48,6 +51,29 @@
 		<interceptor>
 			<mapping path="/**"/>
 			<beans:ref bean="autoLoginInterceptor"/>
+		</interceptor>
+		<interceptor>
+			<mapping path="/member/check"/>
+			<mapping path="/member/update"/>
+			<mapping path="/point/history"/>
+			<mapping path="/reservation/list"/>
+			<mapping path="/reservation/search"/>
+			<mapping path="/reservation/seatSelect"/>
+			<mapping path="/ticketing/inquiry"/>
+			<beans:ref bean="memberInterceptor" />
+		</interceptor>
+		<interceptor>
+			<mapping path="/member/login"/>
+			<mapping path="/member/signup"/>
+			<beans:ref bean="guestInterceptor" />
+		</interceptor>
+		<interceptor>
+			<mapping path="/schedule/**"/>
+			<mapping path="/route/**"/>
+			<mapping path="/menu/**"/>
+			<mapping path="/airline/**"/>
+			<mapping path="/airport/**"/>
+			<beans:ref bean="adminInterceptor" />
 		</interceptor>
 	</interceptors>
 	

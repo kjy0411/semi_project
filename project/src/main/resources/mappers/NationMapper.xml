@@ -67,4 +67,45 @@
 		order by
 			di_name asc, na_name asc
 	</select>
+	<select id="getNationByNotRoute" resultType="kr.kh.project.vo.NationVO">
+		select
+			 na_name,
+			 na_di_name
+		from
+			airport
+				left join
+			route on ai_num = ro_ai_end
+				join
+			nation on ai_na_name = na_name
+				join
+			division on na_di_name = di_name
+		where
+			(ro_ai_start != #{ai_num} or ro_ai_start is null)
+		    and ai_num != #{ai_num}
+		    and ai_state = true
+		group by
+			na_name
+		order by
+			di_name asc, na_name asc, ai_name asc
+	</select>
+	<select id="getDivisionByNotRoute" resultType="kr.kh.project.vo.DivisionVO">
+		select
+			di_name
+		from
+			airport
+				left join
+			route on ai_num = ro_ai_end
+				join
+			nation on ai_na_name = na_name
+				join
+			division on na_di_name = di_name
+		where
+			(ro_ai_start != #{ai_num} or ro_ai_start is null)
+		    and ai_num != #{ai_num}
+		    and ai_state = true
+		group by
+			di_name
+		order by
+			di_name asc, na_name asc, ai_name asc
+	</select>
 </mapper>

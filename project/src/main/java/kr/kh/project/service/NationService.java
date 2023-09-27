@@ -16,4 +16,8 @@ public interface NationService {
 	List<NationVO> getNation();
 
 	List<DivisionVO> getDivision();
+
+	List<NationVO> getNationByNotRoute(boolean route, String ai_num);
+
+	List<DivisionVO> getDivisionNotByRoute(boolean route, String ai_num);
 }

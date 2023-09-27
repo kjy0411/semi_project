@@ -35,7 +35,30 @@
                     </div>
                     <div class="form-group">
                         <label for="ai_standard_time">국가 표준 시(UTC):</label>
-                        <input type="text" class="form-control" id="ai_standard_time" name="aiStandardTime" required>
+                        <div class="ai_standard_time-box" style="display: flex;">
+	                        <select class="form-control" id="ai_na_name" name="aiStandardType" style="flex: 1">
+		                       	<option value="1">+</option>
+		                       	<option value="2">-</option>
+	                        </select>
+	                        <select class="form-control" id="ai_na_name" name="aiStandardTime" style="flex: 1">
+	                        	<c:forEach begin="0" end="12" var="h">
+	                        		<c:forEach begin="0" end="1" var="m">
+	                        			<c:if test="${h < 10 && m == 0}">
+		                        			<option value="0${h}:0${m*30}">0${h}:0${m*30}</option>
+	                        			</c:if>
+	                        			<c:if test="${h < 10 && m == 1}">
+		                        			<option value="0${h}:${m*30}">0${h}:${m*30}</option>
+	                        			</c:if>
+	                        			<c:if test="${h >= 10 && m == 0}">
+		                        			<option value="${h}:0${m*30}">${h}:0${m*30}</option>
+	                        			</c:if>
+	                        			<c:if test="${h > 10 && m == 1}">
+		                        			<option value="${h}:${m*30}">${h}:${m*30}</option>
+	                        			</c:if>
+	                        		</c:forEach>
+	                        	</c:forEach>
+	                        </select>
+                        </div>
                     </div>
                     
                     <!-- 중복 메시지를 표시합니다. -->

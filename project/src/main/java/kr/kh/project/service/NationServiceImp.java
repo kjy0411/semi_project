@@ -63,5 +63,21 @@ public class NationServiceImp implements NationService{
 	public List<DivisionVO> getDivision() {
 		return nationDao.getDivision();
 	}
+
+	@Override
+	public List<NationVO> getNationByNotRoute(boolean route, String ai_num) {
+		if(route == false && ai_num == null) {
+			return null;
+		}
+		return nationDao.getNationByNotRoute(route, ai_num);
+	}
+
+	@Override
+	public List<DivisionVO> getDivisionNotByRoute(boolean route, String ai_num) {
+		if(route == false && ai_num == null) {
+			return null;
+		}
+		return nationDao.getDivisionByNotRoute(route, ai_num);
+	}
 	
 }

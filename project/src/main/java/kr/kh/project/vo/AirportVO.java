@@ -37,17 +37,17 @@ public class AirportVO {
 		if(ai_standard_time == null) {
 			return "";	
 		}
-		SimpleDateFormat format = new SimpleDateFormat("hh:mm:ss");
+		SimpleDateFormat format = new SimpleDateFormat("HH:mm");
 		if(ai_standard_type == 1) {
-			return format.format(ai_standard_time).equals("12:00:00") ? "00:00:00" : format.format(ai_standard_time);
+			return format.format(ai_standard_time).equals("12:00") ? "00:00" : format.format(ai_standard_time);
 		}else{
 			return "-" + format.format(ai_standard_time);
 		}
 	}
 	public void setAi_standard_time(String time) {
-		SimpleDateFormat format = new SimpleDateFormat("hh:mm:ss");
+		SimpleDateFormat format = new SimpleDateFormat("HH:mm");
 		try {
-			ai_standard_time = format.parse(time);
+			this.ai_standard_time = format.parse(time);
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}

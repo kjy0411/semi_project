@@ -13,7 +13,7 @@ public interface AirportDAO {
     
     AirportVO getAirportByNumber(String ai_num);
     
-    void insertAirport(AirportVO airportvo);
+    void insertAirport(@Param("airportvo")AirportVO airportvo);
     
     void deleteAirportByCode(String aiNum);
 
@@ -26,6 +26,10 @@ public interface AirportDAO {
 	int countTotalAirports();
 
 	List<AirportVO> selectAirportListWithPaging(@Param("criteria")Criteria cri);
+
+	List<AirportVO> getAirportList();
+
+	List<AirportVO> getAirportByNotRoute(@Param("route")boolean route, @Param("ai_num")String ai_num);
     
     
 

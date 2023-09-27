@@ -20,6 +20,10 @@ public interface NationDAO {
 
 	List<DivisionVO> getDivision();
 
+	List<NationVO> getNationByNotRoute(@Param("route")boolean route, @Param("ai_num")String ai_num);
+
+	List<DivisionVO> getDivisionByNotRoute(@Param("route")boolean route, @Param("ai_num")String ai_num);
+
 	
 
 	

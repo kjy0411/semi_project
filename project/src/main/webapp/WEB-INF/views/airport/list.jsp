@@ -11,9 +11,7 @@
     <nav style="display: flex;">
 	    <div class="info-box container-fluid" style="flex: 2;">
 			<a href="<c:url value='/airport/insert'/>" class="btn btn-outline-primary">공항 등록</a>
-			<a href="<c:url value='/airport/delete'/>" class="btn btn-outline-primary">공항 삭제</a>
 			<a href="<c:url value='/route/insert'/>" class="btn btn-outline-danger">노선 등록</a>
-			<a href="<c:url value='/route/delete'/>" class="btn btn-outline-danger">노선 삭제</a>
 		    <div class="detail-box">
 		    	
 		    </div>

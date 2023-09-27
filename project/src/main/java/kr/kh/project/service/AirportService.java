@@ -13,6 +13,8 @@ public interface AirportService {
     List<AirportVO> getAirportByRoute(boolean route, String ai_num);
 	List<AirportVO> searchAirport(String keyword);
 	boolean checkDuplicateIATA(String aiNum);
+	List<AirportVO> getAirportList();
+	List<AirportVO> getAirportByNotRoute(boolean route, String ai_num);
 
 	
 	

@@ -80,6 +80,7 @@ public class AirportController {
         @RequestParam("aiName") String aiName,
         @RequestParam("aiNaName") String aiNaName,
         @RequestParam("aiStandardTime") String aiStandardTime,
+        @RequestParam("aiStandardType") int aiStandardType,
         Model model
     ) {
         // 사용자가 입력한 데이터로 AirportVO 객체 생성
@@ -88,9 +89,10 @@ public class AirportController {
         airportVO.setAi_name(aiName);
         airportVO.setAi_na_name(aiNaName);
         airportVO.setAi_standard_time(aiStandardTime);
+        airportVO.setAi_standard_type(aiStandardType);
         // 이미 데이터가 존재하는지 데이터베이스에서 확인
         List<AirportVO> airportList = airportService.selectAirportList();
-
+        
         // 국가 유효성 검사 추가
         if (!nationService.checkNation(aiNaName)) {
             model.addAttribute("invalidNationMessage", "등록할 수 없는 국가입니다.");
@@ -100,7 +102,8 @@ public class AirportController {
             if (existingAirport.getAi_num().equals(aiNum) &&
                 existingAirport.getAi_name().equals(aiName) &&
                 existingAirport.getAi_na_name().equals(aiNaName) &&
-                existingAirport.getAi_standard_time_str().equals(aiStandardTime)) {
+                existingAirport.getAi_standard_time_str().equals(aiStandardTime) &&
+            	existingAirport.getAi_standard_type() == aiStandardType) {
                 model.addAttribute("duplicateMessage", "중복된 공항입니다.");
                 return "/airport/insert";
             }
@@ -127,10 +130,4 @@ public class AirportController {
         return response;
     }
 
-    @GetMapping("/delete")
-    public String showDeleteForm(Model model) {
-    	List<AirportVO> airportList = airportService.selectAirportList();
-    	model.addAttribute("airportList", airportList);
-        return "/airport/delete";
-    }
 }

@@ -37,6 +37,7 @@
 	        	<select class="form-control" name="type">
 			      <option value="USER" <c:if test="${member.me_authority eq 'USER'}">selected</c:if>>USER</option>
 			      <option value="ADMIN"<c:if test="${member.me_authority eq 'ADMIN'}">selected</c:if>>ADMIN</option>
+			      <option value="STOP"<c:if test="${member.me_authority eq 'STOP'}">selected</c:if>>STOP</option>
 			    </select>
 	        </td>
 	        <td><button class="btn btn-outline-warning btn-update">수정</button></td>

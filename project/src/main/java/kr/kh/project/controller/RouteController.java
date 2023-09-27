@@ -1,27 +1,40 @@
 package kr.kh.project.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import kr.kh.project.service.AirportService;
-import kr.kh.project.service.RouteService;
-import kr.kh.project.vo.AirportVO;
-import kr.kh.project.vo.RouteVO;
-
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import kr.kh.project.service.AirportService;
+import kr.kh.project.service.NationService;
+import kr.kh.project.service.RouteService;
+import kr.kh.project.vo.AirportVO;
+import kr.kh.project.vo.DivisionVO;
+import kr.kh.project.vo.NationVO;
+import kr.kh.project.vo.RouteVO;
 
 @Controller
 @RequestMapping("/route")
 public class RouteController {
 
     @Autowired
-    private RouteService routeService;
+    RouteService routeService;
     
     @Autowired
-    private AirportService airportService;
+    AirportService airportService;
+
+    @Autowired
+    NationService nationService;
 
     // 노선 등록 페이지를 불러오는 메서드
     @GetMapping("/insert")
@@ -65,54 +78,31 @@ public class RouteController {
         model.addAttribute("routeList", routeList);
         return "/route/insert";
     }
-
-    // 노선 삭제 페이지를 불러오는 메서드
-    @GetMapping("/delete")
-    public String showDeleteForm(Model model) {
-        // 노선 리스트 표시
-    	List<RouteVO> routeList = routeService.getRouteList();
-        model.addAttribute("routeList", routeList);
-
-        return "/route/delete";
-    }
-
-    // 노선 삭제를 처리하는 메서드
-   /* @PostMapping("/delete")
-    public String deleteRoute(@RequestParam("ro_num") int ro_num, Model model) {
-        // 노선 삭제 전에 해당 노선이 존재하는지 확인.
-        RouteVO existingRoute = routeService.findRouteByNumber(ro_num);
-
-        if (existingRoute == null) {
-            // 주어진 노선 번호로 노선을 찾을 수 없는 경우
-            model.addAttribute("notFoundMessage", "존재하지 않는 노선입니다.");
-
-            List<RouteVO> routeList = routeService.getRouteList();
-            model.addAttribute("routeList", routeList);
-
-            // 노선 삭제 페이지로 이동.
-            return "/route/delete";
-        }
-
-        // 노선 삭제
-        routeService.deleteRouteByNumber(ro_num);
-
-        // 연관된 스케쥴 삭제
-        routeService.deleteSchedulesByRouteNumber(ro_num);
-
-        // 성공 메시지와 함께 노선 삭제 페이지로 리다이렉트.
-        return "redirect:/route/delete?success=true";
-    }*/
     @ResponseBody
-    @PostMapping("/delete")
-	public Map<String, Object> selectReservationPost(@RequestBody int num){
+	@PostMapping("/search")
+	public Map<String, Object> searchRoutePost(@RequestParam("route")boolean route, @RequestParam("ai_num")String ai_num){
 		Map<String, Object> map = new HashMap<String, Object>();
-		
-		routeService.deleteSchedulesByRouteNumber(num);
-		
-		routeService.deleteRouteByNumber(num);
-		
-		boolean res = true;
-		map.put("res", res);
+		List<AirportVO> airportList = new ArrayList<AirportVO>();
+		List<NationVO> nationList = new ArrayList<NationVO>();
+		List<DivisionVO> divisionList = new ArrayList<DivisionVO>();
+		if(route) {
+			airportList = airportService.getAirportList();
+			nationList = nationService.getNation();
+			divisionList = nationService.getDivision();						
+		}else {
+			airportList = airportService.getAirportByNotRoute(route, ai_num);
+			nationList = nationService.getNationByNotRoute(route, ai_num);
+			divisionList = nationService.getDivisionNotByRoute(route, ai_num);			
+		}
+		if(airportList == null || nationList == null || divisionList == null) {
+			map.put("res", false);
+			return map;
+		}
+		System.out.println(airportList);
+		map.put("airportList", airportList);
+		map.put("nationList", nationList);
+		map.put("divisionList", divisionList);
+		map.put("res", true);
 		return map;
 	}
     // 출발 노선 리스트 페이지를 불러오는 메서드

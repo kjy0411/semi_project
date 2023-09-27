@@ -1,5 +1,6 @@
 package kr.kh.project.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,6 +58,10 @@ public class AirportServiceImp implements AirportService {
         return airportDao.getAirportByRoute(route, ai_num);
     }
     @Override
+    public List<AirportVO> getAirportList() {
+        return airportDao.getAirportList();
+    }
+    @Override
     public boolean checkDuplicateIATA(String aiNum) {
         // aiNum을 이용하여 데이터베이스에서 공항을 조회합니다.
         AirportVO airport = airportDao.getAirportByNumber(aiNum);
@@ -81,4 +86,11 @@ public class AirportServiceImp implements AirportService {
             routeService.deleteRouteByNumber(route.getRo_num());
         }
     }
+	@Override
+	public List<AirportVO> getAirportByNotRoute(boolean route, String ai_num) {
+		if (route == false && ai_num == null) {
+            return null;
+        }
+        return airportDao.getAirportByNotRoute(route, ai_num);
+	}
 }
