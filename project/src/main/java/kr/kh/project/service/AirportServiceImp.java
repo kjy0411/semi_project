@@ -1,18 +1,13 @@
 package kr.kh.project.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.kh.project.dao.AirportDAO;
-import kr.kh.project.pagination.Criteria;
 import kr.kh.project.vo.AirportVO;
-
 import kr.kh.project.vo.RouteVO;
-
-import java.util.List;
 
 
 @Service

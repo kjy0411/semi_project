@@ -37,4 +37,9 @@ public class AirplaneServiceImp implements AirplaneService {
 		}
 		return airplaneDao.selectAirplaneByAlName(al_name);
 	}
+
+	@Override
+	public boolean deleteAirplane(String ap_num) {
+		return airplaneDao.deleteAirplane(ap_num);
+	}
 }

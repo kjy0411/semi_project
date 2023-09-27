@@ -19,7 +19,7 @@
 			join
 		airplane_model on ap_am_model = am_model
 	where
-		sk_num = #{sk_num};
+		sk_num = #{sk_num}
   </select>
   <select id="selectPath" resultType="int">
   	select
@@ -33,7 +33,7 @@
 			join
 		`path` on pa_am_model = am_model
 	where
-		sk_num = #{sk_num};
+		sk_num = #{sk_num}
   </select>
   <select id="selectAirplaneByAlName" resultType="kr.kh.project.vo.AirplaneVO">
   	select
@@ -41,6 +41,13 @@
 	from
 		airplane
 	where
-		ap_al_name = #{al_name}
+		ap_al_name = #{al_name} and ap_state = true
   </select>
+  <update id="deleteAirplane">
+  	update airplane
+  	set
+  		ap_state = false
+  	where
+  		ap_num = #{ap_num}
+  </update>
 </mapper>

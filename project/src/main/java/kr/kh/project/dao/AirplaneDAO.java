@@ -14,4 +14,6 @@ public interface AirplaneDAO {
 
 	List<AirplaneVO> selectAirplaneByAlName(@Param("al_name")String al_name);
 
+	boolean deleteAirplane(@Param("ap_num")String ap_num);
+
 }

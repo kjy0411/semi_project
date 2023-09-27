@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import kr.kh.project.service.AirlineService;
+import kr.kh.project.service.AirplaneService;
 import kr.kh.project.util.Message;
 import kr.kh.project.vo.AirlineVO;
 import kr.kh.project.vo.AirplaneModelVO;
@@ -21,8 +22,10 @@ import kr.kh.project.vo.MemberVO;
 public class AirlineController {
 
 	@Autowired
-	private AirlineService airlineService;
+	AirlineService airlineService;
 	
+	@Autowired
+	AirplaneService airplaneService;
 	
 	
 	@GetMapping("/menu/airport")
@@ -123,15 +126,20 @@ public class AirlineController {
 	}
 	
 	@GetMapping("/airline/delete_ap")
-	public String delete_AP() {
-		
+	public String delete_AP(Model model) {
+		List<AirlineVO> alList = airlineService.getAirlineList();
+		model.addAttribute("alList",alList);
 		return "/airline/delete_ap";
 	}
 	
 	@PostMapping("/airline/delete_ap")
-	public String deletePost_AP(Model model, AirplaneVO airplane, HttpSession session) {
-		
-		return "message";
+	public String deletePost_AP(Model model, String ap_num, HttpSession session) {
+		Message msg = new Message("/airline/delete_ap", "삭제 실패");
+		if(airplaneService.deleteAirplane(ap_num)) {
+			msg = new Message("/menu/airport", "삭제 성공");
+		}
+		model.addAttribute("msg", msg);
+		return "/message";
 	}
 	
 	@GetMapping("/airline/insert_con")

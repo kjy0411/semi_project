@@ -7,12 +7,10 @@
 <meta charset="UTF-8">
 </head>
 <body>
+	<h1 style="font-size:25px;">항공 상세정보</h1>
+	<a href="<c:url value='/menu/airport'/>"> <button type="button" class="btn btn-primary" >뒤로가기</button></a>
 	 <table class="table table-condensed">
-  <h1 style="font-size:25px;">항공 상세정보</h1>
-    <thead>
-    	<tr>
-		<br><a href="<c:url value='/menu/airport'/>"> <button type="button" class="btn btn-primary" >뒤로가기</button> </a><br>
-		</tr>
+    	<thead>
 	      <tr>
 	        <th style="text-align: center;border : 1px solid">항공사명</th>
 	        <th style="text-align: center;border : 1px solid">항공기번호</th>
@@ -28,7 +26,7 @@
                         <td style="text-align: center;border : 1px solid">${airplane.ap_am_model}</td>
                     </tr>
                 </c:if>
-            </c:forEach><br>
+            </c:forEach>
 		</tr>
 		
 		</thead>

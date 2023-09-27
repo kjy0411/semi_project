@@ -12,4 +12,6 @@ public interface AirplaneService {
 
 	List<AirplaneVO> getAirplaneByAlName(String al_name);
 
+	boolean deleteAirplane(String ap_num);
+
 }
