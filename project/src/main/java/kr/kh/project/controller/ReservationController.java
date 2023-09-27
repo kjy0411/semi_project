@@ -82,7 +82,7 @@ public class ReservationController {
 	@PostMapping("/reservation/search")
 	public Map<String, Object> searchReservationPost(@RequestParam("route")boolean route, @RequestParam("ai_num")String ai_num){
 		Map<String, Object> map = new HashMap<String, Object>();
-		List<AirportVO> airportList = airportService.getAirportList(route, ai_num);
+		List<AirportVO> airportList = airportService.getAirportByRoute(route, ai_num);
 		List<NationVO> nationList = nationService.getNationByRoute(route, ai_num);
 		List<DivisionVO> divisionList = nationService.getDivisionByRoute(route, ai_num);
 		if(airportList == null || nationList == null || divisionList == null) {
