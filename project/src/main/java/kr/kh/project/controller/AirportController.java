@@ -94,6 +94,8 @@ public class AirportController {
         // 국가 유효성 검사 추가
         if (!nationService.checkNation(aiNaName)) {
             model.addAttribute("invalidNationMessage", "등록할 수 없는 국가입니다.");
+            List<AirportVO> updatedAirportList = airportService.selectAirportList();
+            model.addAttribute("airportList", updatedAirportList);
             return "/airport/insert";
         }
         for (AirportVO existingAirport : airportList) {
@@ -102,6 +104,8 @@ public class AirportController {
                 existingAirport.getAi_na_name().equals(aiNaName) &&
                 existingAirport.getAi_standard_time_str().equals(aiStandardTime)) {
                 model.addAttribute("duplicateMessage", "중복된 공항입니다.");
+                List<AirportVO> updatedAirportList = airportService.selectAirportList();
+                model.addAttribute("airportList", updatedAirportList);
                 return "/airport/insert";
             }
         }
