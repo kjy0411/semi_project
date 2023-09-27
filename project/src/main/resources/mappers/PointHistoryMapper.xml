@@ -38,7 +38,7 @@
 				join
 			ticketing on ph_ti_num = ti_num
 		where
-			ti_me_id = #{me_id}
+			ti_me_id = #{me_id} and ti_state = true
 			
 	</select>
 </mapper>

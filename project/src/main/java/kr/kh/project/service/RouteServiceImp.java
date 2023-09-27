@@ -41,24 +41,6 @@ public class RouteServiceImp implements RouteService {
         routeDao.insertRoute(ro_ai_start, ro_ai_end);
     }
 
-
-    @Override
-    public void deleteRouteByNumber(int ro_num) {
-        // 연관된 스케쥴을 가져옴
-        List<ScheduleVO> schedules = scheduleService.getSchedulesByRouteNumber(ro_num);
-
-        // 연관된 스케쥴을 삭제
-        if (schedules != null && !schedules.isEmpty()) {
-            for (ScheduleVO schedule : schedules) {
-                scheduleService.deleteScheduleByNumber(schedule.getSk_ro_num());
-            }
-        }
-
-        // 노선을 삭제
-        routeDao.deleteRouteByNumber(ro_num);
-    }
-
-
 	@Override
 	public RouteVO findRoute(String ro_ai_start, String ro_ai_end) {
 		if(ro_ai_start == null || ro_ai_end == null) {
@@ -74,16 +56,6 @@ public class RouteServiceImp implements RouteService {
 	@Override
 	public RouteVO findRouteByNumber(int ro_num) {
 	    return routeDao.findRouteByNumber(ro_num);
-	}
-	@Override
-	public void deleteSchedulesByRouteNumber(int ro_num) {
-	    // 먼저 해당 노선 번호에 연관된 스케쥴을 조회
-	    List<ScheduleVO> schedulesToDelete = scheduleDao.getSchedulesByRouteNumber(ro_num);
-
-	    // 조회된 스케쥴을 하나씩 삭제
-	    for (ScheduleVO schedule : schedulesToDelete) {
-	        scheduleDao.deleteScheduleByNumber(schedule.getSk_ro_num());
-	    }
 	}
 	@Override
     public List<RouteVO> getRoutesByAirport(String aiNum) {
@@ -121,6 +93,7 @@ public class RouteServiceImp implements RouteService {
 		if(ro_num == 0) {
 			return false;
 		}
+		scheduleDao.deleteScheduleByRoNum(ro_num);
 		return routeDao.deleteRoute(ro_num);
 	}
 

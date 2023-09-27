@@ -23,7 +23,7 @@
 				join
 			airport as ai_end on ai_end.ai_num = ro_ai_end
 		where
-			sk_ro_num = #{ro_num} and date_format(sk_start_time, '%Y-%m-%d') = date(#{startDate}) and sk_start_time >= now()
+			sk_state = true and sk_ro_num = #{ro_num} and date_format(sk_start_time, '%Y-%m-%d') = date(#{startDate}) and sk_start_time >= now()
 		order by
 			sk_start_time asc
 	</select>
@@ -101,4 +101,18 @@
 		values
 			(#{schedule.sk_ap_num}, #{schedule.sk_ro_num}, #{schedule.sk_start_time_str}, #{schedule.sk_time}, #{schedule.sk_price});
 	</insert>
+	<update id="deleteScheduleByApNum">
+		update schedule
+		set
+			sk_state = false
+		where
+			sk_ap_num = #{ap_num}
+	</update>
+	<update id="deleteScheduleByRoNum">
+		update schedule
+		set
+			sk_state = false
+		where
+			sk_ro_num = #{ro_num}
+	</update>
 </mapper>

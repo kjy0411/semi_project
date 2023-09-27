@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.kh.project.dao.AirplaneDAO;
+import kr.kh.project.dao.ScheduleDAO;
 import kr.kh.project.vo.AirplaneVO;
 
 @Service
@@ -13,6 +14,9 @@ public class AirplaneServiceImp implements AirplaneService {
 
 	@Autowired
 	AirplaneDAO airplaneDao;
+
+	@Autowired
+	ScheduleDAO scheduleDao;
 
 	@Override
 	public AirplaneVO getAirplaneBySchedule(int sk_num) {
@@ -40,6 +44,10 @@ public class AirplaneServiceImp implements AirplaneService {
 
 	@Override
 	public boolean deleteAirplane(String ap_num) {
+		if(ap_num == null) {
+			return false;
+		}
+		scheduleDao.deleteScheduleByApNum(ap_num);
 		return airplaneDao.deleteAirplane(ap_num);
 	}
 }

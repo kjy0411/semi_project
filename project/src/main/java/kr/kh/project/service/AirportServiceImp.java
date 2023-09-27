@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.kh.project.dao.AirportDAO;
+import kr.kh.project.dao.RouteDAO;
+import kr.kh.project.dao.ScheduleDAO;
 import kr.kh.project.vo.AirportVO;
 import kr.kh.project.vo.RouteVO;
 
@@ -14,11 +16,13 @@ import kr.kh.project.vo.RouteVO;
 public class AirportServiceImp implements AirportService {
 
     @Autowired
-    private AirportDAO airportDao;
+    AirportDAO airportDao;
 
     @Autowired
-    private RouteService routeService;
+    RouteDAO routeDao;
     
+    @Autowired
+    ScheduleDAO scheduleDao;
    
     
     // 모든 공항 목록을 조회하는 메서드
@@ -64,23 +68,7 @@ public class AirportServiceImp implements AirportService {
         // 조회된 공항이 null이 아니면 중복된 IATA 코드로 간주합니다.
         return airport != null;
     }
-    // 공항 코드를 기반으로 공항을 삭제하는 메서드
-    @Override
-    public void deleteAirportByCode(String aiNum) {
-        airportDao.deleteAirportByCode(aiNum);
-    }
-
-    // 공항과 연관된 모든 노선을 삭제하는 메서드
-    @Override
-    public void deleteRoutesByAirport(String aiNum) {
-        // 먼저 해당 공항과 연관된 모든 노선을 조회
-        List<RouteVO> routesToDelete = routeService.getRoutesByAirport(aiNum);
-
-        // 조회된 노선을 하나씩 삭제
-        for (RouteVO route : routesToDelete) {
-            routeService.deleteRouteByNumber(route.getRo_num());
-        }
-    }
+    
 	@Override
 	public List<AirportVO> getAirportByNotRoute(boolean route, String ai_num) {
 		if (route == false && ai_num == null) {
@@ -93,6 +81,16 @@ public class AirportServiceImp implements AirportService {
 		if (ai_num == null) {
             return false;
         }
+		List<RouteVO> roGoList = routeDao.selectRouteGoByAiNum(ai_num);
+		List<RouteVO> roBackList = routeDao.selectRouteBackByAiNum(ai_num);
+		for(RouteVO ro : roGoList) {
+			scheduleDao.deleteScheduleByRoNum(ro.getRo_num());
+			routeDao.deleteRoute(ro.getRo_num());
+		}
+		for(RouteVO ro : roBackList) {
+			scheduleDao.deleteScheduleByRoNum(ro.getRo_num());
+			routeDao.deleteRoute(ro.getRo_num());
+		}
         return airportDao.deleteAirport(ai_num);
 	}
 }

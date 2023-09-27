@@ -24,5 +24,9 @@ public interface ScheduleDAO {
 
 	boolean insertSchedule(@Param("schedule")ScheduleInsertVO schedule);
 
+	void deleteScheduleByApNum(@Param("ap_num")String ap_num);
+
+	void deleteScheduleByRoNum(@Param("ro_num")int ro_num);
+
 
 }
