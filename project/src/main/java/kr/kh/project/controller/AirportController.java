@@ -73,7 +73,21 @@ public class AirportController {
         return airportList;
     }
 
-
+    @ResponseBody
+    @PostMapping("/delete")
+	public Map<String, Object> airportDeletePost(@RequestBody String num){
+		Map<String, Object> map = new HashMap<String, Object>();
+		String ai_num = num.replaceAll("\"", "");
+		String msg = "삭제 실패";
+		boolean res = false;
+		if(airportService.deleteAirport(ai_num)){
+			msg = "삭제 성공";
+			res = true;
+		}
+		map.put("msg", msg);
+		map.put("res", res);
+		return map;
+	}
     @PostMapping("/insert")
     public String insertAirport(
         @RequestParam("aiNum") String aiNum,

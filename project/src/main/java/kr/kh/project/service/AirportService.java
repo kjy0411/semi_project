@@ -15,6 +15,7 @@ public interface AirportService {
 	boolean checkDuplicateIATA(String aiNum);
 	List<AirportVO> getAirportList();
 	List<AirportVO> getAirportByNotRoute(boolean route, String ai_num);
+	boolean deleteAirport(String ai_num);
 
 	
 	

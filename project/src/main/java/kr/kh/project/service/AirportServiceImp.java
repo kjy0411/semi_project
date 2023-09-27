@@ -88,4 +88,11 @@ public class AirportServiceImp implements AirportService {
         }
         return airportDao.getAirportByNotRoute(route, ai_num);
 	}
+	@Override
+	public boolean deleteAirport(String ai_num) {
+		if (ai_num == null) {
+            return false;
+        }
+        return airportDao.deleteAirport(ai_num);
+	}
 }

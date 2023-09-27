@@ -34,6 +34,14 @@
     </nav>
     <script type="text/javascript">
    		let num;
+   		
+	    $(document).on('click', '.btn-del-airport', function() {
+			if(confirm("해당 공항을 삭제하시겠습니까?")){
+				let ai_num = $(this).data('num');
+				airportDelete(ai_num)
+				location.href="<c:url value='/airport/list'/>"
+			}
+		});
 	    $(document).on('click', '.btn-route-delete', function() {
 			if(confirm("해당 노선을 삭제하시겠습니까?")){
 				let ro_num = $(this).data('num');
@@ -61,8 +69,9 @@
 						str += `
 							<h4>\${airport.ai_name}(\${airport.ai_num})</h4>
 							<h5>국가 : \${airport.ai_na_name}(UTC : \${airport.ai_standard_time_str})</h5>
-							<button class="btn-go btn btn-outline-danger">가는편 노선</button>
+							<button class="btn-go btn btn-outline-success">가는편 노선</button>
 							<button class="btn-back btn btn-outline-primary">오는편 노선</button>
+							<button class="btn-del-airport btn btn-outline-danger" data-num="\${airport.ai_num}">공항삭제</button>
 							<div class="route-box"></div>
 						`;
 					}else{
@@ -160,6 +169,23 @@
 				async : false,
 				method : 'post',
 				url : '<c:url value="/route/delete"/>',
+				data : JSON.stringify(num),
+				contentType : "application/json; charset=UTF-8",
+				dataType : 'json',
+				success : function(data) {
+					if(data.res){
+						alert(data.msg);
+					}else {
+						alert(data.msg);
+					}
+				}
+			});
+		}
+	    function airportDelete(num) {
+	    	$.ajax({
+				async : false,
+				method : 'post',
+				url : '<c:url value="/airport/delete"/>',
 				data : JSON.stringify(num),
 				contentType : "application/json; charset=UTF-8",
 				dataType : 'json',

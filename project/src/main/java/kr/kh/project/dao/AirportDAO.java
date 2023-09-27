@@ -30,6 +30,8 @@ public interface AirportDAO {
 	List<AirportVO> getAirportList();
 
 	List<AirportVO> getAirportByNotRoute(@Param("route")boolean route, @Param("ai_num")String ai_num);
+
+	boolean deleteAirport(@Param("ai_num")String ai_num);
     
     
 

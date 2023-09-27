@@ -5,7 +5,7 @@
 <mapper namespace="kr.kh.project.dao.AirportDAO">
 
   <select id="selectAirportList" resultType="kr.kh.project.vo.AirportVO">
-    select * from airport order by ai_name asc
+    select * from airport where ai_state = true order by ai_name asc
   </select>
 
   <!-- 공항 추가 -->
@@ -39,7 +39,7 @@
 			join
 		division on na_di_name = di_name
 	where
-		ro_ai_start= if(#{route}, airport.ai_num, #{ai_num}) and ro_state = true 
+		ro_ai_start= if(#{route}, airport.ai_num, #{ai_num}) and ai_state = true 
 	group by
 		if(#{route}, ro_ai_start, ro_ai_end)
 	order by
@@ -79,4 +79,11 @@
 	order by
 		di_name asc, na_name asc, ai_name asc
   </select>
+  <update id="deleteAirport">
+  	update airport
+  	set
+  		ai_state = false
+  	where
+  		ai_num = #{ai_num}
+  </update>
 </mapper>
