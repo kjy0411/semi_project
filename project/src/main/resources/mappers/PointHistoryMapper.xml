@@ -10,7 +10,7 @@
 			(#{po_num}, #{ti_num}, "적립")
 	</insert>
 	<select id="selectPotinHistoryList" resultType="kr.kh.project.vo.PointHistoryVO">
-		select * from point_history where ph_ti_num = #{ti_num}
+		select * from point_history join ticketing on ph_ti_num = ti_num where ph_ti_num = #{ti_num} and ti_state != "예매취소"
 	</select>
 	<delete id="deletePointHistoryList">
 		delete from point_history where ph_num = #{ph_num}
@@ -26,7 +26,7 @@
 				join
 			ticketing on ph_ti_num = ti_num
 		where
-			ti_me_id = #{me_id}
+			ti_me_id = #{me_id} and ti_state != "예매취소"
 		order by
 			ph_num asc
 	</select>
