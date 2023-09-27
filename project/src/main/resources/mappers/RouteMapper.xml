@@ -70,7 +70,7 @@
 			join
 		airport on ai_num = ro_ai_end
   	where
-  		ro_ai_start = #{ai_num};
+  		ro_ai_start = #{ai_num} and ro_state = true
   </select>
   <select id="selectRouteListBack" resultType="kr.kh.project.vo.RouteVO">
   	select
@@ -87,7 +87,7 @@
 			join
 		airport on ai_num = ro_ai_start
   	where
-  		ro_ai_end = #{ai_num};
+  		ro_ai_end = #{ai_num} and ro_state = true
   </select>
   <select id="getRoNumByAiNum" resultType="int">
   	select
@@ -97,6 +97,13 @@
 	where
 		ro_ai_start = #{ro_ai_start}
 		and ro_ai_end = #{ro_ai_end}
-		and ro_state = true;
+		and ro_state = true
   </select>
+  <update id="deleteRoute">
+  	update route
+  	set
+  		ro_state = false
+  	where
+  		ro_num = #{ro_num}
+  </update>
 </mapper>

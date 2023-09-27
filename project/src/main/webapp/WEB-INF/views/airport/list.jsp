@@ -33,9 +33,20 @@
 		</div>
     </nav>
     <script type="text/javascript">
+   		let num;
+	    $(document).on('click', '.btn-route-delete', function() {
+			if(confirm("해당 노선을 삭제하시겠습니까?")){
+				let ro_num = $(this).data('num');
+				routeDelete(ro_num);
+				printRoute(num)
+			}
+		});
 	    $(document).on('click', '.ai_name', function() {
-			let num = $(this).children('span').text();
-			let str = ``;
+			num = $(this).children('span').text();
+			printRoute(num)
+		});
+	    function printRoute(num) {
+	    	let str = ``;
 			$.ajax({
 				async : false,
 				method : 'post',
@@ -69,6 +80,7 @@
 									<tr style="display: flex; border-bottom: 3px solid black">
 										<th style="flex: 4";>출발</th>
 										<th style="flex: 4";>도착</th>
+										<th style="flex: 1";>삭제</th>
 									</tr>
 								</thead>
 						`;
@@ -83,6 +95,9 @@
 										<td style="flex: 4";>
 											\${go.ro_ai_end} <br>
 											\${go.ai_name_end}
+										</td>
+										<td style="flex: 1";>
+											<button class="btn-route-delete" data-num="\${go.ro_num}">X</button>
 										</td>
 									</tr>
 								</tbody>
@@ -104,6 +119,7 @@
 									<tr style="display: flex; border-bottom: 3px solid black">
 										<th style="flex: 4";>출발</th>
 										<th style="flex: 4";>도착</th>
+										<th style="flex: 1";>삭제</th>
 									</tr>
 								</thead>
 						`;
@@ -119,6 +135,9 @@
 											\${back.ro_ai_end} <br>
 											\${back.ai_name_end}
 										</td>
+										<td style="flex: 1";>
+											<button class="btn-route-delete" data-num="\${back.ro_num}">X</button>
+										</td>
 									</tr>
 								</tbody>
 							`;
@@ -131,16 +150,11 @@
 						}
 						$('.route-box').html(routestr);
 					});
-					$(document).on('click', '.btn-route-delete', function() {
-						if(confirm("해당 노선을 삭제하시겠습니까?")){
-							let ro_num = $(this).data('num');
-							routeDelete(ro_num)
-						}
-					});
+					
 				}
 				
 			});
-		});
+		}
 	    function routeDelete(num) {
 	    	$.ajax({
 				async : false,
@@ -150,6 +164,11 @@
 				contentType : "application/json; charset=UTF-8",
 				dataType : 'json',
 				success : function(data) {
+					if(data.res){
+						alert(data.msg);
+					}else {
+						alert(data.msg);
+					}
 				}
 			});
 		}

@@ -116,5 +116,13 @@ public class RouteServiceImp implements RouteService {
 		return routeDao.getRoNumByAiNum(ro_ai_start, ro_ai_end);
 	}
 
+	@Override
+	public boolean deleteroute(int ro_num) {
+		if(ro_num == 0) {
+			return false;
+		}
+		return routeDao.deleteRoute(ro_num);
+	}
+
 	
 }

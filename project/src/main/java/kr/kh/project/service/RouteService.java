@@ -21,6 +21,7 @@ public interface RouteService {
 	List<RouteVO> findRouteGo(String ai_num);
 	List<RouteVO> findRouteback(String ai_num);
 	int getRoNumByAiNum(String ro_ai_start, String ro_ai_end);
+	boolean deleteroute(int ro_num);
 	
 
 	

@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -98,11 +99,24 @@ public class RouteController {
 			map.put("res", false);
 			return map;
 		}
-		System.out.println(airportList);
 		map.put("airportList", airportList);
 		map.put("nationList", nationList);
 		map.put("divisionList", divisionList);
 		map.put("res", true);
+		return map;
+	}
+    @ResponseBody
+    @PostMapping("/delete")
+	public Map<String, Object> routeDeletePost(@RequestBody int ro_num){
+		Map<String, Object> map = new HashMap<String, Object>();
+		String msg = "삭제 실패";
+		boolean res = false;
+		if(routeService.deleteroute(ro_num)){
+			msg = "삭제 성공";
+			res = true;
+		}
+		map.put("msg", msg);
+		map.put("res", res);
 		return map;
 	}
     // 출발 노선 리스트 페이지를 불러오는 메서드

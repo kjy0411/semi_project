@@ -18,9 +18,9 @@ VALUES
     ("다이아몬드플러스", 1.15, 1000000),
     ("플래티넘", 1.2, 10000000);
 
-INSERT INTO POINT(PO_ME_ID, PO_MC_NAME)
+INSERT INTO POINT(PO_ME_ID)
 VALUES
-	("USER", "실버");
+	("USER"), ("ADMIN");
 
 -- 좌석등급 등록
 INSERT INTO SEAT_CLASS(SC_NAME, SC_RATIO)
