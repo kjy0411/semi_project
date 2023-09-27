@@ -9,26 +9,25 @@
         .container {
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            align-items: flex-start; 
         }
         .left {
             flex: 1;
             padding: 20px;
-            border: 1px solid #ccc;
+            border: 1px #ccc;
             border-radius: 5px;
             margin-right: 20px;
+            height: 400px; 
+            overflow-y: scroll; 
         }
         .right {
             flex: 1;
         }
         
-        h1 {
-            white-space: nowrap;
-        }
+        
     </style>
 </head>
 <body>
-    <h1>노선 삭제</h1>
     
     <div class="container">
         <!-- 왼쪽 컨테이너에 노선 리스트 표시 -->
